@@ -40,13 +40,13 @@ endfunction()
 
 # Start (or resume download)
 if(NOT (EXISTS ${CPM_DOWNLOAD_LOCATION}))
-    download_cpm(CPM_DOWNLOAD_VERSION CPM_DOWNLOAD_LOCATION)
+    download_cpm(${CPM_DOWNLOAD_VERSION} ${CPM_DOWNLOAD_LOCATION})
 else()
     # resume download if it previously failed
     file(READ ${CPM_DOWNLOAD_LOCATION} check)
 
     if("${check}" STREQUAL "")
-        download_cpm(CPM_DOWNLOAD_VERSION CPM_DOWNLOAD_LOCATION)
+        download_cpm(${CPM_DOWNLOAD_VERSION} ${CPM_DOWNLOAD_LOCATION})
     endif()
 
     unset(check)
