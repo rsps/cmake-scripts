@@ -10,7 +10,7 @@
 include_guard(GLOBAL)
 
 # Set the desired CPM version
-set(CPM_DOWNLOAD_VERSION 0.40.0)
+set(CPM_DOWNLOAD_VERSION 0.40.1)
 
 # Skip download of CPM, if it is already initialised. This part will most likely only be true, when this project
 # is consumed by a top-level project.
