@@ -5,8 +5,8 @@
 cmake_minimum_required(VERSION 3.30)
 
 # Append this package's cmake scripts in module path
-list(FIND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" hasModule)
-if(${hasModule} STREQUAL "-1")
+list(FIND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" hasModulePath)
+if(${hasModulePath} STREQUAL "-1")
     list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 endif()
 
