@@ -48,7 +48,6 @@ endif()
 # Misc.
 # -------------------------------------------------------------------------------------------------------------- #
 
-# include("dump")
-# include("dd")
+# include("helpers")
 
-# dump(CMAKE_MODULE_PATH FOO BAR)
+# dd(CMAKE_MODULE_PATH FOO BAR)
