@@ -2,7 +2,7 @@
 # Responsible for downloading and configuring CPM package manager
 # @see https://github.com/cpm-cmake/CPM.cmake
 #
-# Inspired by Adobe's version of `CPM.cmake` (Copyright 2022 Adobe - Apache License 2.0).
+# This modules is inspired by Adobe's version of `CPM.cmake` (Copyright 2022 Adobe - Apache License 2.0).
 # @see https://github.com/adobe/lagrange/blob/main/cmake/recipes/external/CPM.cmake
 # -------------------------------------------------------------------------------------------------------------- #
 
@@ -11,6 +11,23 @@ include_guard(GLOBAL)
 
 # Set the desired CPM version
 set(CPM_DOWNLOAD_VERSION 0.40.0)
+
+# Skip download of CPM, if it is already initialised. This part will most likely only be true, when this project
+# is consumed by a top-level project.
+if (DEFINED CPM_INITIALIZED AND DEFINED CPM_VERSION)
+    # Warn developer if an older version of CPM is running.
+    if (CPM_VERSION VERSION_LESS CPM_DOWNLOAD_VERSION)
+        message(
+            AUTHOR_WARNING
+                "You are running CPM v${CPM_VERSION} which appears to be outdated. Please upgrade CPM to \
+                v${CPM_DOWNLOAD_VERSION} or higher. \
+                See https://github.com/cpm-cmake/CPM.cmake for more information."
+        )
+    endif ()
+
+    message(VERBOSE "Initialised CPM v${CPM_VERSION} detected, skipping download of CPM v${CPM_DOWNLOAD_VERSION}")
+    return()
+endif ()
 
 # Set download location, in accordance to CPM's own preferred download location(s)
 if(CPM_SOURCE_CACHE)
