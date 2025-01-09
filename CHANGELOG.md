@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* N/A
+* Project's root `CMakeLists.txt`.
+* `dependencies.cmake` and `dev-dependencies.cmake` scripts.
+* `CPM.cmake` script that downloads specified version of [CPM](https://github.com/cpm-cmake/CPM.cmake).
+* `dump()` and `dd()` utils functions, in `helpers.cmake`.
 
-[Unreleased]: https://github.com/rsps/cmake-scripts/compare/0.1.0...HEAD
+[Unreleased]: https://github.com/rsps/cmake-scripts/compare/develop
