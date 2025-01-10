@@ -4,6 +4,9 @@
 
 include_guard(GLOBAL)
 
+# Debug
+message(VERBOSE "rsp/helpers module included")
+
 if (NOT COMMAND "dump")
     #! dump : Outputs given variables' name and value
     #
