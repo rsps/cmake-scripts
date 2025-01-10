@@ -7,7 +7,7 @@ include_guard()
 # Include regular dependencies
 include("dependencies.cmake")
 
-message(STATUS "Installing Development Dependencies for ${PROJECT_NAME}")
+message(VERBOSE "Installing Development Dependencies for ${PROJECT_NAME}")
 
 # TODO: Add dependencies here...
-message(STATUS "    N/A") # TODO: Cleanup
+message(VERBOSE "    N/A") # TODO: Cleanup
