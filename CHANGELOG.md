@@ -13,5 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `dependencies.cmake` and `dev-dependencies.cmake` scripts.
 * `CPM.cmake` script that downloads specified version of [CPM](https://github.com/cpm-cmake/CPM.cmake).
 * `dump()` and `dd()` utils functions, in `helpers.cmake`.
+* `semver_parse()` utils functions, in `version.cmake`.
 
 [Unreleased]: https://github.com/rsps/cmake-scripts/compare/develop
