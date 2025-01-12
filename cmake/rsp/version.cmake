@@ -18,8 +18,8 @@ if (NOT COMMAND "semver_parse")
     #       semver_parse(VERSION "v3.4.22-beta.3+AF1004" OUTPUT foo)
     #       message("${foo_VERSION}") # 3.4.22
     #
-    # @param VERSION The version string to parse
-    # @param OUTPUT The output variable to assign parsed results to
+    # @param VERSION                    The version string to parse
+    # @param OUTPUT                     The output variable to assign parsed results to
     #
     # @return
     #     [OUTPUT]                      The full version string as provided, e.g. "v3.4.22-beta.3+AF1004"
@@ -52,7 +52,6 @@ if (NOT COMMAND "semver_parse")
         string(REGEX REPLACE "^[v]" "" cleanVersion "${INPUT_VERSION}")
 
         # Parse given version string
-        set(matches "")
         string(REGEX MATCH "^(0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)(-[.0-9A-Za-z-]+)?([+][.0-9A-Za-z-]+)?$" matches "${cleanVersion}")
         if (CMAKE_MATCH_COUNT LESS 3)
             message(FATAL_ERROR "${cleanVersion} is not a valid semantic version")
