@@ -19,7 +19,7 @@ if (NOT COMMAND "semver_parse")
     #       message("${foo_VERSION}") # 3.4.22
     #
     # @param VERSION <string>           The version string to parse
-    # @param OUTPUT  <variable>         The output variable to assign parsed results to
+    # @param OUTPUT <variable>          The output variable to assign parsed results to
     #
     # @return
     #     [OUTPUT]                      The full version string as provided, e.g. "v3.4.22-beta.3+AF1004"
@@ -82,5 +82,81 @@ if (NOT COMMAND "semver_parse")
             "${INPUT_OUTPUT}_PRE_RELEASE"
             "${INPUT_OUTPUT}_BUILD_METADATA"
         )
+    endfunction()
+endif ()
+
+if (NOT COMMAND "write_version_file")
+
+    #! write_version_file : Writes a version string to given file
+    #
+    # @see rsp/git::git_find_version_tag()
+    #
+    # @example
+    #       # Defaults to version obtained via git
+    #       write_version_file(FILE "version.txt")
+    #       # Or, use custom version
+    #       write_version_file(FILE "version.txt" VERSION "v1.4.3")
+    #
+    #       file(READ "version.txt" version)
+    #       message("Version: ${version}") # E.g. "v1.4.3"
+    #
+    # Note: The specified version file will automatically be created, if it does not exist.
+    # Existing version file is NOT overwritten, if its content matches specified or found
+    # found version string.
+    #
+    # @param FILE <path>            Path to the target file
+    # @param [VERSION <string>]     The version string to write in file.
+    #                               Defaults to version obtain via `git_find_version_tag()`,
+    #                               when no version specified.
+    #
+    function(write_version_file)
+        set(options "") # N/A
+        set(oneValueArgs FILE VERSION)
+        set(multiValueArgs "") # N/A
+
+        cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+        # Ensure required arguments are defined
+        set(requiredArgs "FILE")
+        foreach (name ${requiredArgs})
+            if (NOT DEFINED INPUT_${name})
+                message(FATAL_ERROR "${name} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
+            endif ()
+        endforeach ()
+
+        # Resolve version, if none specified
+        if (NOT DEFINED INPUT_VERSION)
+            message(VERBOSE "No version specified, using git version tag")
+
+            # Presume that working dir is the same as where the version file
+            # must be written.
+            get_filename_component(workingDir ${INPUT_FILE} DIRECTORY)
+
+            # Find version tag
+            git_find_version_tag(
+                OUTPUT INPUT_VERSION
+                WORKING_DIRECTORY ${workingDir}
+            )
+        endif ()
+
+        # Prevent re-writing file, if the content is the same as the version.
+        if (EXISTS ${INPUT_FILE})
+            message(VERBOSE "${INPUT_FILE} file already exists")
+
+            # Obtain existing version and compare it against the one provided or found.
+            # Limit the maximum amount of bytes to 255, to prevent processing too large
+            # version strings ("[..] A 255 character version string is probably overkill [...]").
+            # @see https://semver.org/#does-semver-have-a-size-limit-on-the-version-string
+            file(READ ${INPUT_FILE} existing LENGTH_MAXIMUM 255)
+
+            # Avoid changing the version file's modification datetime, if versions match.
+            if (existing STREQUAL INPUT_VERSION)
+                message(VERBOSE "${INPUT_FILE} file already contains version string: ${INPUT_VERSION}")
+                return()
+            endif ()
+        endif ()
+
+        # Finally, write the version in specified file
+        file(WRITE ${INPUT_FILE} ${INPUT_VERSION})
     endfunction()
 endif ()
