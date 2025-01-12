@@ -10,14 +10,14 @@ if(${hasModulePath} STREQUAL "-1")
     list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 endif()
 
+include("rsp/version")
+include("rsp/helpers")
+
 # Version file to use for this project
 set(VERSION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/version")
 
 # Run only when this project is the root project
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-    include("rsp/helpers")
-    include("rsp/version")
-
     # Create or update version file
     write_version_file(FILE "${VERSION_FILE}")
 
