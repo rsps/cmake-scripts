@@ -34,21 +34,23 @@ include("CPM")
 # Get project's version from file
 version_from_file(
     FILE "${VERSION_FILE}"
-    OUTPUT result
+    OUTPUT version
     EXIT_ON_FAILURE
 )
 
 # Define this cmake project
 project(rsp-cmake-scripts
-    VERSION "${result_VERSION}"
+    VERSION "${version_VERSION}"
     DESCRIPTION "A collection of CMake scripts for C++ projects"
     HOMEPAGE_URL "https://github.com/rsps/cmake-scripts"
     LANGUAGES NONE
 )
 
-# Ensure cmake scripts are available for parent projects.
+# Ensure parent project has modules and other properties available.
 if(NOT CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" PARENT_SCOPE)
+    set("${PROJECT_NAME}_VERSION" "${PROJECT_VERSION}" PARENT_SCOPE)
+    set("${PROJECT_NAME}_SEMVER" "${version_SEMVER}" PARENT_SCOPE)
 endif()
 
 # -------------------------------------------------------------------------------------------------------------- #
