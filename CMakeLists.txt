@@ -10,8 +10,18 @@ if(${hasModulePath} STREQUAL "-1")
     list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 endif()
 
-# Setup package manager
-if (NOT CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+# Version file to use for this project
+set(VERSION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/version")
+
+# Run only when this project is the root project
+if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    include("rsp/helpers")
+    include("rsp/version")
+
+    # Create or update version file
+    write_version_file(FILE "${VERSION_FILE}")
+
+    # Setup package manager
     set(CPM_USE_NAMED_CACHE_DIRECTORIES ON)
 endif()
 
@@ -21,9 +31,16 @@ include("CPM")
 # Project
 # -------------------------------------------------------------------------------------------------------------- #
 
-# TODO: Dynamically determine this package's version from git
+# Get project's version from file
+version_from_file(
+    FILE "${VERSION_FILE}"
+    OUTPUT result
+    EXIT_ON_FAILURE
+)
+
+# Define this cmake project
 project(rsp-cmake-scripts
-    VERSION 0.1.0
+    VERSION "${result_VERSION}"
     DESCRIPTION "A collection of CMake scripts for C++ projects"
     HOMEPAGE_URL "https://github.com/rsps/cmake-scripts"
     LANGUAGES NONE
