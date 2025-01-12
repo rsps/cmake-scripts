@@ -18,8 +18,8 @@ if (NOT COMMAND "semver_parse")
     #       semver_parse(VERSION "v3.4.22-beta.3+AF1004" OUTPUT foo)
     #       message("${foo_VERSION}") # 3.4.22
     #
-    # @param VERSION                    The version string to parse
-    # @param OUTPUT                     The output variable to assign parsed results to
+    # @param VERSION <string>           The version string to parse
+    # @param OUTPUT  <variable>         The output variable to assign parsed results to
     #
     # @return
     #     [OUTPUT]                      The full version string as provided, e.g. "v3.4.22-beta.3+AF1004"
