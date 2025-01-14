@@ -51,7 +51,7 @@ if (NOT COMMAND "semver_parse")
         string(REGEX REPLACE "^[v]" "" cleanVersion "${INPUT_VERSION}")
 
         # Parse given version string
-        string(REGEX MATCH "^(0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)(-[.0-9A-Za-z-]+)?([+][.0-9A-Za-z-]+)?$" matches "${cleanVersion}")
+        string(REGEX MATCH "^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[\.0-9A-Za-z-]+)?([+][\.0-9A-Za-z-]+)?$" matches "${cleanVersion}")
         if (CMAKE_MATCH_COUNT LESS 3)
             message(FATAL_ERROR "${cleanVersion} is not a valid semantic version")
         endif ()
