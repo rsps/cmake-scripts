@@ -13,14 +13,8 @@ endif()
 include("rsp/version")
 include("rsp/helpers")
 
-# Version file to use for this project
-set(VERSION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/version")
-
 # Run only when this project is the root project
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-    # Create or update version file
-    write_version_file(FILE "${VERSION_FILE}")
-
     # Setup package manager
     set(CPM_USE_NAMED_CACHE_DIRECTORIES ON)
 endif()
@@ -33,7 +27,7 @@ include("CPM")
 
 # Get project's version from file
 version_from_file(
-    FILE "${VERSION_FILE}"
+    FILE "${CMAKE_CURRENT_SOURCE_DIR}/VERSION"
     OUTPUT version
     EXIT_ON_FAILURE
 )
