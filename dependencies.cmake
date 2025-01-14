@@ -4,7 +4,7 @@
 
 include_guard()
 
-message(STATUS "Installing Dependencies for ${PROJECT_NAME}")
+message(VERBOSE "Installing Dependencies for ${PROJECT_NAME}")
 
 # TODO: Add dependencies here...
-message(STATUS "    N/A") # TODO: Cleanup
+message(VERBOSE "    N/A") # TODO: Cleanup
