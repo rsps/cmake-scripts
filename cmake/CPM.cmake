@@ -9,8 +9,66 @@
 # Prevent this setup from being included multiple times.
 include_guard(GLOBAL)
 
-# Set the desired CPM version
+# TODO: --------------------------------------------------------------------------
+
+# TODO: Remove include again
+include("rsp/helpers")
+
+# The default version of CPM to download, unless a newer version available.
 set(CPM_DOWNLOAD_VERSION 0.40.1)
+
+# Version constraint used for when checking newer versions (git's "glob" matching patterns).
+set(CPM_VERSION_CONSTRAINT "v0.40.*")
+set(CPM_REPOSITORY "https://github.com/cpm-cmake/CPM.cmake.git")
+
+# Ensure Git is available
+find_package(Git REQUIRED)
+
+# TODO: Avoid running this too often - CACHING !!!
+
+# List available tags in the remote repository.
+# @see https://git-scm.com/docs/git-ls-remote
+execute_process(
+        COMMAND ${GIT_EXECUTABLE} ls-remote --tags --refs --sort=-version:refname ${CPM_REPOSITORY} ${CPM_VERSION_CONSTRAINT}
+        WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+        RESULT_VARIABLE status
+        OUTPUT_VARIABLE result
+        ERROR_VARIABLE error
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+        TIMEOUT 1
+)
+
+if (NOT status EQUAL 0)
+    # In case of failure, continue by using the default version.
+    message(AUTHOR_WARNING
+            "Unable to list available CPM versions that match \"${CPM_VERSION_CONSTRAINT}\"\n"
+            "Git exit code: ${status}\n"
+            "Git error message: ${error}"
+            " - called from ${CMAKE_CURRENT_LIST_FILE}\n"
+    )
+else ()
+    # Replace newlines from result (convert to implicit list)
+    string(REPLACE "\n" ";" result "${result}")
+    list(POP_FRONT result first)
+
+    # Find version tag
+    string(REGEX MATCH "(v*)(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[\.0-9A-Za-z-]+)?([+][\.0-9A-Za-z-]+)?$" foundVersion "${first}")
+    if (NOT foundVersion STREQUAL "")
+        # Strip evt. "v" prefix
+        string(REPLACE "v" "" foundVersion "${foundVersion}")
+
+        # Use newer version, if applicable...
+        if (foundVersion VERSION_GREATER CPM_DOWNLOAD_VERSION)
+            message(STATUS "Newer version of CPM available: ${foundVersion}")
+            set(CPM_DOWNLOAD_VERSION ${foundVersion})
+        endif ()
+    endif ()
+endif ()
+
+# TODO: --------------------------------------------------------------------------
+
+## Set the desired CPM version
+#set(CPM_DOWNLOAD_VERSION 0.40.1)
 
 # Skip download of CPM, if it is already initialised. This part will most likely only be true, when this project
 # is consumed by a top-level project.
