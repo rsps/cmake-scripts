@@ -145,7 +145,7 @@ if (NOT COMMAND "cache_has")
     # @see https://cmake.org/cmake/help/latest/command/if.html#defined
     #
     # @param KEY <variable>         The variable to check
-    # @param OUTPUT <variable>      Default value to assign, if no cache entry found
+    # @param OUTPUT <variable>      Variable to assign exist status to
     #
     # @return
     #     [OUTPUT]                  Exists status: 1 if entry exists,
@@ -375,7 +375,7 @@ if (NOT COMMAND "cache_has_expired")
     # @internal
     #
     # @param KEY <variable>     Cached variable
-    # @param OUTPUT <variable>  Optional, the variable to check expiration of
+    # @param OUTPUT <variable>  Variable to assign check expiration status to
     #
     # @return
     #     [OUTPUT]              Expiration status: 1 if entry has expired, 0 otherwise.
