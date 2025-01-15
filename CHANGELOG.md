@@ -16,5 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `semver_parse()`, `write_version_file` and `version_from_file()` utils, in `version.cmake`.
 * `git_find_version_tag()` util, in `git.cmake`.
 * `VERSION` file.
+* Caching utilities, `cache.cmake`.
 
 [Unreleased]: https://github.com/rsps/cmake-scripts/compare/develop
