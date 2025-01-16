@@ -7,13 +7,13 @@ include_guard(GLOBAL)
 # Debug
 message(VERBOSE "rsp/helpers module included")
 
-if (NOT COMMAND "fail_when_build_in_source")
+if (NOT COMMAND "fail_in_source_build")
 
-    #! fail_when_build_in_source : Fails when building project in the source directory
+    #! fail_in_source_build : Fails when building project in the source directory
     #
     # @throws
     #
-    function(fail_when_build_in_source)
+    function(fail_in_source_build)
         if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
             message(FATAL_ERROR "In-source builds are forbidden!")
         endif()

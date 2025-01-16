@@ -12,7 +12,7 @@ endif()
 
 # Abort if building in-source
 include("rsp/helpers")
-fail_when_build_in_source()
+fail_in_source_build()
 
 # Run only when this project is the root project
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
