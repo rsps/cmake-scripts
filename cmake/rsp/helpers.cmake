@@ -14,7 +14,10 @@ if (NOT COMMAND "fail_in_source_build")
     # @throws
     #
     function(fail_in_source_build)
-        if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
+        get_filename_component(sourceDir "${CMAKE_SOURCE_DIR}" REALPATH)
+        get_filename_component(binDir "${CMAKE_BINARY_DIR}" REALPATH)
+
+        if (${sourceDir} STREQUAL ${binDir})
             message(FATAL_ERROR "In-source builds are forbidden!")
         endif()
     endfunction()
