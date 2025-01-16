@@ -10,8 +10,9 @@ if(${hasModulePath} STREQUAL "-1")
     list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 endif()
 
-include("rsp/version")
+# Abort if building in-source
 include("rsp/helpers")
+fail_when_build_in_source()
 
 # Run only when this project is the root project
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
@@ -26,6 +27,7 @@ include("CPM")
 # -------------------------------------------------------------------------------------------------------------- #
 
 # Get project's version from file
+include("rsp/version")
 version_from_file(
     FILE "${CMAKE_CURRENT_SOURCE_DIR}/VERSION"
     OUTPUT version
