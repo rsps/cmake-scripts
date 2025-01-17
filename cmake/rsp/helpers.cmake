@@ -7,7 +7,24 @@ include_guard(GLOBAL)
 # Debug
 message(VERBOSE "rsp/helpers module included")
 
+if (NOT COMMAND "fail_in_source_build")
+
+    #! fail_in_source_build : Fails when building project in the source directory
+    #
+    # @throws
+    #
+    function(fail_in_source_build)
+        get_filename_component(sourceDir "${CMAKE_SOURCE_DIR}" REALPATH)
+        get_filename_component(binDir "${CMAKE_BINARY_DIR}" REALPATH)
+
+        if (${sourceDir} STREQUAL ${binDir})
+            message(FATAL_ERROR "In-source builds are forbidden!")
+        endif()
+    endfunction()
+endif ()
+
 if (NOT COMMAND "dump")
+
     #! dump : Outputs given variables' name and value
     #
     # @param ... Variables to output
@@ -23,6 +40,7 @@ if (NOT COMMAND "dump")
 endif ()
 
 if (NOT COMMAND "dd")
+
     #! dump and die: Outputs given variables' name and value and stops build
     #
     # @param ... Variables to output
