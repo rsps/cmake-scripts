@@ -11,7 +11,7 @@ include("rsp/helpers")
 
 # Path to the "test executor"
 if (NOT DEFINED RSP_TEST_EXECUTOR_PATH)
-    get_filename_component(RSP_TEST_EXECUTOR_PATH "${CMAKE_CURRENT_LIST_DIR}/testing/test_executor.cmake" REALPATH)
+    get_filename_component(RSP_TEST_EXECUTOR_PATH "${CMAKE_CURRENT_LIST_DIR}/testing/executor.cmake" REALPATH)
 endif ()
 
 # A temporary list of "test entries"
