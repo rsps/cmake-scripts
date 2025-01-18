@@ -45,6 +45,7 @@ message(NOTICE "Module path(s): ${MODULE_PATHS}")
 message(NOTICE "\n")
 
 # -------------------------------------------------------------------------------------------------------------- #
+
 # Append provided paths to cmake's module path
 foreach (path ${MODULE_PATHS})
     list(APPEND CMAKE_MODULE_PATH "${path}")
@@ -59,8 +60,11 @@ if (NOT EXISTS ${TEST_FILE})
     message(FATAL_ERROR "Test file \"${TEST_FILE}\" does not exist")
 endif ()
 
-# Disable the define_test() function
-set(IGNORE_DEFINE_TEST TRUE)
+# Test Executor's "running" state flag
+#
+# @internal
+#
+set(_RSP_TEST_EXECUTOR_RUNNING TRUE)
 
 # Include the test file
 include(${TEST_FILE})

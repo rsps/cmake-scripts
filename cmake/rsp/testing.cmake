@@ -10,18 +10,13 @@ message(VERBOSE "rsp/testing module included")
 # A temporary list of "test entries"
 set(DEFINED_TESTS_LIST "")
 
-# TODO: Describe this "hacky" thing
-if (NOT DEFINED IGNORE_DEFINE_TEST)
-    set(IGNORE_DEFINE_TEST FALSE)
-endif ()
-
 if (NOT COMMAND "define_test")
 
     # TODO
     function(define_test name callback)
-        # Do nothing if requested ignored
-        if (IGNORE_DEFINE_TEST)
-            # message(STATUS "Ignoring define_test()")
+        # Do nothing if in test exector scope...
+        if (_RSP_TEST_EXECUTOR_RUNNING)
+            # message(STATUS "Skipping define_test()")
             return()
         endif ()
 
