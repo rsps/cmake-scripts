@@ -10,12 +10,6 @@ message(STATUS "Building ${PROJECT_NAME}")
 
 # TODO: ... describe why we do this!?
 
-# TODO: path to test executor
-# TODO: SHOULD BE DEFINED IN THE "testing.cmake" module
-if (NOT DEFINED TEST_EXECUTOR_PATH)
-    get_filename_component(TEST_EXECUTOR_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../cmake/rsp/testing/test_executor.cmake" REALPATH)
-endif ()
-
 # Find all tests
 file(GLOB_RECURSE UNIT_TESTS "${CMAKE_CURRENT_SOURCE_DIR}/unit/*.cmake")
 
@@ -50,7 +44,7 @@ foreach (testFile ${UNIT_TESTS})
                 -DTEST_FILE=${testFile}
                 -DRSP_MODULE_PATH=${RSP_MODULE_PATH}
                 -DMODULE_PATHS=${CMAKE_MODULE_PATH}
-                -P "${TEST_EXECUTOR_PATH}"
+                -P "${RSP_TEST_EXECUTOR_PATH}"
         )
 
         # TODO: Add WILL_FAIL, based on entry!
