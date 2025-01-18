@@ -23,7 +23,7 @@ if (NOT COMMAND "define_test_suite")
     #
     # @param <string> name              Human readable name of test suite TODO: Can this be used for ctest labels / groups?
     # @param DIRECTORY <path>           Path to directory that contains test-cases
-    # @param [TEST_CASE_FILES <glob>]   Glob used to match test-case files.
+    # @param [MATCH <glob>]             Glob used to match test-case files.
     #                                   Defaults to "*_test.cmake".
     #
     # @throws If DIRECTORY path is invalid
@@ -36,7 +36,7 @@ if (NOT COMMAND "define_test_suite")
         endif ()
 
         set(options "") # N/A
-        set(oneValueArgs DIRECTORY TEST_CASE_FILES)
+        set(oneValueArgs DIRECTORY MATCH)
         set(multiValueArgs "") # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -50,8 +50,8 @@ if (NOT COMMAND "define_test_suite")
         endforeach ()
 
         # Resolve optional arguments
-        if (NOT DEFINED INPUT_TEST_CASE_FILES OR INPUT_TEST_CASE_FILES STREQUAL "")
-            set(INPUT_TEST_CASE_FILES "*_test.cmake")
+        if (NOT DEFINED INPUT_MATCH OR INPUT_MATCH STREQUAL "")
+            set(INPUT_MATCH "*_test.cmake")
         endif ()
 
         # Resolve directory path
@@ -61,10 +61,10 @@ if (NOT COMMAND "define_test_suite")
         endif ()
 
         # Find all test-case files in directory
-        file(GLOB_RECURSE test_cases "${target_directory}/${INPUT_TEST_CASE_FILES}")
+        file(GLOB_RECURSE test_cases "${target_directory}/${INPUT_MATCH}")
         list(LENGTH test_cases amount)
 
-        message(STATUS "${name} | Adding ${amount} test-cases")
+        message(STATUS "Defining ${name} | ${amount} test-cases")
 
         # Include each found test-case file.
         foreach (test_case ${test_cases})
@@ -74,7 +74,6 @@ if (NOT COMMAND "define_test_suite")
             # define_test() function...
             include("${test_case}")
         endforeach ()
-
     endfunction()
 endif ()
 
