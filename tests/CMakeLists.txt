@@ -10,15 +10,10 @@ message(STATUS "Building ${PROJECT_NAME}")
 
 # TODO: ... describe why we do this!?
 
-# TODO: Define the RSP_MODULE_PATH
-if (NOT DEFINED RSP_MODULE_PATH)
-    get_filename_component(RSP_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../cmake" REALPATH)
-endif ()
-
 # TODO: path to test executor
 # TODO: SHOULD BE DEFINED IN THE "testing.cmake" module
 if (NOT DEFINED TEST_EXECUTOR_PATH)
-    get_filename_component(TEST_EXECUTOR_PATH "${RSP_MODULE_PATH}/rsp/testing/test_executor.cmake" REALPATH)
+    get_filename_component(TEST_EXECUTOR_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../cmake/rsp/testing/test_executor.cmake" REALPATH)
 endif ()
 
 # Find all tests
@@ -54,6 +49,7 @@ foreach (testFile ${UNIT_TESTS})
                 -DTEST_CALLBACK=${callback}
                 -DTEST_FILE=${testFile}
                 -DRSP_MODULE_PATH=${RSP_MODULE_PATH}
+                -DMODULE_PATHS=${CMAKE_MODULE_PATH}
                 -P "${TEST_EXECUTOR_PATH}"
         )
 

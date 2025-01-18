@@ -7,13 +7,17 @@
 
 # TODO: Can this file REJECT running, if not within CTest execution process???
 
+# ---------------------------------------------------------------------------------------------------------- #
+
 # Abort if required variables are not defined
-set(required "TEST_NAME;TEST_CALLBACK;TEST_FILE;RSP_MODULE_PATH")
+set(required "TEST_NAME;TEST_CALLBACK;TEST_FILE;MODULE_PATHS")
 foreach (arg ${required})
     if (NOT DEFINED ${arg} OR ${arg} STREQUAL "")
-        message(FATAL_ERROR "${arg} argument is missing, for ${CMAKE_CURRENT_LIST_FILE}()")
+        message(FATAL_ERROR "${arg} argument is missing, in test executor")
     endif ()
 endforeach ()
+
+# ---------------------------------------------------------------------------------------------------------- #
 
 # Output a bit of information about the test that is about to be attempted executed.
 # This output will be displayed when adding `--verbose` option to ctest, e.g.
@@ -27,8 +31,16 @@ message(NOTICE "\n")
 message(NOTICE "Name: ${TEST_NAME}")
 message(NOTICE "Callback: ${TEST_CALLBACK}")
 message(NOTICE "File: ${TEST_FILE}")
-message(NOTICE "RSP Module Path: ${RSP_MODULE_PATH}")
+message(NOTICE "Module path(s): ${MODULE_PATHS}")
 message(NOTICE "\n")
+
+# ---------------------------------------------------------------------------------------------------------- #
+# Append provided paths to cmake's module path
+foreach (path ${MODULE_PATHS})
+    list(APPEND CMAKE_MODULE_PATH "${path}")
+endforeach ()
+
+list(REMOVE_DUPLICATES CMAKE_MODULE_PATH)
 
 # ---------------------------------------------------------------------------------------------------------- #
 
@@ -47,8 +59,8 @@ include(${TEST_FILE})
 
 # Fail if command does not exist...
 if (NOT COMMAND "${TEST_CALLBACK}")
-    message(FATAL_ERROR "Test callback \"${TEST_CALLBACK}\" does not exist")
+    message(FATAL_ERROR "Test callback \"${TEST_CALLBACK}\" does not exist, in ${TEST_FILE}")
 endif ()
 
-# Finally, invoke the callback
+# Finally, invoke the test callback
 cmake_language(CALL "${TEST_CALLBACK}")

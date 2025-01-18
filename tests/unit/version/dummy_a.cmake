@@ -1,4 +1,4 @@
-include("${RSP_MODULE_PATH}/rsp/testing.cmake")
+include("rsp/testing")
 
 # TODO: ...a test file..
 
