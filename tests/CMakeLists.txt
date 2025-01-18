@@ -48,7 +48,6 @@ foreach (testFile ${UNIT_TESTS})
                 -DTEST_NAME=${name}
                 -DTEST_CALLBACK=${callback}
                 -DTEST_FILE=${testFile}
-                -DRSP_MODULE_PATH=${RSP_MODULE_PATH}
                 -DMODULE_PATHS=${CMAKE_MODULE_PATH}
                 -P "${RSP_TEST_EXECUTOR_PATH}"
         )
