@@ -35,6 +35,12 @@ foreach (testFile ${UNIT_TESTS})
         # Debug
         message("\t\t${name} ${callback}")
 
+        # TODO: This can perhaps be checked elsewhere...
+        # Fail if path to test executor is invalid
+        if (NOT EXISTS "${RSP_TEST_EXECUTOR_PATH}")
+            message(FATAL_ERROR "Path to \"test executor\" is invalid: ${RSP_TEST_EXECUTOR_PATH}")
+        endif ()
+
         # Add CTest, use custom executor
         add_test(
             NAME "${name}"
