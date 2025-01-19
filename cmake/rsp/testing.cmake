@@ -7,6 +7,10 @@ include_guard(GLOBAL)
 # Debug
 message(VERBOSE "rsp/testing module included")
 
+# -------------------------------------------------------------------------------------------------------------- #
+# Utils. for testing cmake scripts
+# -------------------------------------------------------------------------------------------------------------- #
+
 # Path to the "test executor"
 if (NOT DEFINED RSP_TEST_EXECUTOR_PATH)
     get_filename_component(RSP_TEST_EXECUTOR_PATH "${CMAKE_CURRENT_LIST_DIR}/testing/executor.cmake" REALPATH)
@@ -16,7 +20,7 @@ endif ()
 
 if (NOT COMMAND "define_test_suite")
 
-    #! define_test_suite : Define a test suite - a collection of test-cases
+    #! define_test_suite : Define a test suite (a collection of test-cases)
     #
     # Warning: all test-case files in specified directory will be included,
     # by this function!
@@ -79,9 +83,11 @@ endif ()
 
 if (NOT COMMAND "define_test")
 
-    #! define_test : Define a test to be executed
+    #! define_test : Define a test to be executed by the "test executor"
     #
     # @see https://cmake.org/cmake/help/latest/module/CTest.html
+    # @see
+    #
     #
     # @param <string> name           Human readable name of test.
     # @param <command> callback      The function that contains the actual test logic.
@@ -107,7 +113,7 @@ if (NOT COMMAND "define_test")
         endforeach ()
 
         # Add the actual ctest
-        add_ctest(
+        add_ctest_using_executor(
             NAME ${name}
             CALLBACK ${callback}
 
@@ -117,10 +123,11 @@ if (NOT COMMAND "define_test")
     endfunction()
 endif ()
 
-if (NOT COMMAND "add_ctest")
+if (NOT COMMAND "add_ctest_using_executor")
 
-    #! add_ctest : Add a test to be executed by the "test executor", via CTest
+    #! add_ctest_using_executor : Add a test to be executed by "test executor", via CTest
     #
+    # @see RSP_TEST_EXECUTOR_PATH
     # @see https://cmake.org/cmake/help/latest/module/CTest.html
     #
     # @param NAME <string>          Human readable name of test
@@ -131,7 +138,7 @@ if (NOT COMMAND "add_ctest")
     #
     # @throws If EXECUTOR path is invalid.
     #
-    function(add_ctest)
+    function(add_ctest_using_executor)
         # Do nothing if in test exector scope...
         if (_RSP_TEST_EXECUTOR_RUNNING)
             # message(STATUS "Skipping add_ctest()")
