@@ -23,6 +23,31 @@ if (NOT COMMAND "fail_in_source_build")
     endfunction()
 endif ()
 
+if (NOT COMMAND "extract_value")
+
+    #! extract_value : Extracts variable value
+    #
+    # If given key is a value, then the value will be assigned
+    # to the output variable.
+    #
+    # @param <variable> output  The variable to assign extracted value to
+    # @param <mixed> key        The target key
+    #
+    # @return
+    #     output                The extracted value
+    #
+    function(extract_value output key)
+
+        set("${output}" "${key}")
+
+        if (DEFINED ${key})
+            set("${output}" "${${key}}")
+        endif ()
+
+        return(PROPAGATE "${output}")
+    endfunction()
+endif ()
+
 if (NOT COMMAND "dump")
 
     #! dump : Outputs given variables' name and value
