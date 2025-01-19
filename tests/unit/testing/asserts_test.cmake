@@ -96,14 +96,14 @@ endfunction()
 # Existence
 # -------------------------------------------------------------------------------------------------------------- #
 
-define_test("can assert defined keys" "asserts_defined_keys")
+define_test("can assert defined" "asserts_defined_keys")
 function(asserts_defined_keys)
     set(foo "")
 
     assert_defined(foo)
 endfunction()
 
-define_test("can assert not defined keys" "asserts_not_defined_keys")
+define_test("can assert not defined" "asserts_not_defined_keys")
 function(asserts_not_defined_keys)
     assert_not_defined(foo)
 endfunction()
@@ -126,4 +126,28 @@ function(asserts_not_callable)
 
     set(foo "bar")
     assert_is_not_callable(foo MESSAGE "variable")
+endfunction()
+
+define_test("can assert in list" "asserts_in_list")
+function(asserts_in_list)
+    set(my_list "a;b;c;d")
+    set(foo "d")
+
+    assert_in_list(foo my_list MESSAGE "variable")
+    assert_in_list("a" my_list MESSAGE "value")
+
+    list(APPEND my_list "e")
+    assert_in_list("e" my_list MESSAGE "value (after list modification)")
+endfunction()
+
+define_test("can assert not in list" "asserts_not_in_list")
+function(asserts_not_in_list)
+    set(my_list "a;b;c;d")
+    set(foo "bar")
+
+    assert_not_in_list(foo my_list MESSAGE "variable")
+    assert_not_in_list("e" my_list MESSAGE "value")
+
+    list(REMOVE_ITEM my_list "a")
+    assert_not_in_list("a" my_list MESSAGE "value (after list modification)")
 endfunction()
