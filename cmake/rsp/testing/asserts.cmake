@@ -111,7 +111,54 @@ if (NOT COMMAND "assert_not_defined")
     endfunction()
 endif ()
 
-# TODO: ...command
+if (NOT COMMAND "assert_is_callable")
+
+    #! assert_is_callable : Assert key to be a callable command or marco
+    #
+    # @see https://cmake.org/cmake/help/latest/command/if.html#command
+    #
+    # @param <variable> key         The key to assert
+    # @param [MESSAGE <string>]     Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_is_callable key)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        if (NOT COMMAND ${key})
+            message(FATAL_ERROR "'${key}' is not callable, but was expected to be so." "${msg}")
+        endif ()
+    endfunction()
+endif ()
+
+if (NOT COMMAND "assert_is_not_callable")
+
+    #! assert_is_not_callable : Assert key not to be a callable command or marco
+    #
+    # @see https://cmake.org/cmake/help/latest/command/if.html#command
+    #
+    # @param <variable> key         The key to assert
+    # @param [MESSAGE <string>]     Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_is_not_callable key)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        if (COMMAND ${key})
+            message(FATAL_ERROR "'${key}' is callable, but was not expected to be so." "${msg}")
+        endif ()
+    endfunction()
+endif ()
+
 # TODO: ...in list
 
 # -------------------------------------------------------------------------------------------------------------- #
