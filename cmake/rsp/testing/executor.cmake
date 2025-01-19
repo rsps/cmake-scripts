@@ -8,6 +8,8 @@
 #
 # -------------------------------------------------------------------------------------------------------------- #
 
+cmake_minimum_required(VERSION 3.30)
+
 # Fail if executor is attempted included inside a project's CMakeLists.txt, or other cmake file
 if(DEFINED CMAKE_PROJECT_NAME OR DEFINED PROJECT_NAME OR DEFINED PROJECT_IS_TOP_LEVEL)
     message(FATAL_ERROR
