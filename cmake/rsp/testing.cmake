@@ -7,6 +7,8 @@ include_guard(GLOBAL)
 # Debug
 message(VERBOSE "rsp/testing module included")
 
+include("rsp/testing/asserts")
+
 # -------------------------------------------------------------------------------------------------------------- #
 # Utils. for testing cmake scripts
 # -------------------------------------------------------------------------------------------------------------- #
