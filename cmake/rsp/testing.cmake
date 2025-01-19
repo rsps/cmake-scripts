@@ -88,11 +88,11 @@ if (NOT COMMAND "define_test")
     #! define_test : Define a test to be executed by the "test executor"
     #
     # @see https://cmake.org/cmake/help/latest/module/CTest.html
-    # @see
+    # @see add_ctest_using_executor()
     #
-    #
-    # @param <string> name           Human readable name of test.
-    # @param <command> callback      The function that contains the actual test logic.
+    # @param <string> name              Human readable name of test.
+    # @param <command> callback         The function that contains the actual test logic.
+    # @param [EXPECT_FAILURE]           Option, if specified then callback is expected to fail.
     #
     # @throws
     #
@@ -114,6 +114,22 @@ if (NOT COMMAND "define_test")
             endif ()
         endforeach ()
 
+        set(options EXPECT_FAILURE)
+        set(oneValueArgs "")
+        set(multiValueArgs "") # N/A
+
+        cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Resolve failure expectation
+        set(expected_to_fail false)
+        if (INPUT_EXPECT_FAILURE)
+            set(expected_to_fail true)
+        endif ()
+
+        # ---------------------------------------------------------------------------------------------- #
+
         # Add the actual ctest
         add_ctest_using_executor(
             NAME ${name}
@@ -121,6 +137,7 @@ if (NOT COMMAND "define_test")
 
             # Default the test-case file to the *.cmake file that invoked this function!
             TEST_CASE ${CMAKE_CURRENT_LIST_FILE}
+            EXPECT_FAILURE ${expected_to_fail}
         )
     endfunction()
 endif ()
@@ -132,11 +149,13 @@ if (NOT COMMAND "add_ctest_using_executor")
     # @see RSP_TEST_EXECUTOR_PATH
     # @see https://cmake.org/cmake/help/latest/module/CTest.html
     #
-    # @param NAME <string>          Human readable name of test
-    # @param CALLBACK <command>     The function that contains the actual test, in the test-case file.
-    # @param TEST_CASE <path>       Path to the target *.cmake test-case file.
-    # @param [EXECUTOR <path>]      Path to the "test executor". Defaults to RSP_TEST_EXECUTOR_PATH,
-    #                               when not specified.
+    # @param NAME <string>              Human readable name of test
+    # @param CALLBACK <command>         The function that contains the actual test, in the test-case file.
+    # @param TEST_CASE <path>           Path to the target *.cmake test-case file.
+    # @param [EXPECT_FAILURE <bool>]    If set to true, then test callback is expected to fail.
+    #                                   Default set to false.
+    # @param [EXECUTOR <path>]          Path to the "test executor". Defaults to RSP_TEST_EXECUTOR_PATH,
+    #                                   when not specified.
     #
     # @throws If EXECUTOR path is invalid.
     #
@@ -147,8 +166,8 @@ if (NOT COMMAND "add_ctest_using_executor")
             return()
         endif ()
 
-        set(options "") # N/A
-        set(oneValueArgs NAME CALLBACK TEST_CASE EXECUTOR)
+        set(options "")  # N/A
+        set(oneValueArgs NAME CALLBACK TEST_CASE EXPECT_FAILURE EXECUTOR)
         set(multiValueArgs "") # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -162,6 +181,9 @@ if (NOT COMMAND "add_ctest_using_executor")
         endforeach ()
 
         # Resolve optional arguments
+        if (NOT DEFINED INPUT_EXPECT_FAILURE)
+            set(INPUT_EXPECT_FAILURE false)
+        endif ()
         if (NOT DEFINED INPUT_EXECUTOR)
             set(INPUT_EXECUTOR "${RSP_TEST_EXECUTOR_PATH}")
         endif ()
@@ -177,11 +199,11 @@ if (NOT COMMAND "add_ctest_using_executor")
         endif ()
 
         # Debug
-        message(VERBOSE "\tAdding test: ${name}")
+        message(VERBOSE "\tAdding test: ${INPUT_NAME}")
 
         # Add the actual CTest, using CMake's executable to process a script file...
         add_test(
-            NAME "${name}"
+            NAME "${INPUT_NAME}"
             COMMAND ${CMAKE_COMMAND}
                 -DTEST_NAME=${INPUT_NAME}
                 -DTEST_CALLBACK=${INPUT_CALLBACK}
@@ -190,8 +212,9 @@ if (NOT COMMAND "add_ctest_using_executor")
                 -P "${INPUT_EXECUTOR}"
         )
 
-        # TODO: Add WILL_FAIL, based on entry!
-        # TODO: @see https://cmake.org/cmake/help/latest/prop_test/WILL_FAIL.html#prop_test:WILL_FAIL
+        # Set test failure expectation
+        # @see https://cmake.org/cmake/help/latest/prop_test/WILL_FAIL.html#prop_test:WILL_FAIL
+        set_property(TEST ${INPUT_NAME} PROPERTY WILL_FAIL "${INPUT_EXPECT_FAILURE}")
 
         # TODO: What about test LABELS
         # TODO: @see https://stackoverflow.com/questions/24495412/ctest-using-labels-for-different-tests-ctesttestfile-cmake
