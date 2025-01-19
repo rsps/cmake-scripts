@@ -63,7 +63,56 @@ endif ()
 # Existence
 # -------------------------------------------------------------------------------------------------------------- #
 
-# TODO: ...
+if (NOT COMMAND "assert_defined")
+
+    #! assert_defined : Assert key to be defined
+    #
+    # @see https://cmake.org/cmake/help/latest/command/if.html#defined
+    #
+    # @param <variable> key         The key to assert
+    # @param [MESSAGE <string>]     Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_defined key)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        if (NOT DEFINED ${key})
+            message(FATAL_ERROR "'${key}' is not defined, but was expected to be." "${msg}")
+        endif ()
+    endfunction()
+endif ()
+
+if (NOT COMMAND "assert_not_defined")
+
+    #! assert_not_defined : Assert key to not be defined
+    #
+    # @see https://cmake.org/cmake/help/latest/command/if.html#defined
+    #
+    # @param <variable> key         The key to assert
+    # @param [MESSAGE <string>]     Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_not_defined key)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        if (DEFINED ${key})
+            message(FATAL_ERROR "'${key}' is defined, but was expected not to be." "${msg}")
+        endif ()
+    endfunction()
+endif ()
+
+# TODO: ...command
+# TODO: ...in list
 
 # -------------------------------------------------------------------------------------------------------------- #
 # Comparisons
