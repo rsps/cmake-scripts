@@ -159,7 +159,55 @@ if (NOT COMMAND "assert_is_not_callable")
     endfunction()
 endif ()
 
-# TODO: ...in list
+if (NOT COMMAND "assert_in_list")
+
+    #! assert_in_list : Assert key (value) to be inlist
+    #
+    # @see https://cmake.org/cmake/help/latest/command/if.html#in-list
+    #
+    # @param <variable|value> key   The key (or value) to be in list
+    # @param <variable> list_key    The list expected to contain key or value
+    # @param [MESSAGE <string>]     Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_in_list key list_key)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        if (NOT (${key} IN_LIST ${list_key}))
+            message(FATAL_ERROR "'${key}' is not in list ${list}." "${msg}")
+        endif ()
+    endfunction()
+endif ()
+
+if (NOT COMMAND "assert_not_in_list")
+
+    #! assert_not_in_list : Assert key (value) not to be inlist
+    #
+    # @see https://cmake.org/cmake/help/latest/command/if.html#in-list
+    #
+    # @param <variable|value> key   The key (or value) not to be in list
+    # @param <variable> list_key    The list expected not to contain key or value
+    # @param [MESSAGE <string>]     Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_not_in_list key list_key)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        if (${key} IN_LIST ${list_key})
+            message(FATAL_ERROR "'${key}' is in list ${list}, but was not expected to be." "${msg}")
+        endif ()
+    endfunction()
+endif ()
 
 # -------------------------------------------------------------------------------------------------------------- #
 # Comparisons
