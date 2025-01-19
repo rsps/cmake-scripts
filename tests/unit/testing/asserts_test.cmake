@@ -188,7 +188,24 @@ endfunction()
 # Strings
 # -------------------------------------------------------------------------------------------------------------- #
 
-# TODO: ...
+define_test("can assert string equals" "asserts_str_equals")
+function(asserts_str_equals)
+    set(expected "foo")
+    set(actual "foo")
+    assert_string_equals(expected actual MESSAGE "keys")
+
+    assert_string_equals("bar" "bar" MESSAGE "values")
+endfunction()
+
+define_test("can assert string not equals" "asserts_str_not_equals")
+function(asserts_str_not_equals)
+    set(expected "foo")
+    set(actual "bar")
+    assert_string_not_equals(expected actual MESSAGE "keys")
+
+    assert_string_not_equals("foo" "bar" MESSAGE "values")
+endfunction()
+
 # TODO: ...gt, gte, lt, lte... etc
 # TODO: ...regex
 

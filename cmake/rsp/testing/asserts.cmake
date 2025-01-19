@@ -301,6 +301,78 @@ endif ()
 # Strings
 # -------------------------------------------------------------------------------------------------------------- #
 
+if (NOT COMMAND "assert_string_equals")
+
+    #! assert_string_equals : Assert string keys or values equal each other
+    #
+    # @see https://cmake.org/cmake/help/latest/command/if.html#strequal
+    #
+    # @param <variable|string> expected  The expected key or value
+    # @param <variable|string> actual    The actual key or value
+    # @param [MESSAGE <string>]          Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_string_equals expected_key actual_key)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        assert_compare_values(
+            OUTPUT result
+            EXPECTED ${expected_key}
+            ACTUAL ${actual_key}
+            OPERATOR "STREQUAL"
+        )
+
+        if (NOT result)
+            extract_value(a "${actual_key}")
+            extract_value(e "${expected_key}")
+
+            message(FATAL_ERROR "Actual '${a}' does not equal expected '${e}'." "${msg}")
+        endif ()
+
+    endfunction()
+endif ()
+
+if (NOT COMMAND "assert_string_not_equals")
+
+    #! assert_string_not_equals : Assert string keys or values do not equal each other
+    #
+    # @see https://cmake.org/cmake/help/latest/command/if.html#strequal
+    #
+    # @param <variable|string> expected  The expected key or value
+    # @param <variable|string> actual    The actual key or value
+    # @param [MESSAGE <string>]          Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_string_not_equals expected_key actual_key)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        assert_compare_values(
+            OUTPUT result
+            EXPECTED ${expected_key}
+            ACTUAL ${actual_key}
+            OPERATOR "STREQUAL"
+        )
+
+        if (result)
+            extract_value(a "${actual_key}")
+            extract_value(e "${expected_key}")
+
+            message(FATAL_ERROR "Actual '${a}' equals expected '${e}', but was not expected to." "${msg}")
+        endif ()
+
+    endfunction()
+endif ()
+
 # TODO: ...
 # TODO: ...gt, gte, lt, lte... etc
 # TODO: ...regex
