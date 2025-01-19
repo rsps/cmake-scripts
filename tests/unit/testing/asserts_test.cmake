@@ -107,3 +107,23 @@ define_test("can assert not defined keys" "asserts_not_defined_keys")
 function(asserts_not_defined_keys)
     assert_not_defined(foo)
 endfunction()
+
+define_test("can assert callable" "asserts_callable")
+function(asserts_callable)
+    function(foo)
+    endfunction()
+
+    macro(bar)
+    endmacro()
+
+    assert_is_callable(foo MESSAGE "function")
+    assert_is_callable(bar MESSAGE "marco")
+endfunction()
+
+define_test("can assert not callable" "asserts_not_callable")
+function(asserts_not_callable)
+    assert_is_not_callable(none MESSAGE "none defined")
+
+    set(foo "bar")
+    assert_is_not_callable(foo MESSAGE "variable")
+endfunction()
