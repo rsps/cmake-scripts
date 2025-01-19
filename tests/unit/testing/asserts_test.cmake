@@ -151,3 +151,21 @@ function(asserts_not_in_list)
     list(REMOVE_ITEM my_list "a")
     assert_not_in_list("a" my_list MESSAGE "value (after list modification)")
 endfunction()
+
+define_test("can assert equals" "asserts_num_equals")
+function(asserts_num_equals)
+    set(expected 5)
+    set(actual 5)
+    assert_equals(expected actual MESSAGE "keys")
+
+    assert_equals(10 10 MESSAGE "values")
+endfunction()
+
+define_test("can assert not equals" "asserts_num_not_equals")
+function(asserts_num_not_equals)
+    set(expected 15)
+    set(actual 5)
+    assert_not_equals(expected actual MESSAGE "keys")
+
+    assert_not_equals(20 10 MESSAGE "values")
+endfunction()
