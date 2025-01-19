@@ -91,3 +91,19 @@ function(asserts_falsy_values)
 
     assert_falsy("abc-NOTFOUND" MESSAGE "string that end with '-NOTFOUND'")
 endfunction()
+
+# -------------------------------------------------------------------------------------------------------------- #
+# Existence
+# -------------------------------------------------------------------------------------------------------------- #
+
+define_test("can assert defined keys" "asserts_defined_keys")
+function(asserts_defined_keys)
+    set(foo "")
+
+    assert_defined(foo)
+endfunction()
+
+define_test("can assert not defined keys" "asserts_not_defined_keys")
+function(asserts_not_defined_keys)
+    assert_not_defined(foo)
+endfunction()
