@@ -7,6 +7,8 @@ include_guard(GLOBAL)
 # Debug
 message(VERBOSE "rsp/testing/asserts module included")
 
+include("rsp/helpers")
+
 # -------------------------------------------------------------------------------------------------------------- #
 # Truthy / Falsy
 # -------------------------------------------------------------------------------------------------------------- #
@@ -213,6 +215,78 @@ endif ()
 # Comparisons
 # -------------------------------------------------------------------------------------------------------------- #
 
+if (NOT COMMAND "assert_equals")
+
+    #! assert_equals : Assert numeric keys or values equal each other
+    #
+    # @see https://cmake.org/cmake/help/latest/command/if.html#equal
+    #
+    # @param <variable|string> expected  The expected key or value
+    # @param <variable|string> actual    The actual key or value
+    # @param [MESSAGE <string>]          Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_equals expected_key actual_key)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        assert_compare_values(
+            OUTPUT result
+            EXPECTED ${expected_key}
+            ACTUAL ${actual_key}
+            OPERATOR "EQUAL"
+        )
+
+        if (NOT result)
+            extract_value(a "${actual_key}")
+            extract_value(e "${expected_key}")
+
+            message(FATAL_ERROR "Actual value ${a} does not equal expected value ${e}." "${msg}")
+        endif ()
+
+    endfunction()
+endif ()
+
+if (NOT COMMAND "assert_not_equals")
+
+    #! assert_not_equals : Assert numeric keys or values do not equal each other
+    #
+    # @see https://cmake.org/cmake/help/latest/command/if.html#equal
+    #
+    # @param <variable|string> expected  The expected key or value
+    # @param <variable|string> actual    The actual key or value
+    # @param [MESSAGE <string>]          Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_not_equals expected_key actual_key)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        assert_compare_values(
+            OUTPUT result
+            EXPECTED ${expected_key}
+            ACTUAL ${actual_key}
+            OPERATOR "EQUAL"
+        )
+
+        if (result)
+            extract_value(a "${actual_key}")
+            extract_value(e "${expected_key}")
+
+            message(FATAL_ERROR "Actual value ${a} equals expected value ${e}, but was not expected to." "${msg}")
+        endif ()
+
+    endfunction()
+endif ()
+
 # TODO: ...numbers
 # TODO: ...strings (incl. regex)
 # TODO: ...versions
@@ -222,6 +296,59 @@ endif ()
 # -------------------------------------------------------------------------------------------------------------- #
 
 # TODO: ...
+
+# -------------------------------------------------------------------------------------------------------------- #
+# Misc.
+# -------------------------------------------------------------------------------------------------------------- #
+
+if (NOT COMMAND "assert_compare_values")
+
+    #! assert_compare_values : Compares two keys / values using specified operator
+    #
+    # @see https://cmake.org/cmake/help/latest/command/if.html#comparisons
+    #
+    # @param OUTPUT <variable>          The output variable to assign the found version tag
+    # @param EXPECTED <variable>        Expected key or value
+    # @param ACTUAL <variable>          Actual key or value
+    # @param OPERATOR <string>          Cmake comparison operator to use, e.g. LESS_EQUAL
+    #
+    # @return
+    #     [OUTPUT]                      True if comparison passes, false otherwise
+    #
+    # @throws If OPERATOR is not supported by cmake
+    #
+    function(assert_compare_values)
+        set(oneValueArgs OUTPUT EXPECTED ACTUAL OPERATOR)
+
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+
+        # Ensure required arguments are defined
+        set(requiredArgs "OUTPUT;EXPECTED;ACTUAL;OPERATOR")
+        foreach (arg ${requiredArgs})
+            if (NOT DEFINED INPUT_${arg})
+                message(FATAL_ERROR "${arg} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
+            endif ()
+        endforeach ()
+
+        # ------------------------------------------------------------------------------------- #
+
+        extract_value(INPUT_EXPECTED "${INPUT_EXPECTED}")
+        extract_value(INPUT_ACTUAL "${INPUT_ACTUAL}")
+
+        # Default output
+        set("${INPUT_OUTPUT}" FALSE)
+
+        # If comparison passes, change output to true...
+        if (INPUT_ACTUAL ${INPUT_OPERATOR} INPUT_EXPECTED)
+            set("${INPUT_OUTPUT}" TRUE)
+        endif ()
+
+        # Debug
+        # dd(INPUT_OUTPUT "${INPUT_OUTPUT}" INPUT_EXPECTED INPUT_ACTUAL INPUT_OPERATOR)
+
+        return(PROPAGATE "${INPUT_OUTPUT}")
+    endfunction()
+endif ()
 
 # -------------------------------------------------------------------------------------------------------------- #
 # Internals
