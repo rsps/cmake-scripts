@@ -467,9 +467,9 @@ if (NOT COMMAND "add_ctest_using_executor")
         endif ()
 
         # Fail if path to test executor is invalid
-        if (NOT EXISTS "${INPUT_EXECUTOR}")
-            message(FATAL_ERROR "Path to \"test executor\" is invalid: ${INPUT_EXECUTOR}")
-        endif ()
+        #        if (NOT EXISTS "${INPUT_EXECUTOR}")
+        #            message(FATAL_ERROR "Path to \"test executor\" is invalid: ${INPUT_EXECUTOR}")
+        #        endif ()
 
         # ---------------------------------------------------------------------------------------------- #
 
