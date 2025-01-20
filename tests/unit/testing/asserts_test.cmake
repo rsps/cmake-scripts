@@ -187,7 +187,41 @@ function(asserts_num_not_equals)
     assert_not_equals(20 10 MESSAGE "values")
 endfunction()
 
-# TODO: ...gt, gte, lt, lte... etc
+define_test("can assert less than" "asserts_num_less_then")
+function(asserts_num_less_then)
+    set(expected 3)
+    set(actual 2)
+    assert_less_than(expected actual MESSAGE "keys")
+
+    assert_less_than(10 9 MESSAGE "values")
+endfunction()
+
+define_test("can assert less than or equal to" "asserts_num_less_or_equal")
+function(asserts_num_less_or_equal)
+    set(expected 3)
+    set(actual 3)
+    assert_less_than_or_equal(expected actual MESSAGE "keys")
+
+    assert_less_than_or_equal(4 3 MESSAGE "values")
+endfunction()
+
+define_test("can assert greater than" "asserts_num_greater_then")
+function(asserts_num_greater_then)
+    set(expected 5)
+    set(actual 6)
+    assert_greater_than(expected actual MESSAGE "keys")
+
+    assert_greater_than(22 24 MESSAGE "values")
+endfunction()
+
+define_test("can assert greater than or equal to" "asserts_num_greater_or_equal")
+function(asserts_num_greater_or_equal)
+    set(expected 1)
+    set(actual 1)
+    assert_greater_than_or_equal(expected actual MESSAGE "keys")
+
+    assert_greater_than_or_equal(22 23 MESSAGE "values")
+endfunction()
 
 # -------------------------------------------------------------------------------------------------------------- #
 # Strings
@@ -225,5 +259,18 @@ endfunction()
 # Files & Paths
 # -------------------------------------------------------------------------------------------------------------- #
 
-# TODO: ...
+define_test("can assert file exists" "asserts_file_exists")
+function(asserts_file_exists)
+    set(target "${CMAKE_CURRENT_BINARY_DIR}/cmake_install.cmake")
+
+    assert_file_exists(${target})
+endfunction()
+
+define_test("can assert file does not exist exists" "asserts_file_not_exists")
+function(asserts_file_not_exists)
+    set(target "${CMAKE_CURRENT_BINARY_DIR}/my_unknown_file.txt")
+
+    assert_file_not_exists(${target})
+endfunction()
+
 # TODO: ...is dir, is file, is symlink, file exists... etc
