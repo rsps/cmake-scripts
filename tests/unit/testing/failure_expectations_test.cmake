@@ -1,5 +1,10 @@
 include("rsp/testing")
 
+define_test_case(
+    "Failure Expectations Test"
+    LABELS "failure;expectations;testing"
+)
+
 define_test("test without failure expectation" "no_fail_exp_test")
 function(no_fail_exp_test)
     assert_truthy(true)
