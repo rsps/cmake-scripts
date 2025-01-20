@@ -295,7 +295,153 @@ if (NOT COMMAND "assert_not_equals")
     endfunction()
 endif ()
 
-# TODO: ...gt, gte, lt, lte... etc
+if (NOT COMMAND "assert_less_than")
+
+    #! assert_less_than : Assert numeric key or value is less than specified value
+    #
+    # @see https://cmake.org/cmake/help/latest/command/if.html#less
+    #
+    # @param <variable|string> expected  The expected key or value
+    # @param <variable|string> actual    The actual key or value that should be less than expected
+    # @param [MESSAGE <string>]          Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_less_than expected_key actual_key)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        assert_compare_values(
+                OUTPUT result
+                EXPECTED ${expected_key}
+                ACTUAL ${actual_key}
+                OPERATOR "LESS"
+        )
+
+        if (NOT result)
+            extract_value(a "${actual_key}")
+            extract_value(e "${expected_key}")
+
+            message(FATAL_ERROR "Actual value ${a} is not less than ${e}." "${msg}")
+        endif ()
+
+    endfunction()
+endif ()
+
+if (NOT COMMAND "assert_less_than_or_equal")
+
+    #! assert_less_than_or_equal : Assert numeric key or value is less than or equal
+    # to the specified value
+    #
+    # @see https://cmake.org/cmake/help/latest/command/if.html#less-equal
+    #
+    # @param <variable|string> expected  The expected key or value
+    # @param <variable|string> actual    The actual key or value that should be less than
+    #                                    or equal to expected
+    # @param [MESSAGE <string>]          Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_less_than_or_equal expected_key actual_key)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        assert_compare_values(
+                OUTPUT result
+                EXPECTED ${expected_key}
+                ACTUAL ${actual_key}
+                OPERATOR "LESS_EQUAL"
+        )
+
+        if (NOT result)
+            extract_value(a "${actual_key}")
+            extract_value(e "${expected_key}")
+
+            message(FATAL_ERROR "Actual value ${a} is not less than or equal to ${e}." "${msg}")
+        endif ()
+
+    endfunction()
+endif ()
+
+if (NOT COMMAND "assert_greater_than")
+
+    #! assert_greater_than : Assert numeric key or value is greater than specified value
+    #
+    # @see https://cmake.org/cmake/help/latest/command/if.html#greater
+    #
+    # @param <variable|string> expected  The expected key or value
+    # @param <variable|string> actual    The actual key or value that should be greater than expected
+    # @param [MESSAGE <string>]          Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_greater_than expected_key actual_key)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        assert_compare_values(
+                OUTPUT result
+                EXPECTED ${expected_key}
+                ACTUAL ${actual_key}
+                OPERATOR "GREATER"
+        )
+
+        if (NOT result)
+            extract_value(a "${actual_key}")
+            extract_value(e "${expected_key}")
+
+            message(FATAL_ERROR "Actual value ${a} is not greater than ${e}." "${msg}")
+        endif ()
+
+    endfunction()
+endif ()
+
+if (NOT COMMAND "assert_greater_than_or_equal")
+
+    #! assert_greater_than_or_equal : Assert numeric key or value is greater than or equal
+    # to the specified value
+    #
+    # @see https://cmake.org/cmake/help/latest/command/if.html#greater-equal
+    #
+    # @param <variable|string> expected  The expected key or value
+    # @param <variable|string> actual    The actual key or value that should be greater than
+    #                                    or equal to expected
+    # @param [MESSAGE <string>]          Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_greater_than_or_equal expected_key actual_key)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        assert_compare_values(
+                OUTPUT result
+                EXPECTED ${expected_key}
+                ACTUAL ${actual_key}
+                OPERATOR "GREATER_EQUAL"
+        )
+
+        if (NOT result)
+            extract_value(a "${actual_key}")
+            extract_value(e "${expected_key}")
+
+            message(FATAL_ERROR "Actual value ${a} is not greater than or equal to ${e}." "${msg}")
+        endif ()
+
+    endfunction()
+endif ()
 
 # -------------------------------------------------------------------------------------------------------------- #
 # Strings
