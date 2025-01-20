@@ -23,7 +23,7 @@ endif ()
 # -------------------------------------------------------------------------------------------------------------- #
 
 # Abort if required variables are not defined
-set(required "TEST_NAME;TEST_CALLBACK;TEST_FILE;MODULE_PATHS")
+set(required "TEST_NAME;TEST_CALLBACK;TEST_CASE;MODULE_PATHS")
 foreach (arg ${required})
     if (NOT DEFINED ${arg} OR ${arg} STREQUAL "")
         message(FATAL_ERROR "${arg} argument is missing, in test executor")
@@ -42,7 +42,7 @@ endforeach ()
 message(NOTICE "\n")
 message(NOTICE "Name: ${TEST_NAME}")
 message(NOTICE "Callback: ${TEST_CALLBACK}")
-message(NOTICE "File: ${TEST_FILE}")
+message(NOTICE "Test-Case: ${TEST_CASE}")
 message(NOTICE "Module path(s): ${MODULE_PATHS}")
 message(NOTICE "\n")
 
@@ -58,8 +58,8 @@ list(REMOVE_DUPLICATES CMAKE_MODULE_PATH)
 # -------------------------------------------------------------------------------------------------------------- #
 
 # Abort if target test file does not exist
-if (NOT EXISTS ${TEST_FILE})
-    message(FATAL_ERROR "Test file \"${TEST_FILE}\" does not exist")
+if (NOT EXISTS ${TEST_CASE})
+    message(FATAL_ERROR "Test file \"${TEST_CASE}\" does not exist")
 endif ()
 
 # Test Executor's "running" state flag
@@ -69,13 +69,13 @@ endif ()
 set(_RSP_TEST_EXECUTOR_RUNNING TRUE)
 
 # Include the test file
-include(${TEST_FILE})
+include(${TEST_CASE})
 
 # -------------------------------------------------------------------------------------------------------------- #
 
 # Fail if command does not exist...
 if (NOT COMMAND "${TEST_CALLBACK}")
-    message(FATAL_ERROR "Test callback \"${TEST_CALLBACK}\" does not exist, in ${TEST_FILE}")
+    message(FATAL_ERROR "Test callback \"${TEST_CALLBACK}\" does not exist, in ${TEST_CASE}")
 endif ()
 
 # Finally, invoke the test callback

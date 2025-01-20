@@ -207,7 +207,7 @@ if (NOT COMMAND "add_ctest_using_executor")
             COMMAND ${CMAKE_COMMAND}
                 -DTEST_NAME=${INPUT_NAME}
                 -DTEST_CALLBACK=${INPUT_CALLBACK}
-                -DTEST_FILE=${INPUT_TEST_CASE}
+                -DTEST_CASE=${INPUT_TEST_CASE}
                 -DMODULE_PATHS=${CMAKE_MODULE_PATH}
                 -P "${INPUT_EXECUTOR}"
         )
