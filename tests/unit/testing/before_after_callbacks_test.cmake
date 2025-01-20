@@ -1,6 +1,4 @@
 include("rsp/testing")
-include("rsp/helpers")
-include("rsp/cache")
 
 define_test_case(
     "Before / After Callback Test"
