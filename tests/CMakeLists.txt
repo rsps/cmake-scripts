@@ -13,7 +13,7 @@ message(STATUS "Building ${PROJECT_NAME}")
 include("rsp/testing")
 
 # Define the test suites for this project
-define_test_suite("unit tests" DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/unit")
+define_test_suite("unit" DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/unit")
 
 # HINT:
 # Defined tests can be executed via the following:
