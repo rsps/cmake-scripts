@@ -486,12 +486,12 @@ if (NOT COMMAND "_resolve_test_labels")
 
         # ---------------------------------------------------------------------------------------------- #
 
-        # Test-case label
-        cache_has(KEY _RSP_CURRENT_TEST_CASE OUTPUT has_test_case)
-        if (has_test_case)
-            cache_get(KEY _RSP_CURRENT_TEST_CASE)
-            list(APPEND labels_list "${_RSP_CURRENT_TEST_CASE}")
-        endif ()
+        # Test-case label (disabled - results in too many redundant labels...)
+        #        cache_has(KEY _RSP_CURRENT_TEST_CASE OUTPUT has_test_case)
+        #        if (has_test_case)
+        #            cache_get(KEY _RSP_CURRENT_TEST_CASE)
+        #            list(APPEND labels_list "${_RSP_CURRENT_TEST_CASE}")
+        #        endif ()
 
         # ---------------------------------------------------------------------------------------------- #
 
