@@ -7,6 +7,7 @@ include_guard(GLOBAL)
 # Debug
 message(VERBOSE "rsp/testing module included")
 
+include("rsp/cache")
 include("rsp/testing/asserts")
 
 # -------------------------------------------------------------------------------------------------------------- #
@@ -18,6 +19,24 @@ if (NOT DEFINED RSP_TEST_EXECUTOR_PATH)
     get_filename_component(RSP_TEST_EXECUTOR_PATH "${CMAKE_CURRENT_LIST_DIR}/testing/executor.cmake" REALPATH)
 endif ()
 
+# Current Test-Suite (temporary placeholder)
+#
+# @internal
+#
+#cache_set(KEY _RSP_CURRENT_TEST_SUITE VALUE "")
+
+# Current Test-Case (temporary placeholder)
+#
+# @internal
+#
+#cache_set(KEY _RSP_CURRENT_TEST_CASE VALUE "")
+
+# Current Test-Case labels (temporary placeholder)
+#
+# @internal
+#
+#cache_set(KEY _RSP_CURRENT_TEST_CASE_LABELS VALUE "")
+
 # -------------------------------------------------------------------------------------------------------------- #
 
 if (NOT COMMAND "define_test_suite")
@@ -26,6 +45,11 @@ if (NOT COMMAND "define_test_suite")
     #
     # Warning: all test-case files in specified directory will be included,
     # by this function!
+    #
+    # Note: Function automatically invokes the `end_test_case()` after each
+    # test-case file has been processed.
+    #
+    # @see end_test_case()
     #
     # @param <string> name              Human readable name of test suite TODO: Can this be used for ctest labels / groups?
     # @param DIRECTORY <path>           Path to directory that contains test-cases
@@ -37,9 +61,11 @@ if (NOT COMMAND "define_test_suite")
     function(define_test_suite name)
         # Do nothing if in test exector scope...
         if (_RSP_TEST_EXECUTOR_RUNNING)
-            # message(STATUS "Skipping add_ctest()")
+            # message(STATUS "Skipping define_test_suite()")
             return()
         endif ()
+
+        # ---------------------------------------------------------------------------------------------- #
 
         set(options "") # N/A
         set(oneValueArgs DIRECTORY MATCH)
@@ -54,6 +80,13 @@ if (NOT COMMAND "define_test_suite")
                 message(FATAL_ERROR "${arg} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
             endif ()
         endforeach ()
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Abort if test-suite has no name
+        if (NOT DEFINED name OR name STREQUAL "")
+            message(FATAL_ERROR "name argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
+        endif ()
 
         # ---------------------------------------------------------------------------------------------- #
         # Resolve optional arguments
@@ -76,6 +109,9 @@ if (NOT COMMAND "define_test_suite")
 
         message(STATUS "Defining ${name} | ${amount} test-cases")
 
+        # Set the current test-suite
+        cache_set(KEY _RSP_CURRENT_TEST_SUITE VALUE "${name}")
+
         # Include each found test-case file.
         foreach (test_case ${test_cases})
             message(VERBOSE "\tIncluding test-case: ${test_case}")
@@ -83,7 +119,99 @@ if (NOT COMMAND "define_test_suite")
             # The test-case file is expected to define one or more tests, using the
             # define_test() function...
             include("${test_case}")
+
+            # End evt. defined test-case definition
+            end_test_case()
         endforeach ()
+
+        # Clear current test-suite
+        cache_forget(KEY _RSP_CURRENT_TEST_SUITE)
+
+    endfunction()
+endif ()
+
+if (NOT COMMAND "define_test_case")
+
+    #! define_test_case : Define a test-case
+    #
+    # All subsequent defined tests will automatically be associated with this
+    # test-case, until `end_test_case()` is invoked.
+    #
+    # @see define_test()
+    # @see end_test_case()
+    #
+    # @param <string> name              Human readable name of test-case.
+    # @param [LABELS <list>]            Labels to associate subsequent tests with.
+    #
+    # @throws
+    #
+    function(define_test_case name)
+        # Do nothing if in test exector scope...
+        if (_RSP_TEST_EXECUTOR_RUNNING)
+            # message(STATUS "Skipping define_test_case()")
+            return()
+        endif ()
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        set(options "") # N/A
+        set(oneValueArgs "")
+        set(multiValueArgs LABELS) # N/A
+
+        cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+        # Ensure required arguments are defined
+        set(requiredArgs "")
+        foreach (arg ${requiredArgs})
+            if (NOT DEFINED INPUT_${arg})
+                message(FATAL_ERROR "${arg} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
+            endif ()
+        endforeach ()
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Abort if test-case has no name
+        if (NOT DEFINED name OR name STREQUAL "")
+            message(FATAL_ERROR "name argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
+        endif ()
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Resolve labels for tests
+        set(labels_list "")
+        if (DEFINED INPUT_LABELS)
+            set(labels_list "${INPUT_LABELS}")
+        endif ()
+
+        # Debug
+        # message("Test-Case Labels: ${labels_list}")
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Finally, set the temporary test-case related properties...
+        cache_set(KEY _RSP_CURRENT_TEST_CASE VALUE "${name}")
+        cache_set(KEY _RSP_CURRENT_TEST_CASE_LABELS VALUE "${labels_list}")
+    endfunction()
+endif ()
+
+if (NOT COMMAND "end_test_case")
+
+    #! end_test_case : Ends the test-case definition
+    #
+    # This function SHOULD be called at the end of each test-case.
+    #
+    function(end_test_case)
+        # Do nothing if in test exector scope...
+        if (_RSP_TEST_EXECUTOR_RUNNING)
+            # message(STATUS "Skipping end_test_case()")
+            return()
+        endif ()
+
+        # ---------------------------------------------------------------------------------------------- #
+        # Clear all test-case related temporary variables...
+
+        cache_forget(KEY _RSP_CURRENT_TEST_CASE)
+        cache_forget(KEY _RSP_CURRENT_TEST_CASE_LABELS)
     endfunction()
 endif ()
 
@@ -92,9 +220,13 @@ if (NOT COMMAND "define_test")
     #! define_test : Define a test to be executed by the "test executor"
     #
     # @see https://cmake.org/cmake/help/latest/module/CTest.html
+    # @see define_test_case()
     # @see add_ctest_using_executor()
     #
     # @param <string> name              Human readable name of test.
+    #                                   If a test-case has been defined, then the test-case's
+    #                                   this test's name is automatically prefixed with that
+    #                                   of the test-case.
     # @param <command> callback         The function that contains the actual test logic.
     # @param [EXPECT_FAILURE]           Option, if specified then callback is expected to fail.
     # @param [SKIP]                     Option, if set then test will be marked as "disabled"
@@ -108,6 +240,8 @@ if (NOT COMMAND "define_test")
             # message(STATUS "Skipping define_test()")
             return()
         endif ()
+
+        # ---------------------------------------------------------------------------------------------- #
 
         # Debug
         # message("   defining test invoked: ${name}, using ${callback}")
@@ -140,16 +274,31 @@ if (NOT COMMAND "define_test")
             set(skip_test true)
         endif ()
 
+        # Resolve evt. test-case prefixing of test name
+        set(resolved_test_name "${name}")
+        if (DEFINED _RSP_CURRENT_TEST_CASE AND NOT (_RSP_CURRENT_TEST_CASE STREQUAL ""))
+            set(resolved_test_name "${_RSP_CURRENT_TEST_CASE} | ${resolved_test_name}")
+        endif ()
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Resolve labels for test
+        _resolve_test_labels(labels_list)
+
+        # Debug
+        # message("DEFINED LABELS: ${labels_list}")
+
         # ---------------------------------------------------------------------------------------------- #
 
         # Add the actual ctest
         add_ctest_using_executor(
-            NAME ${name}
+            NAME ${resolved_test_name}
             CALLBACK ${callback}
             TEST_CASE ${CMAKE_CURRENT_LIST_FILE}
 
             EXPECT_FAILURE ${expected_to_fail}
             SKIP ${skip_test}
+            LABELS ${labels_list}
         )
     endfunction()
 endif ()
@@ -168,6 +317,7 @@ if (NOT COMMAND "add_ctest_using_executor")
     #                                   Default set to false.
     # @param [SKIP <bool>]              If set to true, then test callback is skipped.
     #                                   Default set to false.
+    # @param [LABELS <list>]            Labels to associate test with.
     # @param [EXECUTOR <path>]          Path to the "test executor". Defaults to RSP_TEST_EXECUTOR_PATH,
     #                                   when not specified.
     #
@@ -176,13 +326,15 @@ if (NOT COMMAND "add_ctest_using_executor")
     function(add_ctest_using_executor)
         # Do nothing if in test exector scope...
         if (_RSP_TEST_EXECUTOR_RUNNING)
-            # message(STATUS "Skipping add_ctest()")
+            # message(STATUS "Skipping add_ctest_using_executor()")
             return()
         endif ()
 
+        # ---------------------------------------------------------------------------------------------- #
+
         set(options "")  # N/A
         set(oneValueArgs NAME CALLBACK TEST_CASE EXPECT_FAILURE SKIP EXECUTOR)
-        set(multiValueArgs "") # N/A
+        set(multiValueArgs LABELS) # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
@@ -203,6 +355,11 @@ if (NOT COMMAND "add_ctest_using_executor")
 
         if (NOT DEFINED INPUT_SKIP)
             set(INPUT_SKIP false)
+        endif ()
+
+        set(labels_list "")
+        if (DEFINED INPUT_LABELS)
+            set(labels_list "${INPUT_LABELS}")
         endif ()
 
         if (NOT DEFINED INPUT_EXECUTOR)
@@ -245,8 +402,22 @@ if (NOT COMMAND "add_ctest_using_executor")
         # @see https://cmake.org/cmake/help/latest/prop_test/DISABLED.html
         set_property(TEST ${INPUT_NAME} PROPERTY DISABLED "${INPUT_SKIP}")
 
-        # TODO: What about test LABELS
-        # TODO: @see https://stackoverflow.com/questions/24495412/ctest-using-labels-for-different-tests-ctesttestfile-cmake
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Add labels for given test, when available.
+        #
+        # Examples:
+        #   ctest --output-on-failure --label-regex "unit" --test-dir build/tests
+        #   ctest --output-on-failure --label-regex "^skip" --test-dir build/tests
+        #   ctest --output-on-failure --label-regex "^asserts" --test-dir build/tests
+        #
+        # @see https://cmake.org/cmake/help/latest/prop_test/LABELS.html
+        # @see https://stackoverflow.com/questions/24495412/ctest-using-labels-for-different-tests-ctesttestfile-cmake
+
+        list(LENGTH labels_list amount_labels)
+        if (amount_labels GREATER 0)
+            set_property(TEST ${INPUT_NAME} PROPERTY LABELS "${labels_list}")
+        endif ()
 
     endfunction()
 endif ()
@@ -254,3 +425,57 @@ endif ()
 # -------------------------------------------------------------------------------------------------------------- #
 # Internals
 # -------------------------------------------------------------------------------------------------------------- #
+
+if (NOT COMMAND "_resolve_test_labels")
+
+    #! _resolve_test_labels : Resolves labels for current test
+    #
+    # @internal
+    #
+    # @param <variable> output      The variable to assign labels to
+    #
+    # @return
+    #       output                  List of labels to associate test with
+    #
+    function(_resolve_test_labels output)
+        # Resolve labels for test
+        set(labels_list "")
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Test-suite label
+        cache_has(KEY _RSP_CURRENT_TEST_SUITE OUTPUT has_test_suite)
+        if (has_test_suite)
+            cache_get(KEY _RSP_CURRENT_TEST_SUITE)
+            list(APPEND labels_list "${_RSP_CURRENT_TEST_SUITE}")
+        endif ()
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Test-case label
+        cache_has(KEY _RSP_CURRENT_TEST_CASE OUTPUT has_test_case)
+        if (has_test_case)
+            cache_get(KEY _RSP_CURRENT_TEST_CASE)
+            list(APPEND labels_list "${_RSP_CURRENT_TEST_CASE}")
+        endif ()
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Test-case defined labels
+        cache_has(KEY _RSP_CURRENT_TEST_CASE_LABELS OUTPUT has_test_case_labels)
+        if (has_test_case_labels)
+            cache_get(KEY _RSP_CURRENT_TEST_CASE_LABELS)
+            list(APPEND labels_list "${_RSP_CURRENT_TEST_CASE_LABELS}")
+        endif ()
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Cleanup provided labels
+        list(TRANSFORM labels_list TOLOWER)
+        list(REMOVE_DUPLICATES labels_list)
+
+        # Returns labels
+        set("${output}" "${labels_list}")
+        return(PROPAGATE "${output}")
+    endfunction()
+endif ()
