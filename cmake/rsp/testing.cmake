@@ -55,7 +55,9 @@ if (NOT COMMAND "define_test_suite")
             endif ()
         endforeach ()
 
+        # ---------------------------------------------------------------------------------------------- #
         # Resolve optional arguments
+
         if (NOT DEFINED INPUT_MATCH OR INPUT_MATCH STREQUAL "")
             set(INPUT_MATCH "*_test.cmake")
         endif ()
@@ -65,6 +67,8 @@ if (NOT COMMAND "define_test_suite")
         if (NOT EXISTS "${target_directory}")
             message(FATAL_ERROR "Directory \"${INPUT_DIRECTORY}\" does not exist")
         endif ()
+
+        # ---------------------------------------------------------------------------------------------- #
 
         # Find all test-case files in directory
         file(GLOB_RECURSE test_cases "${target_directory}/${INPUT_MATCH}")
@@ -93,6 +97,8 @@ if (NOT COMMAND "define_test")
     # @param <string> name              Human readable name of test.
     # @param <command> callback         The function that contains the actual test logic.
     # @param [EXPECT_FAILURE]           Option, if specified then callback is expected to fail.
+    # @param [SKIP]                     Option, if set then test will be marked as "disabled"
+    #                                   and not executed.
     #
     # @throws
     #
@@ -114,7 +120,7 @@ if (NOT COMMAND "define_test")
             endif ()
         endforeach ()
 
-        set(options EXPECT_FAILURE)
+        set(options EXPECT_FAILURE SKIP)
         set(oneValueArgs "")
         set(multiValueArgs "") # N/A
 
@@ -128,16 +134,22 @@ if (NOT COMMAND "define_test")
             set(expected_to_fail true)
         endif ()
 
+        # Resolve skip state
+        set(skip_test false)
+        if (INPUT_SKIP)
+            set(skip_test true)
+        endif ()
+
         # ---------------------------------------------------------------------------------------------- #
 
         # Add the actual ctest
         add_ctest_using_executor(
             NAME ${name}
             CALLBACK ${callback}
-
-            # Default the test-case file to the *.cmake file that invoked this function!
             TEST_CASE ${CMAKE_CURRENT_LIST_FILE}
+
             EXPECT_FAILURE ${expected_to_fail}
+            SKIP ${skip_test}
         )
     endfunction()
 endif ()
@@ -154,6 +166,8 @@ if (NOT COMMAND "add_ctest_using_executor")
     # @param TEST_CASE <path>           Path to the target *.cmake test-case file.
     # @param [EXPECT_FAILURE <bool>]    If set to true, then test callback is expected to fail.
     #                                   Default set to false.
+    # @param [SKIP <bool>]              If set to true, then test callback is skipped.
+    #                                   Default set to false.
     # @param [EXECUTOR <path>]          Path to the "test executor". Defaults to RSP_TEST_EXECUTOR_PATH,
     #                                   when not specified.
     #
@@ -167,7 +181,7 @@ if (NOT COMMAND "add_ctest_using_executor")
         endif ()
 
         set(options "")  # N/A
-        set(oneValueArgs NAME CALLBACK TEST_CASE EXPECT_FAILURE EXECUTOR)
+        set(oneValueArgs NAME CALLBACK TEST_CASE EXPECT_FAILURE SKIP EXECUTOR)
         set(multiValueArgs "") # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -180,13 +194,22 @@ if (NOT COMMAND "add_ctest_using_executor")
             endif ()
         endforeach ()
 
+        # ---------------------------------------------------------------------------------------------- #
         # Resolve optional arguments
+
         if (NOT DEFINED INPUT_EXPECT_FAILURE)
             set(INPUT_EXPECT_FAILURE false)
         endif ()
+
+        if (NOT DEFINED INPUT_SKIP)
+            set(INPUT_SKIP false)
+        endif ()
+
         if (NOT DEFINED INPUT_EXECUTOR)
             set(INPUT_EXECUTOR "${RSP_TEST_EXECUTOR_PATH}")
         endif ()
+
+        # ---------------------------------------------------------------------------------------------- #
 
         # Fail if path to test-case file is invalid
         if (NOT EXISTS "${INPUT_TEST_CASE}")
@@ -197,6 +220,8 @@ if (NOT COMMAND "add_ctest_using_executor")
         if (NOT EXISTS "${INPUT_EXECUTOR}")
             message(FATAL_ERROR "Path to \"test executor\" is invalid: ${INPUT_EXECUTOR}")
         endif ()
+
+        # ---------------------------------------------------------------------------------------------- #
 
         # Debug
         message(VERBOSE "\tAdding test: ${INPUT_NAME}")
@@ -215,6 +240,10 @@ if (NOT COMMAND "add_ctest_using_executor")
         # Set test failure expectation
         # @see https://cmake.org/cmake/help/latest/prop_test/WILL_FAIL.html#prop_test:WILL_FAIL
         set_property(TEST ${INPUT_NAME} PROPERTY WILL_FAIL "${INPUT_EXPECT_FAILURE}")
+
+        # Skip test if needed
+        # @see https://cmake.org/cmake/help/latest/prop_test/DISABLED.html
+        set_property(TEST ${INPUT_NAME} PROPERTY DISABLED "${INPUT_SKIP}")
 
         # TODO: What about test LABELS
         # TODO: @see https://stackoverflow.com/questions/24495412/ctest-using-labels-for-different-tests-ctesttestfile-cmake
