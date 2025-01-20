@@ -43,6 +43,7 @@ message(NOTICE "\n")
 message(NOTICE "Name: ${TEST_NAME}")
 message(NOTICE "Callback: ${TEST_CALLBACK}")
 message(NOTICE "Test-Case: ${TEST_CASE}")
+message(NOTICE "Callback arg.: ${CALLBACK_ARG}")
 message(NOTICE "Before callback: ${BEFORE_CALLBACK}")
 message(NOTICE "After callback: ${AFTER_CALLBACK}")
 message(NOTICE "Module path(s): ${MODULE_PATHS}")
@@ -70,14 +71,17 @@ endif ()
 #
 # @internal
 #
-# @param <command> name     The command or macro to invoke e
-# @param TYPE <string>    A label that describes the callback.
+# @param <command> name                 The command or macro to invoke e
+# @param TYPE <string>                  A label that describes the callback.
+# @param [CALLBACK_ARG <string|list>]   Evt. data-set list to be passed on to the callback as a
+#                                       single argument.
 #
 # @throws If command or macro does not exist
 #
 function(rsp_executor_run_callback name)
     set(oneValueArgs TYPE)
-    cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+    set(multiValueArgs CALLBACK_ARG) # N/A
+    cmake_parse_arguments(INPUT "" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
     # Ensure required arguments are defined
     set(requiredArgs "TYPE")
@@ -93,7 +97,15 @@ function(rsp_executor_run_callback name)
         message(FATAL_ERROR "${INPUT_TYPE} callback \"${name}\" does not exist, in ${TEST_CASE}")
     endif ()
 
+    # Invoke callback with additional argument(s)
+    if (DEFINED INPUT_CALLBACK_ARG AND NOT (INPUT_CALLBACK_ARG STREQUAL ""))
+        cmake_language(CALL "${name}" ${INPUT_CALLBACK_ARG})
+        return()
+    endif ()
+
+    # Otherwise, just invoke without additional arguments
     cmake_language(CALL "${name}")
+
 endfunction()
 
 # -------------------------------------------------------------------------------------------------------------- #
@@ -117,7 +129,7 @@ endif ()
 # -------------------------------------------------------------------------------------------------------------- #
 # Invoke the test callback
 
-rsp_executor_run_callback("${TEST_CALLBACK}" TYPE "Test")
+rsp_executor_run_callback("${TEST_CALLBACK}" TYPE "Test" CALLBACK_ARG ${CALLBACK_ARG})
 
 # -------------------------------------------------------------------------------------------------------------- #
 # Invoke after callback, if requested

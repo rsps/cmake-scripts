@@ -251,6 +251,10 @@ if (NOT COMMAND "define_test")
     #                                   this test's name is automatically prefixed with that
     #                                   of the test-case.
     # @param <command> callback         The function that contains the actual test logic.
+    # @param [DATA_PROVIDER <command>]  Command or macro that provides data-set(s) for the test.
+    #                                   The command or macro MUST accept a single <output> variable,
+    #                                   used to assign a list of items (data-set), which will be
+    #                                   passed on to the test callback.
     # @param [EXPECT_FAILURE]           Option, if specified then callback is expected to fail.
     # @param [SKIP]                     Option, if set then test will be marked as "disabled"
     #                                   and not executed.
@@ -279,7 +283,7 @@ if (NOT COMMAND "define_test")
 
         set(options EXPECT_FAILURE SKIP)
         set(oneValueArgs "")
-        set(multiValueArgs "") # N/A
+        set(multiValueArgs DATA_PROVIDER) # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
@@ -316,8 +320,63 @@ if (NOT COMMAND "define_test")
         cache_get(KEY _RSP_CURRENT_TEST_CASE_AFTER_CALLBACK DEFAULT "")
 
         # ---------------------------------------------------------------------------------------------- #
+        # If a data provider callback has been given, then it must be processed.
 
-        # Add the actual ctest
+        if (DEFINED INPUT_DATA_PROVIDER AND NOT (INPUT_DATA_PROVIDER STREQUAL ""))
+            # Abort if the data provider callback does not exist.
+            if (NOT COMMAND "${INPUT_DATA_PROVIDER}")
+                message(FATAL_ERROR "Data Provider callback (${INPUT_DATA_PROVIDER}) does not exist, in ${CMAKE_CURRENT_LIST_FILE}")
+            endif ()
+
+            # Invoke the data provider callback
+            set(data_sets "")
+            cmake_language(CALL "${INPUT_DATA_PROVIDER}" data_sets)
+
+            # Abort if data sets are empty
+            list(LENGTH data_sets amount)
+            if (amount LESS_EQUAL 0)
+                message(FATAL_ERROR
+                    "Data Provider (${INPUT_DATA_PROVIDER}) does not provide any data, in ${CMAKE_CURRENT_LIST_FILE}\n"
+                    "Please make sure that the data provider callback accepts an <output> variable, "
+                    "and assign your data-set(s) to that given variable."
+                )
+            endif ()
+
+            # Foreach data-set, add a test.
+            set(index "0")
+            foreach (data_set ${data_sets})
+                # Create a "new" test name, for given data-set
+                set(test_name_for_data_set "${resolved_test_name} : ${index}")
+
+                # Debug
+                message(VERBOSE "\tAdding test for data-set: ${data_set}")
+
+                add_ctest_using_executor(
+                    NAME ${test_name_for_data_set}
+                    CALLBACK ${callback}
+                    TEST_CASE ${CMAKE_CURRENT_LIST_FILE}
+
+                    # Provide additional test callback argument(s)
+                    CALLBACK_ARG ${data_set}
+
+                    BEFORE_CALLBACK ${_RSP_CURRENT_TEST_CASE_BEFORE_CALLBACK}
+                    AFTER_CALLBACK ${_RSP_CURRENT_TEST_CASE_AFTER_CALLBACK}
+
+                    EXPECT_FAILURE ${expected_to_fail}
+                    SKIP ${skip_test}
+                    LABELS ${labels_list}
+                )
+
+                math(EXPR index "${index} + 1")
+            endforeach ()
+
+            # Stop further processing...
+            return()
+        endif ()
+
+        # ---------------------------------------------------------------------------------------------- #
+        # Otherwise, just add a regular test...
+
         add_ctest_using_executor(
             NAME ${resolved_test_name}
             CALLBACK ${callback}
@@ -343,6 +402,8 @@ if (NOT COMMAND "add_ctest_using_executor")
     # @param NAME <string>                  Human readable name of test
     # @param CALLBACK <command>             The function that contains the actual test, in the test-case file.
     # @param TEST_CASE <path>               Path to the target *.cmake test-case file.
+    # @param [CALLBACK_ARG <string|list>]   Evt. data-set list to be passed on to the test callback as a
+    #                                       single argument.
     # @param [BEFORE_CALLBACK <command>]    Command or marco to execute before test.
     # @param [AFTER_CALLBACK <command>]     Command or marco to execute after test.
     # @param [EXPECT_FAILURE <bool>]        If set to true, then test callback is expected to fail.
@@ -366,7 +427,7 @@ if (NOT COMMAND "add_ctest_using_executor")
 
         set(options "")  # N/A
         set(oneValueArgs NAME CALLBACK TEST_CASE BEFORE_CALLBACK AFTER_CALLBACK EXPECT_FAILURE SKIP EXECUTOR)
-        set(multiValueArgs LABELS) # N/A
+        set(multiValueArgs LABELS CALLBACK_ARG) # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
@@ -422,6 +483,7 @@ if (NOT COMMAND "add_ctest_using_executor")
                 -DTEST_NAME=${INPUT_NAME}
                 -DTEST_CALLBACK=${INPUT_CALLBACK}
                 -DTEST_CASE=${INPUT_TEST_CASE}
+                -DCALLBACK_ARG=${INPUT_CALLBACK_ARG}
                 -DBEFORE_CALLBACK=${INPUT_BEFORE_CALLBACK}
                 -DAFTER_CALLBACK=${INPUT_AFTER_CALLBACK}
                 -DMODULE_PATHS=${CMAKE_MODULE_PATH}
