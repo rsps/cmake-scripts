@@ -388,6 +388,54 @@ endif ()
 # Files & Paths
 # -------------------------------------------------------------------------------------------------------------- #
 
+if (NOT COMMAND "assert_file_exists")
+
+    #! assert_file_exists : Assert file exists
+    #
+    # @see https://cmake.org/cmake/help/latest/command/if.html#exists
+    #
+    # @param <string> path          Path to file
+    # @param [MESSAGE <string>]     Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_file_exists path)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        if (NOT EXISTS "${path}")
+            message(FATAL_ERROR "file '${path}' does not exist." "${msg}")
+        endif ()
+    endfunction()
+endif ()
+
+if (NOT COMMAND "assert_file_not_exists")
+
+    #! assert_file_not_exists : Assert file does not exists
+    #
+    # @see https://cmake.org/cmake/help/latest/command/if.html#exists
+    #
+    # @param <string> path           Path to file
+    # @param [MESSAGE <string>]     Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_file_not_exists path)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        if (EXISTS "${path}")
+            message(FATAL_ERROR "file '${path}' exist, but was not expected to." "${msg}")
+        endif ()
+    endfunction()
+endif ()
+
 # TODO: ...
 # TODO: ...is dir, is file, is symlink, file exists... etc
 
