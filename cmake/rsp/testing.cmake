@@ -37,6 +37,18 @@ endif ()
 #
 #cache_set(KEY _RSP_CURRENT_TEST_CASE_LABELS VALUE "")
 
+# Current Test-Case before callback
+#
+# @internal
+#
+#cache_set(KEY _RSP_CURRENT_TEST_CASE_BEFORE_CALLBACK VALUE "")
+
+# Current Test-Case after callback
+#
+# @internal
+#
+#cache_set(KEY _RSP_CURRENT_TEST_CASE_AFTER_CALLBACK VALUE "")
+
 # -------------------------------------------------------------------------------------------------------------- #
 
 if (NOT COMMAND "define_test_suite")
@@ -141,6 +153,8 @@ if (NOT COMMAND "define_test_case")
     # @see end_test_case()
     #
     # @param <string> name              Human readable name of test-case.
+    # @param [BEFORE <command>]         Command or marco to execute before each test in test-case.
+    # @param [AFTER <command>]          Command or marco to execute after each test in test-case.
     # @param [LABELS <list>]            Labels to associate subsequent tests with.
     #
     # @throws
@@ -155,7 +169,7 @@ if (NOT COMMAND "define_test_case")
         # ---------------------------------------------------------------------------------------------- #
 
         set(options "") # N/A
-        set(oneValueArgs "")
+        set(oneValueArgs BEFORE AFTER)
         set(multiValueArgs LABELS) # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -191,6 +205,13 @@ if (NOT COMMAND "define_test_case")
         # Finally, set the temporary test-case related properties...
         cache_set(KEY _RSP_CURRENT_TEST_CASE VALUE "${name}")
         cache_set(KEY _RSP_CURRENT_TEST_CASE_LABELS VALUE "${labels_list}")
+
+        if (DEFINED INPUT_BEFORE)
+            cache_set(KEY _RSP_CURRENT_TEST_CASE_BEFORE_CALLBACK VALUE "${INPUT_BEFORE}")
+        endif ()
+        if (DEFINED INPUT_AFTER)
+            cache_set(KEY _RSP_CURRENT_TEST_CASE_AFTER_CALLBACK VALUE "${INPUT_AFTER}")
+        endif ()
     endfunction()
 endif ()
 
@@ -212,6 +233,8 @@ if (NOT COMMAND "end_test_case")
 
         cache_forget(KEY _RSP_CURRENT_TEST_CASE)
         cache_forget(KEY _RSP_CURRENT_TEST_CASE_LABELS)
+        cache_forget(KEY _RSP_CURRENT_TEST_CASE_BEFORE_CALLBACK)
+        cache_forget(KEY _RSP_CURRENT_TEST_CASE_AFTER_CALLBACK)
     endfunction()
 endif ()
 
@@ -288,6 +311,10 @@ if (NOT COMMAND "define_test")
         # Debug
         # message("DEFINED LABELS: ${labels_list}")
 
+        # Resolve eventual before and after callbacks
+        cache_get(KEY _RSP_CURRENT_TEST_CASE_BEFORE_CALLBACK DEFAULT "")
+        cache_get(KEY _RSP_CURRENT_TEST_CASE_AFTER_CALLBACK DEFAULT "")
+
         # ---------------------------------------------------------------------------------------------- #
 
         # Add the actual ctest
@@ -295,6 +322,9 @@ if (NOT COMMAND "define_test")
             NAME ${resolved_test_name}
             CALLBACK ${callback}
             TEST_CASE ${CMAKE_CURRENT_LIST_FILE}
+
+            BEFORE_CALLBACK ${_RSP_CURRENT_TEST_CASE_BEFORE_CALLBACK}
+            AFTER_CALLBACK ${_RSP_CURRENT_TEST_CASE_AFTER_CALLBACK}
 
             EXPECT_FAILURE ${expected_to_fail}
             SKIP ${skip_test}
@@ -310,16 +340,18 @@ if (NOT COMMAND "add_ctest_using_executor")
     # @see RSP_TEST_EXECUTOR_PATH
     # @see https://cmake.org/cmake/help/latest/module/CTest.html
     #
-    # @param NAME <string>              Human readable name of test
-    # @param CALLBACK <command>         The function that contains the actual test, in the test-case file.
-    # @param TEST_CASE <path>           Path to the target *.cmake test-case file.
-    # @param [EXPECT_FAILURE <bool>]    If set to true, then test callback is expected to fail.
-    #                                   Default set to false.
-    # @param [SKIP <bool>]              If set to true, then test callback is skipped.
-    #                                   Default set to false.
-    # @param [LABELS <list>]            Labels to associate test with.
-    # @param [EXECUTOR <path>]          Path to the "test executor". Defaults to RSP_TEST_EXECUTOR_PATH,
-    #                                   when not specified.
+    # @param NAME <string>                  Human readable name of test
+    # @param CALLBACK <command>             The function that contains the actual test, in the test-case file.
+    # @param TEST_CASE <path>               Path to the target *.cmake test-case file.
+    # @param [BEFORE_CALLBACK <command>]    Command or marco to execute before test.
+    # @param [AFTER_CALLBACK <command>]     Command or marco to execute after test.
+    # @param [EXPECT_FAILURE <bool>]        If set to true, then test callback is expected to fail.
+    #                                       Default set to false.
+    # @param [SKIP <bool>]                  If set to true, then test callback is skipped.
+    #                                       Default set to false.
+    # @param [LABELS <list>]                Labels to associate test with.
+    # @param [EXECUTOR <path>]              Path to the "test executor". Defaults to RSP_TEST_EXECUTOR_PATH,
+    #                                       when not specified.
     #
     # @throws If EXECUTOR path is invalid.
     #
@@ -333,7 +365,7 @@ if (NOT COMMAND "add_ctest_using_executor")
         # ---------------------------------------------------------------------------------------------- #
 
         set(options "")  # N/A
-        set(oneValueArgs NAME CALLBACK TEST_CASE EXPECT_FAILURE SKIP EXECUTOR)
+        set(oneValueArgs NAME CALLBACK TEST_CASE BEFORE_CALLBACK AFTER_CALLBACK EXPECT_FAILURE SKIP EXECUTOR)
         set(multiValueArgs LABELS) # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -390,6 +422,8 @@ if (NOT COMMAND "add_ctest_using_executor")
                 -DTEST_NAME=${INPUT_NAME}
                 -DTEST_CALLBACK=${INPUT_CALLBACK}
                 -DTEST_CASE=${INPUT_TEST_CASE}
+                -DBEFORE_CALLBACK=${INPUT_BEFORE_CALLBACK}
+                -DAFTER_CALLBACK=${INPUT_AFTER_CALLBACK}
                 -DMODULE_PATHS=${CMAKE_MODULE_PATH}
                 -P "${INPUT_EXECUTOR}"
         )
