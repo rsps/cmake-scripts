@@ -519,6 +519,60 @@ if (NOT COMMAND "assert_string_not_equals")
     endfunction()
 endif ()
 
+if (NOT COMMAND "assert_string_empty")
+
+    #! assert_string_empty : Assert given string is empty
+    #
+    # @see https://cmake.org/cmake/help/latest/command/string.html#length
+    #
+    # @param <string> str        The string value
+    # @param [MESSAGE <string>]  Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_string_empty str)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        string(LENGTH "${str}" length)
+
+        if (NOT length EQUAL 0)
+            message(FATAL_ERROR "String '${str}' (${length} bytes) was expected to be empty." "${msg}")
+        endif ()
+
+    endfunction()
+endif ()
+
+if (NOT COMMAND "assert_string_not_empty")
+
+    #! assert_string_not_empty : Assert given string is not empty
+    #
+    # @see https://cmake.org/cmake/help/latest/command/string.html#length
+    #
+    # @param <string> str        The string value
+    # @param [MESSAGE <string>]  Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_string_not_empty str)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        string(LENGTH "${str}" length)
+
+        if (length EQUAL 0)
+            message(FATAL_ERROR "String '${str}' (${length} bytes) is empty." "${msg}")
+        endif ()
+
+    endfunction()
+endif ()
+
 # TODO: ...
 # TODO: ...gt, gte, lt, lte... etc
 # TODO: ...regex
