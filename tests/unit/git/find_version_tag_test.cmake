@@ -27,6 +27,7 @@ macro(prepare_dummy_repo)
         OUTPUT_STRIP_TRAILING_WHITESPACE
         TIMEOUT 1
     )
+    assert_equals(0 status_a MESSAGE "Unable to init local repo: ${error}")
 
     # Commit a few empty commits...
     file(TOUCH "${OUTPUT_DIR}/README.md")
@@ -39,6 +40,8 @@ macro(prepare_dummy_repo)
         OUTPUT_STRIP_TRAILING_WHITESPACE
         TIMEOUT 1
     )
+    assert_equals(0 status_b MESSAGE "Unable to stage file: ${error}")
+
     execute_process(
         COMMAND ${GIT_EXECUTABLE} commit -m "testing..."
         WORKING_DIRECTORY "${OUTPUT_DIR}"
@@ -48,6 +51,8 @@ macro(prepare_dummy_repo)
         OUTPUT_STRIP_TRAILING_WHITESPACE
         TIMEOUT 1
     )
+    assert_equals(0 status_c MESSAGE "Unable to create first commit: ${error}")
+
     execute_process(
         COMMAND ${GIT_EXECUTABLE} tag "v1.0.0-alpha"
         WORKING_DIRECTORY "${OUTPUT_DIR}"
@@ -57,6 +62,7 @@ macro(prepare_dummy_repo)
         OUTPUT_STRIP_TRAILING_WHITESPACE
         TIMEOUT 1
     )
+    assert_equals(0 status_d MESSAGE "Unable to create first tag: ${error}")
 
     # Update content, commit and tag...
     file(WRITE "${OUTPUT_DIR}/README.md" "Lorum lipsum")
@@ -69,6 +75,8 @@ macro(prepare_dummy_repo)
         OUTPUT_STRIP_TRAILING_WHITESPACE
         TIMEOUT 1
     )
+    assert_equals(0 status_e MESSAGE "Unable to stage file: ${error}")
+
     execute_process(
         COMMAND ${GIT_EXECUTABLE} commit -m "another test"
         WORKING_DIRECTORY "${OUTPUT_DIR}"
@@ -78,6 +86,8 @@ macro(prepare_dummy_repo)
         OUTPUT_STRIP_TRAILING_WHITESPACE
         TIMEOUT 1
     )
+    assert_equals(0 status_f MESSAGE "Unable to create second commit: ${error}")
+
     execute_process(
         COMMAND ${GIT_EXECUTABLE} tag "v1.0.0-beta"
         WORKING_DIRECTORY "${OUTPUT_DIR}"
@@ -87,19 +97,7 @@ macro(prepare_dummy_repo)
         OUTPUT_STRIP_TRAILING_WHITESPACE
         TIMEOUT 1
     )
-
-    # Debug
-#    dump(
-#        status_a
-#
-#        status_b
-#        status_c
-#        status_d
-#
-#        status_e
-#        status_f
-#        status_g
-#    )
+    assert_equals(0 status_g MESSAGE "Unable to create second tag: ${error}")
 
 endmacro()
 
