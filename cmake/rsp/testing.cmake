@@ -119,7 +119,7 @@ if (NOT COMMAND "define_test_suite")
         file(GLOB_RECURSE test_cases "${target_directory}/${INPUT_MATCH}")
         list(LENGTH test_cases amount)
 
-        message(STATUS "Defining ${name} | ${amount} test-cases")
+        message(STATUS "Defining \"${name}\" test suite | ${amount} test-cases (${PROJECT_NAME})")
 
         # Set the current test-suite
         cache_set(KEY _RSP_CURRENT_TEST_SUITE VALUE "${name}")
