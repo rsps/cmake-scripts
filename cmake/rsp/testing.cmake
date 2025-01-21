@@ -195,6 +195,9 @@ if (NOT COMMAND "define_test_case")
         set(labels_list "")
         if (DEFINED INPUT_LABELS)
             set(labels_list "${INPUT_LABELS}")
+
+            # Escape semicolon, before value is cached
+            string(REPLACE ";" "|" labels_list "${labels_list}")
         endif ()
 
         # Debug
@@ -567,7 +570,11 @@ if (NOT COMMAND "_resolve_test_labels")
         cache_has(KEY _RSP_CURRENT_TEST_CASE_LABELS OUTPUT has_test_case_labels)
         if (has_test_case_labels)
             cache_get(KEY _RSP_CURRENT_TEST_CASE_LABELS)
-            list(APPEND labels_list "${_RSP_CURRENT_TEST_CASE_LABELS}")
+
+            # Ensure cached value is converted to list
+            string(REPLACE "|" ";" cached_labels_list "${_RSP_CURRENT_TEST_CASE_LABELS}")
+
+            list(APPEND labels_list "${cached_labels_list}")
         endif ()
 
         # ---------------------------------------------------------------------------------------------- #
