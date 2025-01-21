@@ -245,6 +245,22 @@ function(asserts_str_not_equals)
     assert_string_not_equals("foo" "bar" MESSAGE "values")
 endfunction()
 
+define_test("can assert string is empty" "asserts_str_empty")
+function(asserts_str_empty)
+    set(str "")
+    assert_string_empty("${str}" MESSAGE "from keys")
+
+    assert_string_empty("" MESSAGE "values")
+endfunction()
+
+define_test("can assert string is not empty" "asserts_str_not_empty")
+function(asserts_str_not_empty)
+    set(str "abc")
+    assert_string_not_empty("${str}" MESSAGE "from keys")
+
+    assert_string_not_empty("abc" MESSAGE "values")
+endfunction()
+
 # TODO: ...gt, gte, lt, lte... etc
 # TODO: ...regex
 
