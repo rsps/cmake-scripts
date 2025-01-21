@@ -473,6 +473,12 @@ if (NOT COMMAND "add_ctest_using_executor")
 
         # ---------------------------------------------------------------------------------------------- #
 
+        # Escape lists (semicolon), so they can be passed as arguments for cmake command line.
+        string(REPLACE ";" "\\;" module_paths "${CMAKE_MODULE_PATH}")
+        string(REPLACE ";" "\\;" callback_args "${INPUT_CALLBACK_ARG}")
+
+        # ---------------------------------------------------------------------------------------------- #
+
         # Debug
         message(VERBOSE "\tAdding test: ${INPUT_NAME}")
 
@@ -483,10 +489,10 @@ if (NOT COMMAND "add_ctest_using_executor")
                 -DTEST_NAME=${INPUT_NAME}
                 -DTEST_CALLBACK=${INPUT_CALLBACK}
                 -DTEST_CASE=${INPUT_TEST_CASE}
-                -DCALLBACK_ARG=${INPUT_CALLBACK_ARG}
+                -DCALLBACK_ARG=${callback_args}
                 -DBEFORE_CALLBACK=${INPUT_BEFORE_CALLBACK}
                 -DAFTER_CALLBACK=${INPUT_AFTER_CALLBACK}
-                -DMODULE_PATHS=${CMAKE_MODULE_PATH}
+                -DMODULE_PATHS=${module_paths}
                 -P "${INPUT_EXECUTOR}"
         )
 
