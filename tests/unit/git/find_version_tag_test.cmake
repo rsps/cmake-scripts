@@ -17,6 +17,11 @@ macro(prepare_dummy_repo)
     endif ()
     set(OUTPUT_DIR "${OUTPUT_DIR}" PARENT_SCOPE)
 
+    # Clear dummy repository (from evt. previous run)
+    set(target_file "${OUTPUT_DIR}/README.md")
+    file(REMOVE "${target_file}")
+    file(REMOVE_RECURSE "${OUTPUT_DIR}/.git")
+
     # Create a local repo
     execute_process(
         COMMAND ${GIT_EXECUTABLE} init
@@ -30,7 +35,7 @@ macro(prepare_dummy_repo)
     assert_equals(0 status_a MESSAGE "Unable to init local repo: ${error}")
 
     # Commit a few empty commits...
-    file(TOUCH "${OUTPUT_DIR}/README.md")
+    file(TOUCH "${target_file}")
     execute_process(
         COMMAND ${GIT_EXECUTABLE} add .
         WORKING_DIRECTORY "${OUTPUT_DIR}"
@@ -65,7 +70,7 @@ macro(prepare_dummy_repo)
     assert_equals(0 status_d MESSAGE "Unable to create first tag: ${error}")
 
     # Update content, commit and tag...
-    file(WRITE "${OUTPUT_DIR}/README.md" "Lorum lipsum")
+    file(WRITE "${target_file}" "Lorum lipsum")
     execute_process(
         COMMAND ${GIT_EXECUTABLE} add .
         WORKING_DIRECTORY "${OUTPUT_DIR}"
@@ -112,11 +117,37 @@ endmacro()
 
 define_test("can find nearest version tag" "can_find_version_tag")
 function(can_find_version_tag)
-
     git_find_version_tag(
         OUTPUT version
         WORKING_DIRECTORY "${OUTPUT_DIR}"
     )
 
     assert_string_equals("v1.0.0-beta" version MESSAGE "Incorrect version obtained from local repo")
+endfunction()
+
+define_test("returns default version" "returns_default_version")
+function(returns_default_version)
+    git_find_version_tag(
+        OUTPUT version_a
+        WORKING_DIRECTORY "${OUTPUT_DIR}/unknown"
+    )
+
+    set(custom_default "v12.5.0")
+    git_find_version_tag(
+        OUTPUT version_b
+        DEFAULT "${custom_default}"
+        WORKING_DIRECTORY "${OUTPUT_DIR}/unknown"
+    )
+
+    assert_string_equals("0.0.0" version_a MESSAGE "Expected 0.0.0 as default version returned")
+    assert_string_equals(custom_default version_b MESSAGE "Expected custom default version (${custom_default}) to be returned")
+endfunction()
+
+define_test("fails when requested and unable to find version" "fails_when_unable_to_find_version" EXPECT_FAILURE)
+function(fails_when_unable_to_find_version)
+    git_find_version_tag(
+        OUTPUT version
+        WORKING_DIRECTORY "${OUTPUT_DIR}/unknown"
+        EXIT_ON_FAILURE
+    )
 endfunction()
