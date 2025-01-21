@@ -486,13 +486,13 @@ if (NOT COMMAND "add_ctest_using_executor")
         add_test(
             NAME "${INPUT_NAME}"
             COMMAND ${CMAKE_COMMAND}
-                -DTEST_NAME=${INPUT_NAME}
-                -DTEST_CALLBACK=${INPUT_CALLBACK}
-                -DTEST_CASE=${INPUT_TEST_CASE}
-                -DCALLBACK_ARG=${callback_args}
-                -DBEFORE_CALLBACK=${INPUT_BEFORE_CALLBACK}
-                -DAFTER_CALLBACK=${INPUT_AFTER_CALLBACK}
-                -DMODULE_PATHS=${module_paths}
+                -D TEST_NAME:STRING=${INPUT_NAME}
+                -D TEST_CALLBACK:STRING=${INPUT_CALLBACK}
+                -D TEST_CASE:PATH=${INPUT_TEST_CASE}
+                -D CALLBACK_ARG:STRING=${callback_args}
+                -D BEFORE_CALLBACK:STRING=${INPUT_BEFORE_CALLBACK}
+                -D AFTER_CALLBACK:STRING=${INPUT_AFTER_CALLBACK}
+                -D MODULE_PATHS:STRING=${module_paths}
                 -P "${INPUT_EXECUTOR}"
         )
 
