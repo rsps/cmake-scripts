@@ -227,12 +227,12 @@ if (NOT COMMAND "version_from_file")
                 "Version file ${INPUT_FILE} does not exist\n"
                 "Defaulting to use version: ${version}\n"
             )
+        else ()
+            # Read the contents of the file (max 255 bytes).
+            # @see https://semver.org/#does-semver-have-a-size-limit-on-the-version-string
+            file(READ ${INPUT_FILE} version LENGTH_MAXIMUM 255)
+            string(STRIP "${version}" version)
         endif ()
-
-        # Read the contents of the file (max 255 bytes).
-        # @see https://semver.org/#does-semver-have-a-size-limit-on-the-version-string
-        file(READ ${INPUT_FILE} version LENGTH_MAXIMUM 255)
-        string(STRIP "${version}" version)
 
         # If version file is empty
         if (version STREQUAL "")
