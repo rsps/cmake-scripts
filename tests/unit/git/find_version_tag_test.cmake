@@ -3,7 +3,7 @@ include("rsp/git")
 
 define_test_case(
     "Git Find Version Tag Test"
-    LABELS "git;version;testing"
+    LABELS "git;version"
 
     BEFORE "prepare_dummy_repo"
     AFTER "cleanup_dummy_repo"
