@@ -109,6 +109,8 @@ if (NOT COMMAND "write_version_file")
     #                               Defaults to version obtain via `git_find_version_tag()`,
     #                               when no version specified.
     #
+    # @throws If VERSION is not a valid semantic version
+    #
     function(write_version_file)
         set(options "") # N/A
         set(oneValueArgs FILE VERSION)
@@ -138,6 +140,12 @@ if (NOT COMMAND "write_version_file")
                 WORKING_DIRECTORY ${workingDir}
             )
         endif ()
+
+        # Ensure that a valid semver
+        semver_parse(
+            VERSION "${INPUT_VERSION}"
+            OUTPUT ${INPUT_VERSION}
+        )
 
         # Prevent re-writing file, if the content is the same as the version.
         if (EXISTS ${INPUT_FILE})
