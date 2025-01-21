@@ -66,6 +66,9 @@ if (NOT COMMAND "cache_set")
             string(TIMESTAMP now "%s")
             math(EXPR expires_at "${now} + ${INPUT_TTL}")
 
+            # Debug
+            message(VERBOSE "Cache (${INPUT_KEY}) TTL set to ${INPUT_TTL} seconds. Now: ${now}, expires at: ${expires_at}")
+
             set("${EXPIRES_AT_KEY}" "${expires_at}" CACHE STRING " Expiration timestamp for \"${INPUT_KEY}\" (via rsp/cache module)" FORCE)
         else ()
             # When no TTL has been specified, remove eventual previous stored TTl,
