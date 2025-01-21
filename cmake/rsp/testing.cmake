@@ -49,6 +49,12 @@ endif ()
 #
 #cache_set(KEY _RSP_CURRENT_TEST_CASE_AFTER_CALLBACK VALUE "")
 
+# Current Test-Case "run serial"
+#
+# @internal
+#
+#cache_set(KEY _RSP_CURRENT_TEST_CASE_RUN_SERIAL VALUE "")
+
 # -------------------------------------------------------------------------------------------------------------- #
 
 if (NOT COMMAND "define_test_suite")
@@ -156,6 +162,8 @@ if (NOT COMMAND "define_test_case")
     # @param [BEFORE <command>]         Command or marco to execute before each test in test-case.
     # @param [AFTER <command>]          Command or marco to execute after each test in test-case.
     # @param [LABELS <list>]            Labels to associate subsequent tests with.
+    # @param [RUN_SERIAL]               Option, If specified tests in this test-case are prevent
+    #                                   from running in parallel with other tests.
     #
     # @throws
     #
@@ -168,7 +176,7 @@ if (NOT COMMAND "define_test_case")
 
         # ---------------------------------------------------------------------------------------------- #
 
-        set(options "") # N/A
+        set(options RUN_SERIAL)
         set(oneValueArgs BEFORE AFTER)
         set(multiValueArgs LABELS) # N/A
 
@@ -200,6 +208,12 @@ if (NOT COMMAND "define_test_case")
             string(REPLACE ";" "|" labels_list "${labels_list}")
         endif ()
 
+        # Resolve "run serial"
+        set(enforce_serial_run false)
+        if (INPUT_RUN_SERIAL)
+            set(enforce_serial_run true)
+        endif ()
+
         # Debug
         # message("Test-Case Labels: ${labels_list}")
 
@@ -208,6 +222,7 @@ if (NOT COMMAND "define_test_case")
         # Finally, set the temporary test-case related properties...
         cache_set(KEY _RSP_CURRENT_TEST_CASE VALUE "${name}")
         cache_set(KEY _RSP_CURRENT_TEST_CASE_LABELS VALUE "${labels_list}")
+        cache_set(KEY _RSP_CURRENT_TEST_CASE_RUN_SERIAL VALUE "${enforce_serial_run}" TYPE "BOOL")
 
         if (DEFINED INPUT_BEFORE)
             cache_set(KEY _RSP_CURRENT_TEST_CASE_BEFORE_CALLBACK VALUE "${INPUT_BEFORE}")
@@ -238,6 +253,7 @@ if (NOT COMMAND "end_test_case")
         cache_forget(KEY _RSP_CURRENT_TEST_CASE_LABELS)
         cache_forget(KEY _RSP_CURRENT_TEST_CASE_BEFORE_CALLBACK)
         cache_forget(KEY _RSP_CURRENT_TEST_CASE_AFTER_CALLBACK)
+        cache_forget(KEY _RSP_CURRENT_TEST_CASE_RUN_SERIAL)
     endfunction()
 endif ()
 
@@ -322,6 +338,9 @@ if (NOT COMMAND "define_test")
         cache_get(KEY _RSP_CURRENT_TEST_CASE_BEFORE_CALLBACK DEFAULT "")
         cache_get(KEY _RSP_CURRENT_TEST_CASE_AFTER_CALLBACK DEFAULT "")
 
+        # Resolve "run serial" flag
+        cache_get(KEY _RSP_CURRENT_TEST_CASE_RUN_SERIAL DEFAULT "false")
+
         # ---------------------------------------------------------------------------------------------- #
         # If a data provider callback has been given, then it must be processed.
 
@@ -362,6 +381,8 @@ if (NOT COMMAND "define_test")
                     # Provide additional test callback argument(s)
                     CALLBACK_ARG ${data_set}
 
+                    RUN_SERIAL ${_RSP_CURRENT_TEST_CASE_RUN_SERIAL}
+
                     BEFORE_CALLBACK ${_RSP_CURRENT_TEST_CASE_BEFORE_CALLBACK}
                     AFTER_CALLBACK ${_RSP_CURRENT_TEST_CASE_AFTER_CALLBACK}
 
@@ -384,6 +405,8 @@ if (NOT COMMAND "define_test")
             NAME ${resolved_test_name}
             CALLBACK ${callback}
             TEST_CASE ${CMAKE_CURRENT_LIST_FILE}
+
+            RUN_SERIAL ${_RSP_CURRENT_TEST_CASE_RUN_SERIAL}
 
             BEFORE_CALLBACK ${_RSP_CURRENT_TEST_CASE_BEFORE_CALLBACK}
             AFTER_CALLBACK ${_RSP_CURRENT_TEST_CASE_AFTER_CALLBACK}
@@ -414,6 +437,8 @@ if (NOT COMMAND "add_ctest_using_executor")
     # @param [SKIP <bool>]                  If set to true, then test callback is skipped.
     #                                       Default set to false.
     # @param [LABELS <list>]                Labels to associate test with.
+    # @param [RUN_SERIAL <bool>]            If true tests in this test-case are prevent
+    #                                       from running in parallel with other tests. Defaults to false.
     # @param [EXECUTOR <path>]              Path to the "test executor". Defaults to RSP_TEST_EXECUTOR_PATH,
     #                                       when not specified.
     #
@@ -429,7 +454,7 @@ if (NOT COMMAND "add_ctest_using_executor")
         # ---------------------------------------------------------------------------------------------- #
 
         set(options "")  # N/A
-        set(oneValueArgs NAME CALLBACK TEST_CASE BEFORE_CALLBACK AFTER_CALLBACK EXPECT_FAILURE SKIP EXECUTOR)
+        set(oneValueArgs NAME CALLBACK TEST_CASE BEFORE_CALLBACK AFTER_CALLBACK EXPECT_FAILURE SKIP RUN_SERIAL EXECUTOR)
         set(multiValueArgs LABELS CALLBACK_ARG) # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -456,6 +481,11 @@ if (NOT COMMAND "add_ctest_using_executor")
         set(labels_list "")
         if (DEFINED INPUT_LABELS)
             set(labels_list "${INPUT_LABELS}")
+        endif ()
+
+        set(enforce_serial_run false)
+        if (DEFINED INPUT_RUN_SERIAL)
+            set(enforce_serial_run "${INPUT_RUN_SERIAL}")
         endif ()
 
         if (NOT DEFINED INPUT_EXECUTOR)
@@ -506,6 +536,10 @@ if (NOT COMMAND "add_ctest_using_executor")
         # Skip test if needed
         # @see https://cmake.org/cmake/help/latest/prop_test/DISABLED.html
         set_property(TEST ${INPUT_NAME} PROPERTY DISABLED "${INPUT_SKIP}")
+
+        # Enforce "run serial", if needed
+        # @see https://cmake.org/cmake/help/latest/prop_test/RUN_SERIAL.html
+        set_property(TEST ${INPUT_NAME} PROPERTY RUN_SERIAL "${enforce_serial_run}")
 
         # ---------------------------------------------------------------------------------------------- #
 
