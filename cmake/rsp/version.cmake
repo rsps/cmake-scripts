@@ -184,7 +184,7 @@ if (NOT COMMAND "version_from_file")
     # @throws If obtained version is not a valid semantic version (regardless of [EXIT_ON_FAILURE] option)
     #
     function(version_from_file)
-        set(options EXIT_ON_FAILURE) # N/A
+        set(options EXIT_ON_FAILURE)
         set(oneValueArgs FILE OUTPUT DEFAULT)
         set(multiValueArgs "") # N/A
 
