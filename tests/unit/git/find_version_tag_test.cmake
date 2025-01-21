@@ -7,6 +7,10 @@ define_test_case(
 
     BEFORE "prepare_dummy_repo"
     AFTER "cleanup_dummy_repo"
+
+    # Very important that these tests do NOT run parallel with
+    # other tests, or the prepare local git repo can fail.
+    RUN_SERIAL
 )
 
 macro(prepare_dummy_repo)
