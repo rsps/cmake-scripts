@@ -30,6 +30,6 @@ function(can_safeguard_properties)
     #risky_callback()
 
     assert_string_equals("aaa" ${a} MESSAGE "Property a was modified")
-    assert_string_equals("bbb" ${b} MESSAGE "Property a was modified")
-    assert_string_equals("ccc" ${c} MESSAGE "Property a was modified")
+    assert_string_equals("bbb" ${b} MESSAGE "Property b was modified")
+    assert_string_equals("ccc" ${c} MESSAGE "Property c was modified")
 endfunction()
