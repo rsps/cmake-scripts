@@ -7,7 +7,7 @@ include_guard()
 # Include regular dependencies
 include("dependencies.cmake")
 
-function(install_dependencies)
+function(install_dev_dependencies)
     message(STATUS "Installing Development Dependencies for ${PROJECT_NAME}")
 
     # Avoid building tests for dependencies...
@@ -17,4 +17,4 @@ function(install_dependencies)
     message(STATUS "    N/A")
 
 endfunction()
-safeguard_properties(CALLBACK "install_dependencies" PROPERTIES BUILD_TESTING)
+safeguard_properties(CALLBACK "install_dev_dependencies" PROPERTIES BUILD_TESTING)
