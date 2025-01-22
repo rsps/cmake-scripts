@@ -19,5 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Caching utilities, `cache.cmake`.
 * A "mini" testing framework for cmake modules and scripts, in `testing.cmake`. 
 * `RSP_CMAKE_SCRIPTS_BUILD_TESTS` project option for building tests.
+* `tests.yaml` GitHub Actions workflow.
 
 [Unreleased]: https://github.com/rsps/cmake-scripts/compare/develop
