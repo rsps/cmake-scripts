@@ -234,6 +234,8 @@ function(asserts_str_equals)
     assert_string_equals(expected actual MESSAGE "keys")
 
     assert_string_equals("bar" "bar" MESSAGE "values")
+
+    assert_string_equals("foo" actual MESSAGE "value & key")
 endfunction()
 
 define_test("can assert string not equals" "asserts_str_not_equals")
@@ -243,6 +245,8 @@ function(asserts_str_not_equals)
     assert_string_not_equals(expected actual MESSAGE "keys")
 
     assert_string_not_equals("foo" "bar" MESSAGE "values")
+
+    assert_string_not_equals("foo" actual MESSAGE "values & key")
 endfunction()
 
 define_test("can assert string is empty" "asserts_str_empty")
