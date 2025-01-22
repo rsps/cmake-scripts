@@ -48,6 +48,79 @@ if (NOT COMMAND "extract_value")
     endfunction()
 endif ()
 
+if (NOT COMMAND "safeguard_properties")
+
+    #! safeguard_properties : Invoke a "risky" callback whilst "safeguarding" properties
+    #
+    # Function copies the values of the specified properties, invokes the callback, and
+    # restores the properties' values.
+    #
+    # Caution: This function does NOT prevent properties from being force-cached.
+    # Environment variables are NOT prevented changed.
+    #
+    # Alternatively, consider using cmake's `block()`.
+    #
+    # @see https://cmake.org/cmake/help/latest/manual/cmake-language.7.html#variables
+    # @see https://cmake.org/cmake/help/latest/manual/cmake-language.7.html#environment-variables
+    # @see https://cmake.org/cmake/help/latest/command/block.html#block
+    #
+    # @param [CALLBACK <command>]           Risky command or marco to be invoked.
+    # @param [PROPERTIES <variable>...]     One or more properties to safeguard.
+    #
+    # @return
+    #       [PROPERTIES <variable>...]      Restored properties
+    #
+    function(safeguard_properties)
+        set(options "") # N/A
+        set(oneValueArgs CALLBACK)
+        set(multiValueArgs PROPERTIES)
+
+        cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+        # Ensure required arguments are defined
+        set(requiredArgs "CALLBACK;PROPERTIES")
+        foreach (arg ${requiredArgs})
+            if (NOT DEFINED INPUT_${arg})
+                message(FATAL_ERROR "${arg} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
+            endif ()
+        endforeach ()
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Abort if callback not defined
+        if (NOT COMMAND "${INPUT_CALLBACK}")
+            message(FATAL_ERROR "Callback \"${INPUT_CALLBACK}()\" does not exist")
+        endif ()
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        set(prefix "original_")
+
+        # Copy each provided property
+        foreach (prop ${INPUT_PROPERTIES})
+            message(VERBOSE "Safeguarding: ${prop}, original value: ${${prop}}")
+
+            set("${prefix}${prop}" "${${prop}}")
+        endforeach ()
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Invoke the risky callback
+        message(VERBOSE "Invoking risky callback: ${INPUT_CALLBACK}")
+        cmake_language(CALL "${INPUT_CALLBACK}")
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Restore each provided property
+        foreach (prop ${INPUT_PROPERTIES})
+            message(VERBOSE "Restoring: ${prop} from: ${${prop}}, to original value: ${${prefix}${prop}}")
+
+            # Ensure that property is set on parent scope
+            set("${prop}" "${${prefix}${prop}}" PARENT_SCOPE)
+        endforeach ()
+    endfunction()
+endif ()
+
 if (NOT COMMAND "dump")
 
     #! dump : Outputs given variables' name and value
