@@ -109,6 +109,8 @@ if (NOT COMMAND "write_version_file")
     #                               Defaults to version obtain via `git_find_version_tag()`,
     #                               when no version specified.
     #
+    # @throws If VERSION is not a valid semantic version
+    #
     function(write_version_file)
         set(options "") # N/A
         set(oneValueArgs FILE VERSION)
@@ -138,6 +140,12 @@ if (NOT COMMAND "write_version_file")
                 WORKING_DIRECTORY ${workingDir}
             )
         endif ()
+
+        # Ensure that a valid semver
+        semver_parse(
+            VERSION "${INPUT_VERSION}"
+            OUTPUT ${INPUT_VERSION}
+        )
 
         # Prevent re-writing file, if the content is the same as the version.
         if (EXISTS ${INPUT_FILE})
@@ -184,7 +192,7 @@ if (NOT COMMAND "version_from_file")
     # @throws If obtained version is not a valid semantic version (regardless of [EXIT_ON_FAILURE] option)
     #
     function(version_from_file)
-        set(options EXIT_ON_FAILURE) # N/A
+        set(options EXIT_ON_FAILURE)
         set(oneValueArgs FILE OUTPUT DEFAULT)
         set(multiValueArgs "") # N/A
 
@@ -219,12 +227,12 @@ if (NOT COMMAND "version_from_file")
                 "Version file ${INPUT_FILE} does not exist\n"
                 "Defaulting to use version: ${version}\n"
             )
+        else ()
+            # Read the contents of the file (max 255 bytes).
+            # @see https://semver.org/#does-semver-have-a-size-limit-on-the-version-string
+            file(READ ${INPUT_FILE} version LENGTH_MAXIMUM 255)
+            string(STRIP "${version}" version)
         endif ()
-
-        # Read the contents of the file (max 255 bytes).
-        # @see https://semver.org/#does-semver-have-a-size-limit-on-the-version-string
-        file(READ ${INPUT_FILE} version LENGTH_MAXIMUM 255)
-        string(STRIP "${version}" version)
 
         # If version file is empty
         if (version STREQUAL "")

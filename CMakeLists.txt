@@ -4,6 +4,12 @@
 
 cmake_minimum_required(VERSION 3.30)
 
+option(RSP_CMAKE_SCRIPTS_BUILD_TESTS "Build tests for the RSP CMake Scripts project" off)
+
+# -------------------------------------------------------------------------------------------------------------- #
+# Setup
+# -------------------------------------------------------------------------------------------------------------- #
+
 # Append this package's cmake scripts in module path
 list(FIND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" hasModulePath)
 if(${hasModulePath} STREQUAL "-1")
@@ -58,6 +64,15 @@ include("dependencies.cmake")
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     include("dev-dependencies.cmake")
 endif()
+
+# -------------------------------------------------------------------------------------------------------------- #
+# Tests
+# -------------------------------------------------------------------------------------------------------------- #
+
+if (RSP_CMAKE_SCRIPTS_BUILD_TESTS)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+    add_subdirectory("tests")
+endif ()
 
 # -------------------------------------------------------------------------------------------------------------- #
 # Misc.

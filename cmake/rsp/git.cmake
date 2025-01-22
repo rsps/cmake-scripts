@@ -63,7 +63,7 @@ if (NOT COMMAND "git_find_version_tag")
             # And alternative could be "git tag --list --sort=-version:refname". Yet, a list of tags
             # would then have to be processed...
             COMMAND ${GIT_EXECUTABLE} describe --tags --match "${INPUT_MATCH_PATTERN}" --abbrev=0
-            WORKING_DIRECTORY "${dir}"
+            WORKING_DIRECTORY "${INPUT_WORKING_DIRECTORY}"
             RESULT_VARIABLE status
             OUTPUT_VARIABLE result
             ERROR_VARIABLE error
