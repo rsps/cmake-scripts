@@ -45,6 +45,16 @@ jobs:
           cmake-version: ${{ matrix.cmake_version }}
 
       # ------------------------------------------------------------------------------------------------------- #
+      # Configure Git
+      # ------------------------------------------------------------------------------------------------------- #
+
+      # This step is required due to some of the git related tests in the project.
+      - name: "Configure locale git"
+        run: |
+          git config --global user.email "system@rspsystems.com"
+          git config --global user.name "RSP Systems A/S"
+
+      # ------------------------------------------------------------------------------------------------------- #
       # Build
       # ------------------------------------------------------------------------------------------------------- #
 
