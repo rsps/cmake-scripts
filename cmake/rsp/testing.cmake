@@ -182,14 +182,6 @@ if (NOT COMMAND "define_test_case")
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-        # Ensure required arguments are defined
-        set(requiredArgs "")
-        foreach (arg ${requiredArgs})
-            if (NOT DEFINED INPUT_${arg})
-                message(FATAL_ERROR "${arg} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
-            endif ()
-        endforeach ()
-
         # ---------------------------------------------------------------------------------------------- #
 
         # Abort if test-case has no name
