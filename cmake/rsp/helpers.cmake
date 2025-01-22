@@ -64,7 +64,7 @@ if (NOT COMMAND "safeguard_properties")
     # @see https://cmake.org/cmake/help/latest/manual/cmake-language.7.html#environment-variables
     # @see https://cmake.org/cmake/help/latest/command/block.html#block
     #
-    # @param [CALLBACK <command>]           Risky command or marco to be invoked.
+    # @param [CALLBACK <command>]           Risky command or macro to be invoked.
     # @param [PROPERTIES <variable>...]     One or more properties to safeguard.
     #
     # @return

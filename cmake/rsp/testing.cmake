@@ -159,8 +159,8 @@ if (NOT COMMAND "define_test_case")
     # @see end_test_case()
     #
     # @param <string> name              Human readable name of test-case.
-    # @param [BEFORE <command>]         Command or marco to execute before each test in test-case.
-    # @param [AFTER <command>]          Command or marco to execute after each test in test-case.
+    # @param [BEFORE <command>]         Command or macro to execute before each test in test-case.
+    # @param [AFTER <command>]          Command or macro to execute after each test in test-case.
     # @param [LABELS <list>]            Labels to associate subsequent tests with.
     # @param [RUN_SERIAL]               Option, If specified tests in this test-case are prevent
     #                                   from running in parallel with other tests.
@@ -422,8 +422,8 @@ if (NOT COMMAND "add_ctest_using_executor")
     # @param TEST_CASE <path>               Path to the target *.cmake test-case file.
     # @param [CALLBACK_ARG <string|list>]   Evt. data-set list to be passed on to the test callback as a
     #                                       single argument.
-    # @param [BEFORE_CALLBACK <command>]    Command or marco to execute before test.
-    # @param [AFTER_CALLBACK <command>]     Command or marco to execute after test.
+    # @param [BEFORE_CALLBACK <command>]    Command or macro to execute before test.
+    # @param [AFTER_CALLBACK <command>]     Command or macro to execute after test.
     # @param [EXPECT_FAILURE <bool>]        If set to true, then test callback is expected to fail.
     #                                       Default set to false.
     # @param [SKIP <bool>]                  If set to true, then test callback is skipped.

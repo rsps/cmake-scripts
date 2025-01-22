@@ -119,7 +119,7 @@ endif ()
 
 if (NOT COMMAND "assert_is_callable")
 
-    #! assert_is_callable : Assert key to be a callable command or marco
+    #! assert_is_callable : Assert key to be a callable command or macro
     #
     # @see https://cmake.org/cmake/help/latest/command/if.html#command
     #
@@ -143,7 +143,7 @@ endif ()
 
 if (NOT COMMAND "assert_is_not_callable")
 
-    #! assert_is_not_callable : Assert key not to be a callable command or marco
+    #! assert_is_not_callable : Assert key not to be a callable command or macro
     #
     # @see https://cmake.org/cmake/help/latest/command/if.html#command
     #
