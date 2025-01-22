@@ -126,7 +126,7 @@ function(asserts_callable)
     endmacro()
 
     assert_is_callable(foo MESSAGE "function")
-    assert_is_callable(bar MESSAGE "marco")
+    assert_is_callable(bar MESSAGE "macro")
 endfunction()
 
 define_test("can assert not callable" "asserts_not_callable")
