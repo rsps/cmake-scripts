@@ -681,6 +681,8 @@ if (NOT COMMAND "assert_compare_values")
         set("${INPUT_OUTPUT}" FALSE)
 
         # If comparison passes, change output to true...
+        message(VERBOSE "Comparing: ${INPUT_ACTUAL} ${INPUT_OPERATOR} ${INPUT_EXPECTED}")
+
         if (INPUT_ACTUAL ${INPUT_OPERATOR} INPUT_EXPECTED)
             set("${INPUT_OUTPUT}" TRUE)
         endif ()
