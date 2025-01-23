@@ -25,10 +25,10 @@
         "docs:build": [
             "@make:docs-build-dir",
             "vendor/bin/daux clear-cache",
-            "vendor/bin/daux generate -d build/docs/"
+            "vendor/bin/daux generate --source=docs --destination=build/docs/"
         ],
         "docs:dev": [
-            "@make:build-dir",
+            "@make:docs-build-dir",
             "vendor/bin/daux serve"
         ],
         "make:docs-build-dir": [
