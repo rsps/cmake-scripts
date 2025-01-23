@@ -1,10 +1,10 @@
 ---
-title: Version 0.x
+title: x.x
 description: Documentation for CMake Scripts v0.x.
 keywords: cmake, c++
 author: RSP Systems A/S
 ---
 
-# Version 0.x
+# Version x.x Placeholder
 
-_TODO: Placeholder for version `0.x` documentation..._
+_TODO: Placeholder for version `x.x` documentation... This page will be removed, once version `1.x` is ready_
