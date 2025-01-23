@@ -7,5 +7,5 @@ author: RSP Systems A/S
 
 # Modules
 
-This chapter contains the documentation for the available cmake modules. 
+In here, you will find documentation for the available cmake modules. 
 
