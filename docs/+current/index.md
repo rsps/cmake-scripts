@@ -8,10 +8,10 @@ author: RSP Systems A/S
 # Version 0.x
 
 !!! danger "Caution"
-    "CMake Scripts" is still in development. You **SHOULD NOT** this packages in a production environment.
-    Breaking changes **MUST** be expected for all v0.x releases!
+    "CMake Scripts" is still in development. You **SHOULD NOT** use this packages in a production environment.
+    Breaking changes **MUST** be expected for all `v0.x` releases!
     
-    _Please review the [CHANGELOG.md](https://github.com/rsps/cmake-scripts/blob/main/CHANGELOG.md) for additional details._
+    _Please review the [changelog](https://github.com/rsps/cmake-scripts/blob/main/CHANGELOG.md) for additional details._
 
 [TOC]
 
