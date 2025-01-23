@@ -1,0 +1,189 @@
+/* -------------------------------------------------------------------------------------------------------------------
+ | Overwrites of Daux's default theme
+ |
+ | @see https://github.com/dauxio/daux.io/tree/master/src/css/theme_daux
+ ------------------------------------------------------------------------------------------------------------------ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+:root {
+    --font-family-text: "Nunito", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
+    --font-family-monospace: Monaco, Menlo, Consolas, "Lucida Console", "Courier New", monospace;
+    --font-family-heading: "Roboto Slab", var(--font-family-text);
+
+    --brand: #006494;
+    --brand-light: #0f4c5c;
+
+    --color-primary: var(--brand);
+    --color-secondary: #3f4657;
+    --color-text: #222;
+
+    --color-info: #00b8d4;
+    --color-warning: #ff9100;
+    --color-danger: #f50057;
+
+    --link-color: var(--color-primary);
+    --brand-color: var(--color-primary);
+    --brand-background: #fff;
+
+    --body-background: #fff;
+
+    /* Sidebar */
+    --sidebar-border-color: #e7e7e9;
+    --sidebar-background: var(--brand-background);
+
+    /* Sidebar links*/
+    --sidebar-link-color: var(--color-secondary);
+    --sidebar-link-active-background: #c5c5cb;
+    --sidebar-link-hover-background: var(--sidebar-link-active-background);
+    --sidebar-link-arrow-color: var(--color-secondary);
+    --sidebar-link-secondary-color: var(--color-text);
+
+    /* Sidebar Checkbox*/
+    --checkbox-background: var(--lighter-gray);
+    --checkbox-hover-background: #ccc;
+    --checkbox-checked-background: var(--color-secondary);
+    --checkbox-checked-hover-background: var(--color-primary);
+    --checkbox-tick-color: #fff;
+    --checkbox-disabled-background: var(--light-gray);
+    --checkbox-disabled-tick-color: var(--gray);
+
+    /* Sidebar search field */
+    --search-field-color: #555;
+    --search-field-border-color: var(--lighter-gray);
+    --search-field-background: #fff;
+    --search-field-hover-border-color: var(--color-primary);
+
+    /* Sidebar hamburger */
+    --sidebar-collapsible--hamburger-color: var(--color-primary);
+    --sidebar-collapsible--hamburger-hover-color: var(--color-secondary);
+    --sidebar-collapsible--hamburger-hover-background: var(--color-primary);
+
+    /* Homepage */
+    --homepage-navbar-background: var(--brand-background);
+
+    --homepage-hero-background: var(--color-primary);
+    --homepage-hero-color: #fff;
+    --homepage-bullet-color: var(--color-primary);
+
+    --homepage-footer-color: var(--color-primary);
+    --homepage-footer-background: var(--lighter-gray);
+    --homepage-body-background: #fff;
+
+    /* Code blocks */
+    --code-block-bg-color: var(--lightest-gray);
+}
+
+.dark {
+    --brand: #4CA0CDFF;
+
+    --brand-background: #343b44;
+
+    --body-background: var(--brand-background);
+
+    /*--link-color: var(--color-primary);*/
+    /*--link-color: var(--color-primary);*/
+
+    --sidebar-background: var(--brand-background);
+    --sidebar-link-active-background: var(--light-gray);
+    /*--sidebar-link-hover-background: var(--sidebar-link-active-background);*/
+
+    --code-block-bg-color: #e7e7e7;
+}
+
+/* -------------------------------------------------------------------------------------------------------------------
+ | Typography
+ ------------------------------------------------------------------------------------------------------------------ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+}
+
+/* -------------------------------------------------------------------------------------------------------------------
+ | Structure
+ ------------------------------------------------------------------------------------------------------------------ */
+
+html {
+    /*font-size: 18px;*/
+
+    /*@media (--viewport-large) {*/
+    /*    font-size: 16px;*/
+    /*}*/
+}
+
+.Columns__left {
+    width: 15%
+}
+
+.Page {
+    max-width: 860px;
+    margin: 0 auto;
+
+    .s-content {
+        margin-top: 2em;
+
+        /* code block */
+        pre {
+            margin-left: 0;
+            margin-right: 0;
+            margin-bottom: 1em;
+
+            background-color: var(--code-block-bg-color);
+        }
+    }
+
+    nav {
+        border-top: 1px solid var(--lightest-gray);
+        margin-top: 2.5em;
+
+        ul.Pager {
+            /* Previous & Next buttons */
+            li > a {
+                border-radius: 3px;
+            }
+        }
+    }
+}
+
+.Page__header {
+    h1 {
+        font-size: 1em;
+        font-weight: 300;
+    }
+
+    .ModifiedDate, .EditOn {
+        font-size: 0.8em;
+        color: var(--light-gray);
+    }
+}
+
+.TableOfContentsContainer {
+    float: none;
+    min-width: auto;
+    max-width: none;
+    padding-left: 0;
+
+    h4.TableOfContentsContainer__title {
+        display: none;
+        /*visibility: hidden;*/
+    }
+
+    .TableOfContentsContainer__content {
+        border: none;
+
+        ul.TableOfContents {
+            > li:first-of-type {
+                /* Hide the first element in the table of content, which is always page's h1 */
+                > a:first-of-type {
+                    display: none;
+                    /*visibility: hidden;*/
+                }
+            }
+        }
+    }
+}
