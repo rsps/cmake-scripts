@@ -32,7 +32,7 @@
             "vendor/bin/daux serve"
         ],
         "make:docs-build-dir": [
-            "@php -r \"is_dir('build/docs') || mkdir(directory: 'build/docs' recursive: true);\""
+            "@php -r \"is_dir('build/docs') || mkdir(directory: 'build/docs', recursive: true);\""
         ]
     },
     "scripts-descriptions": {
