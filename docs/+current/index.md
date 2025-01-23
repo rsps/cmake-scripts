@@ -19,3 +19,28 @@ author: RSP Systems A/S
 
 _TODO: ...incomplete, please review documentation at a later point_
 
+```cmake
+# Abort if building in-source
+include("rsp/helpers")
+fail_in_source_build()
+
+# Run only when this project is the root project
+if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    # Setup package manager
+    set(CPM_USE_NAMED_CACHE_DIRECTORIES ON)
+endif()
+
+include("CPM")
+```
+
+!!! note 
+    A note...
+
+!!! info
+    Something more important
+
+!!! warning
+    A warning of some kind
+
+!!! danger
+    THIS IS very risky...
