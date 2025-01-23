@@ -1,6 +1,6 @@
 ---
 title: x.x
-description: Documentation for CMake Scripts v0.x.
+description: Documentation for CMake Scripts version x.x.
 keywords: cmake, c++
 author: RSP Systems A/S
 ---
