@@ -1,11 +1,11 @@
 ---
 title: Version 0.x
-description: Release Notes for CMake Scripts version 0.x.
+description: Documentation for CMake Scripts version 0.x.
 keywords: cmake, c++
 author: RSP Systems A/S
 ---
 
-# Release Notes
+# Version 0.x
 
 !!! danger "Caution"
     "CMake Scripts" is still in development. You **SHOULD NOT** this packages in a production environment.
@@ -15,11 +15,7 @@ author: RSP Systems A/S
 
 [TOC]
 
-## Support Policy
-
-_TODO: ...incomplete, please review documentation at a later point_
-
-## `v0.x` Highlights
+## How to install
 
 _TODO: ...incomplete, please review documentation at a later point_
 
