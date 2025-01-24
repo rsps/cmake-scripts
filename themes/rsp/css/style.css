@@ -1,0 +1,294 @@
+/* -------------------------------------------------------------------------------------------------------------------
+ | Overwrites of Daux's default theme
+ |
+ | @see https://github.com/dauxio/daux.io/tree/master/src/css/theme_daux
+ ------------------------------------------------------------------------------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+:root {
+    --font-family-text: "Nunito", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
+    --font-family-monospace: Monaco, Menlo, Consolas, "Lucida Console", "Courier New", monospace;
+    --font-family-heading: "Roboto Slab", var(--font-family-text);
+
+    --brand: #006494;
+    --brand-light: #0f4c5c;
+
+    --color-primary: var(--brand);
+    --color-secondary: #3f4657;
+    --color-text: #222;
+
+    --color-info: #00b8d4;
+    --color-warning: #ff9100;
+    --color-danger: #f50057;
+
+    --link-color: var(--color-primary);
+    --brand-color: var(--color-primary);
+    --brand-background: #fff;
+
+    --body-background: #fff;
+
+    /* Sidebar */
+    --sidebar-border-color: #e7e7e9;
+    --sidebar-background: var(--brand-background);
+
+    /* Sidebar links*/
+    --sidebar-link-color: var(--color-secondary);
+    --sidebar-link-active-background: #c5c5cb;
+    --sidebar-link-hover-background: var(--sidebar-link-active-background);
+    --sidebar-link-arrow-color: var(--color-secondary);
+    --sidebar-link-secondary-color: var(--color-text);
+
+    /* Sidebar Checkbox*/
+    --checkbox-background: var(--lighter-gray);
+    --checkbox-hover-background: #ccc;
+    --checkbox-checked-background: var(--color-secondary);
+    --checkbox-checked-hover-background: var(--color-primary);
+    --checkbox-tick-color: #fff;
+    --checkbox-disabled-background: var(--light-gray);
+    --checkbox-disabled-tick-color: var(--gray);
+
+    /* Sidebar search field */
+    --search-field-color: #555;
+    --search-field-border-color: var(--lighter-gray);
+    --search-field-background: #fff;
+    --search-field-hover-border-color: var(--color-primary);
+
+    /* Sidebar hamburger */
+    --sidebar-collapsible--hamburger-color: var(--color-primary);
+    --sidebar-collapsible--hamburger-hover-color: var(--color-secondary);
+    --sidebar-collapsible--hamburger-hover-background: var(--color-primary);
+
+    /* Homepage */
+    --homepage-navbar-background: var(--brand-background);
+
+    --homepage-hero-background: var(--color-primary);
+    --homepage-hero-color: #fff;
+    --homepage-bullet-color: var(--color-primary);
+
+    --homepage-footer-color: var(--color-primary);
+    --homepage-footer-background: var(--lighter-gray);
+    --homepage-body-background: #fff;
+
+    /* Code blocks */
+    --code-block-bg-color: var(--lightest-gray);
+}
+
+.dark {
+    --link-color: #00b8d4;
+    --brand: #4CA0CDFF;
+    --brand-color: #fff;
+    --brand-background: #343b44;
+    --code-block-bg-color: #e7e7e7;
+
+    --body-background: var(--brand-background);
+
+    /*--link-color: var(--color-primary);*/
+    /*--link-color: var(--color-primary);*/
+
+    --sidebar-background: var(--brand-background);
+
+    /* Sidebar links*/
+    --sidebar-link-color: var(--gray);
+    --sidebar-link-active-background: var(--light-gray);
+    /*--sidebar-link-hover-background: var(--sidebar-link-active-background);*/
+
+
+    /* Homepage */
+    --homepage-hero-color: #fff;
+    --homepage-navbar-background: var(--brand-background);
+
+    /* Homepage Hero Buttons */
+    --hero-button-block-background: var(--color-secondary);
+    --hero-button-primary-border-color: var(--light-gray);
+    --hero-button-primary-color: var(--lighter-gray);
+    --hero-buttom-primary-background: var(--color-secondary);
+    --hero-button-secondary-border-color: var(--color-secondary);
+    --hero-button-secondary-color: var(--lighter-gray);
+    --hero-button-secondary-background: var(--color-secondary);
+}
+
+/* -------------------------------------------------------------------------------------------------------------------
+ | Typography
+ ------------------------------------------------------------------------------------------------------------------ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+}
+
+/* -------------------------------------------------------------------------------------------------------------------
+ | Structure
+ ------------------------------------------------------------------------------------------------------------------ */
+
+html {
+    /*font-size: 18px;*/
+
+    /*@media (--viewport-large) {*/
+    /*    font-size: 16px;*/
+    /*}*/
+}
+
+.Columns__left {
+    width: 15%
+}
+
+.Columns__left, .Columns__right {
+    overflow: unset;
+}
+
+.Page {
+    max-width: 860px;
+    margin: 0 auto;
+
+    .s-content {
+        margin-top: 2em;
+
+        /* code block */
+        pre {
+            margin-left: 0;
+            margin-right: 0;
+            margin-bottom: 1em;
+
+            background-color: var(--code-block-bg-color);
+        }
+    }
+
+    nav {
+        border-top: 1px solid var(--lightest-gray);
+        margin-top: 2.5em;
+
+        ul.Pager {
+            /* Previous & Next buttons */
+            li > a {
+                border-radius: 3px;
+            }
+        }
+    }
+}
+
+.Page__header {
+    h1 {
+        font-size: 1em;
+        font-weight: 300;
+    }
+
+    .ModifiedDate, .EditOn {
+        font-size: 0.8em;
+        color: var(--light-gray);
+    }
+}
+
+.TableOfContentsContainer {
+    float: none;
+    min-width: auto;
+    max-width: none;
+    padding-left: 0;
+
+    h4.TableOfContentsContainer__title {
+        display: none;
+        /*visibility: hidden;*/
+    }
+
+    .TableOfContentsContainer__content {
+        border: none;
+
+        ul.TableOfContents {
+            > li:first-of-type {
+                /* Hide the first element in the table of content, which is always page's h1 */
+                > a:first-of-type {
+                    display: none;
+                    /*visibility: hidden;*/
+                }
+            }
+        }
+    }
+}
+
+.DarkModeToggler {
+
+    /* Visually hide "Dark Mode" text */
+    label {
+        color: transparent;
+    }
+
+    .Checkbox__indicator {
+        background-color: transparent;
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%233f4657" class="bi bi-moon-stars" viewBox="0 0 16 16"><path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"/><path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.73 1.73 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.73 1.73 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.73 1.73 0 0 0 1.097-1.097zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/></svg>');
+        background-repeat: no-repeat;
+        background-size: 1rem 1rem;
+
+
+        /* Hover and focus states */
+        .Checkbox:hover input ~ &,
+        .Checkbox input:focus ~ & {
+            background-color: transparent;
+            background-image: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon-stars-fill" viewBox="0 0 16 16"><path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278"/><path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.73 1.73 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.73 1.73 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.73 1.73 0 0 0 1.097-1.097zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/> </svg>');
+            background-repeat: no-repeat;
+            background-size: 1rem 1rem;
+        }
+
+        /* Checked state */
+        .Checkbox input:checked ~ & {
+            background-color: transparent;
+            background-image: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-sun" viewBox="0 0 16 16"> <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/> </svg>');
+            background-repeat: no-repeat;
+            background-size: 1rem 1rem;
+        }
+
+        /* Hover state whilst checked */
+        .Checkbox:hover input:not([disabled]):checked ~ &,
+        .Checkbox input:checked:focus ~ & {
+            background-color: transparent;
+            background-image: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-sun-fill" viewBox="0 0 16 16"><path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/></svg>');
+            background-repeat: no-repeat;
+            background-size: 1rem 1rem;
+        }
+
+        /* Checkbox tick */
+        .Checkbox &:after {
+            border: none;
+        }
+    }
+}
+
+/* Reverse order of "/archive" entries */
+a[href*="archive/index" i] + ul.Nav {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+/* Mark all entries in archive as "outdated" */
+.Page__header:has(h1 a[href^="/archive/v" i]) + .s-content::before  {
+    content: 'WARNING: You are viewing documentation for an outdated version. It is no longer supported!';
+
+    font-weight: bold;
+    background-color: var(--admonition-warning-background);
+    border: 1px solid var(--admonition-warning-border-color);
+
+    display: inline-block;
+    position: relative;
+    top: -15px;
+    width: 100%;
+
+    padding: 2px;
+}
+
+/* Mark "next" entry in archive as "not yet released" */
+.Page__header:has(h1 a[href^="/archive/v_next" i]) + .s-content::before  {
+    content: 'INFO: You are viewing documentation for an upcoming version. It has not yet been released!';
+
+    font-weight: bold;
+    background-color: var(--admonition-info-background);
+    border: 1px solid var(--admonition-info-border-color);
+
+    display: inline-block;
+    position: relative;
+    top: -15px;
+    width: 100%;
+
+    padding: 2px;
+}
