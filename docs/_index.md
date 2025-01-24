@@ -10,6 +10,9 @@ author: RSP Systems A/S
 The CMake Scripts package contains a collection of reusable "modules", that can be used in your `CMakeLists.txt`,
 for your C++ projects.
 
+!!! warning "Work in progress"
+    The documentation is in a very early stage. Feel free to review it, but please do not expect it to be complete!  
+
 ## Features
 
 _TODO: ...(please review docs for details.)_
