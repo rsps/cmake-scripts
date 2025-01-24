@@ -10,6 +10,11 @@
     },
     "authors": [
         {
+            "name": "Steffen Brummer",
+            "email": "steffen@rspsystems.com",
+            "role": "senior developer"
+        },
+        {
             "name": "Alin Eugen Deac",
             "email": "alin@rspsystems.com",
             "role": "developer"
