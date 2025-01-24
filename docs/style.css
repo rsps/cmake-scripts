@@ -209,3 +209,19 @@ a[href*="archive/index" i] + ul.Nav {
 
     padding: 2px;
 }
+
+/* Mark "next" entry in archive as "not yet released" */
+.Page__header:has(h1 a[href^="/archive/v_next" i]) + .s-content::before  {
+    content: 'INFO: You are viewing documentation for an upcoming version. It has not yet been released!';
+
+    font-weight: bold;
+    background-color: var(--admonition-info-background);
+    border: 1px solid var(--admonition-info-border-color);
+
+    display: inline-block;
+    position: relative;
+    top: -15px;
+    width: 100%;
+
+    padding: 2px;
+}
