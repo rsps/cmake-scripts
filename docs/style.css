@@ -75,9 +75,11 @@
 }
 
 .dark {
+    --link-color: #00b8d4;
     --brand: #4CA0CDFF;
-
+    --brand-color: #fff;
     --brand-background: #343b44;
+    --code-block-bg-color: #e7e7e7;
 
     --body-background: var(--brand-background);
 
@@ -85,10 +87,25 @@
     /*--link-color: var(--color-primary);*/
 
     --sidebar-background: var(--brand-background);
+
+    /* Sidebar links*/
+    --sidebar-link-color: var(--gray);
     --sidebar-link-active-background: var(--light-gray);
     /*--sidebar-link-hover-background: var(--sidebar-link-active-background);*/
 
-    --code-block-bg-color: #e7e7e7;
+
+    /* Homepage */
+    --homepage-hero-color: #fff;
+    --homepage-navbar-background: var(--brand-background);
+
+    /* Homepage Hero Buttons */
+    --hero-button-block-background: var(--color-secondary);
+    --hero-button-primary-border-color: var(--light-gray);
+    --hero-button-primary-color: var(--lighter-gray);
+    --hero-buttom-primary-background: var(--color-secondary);
+    --hero-button-secondary-border-color: var(--color-secondary);
+    --hero-button-secondary-color: var(--lighter-gray);
+    --hero-button-secondary-background: var(--color-secondary);
 }
 
 /* -------------------------------------------------------------------------------------------------------------------
