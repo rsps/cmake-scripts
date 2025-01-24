@@ -262,7 +262,7 @@ a[href*="archive/index" i] + ul.Nav {
 }
 
 /* Mark all entries in archive as "outdated" */
-.Page__header:has(h1 a[href^="/archive/v" i]) + .s-content::before  {
+.Page__header:has(h1 a[href*="/archive/v" i]) + .s-content::before  {
     content: 'WARNING: You are viewing documentation for an outdated version. It is no longer supported!';
 
     font-weight: bold;
@@ -278,7 +278,7 @@ a[href*="archive/index" i] + ul.Nav {
 }
 
 /* Mark "next" entry in archive as "not yet released" */
-.Page__header:has(h1 a[href^="/archive/v_next" i]) + .s-content::before  {
+.Page__header:has(h1 a[href*="/archive/v_next" i]) + .s-content::before  {
     content: 'INFO: You are viewing documentation for an upcoming version. It has not yet been released!';
 
     font-weight: bold;
