@@ -3,7 +3,9 @@
     "tagline": "A collection of CMake scripts for C++ projects.",
     "author": "RSP Systems A/S",
     "ignore": {
-        "files": [],
+        "files": [
+            "99_ignore.md"
+        ],
         "folders": []
     },
     "live": {
