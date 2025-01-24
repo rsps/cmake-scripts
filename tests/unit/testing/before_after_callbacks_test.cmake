@@ -6,6 +6,10 @@ define_test_case(
 
     BEFORE "before_macro"
     AFTER "after_function"
+
+    # Very important that these tests do NOT run parallel with
+    # other tests, to avoid race condition(s) for these tests.
+    RUN_SERIAL
 )
 
 macro(before_macro)
