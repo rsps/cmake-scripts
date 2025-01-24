@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Caching utilities, `cache.cmake`.
 * A "mini" testing framework for cmake modules and scripts, in `testing.cmake`. 
 * `RSP_CMAKE_SCRIPTS_BUILD_TESTS` project option for building tests.
-* `tests.yaml` GitHub Actions workflow.
+* `tests.yaml` and `deploy-docs.yaml` GitHub Actions workflows.
 * `composer.json` to install [Daux.io](https://daux.io) dev-dependency (_documentation generator_).
 * "rsp" theme for Daux (_placed in `resources/daux/themes/rsp`_).
 
