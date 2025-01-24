@@ -195,7 +195,7 @@ a[href*="archive/index" i] + ul.Nav {
 }
 
 /* Mark all entries in archive as "outdated" */
-.Page__header:has(h1 a[href^="/archive" i]) + .s-content::before  {
+.Page__header:has(h1 a[href^="/archive/v" i]) + .s-content::before  {
     content: 'WARNING: You are viewing documentation for an outdated version. It is no longer supported!';
 
     font-weight: bold;
