@@ -1,0 +1,43 @@
+{
+    "name": "rsp/cmake-scripts",
+    "description": "A collection of CMake scripts for C++ projects.",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/rsps/cmake-scripts",
+    "support": {
+        "source": "https://github.com/rsps/cmake-scripts",
+        "issues": "https://github.com/rsps/cmake-scripts/issues"
+    },
+    "authors": [
+        {
+            "name": "Alin Eugen Deac",
+            "email": "alin@rspsystems.com",
+            "role": "developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.2",
+        "daux/daux.io": "^0.22.3"
+    },
+    "scripts": {
+        "docs:build": [
+            "@make:docs-build-dir",
+            "vendor/bin/daux clear-cache",
+            "vendor/bin/daux generate --source=docs --destination=build/docs/"
+        ],
+        "docs:dev": [
+            "@make:docs-build-dir",
+            "vendor/bin/daux serve"
+        ],
+        "make:docs-build-dir": [
+            "@php -r \"is_dir('build/docs') || mkdir(directory: 'build/docs', recursive: true);\""
+        ]
+    },
+    "scripts-descriptions": {
+        "docs:build": "Builds a Html page containing all documentation, in the 'build/docs' directory",
+        "docs:dev": "Live update the documentation",
+        "make:docs-build-dir": "Creates the build directory for the documentation, if it does not already exist"
+    }
+}

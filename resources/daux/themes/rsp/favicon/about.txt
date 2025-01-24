@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Nunito
+- Font Author: Vernon Adams, Cyreal, Jacques Le Bailly
+- Font Source: https://fonts.gstatic.com/s/nunito/v26/XRXI3I6Li01BKofiOc5wtlZ2di8HDFwmRTM9jo7eTWk.ttf
+- Font License: https://openfontlicense.org/open-font-license-official-text/)
