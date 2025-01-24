@@ -136,6 +136,10 @@ html {
     width: 15%
 }
 
+.Columns__left, .Columns__right {
+    overflow: unset;
+}
+
 .Page {
     max-width: 860px;
     margin: 0 auto;
