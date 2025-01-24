@@ -1,0 +1,10 @@
+{
+  "favicon": "<theme_url>favicon/favicon-16x16.png",
+  "css": [
+    "<theme_url>css/daux-blue.min.css",
+    "<theme_url>css/style.css"
+  ],
+  "js": [
+    "<theme_url>js/main.mjs"
+  ]
+}

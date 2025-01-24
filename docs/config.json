@@ -13,8 +13,9 @@
         "clean_urls": true
     },
     "format": "html",
+    "themes_directory": "./resources/daux/themes",
     "html": {
-        "theme": "daux-blue",
+        "theme": "rsp",
         "breadcrumbs": true,
         "breadcrumb_separator": "Chevrons",
         "toggle_code": false,
