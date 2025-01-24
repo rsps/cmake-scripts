@@ -8,4 +8,5 @@ author: RSP Systems A/S
 
 # Archive
 
-The archive contains documentation for previous released versions of the CMake Scripts package.
+The archive contains documentation for previous released versions, as well as for the upcoming major
+version (_when available_).
