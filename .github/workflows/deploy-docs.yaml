@@ -1,0 +1,69 @@
+# --------------------------------------------------------------------------------------------------------- #
+# Deploy docs workflow
+# --------------------------------------------------------------------------------------------------------- #
+
+name: 'Deploy documentation'
+on:
+  push:
+    branches:
+      - main
+
+job:
+  build-and-deploy:
+    name: "Build docs. and deploy"
+    runs-on: ubuntu-latest
+
+    # @see https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/control-the-concurrency-of-workflows-and-jobs
+    concurrency: ci-${{ github.ref }}
+
+    steps:
+
+      # ------------------------------------------------------------------------------------------------------- #
+      # Checkout code ...
+      # ------------------------------------------------------------------------------------------------------- #
+
+      - name: "Checkout"
+        uses: actions/checkout@v4
+
+
+      # ------------------------------------------------------------------------------------------------------- #
+      # Setup PHP
+      # ------------------------------------------------------------------------------------------------------- #
+
+      - name: "Setup PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          extensions: mbstring
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
+
+      # ------------------------------------------------------------------------------------------------------- #
+      # Install dependencies
+      # ------------------------------------------------------------------------------------------------------- #
+
+      - name: "Install dependencies"
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 5
+          max_attempts: 2
+          command: composer install --no-progress --prefer-dist --no-interaction --optimize-autoloader --ansi
+
+      # ------------------------------------------------------------------------------------------------------- #
+      # Build documentation
+      # ------------------------------------------------------------------------------------------------------- #
+
+      - name: "Build documentation"
+        run: |
+          composer run docs:build --ansi
+
+      # ------------------------------------------------------------------------------------------------------- #
+      # Deploy to GitHub pages
+      # ------------------------------------------------------------------------------------------------------- #
+
+      # @see https://github.com/JamesIves/github-pages-deploy-action
+      - name: "Deploy"
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build/docs
+          branch: gh-pages
