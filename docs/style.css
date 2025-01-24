@@ -193,3 +193,19 @@ a[href*="archive/index" i] + ul.Nav {
     display: flex;
     flex-direction: column-reverse;
 }
+
+/* Mark all entries in archive as "outdated" */
+.Page__header:has(h1 a[href^="/archive" i]) + .s-content::before  {
+    content: 'WARNING: You are viewing documentation for an outdated version. It is no longer supported!';
+
+    font-weight: bold;
+    background-color: var(--admonition-warning-background);
+    border: 1px solid var(--admonition-warning-border-color);
+
+    display: inline-block;
+    position: relative;
+    top: -15px;
+    width: 100%;
+
+    padding: 2px;
+}
