@@ -4,7 +4,8 @@
     "author": "RSP Systems A/S",
     "ignore": {
         "files": [
-            "99_ignore.md"
+            "99_ignore.md",
+            "99_next_version.md"
         ],
         "folders": []
     },
