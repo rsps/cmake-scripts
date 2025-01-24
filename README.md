@@ -2,7 +2,7 @@
 
 A collection of [CMake](https://cmake.org/) scripts for C++ projects.
 
-# Official Documentation
+## Official Documentation
 
 Please read the [official documentation](https://rsps.github.io/cmake-scripts) for additional information.
 
