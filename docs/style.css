@@ -187,3 +187,11 @@ html {
         }
     }
 }
+
+/* Reverse order of "/archive" entries */
+a[href*="archive/index" i] + ul.Nav {
+    border: 1px dashed blue;
+
+    display: flex;
+    flex-direction: column-reverse;
+}
