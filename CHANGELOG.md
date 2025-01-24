@@ -21,5 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `RSP_CMAKE_SCRIPTS_BUILD_TESTS` project option for building tests.
 * `tests.yaml` GitHub Actions workflow.
 * `composer.json` to install [Daux.io](https://daux.io) dev-dependency (_documentation generator_).
+* "rsp" theme for Daux (_placed in `resources/daux/themes/rsp`_).
 
 [Unreleased]: https://github.com/rsps/cmake-scripts/compare/develop
