@@ -167,6 +167,10 @@ html {
 
             background-color: var(--code-block-bg-color);
         }
+
+        a {
+            text-decoration: none;
+        }
     }
 
     nav {
