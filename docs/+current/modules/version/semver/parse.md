@@ -47,7 +47,7 @@ message("${my_package}_VERSION") # 2.0.0
 The `[OUTPUT]_SEMVER` variable contains the full semantic version, without eventual "v" prefix.
 
 ```cmake
-message("${my_package}_VERSION") # 2.0.0-beta.3+AF1004
+message("${my_package}_SEMVER") # 2.0.0-beta.3+AF1004
 ```
 
 ### Major Version
