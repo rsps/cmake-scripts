@@ -22,7 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `tests.yaml` and `deploy-docs.yaml` GitHub Actions workflows.
 * `composer.json` to install [Daux.io](https://daux.io) dev-dependency (_documentation generator_).
 * "rsp" theme for Daux (_placed in `resources/daux/themes/rsp`_).
-* Code of Conduct, Contribution Guide and Security Policy in the docs.
-* Defect and Feature Request issue templates.
+* Support Policy, Code of Conduct, Contribution Guide and Security Policy in the docs.
+* Defect and Feature Request issue templates (_for GitHub_).
+* Pull request template (_for GitHub_).
 
 [Unreleased]: https://github.com/rsps/cmake-scripts/compare/develop
