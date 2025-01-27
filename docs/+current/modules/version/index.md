@@ -9,6 +9,10 @@ author: RSP Systems A/S
 
 This module contains helpers for dealing with a project's versioning.
 
+## Requirements
+
+The same requirements as for the [git module](../git/index.md).
+
 ## How to include
 
 ```cmake
