@@ -14,6 +14,8 @@ author: RSP Systems A/S
 ## Example
 
 ```cmake
+include("rsp/version")
+
 semver_parse(
     VERSION "v2.0.0-beta.3+AF1004"
     OUTPUT my_package
