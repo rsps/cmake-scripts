@@ -7,5 +7,10 @@ author: RSP Systems A/S
 
 # Version
 
-_TODO: ...incomplete, please review documentation at a later point_
+This module contains helpers for dealing with a project's versioning.
 
+## How to include
+
+```cmake
+include("rsp/version")
+```

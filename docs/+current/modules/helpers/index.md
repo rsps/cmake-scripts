@@ -7,5 +7,11 @@ author: RSP Systems A/S
 
 # Helpers
 
-_TODO: ...incomplete, please review documentation at a later point_
+The helpers module contains miscellaneous functions that are used by "CMake Scripts".
+Feel free to use them within your own project, if you find them helpful.
 
+## How to include
+
+```cmake
+include("rsp/helpers")
+```

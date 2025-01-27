@@ -7,5 +7,10 @@ author: RSP Systems A/S
 
 # Git
 
-_TODO: ...incomplete, please review documentation at a later point_
+This module contains helpers and utilities for interacting with [git](https://git-scm.com/).
 
+## How to include
+
+```cmake
+include("rsp/git")
+```
