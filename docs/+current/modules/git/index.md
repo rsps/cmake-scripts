@@ -9,6 +9,10 @@ author: RSP Systems A/S
 
 This module contains helpers and utilities for interacting with [git](https://git-scm.com/).
 
+## Requirements
+
+This module requires [git](https://git-scm.com/) to be available on your system. 
+
 ## How to include
 
 ```cmake
