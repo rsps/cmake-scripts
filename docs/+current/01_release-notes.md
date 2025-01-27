@@ -11,7 +11,7 @@ author: RSP Systems A/S
 
 ## Support Policy
 
-The following highlights the supported versions of the "CMake Scripts" project.
+The following shows the supported versions of the "CMake Scripts" project.
 
 | Version | CMake       | Release | Security Fixes Until |
 |---------|-------------|---------|----------------------|
