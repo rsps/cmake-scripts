@@ -71,6 +71,12 @@
 
     /* Code blocks */
     --code-block-bg-color: var(--lightest-gray);
+
+    /* table */
+    --table-border: var(--lighter-gray);
+    --table-background: #fff;
+    --table-background-odd: var(--lightest-gray);
+    --table-header-background: var(--lighter-gray);
 }
 
 .dark {
@@ -105,6 +111,12 @@
     --hero-button-secondary-border-color: var(--color-secondary);
     --hero-button-secondary-color: var(--lighter-gray);
     --hero-button-secondary-background: var(--color-secondary);
+
+    /* table */
+    --table-border: var(--dark-gray);
+    --table-background: var(--body-background);
+    --table-background-odd: var(--dark-gray);
+    --table-header-background: var(--dark-gray);
 }
 
 /* -------------------------------------------------------------------------------------------------------------------
