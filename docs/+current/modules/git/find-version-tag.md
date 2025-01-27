@@ -15,6 +15,8 @@ The `git_find_version_tag()` function allows you to find the nearest version tag
 ## Example
 
 ```cmake
+include("rsp/git")
+
 git_find_version_tag(
     OUTPUT version
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
