@@ -69,7 +69,7 @@ if (NOT COMMAND "define_test_suite")
     #
     # @see end_test_case()
     #
-    # @param <string> name              Human readable name of test suite TODO: Can this be used for ctest labels / groups?
+    # @param <string> name              Human readable name of test suite
     # @param DIRECTORY <path>           Path to directory that contains test-cases
     # @param [MATCH <glob>]             Glob used to match test-case files.
     #                                   Defaults to "*_test.cmake".
