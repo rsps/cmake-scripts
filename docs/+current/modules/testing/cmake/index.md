@@ -101,8 +101,21 @@ endfunction()
 
 ### Build & Run
 
-_TODO: ..._
+To run the tests, you must first build the project using CMake. After that, use
+[CTests](https://cmake.org/cmake/help/latest/manual/ctest.1.html#manual:ctest(1)) to run the tests. 
+
+```sh
+ctest --output-on-failure --parallel --test-dir <your-build-directory>/tests
+```
 
 ## Caveats
 
-_TODO: ..._
+Due to the nature of how tests are [defined (_via ctest_)](https://cmake.org/cmake/help/latest/command/add_test.html#command:add_test),
+and how this "mini" testing framework has been designed, you might be required to rebuild your CMake, whenever changes
+are made to the various "define" functions' parameters. This can, for instance, be when you rename a test function. 
+
+Throughout the remain of this documentation, if a "define" function requires rebuilding before changes take effect,
+then it will be highlighted via a warning, similar to the one shown below: 
+
+!!! warning "Rebuild Required"
+    Changes to function `xyz` parameters requires you to rebuild your project, before the changes take effect. 
