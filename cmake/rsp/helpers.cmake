@@ -48,6 +48,30 @@ if (NOT COMMAND "extract_value")
     endfunction()
 endif ()
 
+if (NOT COMMAND "requires_arguments")
+
+    #! requires_arguments : Verifies that specified arguments have been defined, fails otherwise
+    #
+    # Macro is intended to be used within a custom function, after `cmake_parse_arguments()` has
+    # been used.
+    #
+    # @see https://cmake.org/cmake/help/latest/command/cmake_parse_arguments.html#cmake-parse-arguments
+    # @see https://cmake.org/cmake/help/latest/command/if.html#defined
+    #
+    # @param <variable|string> input  The parsed arguments prefix
+    # @param <list> required          List of required arguments
+    #
+    # @throws If required arguments are not defined
+    #
+    macro(requires_arguments input required)
+        foreach (arg ${required})
+            if (NOT DEFINED "${input}_${arg}")
+                message(FATAL_ERROR "${arg} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
+            endif ()
+        endforeach ()
+    endmacro()
+endif ()
+
 if (NOT COMMAND "safeguard_properties")
 
     #! safeguard_properties : Invoke a "risky" callback whilst "safeguarding" properties
