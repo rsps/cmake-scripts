@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <title>Test - CMake Scripts</title>
+    <meta name="description" content="How to define a test">
+    <meta name="keywords" content="testing, test, cmake">
+    <meta name="author" content="RSP Systems A/S">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="icon" href="../../../../themes/rsp/favicon/favicon-16x16.png" type="image/x-icon">
+
+    <!-- Mobile -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- JS -->
+    <script>
+        window.base_url = "../../../../";
+        document.documentElement.classList.remove('no-js');
+    </script>
+
+    <!-- Font -->
+    
+    <!-- CSS -->
+            <link href='../../../../themes/rsp/css/daux-blue.min.css' rel='stylesheet' type='text/css'>
+            <link href='../../../../themes/rsp/css/style.css' rel='stylesheet' type='text/css'>
+            <link href='../../../../daux_libraries/search.css' rel='stylesheet' type='text/css'>
+    </head>
+<body class="">
+    <div class="Columns content">
+    <aside class="Columns__left Collapsible">
+        <button type="button" class="Button Collapsible__trigger" aria-controls="sidebar_content" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="Collapsible__trigger__bar"></span>
+            <span class="Collapsible__trigger__bar"></span>
+            <span class="Collapsible__trigger__bar"></span>
+        </button>
+
+        <a class="Brand" href="../../../../index.html">CMake Scripts</a>
+
+    <form role='search' action="/" method="get" class="Search" id="search_form">
+        <label for="search_input">
+            <span class='u-visuallyHidden'>Search</span>
+        </label>
+        <input
+            type="search"
+            id="search_input"
+            class="Search__field"
+            placeholder="Search..."
+            aria-label="Search..."
+            autocomplete="on"
+            results=25
+            autosave=text_search
+        >
+        <label>
+            <input type="submit" class='u-visuallyHidden' />
+            <span class='u-visuallyHidden'>Search...</span>
+            <svg class="Search__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 451 451">
+                <path d="M447.05 428l-109.6-109.6c29.4-33.8 47.2-77.9 47.2-126.1C384.65 86.2 298.35 0 192.35 0 86.25 0 .05 86.3.05 192.3s86.3 192.3 192.3 192.3c48.2 0 92.3-17.8 126.1-47.2L428.05 447c2.6 2.6 6.1 4 9.5 4s6.9-1.3 9.5-4c5.2-5.2 5.2-13.8 0-19zM26.95 192.3c0-91.2 74.2-165.3 165.3-165.3 91.2 0 165.3 74.2 165.3 165.3s-74.1 165.4-165.3 165.4c-91.1 0-165.3-74.2-165.3-165.4z"/>
+            </svg>
+        </label>
+    </form>
+
+        <div class="Collapsible__content" id="sidebar_content">
+            <!-- Navigation -->
+            <ul class='Nav'>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../../current/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version 0.x</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../../current/release_notes.html">Release Notes</a></li>
+<li class='Nav__item '><a href="../../../../current/upgrade_guide.html">Upgrade Guide</a></li>
+<li class='Nav__item '><a href="../../../../current/contribution_guide.html">Contribution Guide</a></li>
+<li class='Nav__item '><a href="../../../../current/security_policy.html">Security Policy</a></li>
+<li class='Nav__item '><a href="../../../../current/code_of_conduct.html">Code of Conduct</a></li>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../../current/modules/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../../current/modules/cache/set.html">Set</a></li>
+<li class='Nav__item '><a href="../../../../current/modules/cache/get.html">Get</a></li>
+<li class='Nav__item '><a href="../../../../current/modules/cache/has.html">Has</a></li>
+<li class='Nav__item '><a href="../../../../current/modules/cache/remember.html">Remember</a></li>
+<li class='Nav__item '><a href="../../../../current/modules/cache/forget.html">Forget</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../../current/modules/git/find_version_tag.html">Find Version Tag</a></li></ul></li>
+<li class='Nav__item '><a href="../../../../current/modules/helpers/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Helpers</a><ul class='Nav'></ul></li>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../../current/modules/testing/cmake/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules & Scripts</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../../current/modules/testing/cmake/test_suite.html">Test Suite</a></li>
+<li class='Nav__item '><a href="../../../../current/modules/testing/cmake/test_case.html">Test Case</a></li>
+<li class='Nav__item Nav__item--active'><a href="../../../../current/modules/testing/cmake/test.html">Test</a></li>
+<li class='Nav__item '><a href="../../../../current/modules/testing/cmake/run_tests.html">Run Tests</a></li>
+<li class='Nav__item '><a href="../../../../current/modules/testing/cmake/executor.html">Executor</a></li>
+<li class='Nav__item '><a href="../../../../current/modules/testing/cmake/asserts.html">Asserts</a></li></ul></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../../current/modules/version/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../../current/modules/version/semver/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Semantic Version</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../../current/modules/version/semver/parse.html">Parse</a></li></ul></li>
+<li class='Nav__item '><a href="../../../../current/modules/version/version_file.html">Version File</a></li></ul></li></ul></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../../archive/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Archive</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../../archive/v_next/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>next</a><ul class='Nav'></ul></li></ul></li></ul>
+            <div class="Links">
+                                    <hr/>
+                                            <a href="https://github.com/rsps/cmake-scripts/blob/main/CHANGELOG.md" target="_blank"  rel="noopener noreferrer">Changelog</a>
+                        <br />
+                                            <a href="https://github.com/rsps/cmake-scripts" target="_blank"  rel="noopener noreferrer">GitHub</a>
+                        <br />
+                                            <a href="https://github.com/rsps/cmake-scripts/issues" target="_blank"  rel="noopener noreferrer">Issues</a>
+                        <br />
+                                            <a href="https://rspsystems.com/" target="_blank"  rel="noopener noreferrer">RSP Systems</a>
+                        <br />
+                                                </div>
+
+            
+            <div class="DarkModeToggler">
+                <hr/>
+                <label class="Checkbox">Dark Mode                    <input type="checkbox" class="ColorMode__button" />
+                    <div class="Checkbox__indicator"></div>
+                </label>
+            </div>
+
+                
+                                    <div class="PoweredBy">
+                        <hr/>
+                        © RSP Systems A/S                    </div>
+                        </div>
+    </aside>
+    <div class="Columns__right">
+        <div class="Columns__right__content">
+            <div class="doc_content">
+                <article class="Page">
+
+    <div class="Page__header">
+        <h1><a href="../../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../../current/modules/testing/index.html">Testing</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../../current/modules/testing/cmake/index.html">Modules & Scripts</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../../current/modules/testing/cmake/test.html">Test</a></h1>
+                <span class="ModifiedDate">
+            January 28, 2025 at 5:37 AM        </span>
+                        <span class="EditOn">
+            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/testing/cmake/03_test.md" target="_blank">
+                Edit on GitHub            </a>
+        </span>
+            </div>
+
+    <div class="s-content">
+        <h1><a id="test" href="#test" class="Permalink" aria-hidden="true" title="Permalink">#</a>Test</h1>
+<p>The <code>define_test()</code> function is used to describe what callback (<em>function</em>) must be invoked when tests are executed.
+Behind the scene, this function is responsible to
+<a href="https://cmake.org/cmake/help/latest/command/add_test.html#command:add_test" class="Link--external" rel="noopener noreferrer">register</a> the test for ctest.
+This is done by adding a ctest that invokes an “intermediary” - a <a href="executor.html">test executor</a> - which is
+responsible for invoking the specified callback, via <code>define_test()</code>.</p>
+<div class="TableOfContentsContainer">
+    <h4 class="TableOfContentsContainer__title">Table of Contents</h4>
+    <div class="TableOfContentsContainer__content">
+        <ul class="TableOfContents">
+<li><a href="#test">Test</a>
+<ul>
+<li><a href="#parameters">Parameters</a></li>
+<li><a href="#example">Example</a></li>
+<li><a href="#failure-expectations">Failure Expectations</a></li>
+<li><a href="#data-providers">Data Providers</a></li>
+<li><a href="#skipping-tests">Skipping tests</a></li>
+</ul>
+</li>
+</ul>    </div>
+</div>
+<h2><a id="parameters" href="#parameters" class="Permalink" aria-hidden="true" title="Permalink">#</a>Parameters</h2>
+<ul>
+<li>&lt; name &gt;:  <em>Human readable name of test case.</em></li>
+<li>&lt; callback &gt;:  <em>The function that contains the actual test logic.</em></li>
+<li><code>DATA_PROVIDER</code>: (<em>optional</em>), <em>Command or macro that provides data-set(s) for the test. See <a href="#data-providers">data providers</a> for details.</em></li>
+<li><code>EXPECT_FAILURE</code>: (<em>optional</em>), <em>Options, if specified then callback is expected to fail. See <a href="#failure-expectations">failure expectations</a> for details.</em></li>
+<li><code>SKIP</code>: (<em>optional</em>), <em>Option, if set then test will be marked as “disabled” and not executed. See <a href="#skipping-tests">skipping tests</a> for details.</em></li>
+</ul>
+<div class="Admonition Admonition--warning"><p class="Admonition__title">Rebuild Required</p><p>Changes to function <code>define_test()</code> parameters requires you to rebuild your project, before the changes take effect.</p></div>
+<div class="Admonition Admonition--danger"><p class="Admonition__title">Caution</p><p>Although the <code>&lt; callback &gt;</code> parameter can accept a
+<a href="https://cmake.org/cmake/help/latest/command/macro.html#macro" class="Link--external" rel="noopener noreferrer">marco</a>, you <em>SHOULD</em> always use a
+<a href="https://cmake.org/cmake/help/latest/command/function.html#command:function" class="Link--external" rel="noopener noreferrer">function</a> for defining the actual
+test logic. Using a marco can lead to undesired side effects. Please read CMake’s
+<a href="https://cmake.org/cmake/help/latest/command/macro.html#macro-vs-function" class="Link--external" rel="noopener noreferrer">“Macro vs. Function“</a> for additional
+details.</p></div>
+<h2><a id="example" href="#example" class="Permalink" aria-hidden="true" title="Permalink">#</a>Example</h2>
+<pre><code class="hljs cmake"><span class="hljs-keyword">include</span>(<span class="hljs-string">"rsp/testing"</span>)
+
+<span class="hljs-comment"># ... previous not shown ...</span>
+
+define_test(<span class="hljs-string">"assets are ready after build"</span> <span class="hljs-string">"asserts_ready"</span>)
+<span class="hljs-keyword">function</span>(asserts_ready)
+    
+    <span class="hljs-comment"># ...actual test logic not shown here...</span>
+    
+    assert_truthy(assets_exist <span class="hljs-keyword">MESSAGE</span> <span class="hljs-string">"Assets have not been built..."</span>)
+<span class="hljs-keyword">endfunction</span>()
+</code></pre>
+<h2><a id="failure-expectations" href="#failure-expectations" class="Permalink" aria-hidden="true" title="Permalink">#</a>Failure Expectations</h2>
+<p>When you need to test logic that is intended to fail when certain conditions are true, then you can mark your test
+to expect a failure. This is done by setting the <code>EXPECT_FAILURE</code> option.</p>
+<pre><code class="hljs cmake">define_test(<span class="hljs-string">"fails when assets not built"</span> <span class="hljs-string">"fails_when_not_ready"</span> EXPECT_FAILURE)
+<span class="hljs-keyword">function</span>(fails_when_not_ready)
+
+    <span class="hljs-comment"># ...actual test logic not shown here...</span>
+    
+    assert_truthy(<span class="hljs-keyword">false</span>)
+<span class="hljs-keyword">endfunction</span>()
+</code></pre>
+<p>Behind the scene, ctest’s <a href="https://cmake.org/cmake/help/latest/prop_test/WILL_FAIL.html#prop_test:WILL_FAIL" class="Link--external" rel="noopener noreferrer"><code>WILL_FAIL</code></a>
+property is set for the given test, when the <code>EXPECT_FAILURE</code> option is set.</p>
+<h2><a id="data-providers" href="#data-providers" class="Permalink" aria-hidden="true" title="Permalink">#</a>Data Providers</h2>
+<p>You can specify a function or marco as a test’s data-provider, via the <code>DATA_PROVIDER</code> parameter.
+Doing so will result in the same test being executed multiple times, with different sets of data.
+The specified function or marco <strong>MUST</strong> assign a list of “items” (<em>test data</em>) to the given <code>&lt; output &gt;</code> variable.</p>
+<pre><code class="hljs cmake"><span class="hljs-keyword">function</span>(provides_data output)
+    <span class="hljs-keyword">set</span>(<span class="hljs-string">"${output}"</span> <span class="hljs-string">"a;b;c;d"</span>)
+    <span class="hljs-keyword">return</span> (PROPAGATE <span class="hljs-string">"${output}"</span>)
+<span class="hljs-keyword">endfunction</span>()
+
+define_test(
+    <span class="hljs-string">"My Test"</span>
+    <span class="hljs-string">"my_test"</span>
+    DATA_PROVIDER <span class="hljs-string">"provides_data"</span>
+)
+<span class="hljs-keyword">function</span>(my_test letter)
+    <span class="hljs-keyword">string</span>(LENGTH <span class="hljs-string">"${letter}"</span> length)
+
+    assert_greater_than(<span class="hljs-number">0</span> length <span class="hljs-keyword">MESSAGE</span> <span class="hljs-string">"No letter provided: (length: ${length})"</span>)
+<span class="hljs-keyword">endfunction</span>()
+</code></pre>
+<p>In the above “My Test” will be registered multiple times, one for each item provided by the <code>provides_data()</code> function.
+Each data-set item is then passed on to the test, as an argument.</p>
+<div class="Admonition Admonition--warning"><p class="Admonition__title">Rebuild Required</p><p>Whenever you change the items provided by a “data provider” function, you will be required to rebuild
+your CMake project, before the changes are reflected by the executed tests!</p></div>
+<h2><a id="skipping-tests" href="#skipping-tests" class="Permalink" aria-hidden="true" title="Permalink">#</a>Skipping tests</h2>
+<p>Set the <code>SKIP</code> option, if you wish to ensure that a test is not executed by ctest.</p>
+<pre><code class="hljs cmake"><span class="hljs-comment"># Test is SKIPPED</span>
+define_test(<span class="hljs-string">"can build with bitmap pictures"</span> <span class="hljs-string">"can_build_with_bitmap"</span> SKIP)
+<span class="hljs-keyword">function</span>(can_build_with_bitmap)
+
+    <span class="hljs-comment"># ...not shown...</span>
+    
+<span class="hljs-keyword">endfunction</span>()
+</code></pre>
+<p>Behind the scene, ctest’s <a href="https://cmake.org/cmake/help/latest/prop_test/DISABLED.html" class="Link--external" rel="noopener noreferrer"><code>DISABLED</code></a>
+property is set, when a test is marked as skipped.</p>
+    </div>
+
+        <nav>
+        <ul class="Pager">
+            <li class=Pager--prev><a href="../../../../current/modules/testing/cmake/test_case.html">Previous</a></li>            <li class=Pager--next><a href="../../../../current/modules/testing/cmake/run_tests.html">Next</a></li>        </ul>
+    </nav>
+    </article>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    <!-- JS -->
+            <script src="../../../../themes/rsp/js/main.mjs"></script>
+    
+        <script>
+        
+        window.searchLanguage = "";
+        window.searchTranslation = {"Search_one_result":"1 result","Search_results":"!count results","Search_no_results":"Nothing found","Search_common_words_ignored":"Common words are largely ignored","Search_too_short":"Search too short","Search_one_character_or_more":"Should be one character or more","Search_should_be_x_or_more":"Should be !min characters or more","Link_previous":"Previous","Link_next":"Next"};
+    </script>
+
+    <!-- Search -->
+    <script type="text/javascript" src="../../../../daux_libraries/search.min.js"></script>
+
+    <script>
+        window.search({'base_url': '../../../../'})
+    </script>
+</body>
+</html>

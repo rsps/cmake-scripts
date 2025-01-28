@@ -71,11 +71,27 @@
 <li class='Nav__item '><a href="../current/security_policy.html">Security Policy</a></li>
 <li class='Nav__item '><a href="../current/code_of_conduct.html">Code of Conduct</a></li>
 <li class='Nav__item  has-children'><a href="../current/modules/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules</a><ul class='Nav'>
-<li class='Nav__item '><a href="../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'></ul></li>
-<li class='Nav__item '><a href="../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'></ul></li>
+<li class='Nav__item  has-children'><a href="../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'>
+<li class='Nav__item '><a href="../current/modules/cache/set.html">Set</a></li>
+<li class='Nav__item '><a href="../current/modules/cache/get.html">Get</a></li>
+<li class='Nav__item '><a href="../current/modules/cache/has.html">Has</a></li>
+<li class='Nav__item '><a href="../current/modules/cache/remember.html">Remember</a></li>
+<li class='Nav__item '><a href="../current/modules/cache/forget.html">Forget</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'>
+<li class='Nav__item '><a href="../current/modules/git/find_version_tag.html">Find Version Tag</a></li></ul></li>
 <li class='Nav__item '><a href="../current/modules/helpers/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Helpers</a><ul class='Nav'></ul></li>
-<li class='Nav__item '><a href="../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'></ul></li>
-<li class='Nav__item '><a href="../current/modules/version/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version</a><ul class='Nav'></ul></li></ul></li></ul></li>
+<li class='Nav__item  has-children'><a href="../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../current/modules/testing/cmake/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules & Scripts</a><ul class='Nav'>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/test_suite.html">Test Suite</a></li>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/test_case.html">Test Case</a></li>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/test.html">Test</a></li>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/run_tests.html">Run Tests</a></li>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/executor.html">Executor</a></li>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/asserts.html">Asserts</a></li></ul></li></ul></li>
+<li class='Nav__item  has-children'><a href="../current/modules/version/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../current/modules/version/semver/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Semantic Version</a><ul class='Nav'>
+<li class='Nav__item '><a href="../current/modules/version/semver/parse.html">Parse</a></li></ul></li>
+<li class='Nav__item '><a href="../current/modules/version/version_file.html">Version File</a></li></ul></li></ul></li></ul></li>
 <li class='Nav__item  has-children'><a href="../archive/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Archive</a><ul class='Nav'>
 <li class='Nav__item '><a href="../archive/v_next/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>next</a><ul class='Nav'></ul></li></ul></li></ul>
             <div class="Links">
@@ -112,7 +128,7 @@
     <div class="Page__header">
         <h1><a href="../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../current/contribution_guide.html">Contribution Guide</a></h1>
                 <span class="ModifiedDate">
-            January 24, 2025 at 5:54 AM        </span>
+            January 28, 2025 at 5:37 AM        </span>
                         <span class="EditOn">
             <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/03_contribution-guide.md" target="_blank">
                 Edit on GitHub            </a>
@@ -121,7 +137,51 @@
 
     <div class="s-content">
         <h1><a id="contribution-guide" href="#contribution-guide" class="Permalink" aria-hidden="true" title="Permalink">#</a>Contribution Guide</h1>
-<p><em>TODO: …incomplete, please review documentation at a later point</em></p>
+<p>We appreciate all the help that we can get to improve this project. In this section, you will find useful information
+on how you can contribute.</p>
+<div class="TableOfContentsContainer">
+    <h4 class="TableOfContentsContainer__title">Table of Contents</h4>
+    <div class="TableOfContentsContainer__content">
+        <ul class="TableOfContents">
+<li><a href="#contribution-guide">Contribution Guide</a>
+<ul>
+<li><a href="#bug-report">Bug Report</a></li>
+<li><a href="#security-vulnerability">Security Vulnerability</a></li>
+<li><a href="#feature-request">Feature Request</a></li>
+<li><a href="#pull-requests">Pull Requests</a></li>
+</ul>
+</li>
+</ul>    </div>
+</div>
+<h2><a id="bug-report" href="#bug-report" class="Permalink" aria-hidden="true" title="Permalink">#</a>Bug Report</h2>
+<p>If you have encountered a bug, feel free to <a href="https://github.com/aedart/athenaeum/issues" class="Link--external" rel="noopener noreferrer">report it</a>.
+When reporting the bug, please consider the following:</p>
+<ul>
+<li>Where is the defect located?</li>
+<li>A good, short and precise description of the defect (<em>Why is it a defect?</em>)</li>
+<li>How can the defect be replicated?</li>
+<li>(<em>A possible solution for how to resolve the defect</em>)</li>
+</ul>
+<p>Once we have received the bug or defect report, we will address it as reasonably as we can.</p>
+<h2><a id="security-vulnerability" href="#security-vulnerability" class="Permalink" aria-hidden="true" title="Permalink">#</a>Security Vulnerability</h2>
+<p>See the <a href="security_policy.html">Security Policy</a> for details.</p>
+<h2><a id="feature-request" href="#feature-request" class="Permalink" aria-hidden="true" title="Permalink">#</a>Feature Request</h2>
+<p>If you have an idea for a new feature or perhaps changing an existing one, please feel free to create a
+<a href="https://github.com/aedart/athenaeum/issues" class="Link--external" rel="noopener noreferrer">feature request</a>.</p>
+<h2><a id="pull-requests" href="#pull-requests" class="Permalink" aria-hidden="true" title="Permalink">#</a>Pull Requests</h2>
+<p>If you are able to fix a bug or defect, or perhaps add new features, then you can send us a pull request.
+Please follow this guideline:</p>
+<ul>
+<li>Fork this project</li>
+<li>Create a new local branch for the given fix, addition or change</li>
+<li>Write your changes</li>
+<li>Create executable test-cases (<em>prove that your changes are solid!</em>)</li>
+<li>Commit and push your changes to your fork</li>
+<li>Send a pull-request with your changes (<strong><em>please ensure to check “Allow edits from maintainers”</em></strong>)</li>
+</ul>
+<p>We will review your pull request, as soon as time permits. If your changes are accepted, then they will be merged into
+this project and released in an upcoming version. Should your pull request not be accepted, then you will be informed
+about it.</p>
     </div>
 
         <nav>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-    <title>Testing - CMake Scripts</title>
-    <meta name="description" content="How to use the testing module.">
-    <meta name="keywords" content="testing, cmake">
+    <title>Remember - CMake Scripts</title>
+    <meta name="description" content="Retrieve a cache variable, or create it if it does not exist">
+    <meta name="keywords" content="cache, cmake">
     <meta name="author" content="RSP Systems A/S">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -71,16 +71,16 @@
 <li class='Nav__item '><a href="../../../current/security_policy.html">Security Policy</a></li>
 <li class='Nav__item '><a href="../../../current/code_of_conduct.html">Code of Conduct</a></li>
 <li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules</a><ul class='Nav'>
-<li class='Nav__item  has-children'><a href="../../../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/cache/set.html">Set</a></li>
 <li class='Nav__item '><a href="../../../current/modules/cache/get.html">Get</a></li>
 <li class='Nav__item '><a href="../../../current/modules/cache/has.html">Has</a></li>
-<li class='Nav__item '><a href="../../../current/modules/cache/remember.html">Remember</a></li>
+<li class='Nav__item Nav__item--active'><a href="../../../current/modules/cache/remember.html">Remember</a></li>
 <li class='Nav__item '><a href="../../../current/modules/cache/forget.html">Forget</a></li></ul></li>
 <li class='Nav__item  has-children'><a href="../../../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/git/find_version_tag.html">Find Version Tag</a></li></ul></li>
 <li class='Nav__item '><a href="../../../current/modules/helpers/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Helpers</a><ul class='Nav'></ul></li>
-<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'>
 <li class='Nav__item  has-children'><a href="../../../current/modules/testing/cmake/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules & Scripts</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/testing/cmake/test_suite.html">Test Suite</a></li>
 <li class='Nav__item '><a href="../../../current/modules/testing/cmake/test_case.html">Test Case</a></li>
@@ -126,28 +126,48 @@
                 <article class="Page">
 
     <div class="Page__header">
-        <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/testing/index.html">Testing</a></h1>
+        <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/cache/index.html">Cache</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/cache/remember.html">Remember</a></h1>
                 <span class="ModifiedDate">
             January 28, 2025 at 5:37 AM        </span>
                         <span class="EditOn">
-            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/testing/index.md" target="_blank">
+            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/cache/04_remember.md" target="_blank">
                 Edit on GitHub            </a>
         </span>
             </div>
 
     <div class="s-content">
-        <h1><a id="testing" href="#testing" class="Permalink" aria-hidden="true" title="Permalink">#</a>Testing</h1>
-<p>“CMake Scripts” has been developed with testing in mind. To ensure that the provided functionality works as intended,
-we have made an effort to write code that is testable. As a direct result of this, various testing utilities have been<br />
-developed (<em>e.g. for cmake modules and scripts</em>), which are offered in this module.</p>
-<h2><a id="how-to-include" href="#how-to-include" class="Permalink" aria-hidden="true" title="Permalink">#</a>How to include</h2>
-<pre><code class="hljs cmake"><span class="hljs-keyword">include</span>(<span class="hljs-string">"rsp/testing"</span>)
+        <h1><a id="remember" href="#remember" class="Permalink" aria-hidden="true" title="Permalink">#</a>Remember</h1>
+<p><code>cache_remember()</code> is responsible for retrieve cached entry if it exists, or invoke callback and cache resulting
+output value of the callback.</p>
+<p>The following parameters are accepted:</p>
+<ul>
+<li><code>KEY</code>: _ The variable to assign and cache._</li>
+<li><code>CALLBACK</code>: _ The function or macro that returns value to be cached, if <code>KEY</code> hasn’t already been cached._</li>
+<li><code>TTL</code>: (<em>optional</em>), <em>Time-To-Live of cache entry in seconds (see <a href="set.html#ttl">TTL</a> for details).</em></li>
+<li><code>TYPE</code>: (<em>optional</em>), <em>Cmake cache entry type, BOOL, STRING,…etc. Defaults to <code>STRING</code> if not specified.</em></li>
+<li><code>DESCRIPTION</code>: (<em>optional</em>), <em>Description of cache entry.</em></li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code class="hljs cmake"><span class="hljs-keyword">function</span>(make_asset_uuid output)
+    <span class="hljs-comment"># ...complex logic for generating a UUID... (not shown here)...</span>
+    <span class="hljs-keyword">set</span>(<span class="hljs-string">"${output}"</span> <span class="hljs-string">"..."</span>)
+    
+    <span class="hljs-comment"># Assign to "output" variable</span>
+    <span class="hljs-keyword">return</span>(PROPAGATE <span class="hljs-string">"${output}"</span>)
+<span class="hljs-keyword">endfunction</span>()
+
+cache_remember(
+    KEY assert_uuid
+    CALLBACK <span class="hljs-string">"make_asset_uuid"</span>
+)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${assert_uuid}"</span>) <span class="hljs-comment"># E.g. 2786d7fb-6d88-4878-b1f6-4c66cee31700</span>
 </code></pre>
     </div>
 
         <nav>
         <ul class="Pager">
-            <li class=Pager--prev><a href="../../../current/modules/helpers/index.html">Previous</a></li>            <li class=Pager--next><a href="../../../current/modules/testing/cmake/index.html">Next</a></li>        </ul>
+            <li class=Pager--prev><a href="../../../current/modules/cache/has.html">Previous</a></li>            <li class=Pager--next><a href="../../../current/modules/cache/forget.html">Next</a></li>        </ul>
     </nav>
     </article>
 

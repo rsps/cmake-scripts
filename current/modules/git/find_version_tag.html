@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-    <title>Testing - CMake Scripts</title>
-    <meta name="description" content="How to use the testing module.">
-    <meta name="keywords" content="testing, cmake">
+    <title>Find Version Tag - CMake Scripts</title>
+    <meta name="description" content="Using git_find_version_tag">
+    <meta name="keywords" content="git, version, tag, cmake">
     <meta name="author" content="RSP Systems A/S">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -77,10 +77,10 @@
 <li class='Nav__item '><a href="../../../current/modules/cache/has.html">Has</a></li>
 <li class='Nav__item '><a href="../../../current/modules/cache/remember.html">Remember</a></li>
 <li class='Nav__item '><a href="../../../current/modules/cache/forget.html">Forget</a></li></ul></li>
-<li class='Nav__item  has-children'><a href="../../../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'>
-<li class='Nav__item '><a href="../../../current/modules/git/find_version_tag.html">Find Version Tag</a></li></ul></li>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'>
+<li class='Nav__item Nav__item--active'><a href="../../../current/modules/git/find_version_tag.html">Find Version Tag</a></li></ul></li>
 <li class='Nav__item '><a href="../../../current/modules/helpers/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Helpers</a><ul class='Nav'></ul></li>
-<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'>
 <li class='Nav__item  has-children'><a href="../../../current/modules/testing/cmake/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules & Scripts</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/testing/cmake/test_suite.html">Test Suite</a></li>
 <li class='Nav__item '><a href="../../../current/modules/testing/cmake/test_case.html">Test Case</a></li>
@@ -126,28 +126,85 @@
                 <article class="Page">
 
     <div class="Page__header">
-        <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/testing/index.html">Testing</a></h1>
+        <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/git/index.html">Git</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/git/find_version_tag.html">Find Version Tag</a></h1>
                 <span class="ModifiedDate">
             January 28, 2025 at 5:37 AM        </span>
                         <span class="EditOn">
-            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/testing/index.md" target="_blank">
+            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/git/find-version-tag.md" target="_blank">
                 Edit on GitHub            </a>
         </span>
             </div>
 
     <div class="s-content">
-        <h1><a id="testing" href="#testing" class="Permalink" aria-hidden="true" title="Permalink">#</a>Testing</h1>
-<p>“CMake Scripts” has been developed with testing in mind. To ensure that the provided functionality works as intended,
-we have made an effort to write code that is testable. As a direct result of this, various testing utilities have been<br />
-developed (<em>e.g. for cmake modules and scripts</em>), which are offered in this module.</p>
-<h2><a id="how-to-include" href="#how-to-include" class="Permalink" aria-hidden="true" title="Permalink">#</a>How to include</h2>
-<pre><code class="hljs cmake"><span class="hljs-keyword">include</span>(<span class="hljs-string">"rsp/testing"</span>)
+        <h1><a id="find-version-tag" href="#find-version-tag" class="Permalink" aria-hidden="true" title="Permalink">#</a>Find Version Tag</h1>
+<p>The <code>git_find_version_tag()</code> function allows you to find the nearest version tag that matches a version-pattern
+(<em>local repository</em>). Behind the scene, <a href="https://git-scm.com/docs/git-describe" class="Link--external" rel="noopener noreferrer">git-describe</a> is invoked.</p>
+<div class="TableOfContentsContainer">
+    <h4 class="TableOfContentsContainer__title">Table of Contents</h4>
+    <div class="TableOfContentsContainer__content">
+        <ul class="TableOfContents">
+<li><a href="#find-version-tag">Find Version Tag</a>
+<ul>
+<li><a href="#example">Example</a></li>
+<li><a href="#match-pattern">Match Pattern</a></li>
+<li><a href="#default-version">Default Version</a></li>
+<li><a href="#exit-on-failure">Exit on Failure</a></li>
+</ul>
+</li>
+</ul>    </div>
+</div>
+<h2><a id="example" href="#example" class="Permalink" aria-hidden="true" title="Permalink">#</a>Example</h2>
+<pre><code class="hljs cmake"><span class="hljs-keyword">include</span>(<span class="hljs-string">"rsp/git"</span>)
+
+git_find_version_tag(
+    OUTPUT version
+    WORKING_DIRECTORY <span class="hljs-variable">${CMAKE_CURRENT_SOURCE_DIR}</span>
+)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${version}"</span>) <span class="hljs-comment"># 1.15.2</span>
+</code></pre>
+<h2><a id="match-pattern" href="#match-pattern" class="Permalink" aria-hidden="true" title="Permalink">#</a>Match Pattern</h2>
+<p>By default, the following <a href="https://git-scm.com/docs/git-describe#Documentation/git-describe.txt---matchltpatterngt" class="Link--external" rel="noopener noreferrer">glob-pattern</a>
+is used for matching a version tag:</p>
+<ul>
+<li><code>*[0-9].*[0-9].*[0-9]*</code></li>
+</ul>
+<p>To customize the pattern, specify the <code>MATCH_PATTERN</code> parameter.</p>
+<pre><code class="hljs cmake">git_find_version_tag(
+    OUTPUT pre_release
+    WORKING_DIRECTORY <span class="hljs-variable">${CMAKE_CURRENT_SOURCE_DIR}</span>
+    MATCH_PATTERN <span class="hljs-string">"*[0-9].*[0-9].*[0-9]-*"</span>
+)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${pre_release}"</span>) <span class="hljs-comment"># 1.0.0-alpha.2</span>
+</code></pre>
+<h2><a id="default-version" href="#default-version" class="Permalink" aria-hidden="true" title="Permalink">#</a>Default Version</h2>
+<p>If unable to find a version tag, <code>&quot;0.0.0&quot;</code> is returned
+(<em>See also <a href="#exit-on-failure">Exit on Failure</a></em>).
+You can change this by setting the <code>DEFAULT</code> parameter, in situations when no version tag can be found.</p>
+<pre><code class="hljs cmake">git_find_version_tag(
+    OUTPUT version
+    WORKING_DIRECTORY <span class="hljs-variable">${CMAKE_CURRENT_SOURCE_DIR}</span>
+    DEFAULT <span class="hljs-string">"0.1.0"</span>
+)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${version}"</span>) <span class="hljs-comment"># 0.1.0</span>
+</code></pre>
+<h2><a id="exit-on-failure" href="#exit-on-failure" class="Permalink" aria-hidden="true" title="Permalink">#</a>Exit on Failure</h2>
+<p>A fatal error will be raised, if the <code>EXIT_ON_FAILURE</code> option is set, and no version tag can be found.
+When doing so, the <a href="#default-version">default version</a> parameter will be ignored.</p>
+<pre><code class="hljs cmake">git_find_version_tag(
+    OUTPUT version
+    WORKING_DIRECTORY <span class="hljs-variable">${CMAKE_CURRENT_SOURCE_DIR}</span>
+    DEFAULT <span class="hljs-string">"0.1.0"</span>
+    EXIT_ON_FAILURE
+) <span class="hljs-comment"># Fatal Error: No version tag found ...</span>
 </code></pre>
     </div>
 
         <nav>
         <ul class="Pager">
-            <li class=Pager--prev><a href="../../../current/modules/helpers/index.html">Previous</a></li>            <li class=Pager--next><a href="../../../current/modules/testing/cmake/index.html">Next</a></li>        </ul>
+            <li class=Pager--prev><a href="../../../current/modules/git/index.html">Previous</a></li>            <li class=Pager--next><a href="../../../current/modules/helpers/index.html">Next</a></li>        </ul>
     </nav>
     </article>
 

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-    <title>Testing - CMake Scripts</title>
-    <meta name="description" content="How to use the testing module.">
-    <meta name="keywords" content="testing, cmake">
+    <title>Version File - CMake Scripts</title>
+    <meta name="description" content="To to work with version files">
+    <meta name="keywords" content="git, semver, version, file, cmake">
     <meta name="author" content="RSP Systems A/S">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -80,7 +80,7 @@
 <li class='Nav__item  has-children'><a href="../../../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/git/find_version_tag.html">Find Version Tag</a></li></ul></li>
 <li class='Nav__item '><a href="../../../current/modules/helpers/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Helpers</a><ul class='Nav'></ul></li>
-<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'>
 <li class='Nav__item  has-children'><a href="../../../current/modules/testing/cmake/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules & Scripts</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/testing/cmake/test_suite.html">Test Suite</a></li>
 <li class='Nav__item '><a href="../../../current/modules/testing/cmake/test_case.html">Test Case</a></li>
@@ -88,10 +88,10 @@
 <li class='Nav__item '><a href="../../../current/modules/testing/cmake/run_tests.html">Run Tests</a></li>
 <li class='Nav__item '><a href="../../../current/modules/testing/cmake/executor.html">Executor</a></li>
 <li class='Nav__item '><a href="../../../current/modules/testing/cmake/asserts.html">Asserts</a></li></ul></li></ul></li>
-<li class='Nav__item  has-children'><a href="../../../current/modules/version/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version</a><ul class='Nav'>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/version/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version</a><ul class='Nav'>
 <li class='Nav__item  has-children'><a href="../../../current/modules/version/semver/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Semantic Version</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/version/semver/parse.html">Parse</a></li></ul></li>
-<li class='Nav__item '><a href="../../../current/modules/version/version_file.html">Version File</a></li></ul></li></ul></li></ul></li>
+<li class='Nav__item Nav__item--active'><a href="../../../current/modules/version/version_file.html">Version File</a></li></ul></li></ul></li></ul></li>
 <li class='Nav__item  has-children'><a href="../../../archive/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Archive</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../archive/v_next/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>next</a><ul class='Nav'></ul></li></ul></li></ul>
             <div class="Links">
@@ -126,28 +126,98 @@
                 <article class="Page">
 
     <div class="Page__header">
-        <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/testing/index.html">Testing</a></h1>
+        <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/version/index.html">Version</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/version/version_file.html">Version File</a></h1>
                 <span class="ModifiedDate">
             January 28, 2025 at 5:37 AM        </span>
                         <span class="EditOn">
-            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/testing/index.md" target="_blank">
+            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/version/version-file.md" target="_blank">
                 Edit on GitHub            </a>
         </span>
             </div>
 
     <div class="s-content">
-        <h1><a id="testing" href="#testing" class="Permalink" aria-hidden="true" title="Permalink">#</a>Testing</h1>
-<p>“CMake Scripts” has been developed with testing in mind. To ensure that the provided functionality works as intended,
-we have made an effort to write code that is testable. As a direct result of this, various testing utilities have been<br />
-developed (<em>e.g. for cmake modules and scripts</em>), which are offered in this module.</p>
-<h2><a id="how-to-include" href="#how-to-include" class="Permalink" aria-hidden="true" title="Permalink">#</a>How to include</h2>
-<pre><code class="hljs cmake"><span class="hljs-keyword">include</span>(<span class="hljs-string">"rsp/testing"</span>)
+        <h1><a id="version-file-s" href="#version-file-s" class="Permalink" aria-hidden="true" title="Permalink">#</a>Version File(s)</h1>
+<p>In this section you can find examples on how to read and write a version string, from and to a file.</p>
+<div class="TableOfContentsContainer">
+    <h4 class="TableOfContentsContainer__title">Table of Contents</h4>
+    <div class="TableOfContentsContainer__content">
+        <ul class="TableOfContents">
+<li><a href="#version-file-s">Version File(s)</a>
+<ul>
+<li><a href="#write-version-file">Write Version File</a></li>
+<li><a href="#read-version-file">Read Version File</a></li>
+<li><a href="#exit-on-failure">Exit on Failure</a></li>
+</ul>
+</li>
+</ul>    </div>
+</div>
+<h2><a id="write-version-file" href="#write-version-file" class="Permalink" aria-hidden="true" title="Permalink">#</a>Write Version File</h2>
+<p>Use <code>write_version_file()</code> to write a version string to a specified file.
+The function accepts two parameters:</p>
+<ul>
+<li><code>FILE</code>: <em>Path to target file in which the version must be written</em></li>
+<li><code>VERSION</code>: (<em>optional</em>) <em>The version string to write in file (see “default version” for details).</em></li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code class="hljs cmake"><span class="hljs-keyword">include</span>(<span class="hljs-string">"rsp/version"</span>)
+
+write_version_file(
+    <span class="hljs-keyword">FILE</span> <span class="hljs-string">"version.txt"</span>
+    VERSION <span class="hljs-string">"v1.4.3"</span>
+)
+</code></pre>
+<div class="Admonition Admonition--warning"><p class="Admonition__title">Caution</p><p><code>write_version_file()</code> expects the <code>VERSION</code> parameter to be a valid version string
+that can be parsed by <a href="semver/parse.html"><code>semver_parse()</code></a>. A fatal error is raised,
+if that is not the case.</p></div>
+<p><strong>Default Version</strong></p>
+<p>If the <code>VERSION</code> parameter is not specified, then <a href="../git/find_version_tag.html"><code>git_find_version_tag()</code></a> is used to
+obtain the nearest version tag. This will then be written to the target version file.</p>
+<h2><a id="read-version-file" href="#read-version-file" class="Permalink" aria-hidden="true" title="Permalink">#</a>Read Version File</h2>
+<p>The <code>version_from_file()</code> can be used to read a version string from a specified file. Once a version string has been
+obtained, it will be parsed using <a href="semver/parse.html"><code>semver_parse</code></a>.</p>
+<p><strong>Example</strong></p>
+<pre><code class="hljs cmake"><span class="hljs-keyword">include</span>(<span class="hljs-string">"rsp/version"</span>)
+
+version_from_file(
+    <span class="hljs-keyword">FILE</span> <span class="hljs-string">"version.txt"</span>
+    OUTPUT my_package
+)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${my_package}_SEMVER"</span>) <span class="hljs-comment"># 2.0.0-beta.3+AF1004</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${my_package}_VERSION"</span>) <span class="hljs-comment"># 2.0.0</span>
+</code></pre>
+<div class="Admonition Admonition--warning"><p class="Admonition__title">Caution</p><p>Just like the <code>write_version_file()</code> function, the <code>version_from_file()</code> also parses the version string using
+<a href="semver/parse.html"><code>semver_parse()</code></a>. A fatal error is raised, if the version string is not valid.</p></div>
+<p><strong>Default Version</strong></p>
+<p>If the given file does not contain a version string, then <code>&quot;0.0.0&quot;</code> is returned.
+To change this behaviour, specify the <code>DEFAULT</code> parameter.</p>
+<pre><code class="hljs cmake">version_from_file(
+    <span class="hljs-keyword">FILE</span> <span class="hljs-string">"version.txt"</span>
+    OUTPUT my_package
+    DEFAULT <span class="hljs-string">"1.0.0"</span>
+)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${my_package}_VERSION"</span>) <span class="hljs-comment"># 1.0.0</span>
+</code></pre>
+<h2><a id="exit-on-failure" href="#exit-on-failure" class="Permalink" aria-hidden="true" title="Permalink">#</a>Exit on Failure</h2>
+<p>When the <code>EXIT_ON_FAILURE</code> option is set, the function will raise a fatal error in the following situations:</p>
+<ul>
+<li>If the version file does not exist.</li>
+<li>If obtained version string cannot be parsed.</li>
+</ul>
+<p>The <code>DEFAULT</code> parameter will be ignored, if this option is set.</p>
+<pre><code class="hljs cmake">version_from_file(
+    <span class="hljs-keyword">FILE</span> <span class="hljs-string">"unknown-file"</span>
+    OUTPUT my_package
+    DEFAULT <span class="hljs-string">"1.0.0"</span>
+    EXIT_ON_FAILURE
+) <span class="hljs-comment"># Fatal Error: Version file unknown-file does not exist</span>
 </code></pre>
     </div>
 
         <nav>
         <ul class="Pager">
-            <li class=Pager--prev><a href="../../../current/modules/helpers/index.html">Previous</a></li>            <li class=Pager--next><a href="../../../current/modules/testing/cmake/index.html">Next</a></li>        </ul>
+            <li class=Pager--prev><a href="../../../current/modules/version/semver/parse.html">Previous</a></li>            <li class=Pager--next><a href="../../../index.html">Next</a></li>        </ul>
     </nav>
     </article>
 

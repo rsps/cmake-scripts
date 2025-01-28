@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <title>Asserts - CMake Scripts</title>
+    <meta name="description" content="Assert functions">
+    <meta name="keywords" content="testing, assert, cmake">
+    <meta name="author" content="RSP Systems A/S">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="icon" href="../../../../themes/rsp/favicon/favicon-16x16.png" type="image/x-icon">
+
+    <!-- Mobile -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- JS -->
+    <script>
+        window.base_url = "../../../../";
+        document.documentElement.classList.remove('no-js');
+    </script>
+
+    <!-- Font -->
+    
+    <!-- CSS -->
+            <link href='../../../../themes/rsp/css/daux-blue.min.css' rel='stylesheet' type='text/css'>
+            <link href='../../../../themes/rsp/css/style.css' rel='stylesheet' type='text/css'>
+            <link href='../../../../daux_libraries/search.css' rel='stylesheet' type='text/css'>
+    </head>
+<body class="">
+    <div class="Columns content">
+    <aside class="Columns__left Collapsible">
+        <button type="button" class="Button Collapsible__trigger" aria-controls="sidebar_content" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="Collapsible__trigger__bar"></span>
+            <span class="Collapsible__trigger__bar"></span>
+            <span class="Collapsible__trigger__bar"></span>
+        </button>
+
+        <a class="Brand" href="../../../../index.html">CMake Scripts</a>
+
+    <form role='search' action="/" method="get" class="Search" id="search_form">
+        <label for="search_input">
+            <span class='u-visuallyHidden'>Search</span>
+        </label>
+        <input
+            type="search"
+            id="search_input"
+            class="Search__field"
+            placeholder="Search..."
+            aria-label="Search..."
+            autocomplete="on"
+            results=25
+            autosave=text_search
+        >
+        <label>
+            <input type="submit" class='u-visuallyHidden' />
+            <span class='u-visuallyHidden'>Search...</span>
+            <svg class="Search__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 451 451">
+                <path d="M447.05 428l-109.6-109.6c29.4-33.8 47.2-77.9 47.2-126.1C384.65 86.2 298.35 0 192.35 0 86.25 0 .05 86.3.05 192.3s86.3 192.3 192.3 192.3c48.2 0 92.3-17.8 126.1-47.2L428.05 447c2.6 2.6 6.1 4 9.5 4s6.9-1.3 9.5-4c5.2-5.2 5.2-13.8 0-19zM26.95 192.3c0-91.2 74.2-165.3 165.3-165.3 91.2 0 165.3 74.2 165.3 165.3s-74.1 165.4-165.3 165.4c-91.1 0-165.3-74.2-165.3-165.4z"/>
+            </svg>
+        </label>
+    </form>
+
+        <div class="Collapsible__content" id="sidebar_content">
+            <!-- Navigation -->
+            <ul class='Nav'>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../../current/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version 0.x</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../../current/release_notes.html">Release Notes</a></li>
+<li class='Nav__item '><a href="../../../../current/upgrade_guide.html">Upgrade Guide</a></li>
+<li class='Nav__item '><a href="../../../../current/contribution_guide.html">Contribution Guide</a></li>
+<li class='Nav__item '><a href="../../../../current/security_policy.html">Security Policy</a></li>
+<li class='Nav__item '><a href="../../../../current/code_of_conduct.html">Code of Conduct</a></li>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../../current/modules/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../../current/modules/cache/set.html">Set</a></li>
+<li class='Nav__item '><a href="../../../../current/modules/cache/get.html">Get</a></li>
+<li class='Nav__item '><a href="../../../../current/modules/cache/has.html">Has</a></li>
+<li class='Nav__item '><a href="../../../../current/modules/cache/remember.html">Remember</a></li>
+<li class='Nav__item '><a href="../../../../current/modules/cache/forget.html">Forget</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../../current/modules/git/find_version_tag.html">Find Version Tag</a></li></ul></li>
+<li class='Nav__item '><a href="../../../../current/modules/helpers/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Helpers</a><ul class='Nav'></ul></li>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../../current/modules/testing/cmake/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules & Scripts</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../../current/modules/testing/cmake/test_suite.html">Test Suite</a></li>
+<li class='Nav__item '><a href="../../../../current/modules/testing/cmake/test_case.html">Test Case</a></li>
+<li class='Nav__item '><a href="../../../../current/modules/testing/cmake/test.html">Test</a></li>
+<li class='Nav__item '><a href="../../../../current/modules/testing/cmake/run_tests.html">Run Tests</a></li>
+<li class='Nav__item '><a href="../../../../current/modules/testing/cmake/executor.html">Executor</a></li>
+<li class='Nav__item Nav__item--active'><a href="../../../../current/modules/testing/cmake/asserts.html">Asserts</a></li></ul></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../../current/modules/version/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../../current/modules/version/semver/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Semantic Version</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../../current/modules/version/semver/parse.html">Parse</a></li></ul></li>
+<li class='Nav__item '><a href="../../../../current/modules/version/version_file.html">Version File</a></li></ul></li></ul></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../../archive/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Archive</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../../archive/v_next/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>next</a><ul class='Nav'></ul></li></ul></li></ul>
+            <div class="Links">
+                                    <hr/>
+                                            <a href="https://github.com/rsps/cmake-scripts/blob/main/CHANGELOG.md" target="_blank"  rel="noopener noreferrer">Changelog</a>
+                        <br />
+                                            <a href="https://github.com/rsps/cmake-scripts" target="_blank"  rel="noopener noreferrer">GitHub</a>
+                        <br />
+                                            <a href="https://github.com/rsps/cmake-scripts/issues" target="_blank"  rel="noopener noreferrer">Issues</a>
+                        <br />
+                                            <a href="https://rspsystems.com/" target="_blank"  rel="noopener noreferrer">RSP Systems</a>
+                        <br />
+                                                </div>
+
+            
+            <div class="DarkModeToggler">
+                <hr/>
+                <label class="Checkbox">Dark Mode                    <input type="checkbox" class="ColorMode__button" />
+                    <div class="Checkbox__indicator"></div>
+                </label>
+            </div>
+
+                
+                                    <div class="PoweredBy">
+                        <hr/>
+                        © RSP Systems A/S                    </div>
+                        </div>
+    </aside>
+    <div class="Columns__right">
+        <div class="Columns__right__content">
+            <div class="doc_content">
+                <article class="Page">
+
+    <div class="Page__header">
+        <h1><a href="../../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../../current/modules/testing/index.html">Testing</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../../current/modules/testing/cmake/index.html">Modules & Scripts</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../../current/modules/testing/cmake/asserts.html">Asserts</a></h1>
+                <span class="ModifiedDate">
+            January 28, 2025 at 5:37 AM        </span>
+                        <span class="EditOn">
+            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/testing/cmake/-asserts.md" target="_blank">
+                Edit on GitHub            </a>
+        </span>
+            </div>
+
+    <div class="s-content">
+        <h1><a id="asserts" href="#asserts" class="Permalink" aria-hidden="true" title="Permalink">#</a>Asserts</h1>
+<div class="TableOfContentsContainer">
+    <h4 class="TableOfContentsContainer__title">Table of Contents</h4>
+    <div class="TableOfContentsContainer__content">
+        <ul class="TableOfContents">
+<li><a href="#asserts">Asserts</a>
+<ul>
+<li><a href="#failure-message">Failure Message</a></li>
+<li><a href="#existence">Existence</a>
+<ul>
+<li><a href="#assert-defined">assert_defined()</a></li>
+<li><a href="#assert-not-defined">assert_not_defined()</a></li>
+</ul>
+</li>
+<li><a href="#boolean">Boolean</a>
+<ul>
+<li><a href="#assert-truthy">assert_truthy()</a></li>
+<li><a href="#assert-falsy">assert_falsy()</a></li>
+</ul>
+</li>
+<li><a href="#numbers">Numbers</a>
+<ul>
+<li><a href="#assert-equals">assert_equals()</a></li>
+<li><a href="#assert-not-equals">assert_not_equals()</a></li>
+<li><a href="#assert-less-than">assert_less_than()</a></li>
+<li><a href="#assert-less-than-or-equal">assert_less_than_or_equal()</a></li>
+<li><a href="#assert-greater-than">assert_greater_than()</a></li>
+<li><a href="#assert-greater-than-or-equal">assert_greater_than_or_equal()</a></li>
+</ul>
+</li>
+<li><a href="#strings">Strings</a>
+<ul>
+<li><a href="#assert-string-equals">assert_string_equals()</a></li>
+<li><a href="#assert-string-not-equals">assert_string_not_equals()</a></li>
+<li><a href="#assert-string-empty">assert_string_empty()</a></li>
+<li><a href="#assert-string-not-empty">assert_string_not_empty()</a></li>
+</ul>
+</li>
+<li><a href="#lists">Lists</a>
+<ul>
+<li><a href="#assert-in-list">assert_in_list()</a></li>
+<li><a href="#assert-not-in-list">assert_not_in_list()</a></li>
+</ul>
+</li>
+<li><a href="#commands-macros">Commands &amp; Macros</a>
+<ul>
+<li><a href="#assert-is-callable">assert_is_callable()</a></li>
+<li><a href="#assert-is-not-callable">assert_is_not_callable()</a></li>
+</ul>
+</li>
+<li><a href="#files-paths">Files &amp; Paths</a>
+<ul>
+<li><a href="#assert-file-exists">assert_file_exists()</a></li>
+<li><a href="#assert-file-not-exists">assert_file_not_exists()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>    </div>
+</div>
+<h2><a id="failure-message" href="#failure-message" class="Permalink" aria-hidden="true" title="Permalink">#</a>Failure Message</h2>
+<p>All assert functions support an optional <code>MESSAGE</code> argument, which is shown if the assertion failed.</p>
+<pre><code class="hljs cmake">assert_truthy(<span class="hljs-keyword">false</span> <span class="hljs-keyword">MESSAGE</span> <span class="hljs-string">"My fail msg..."</span>)
+</code></pre>
+<h2><a id="existence" href="#existence" class="Permalink" aria-hidden="true" title="Permalink">#</a>Existence</h2>
+<h3><a id="assert-defined" href="#assert-defined" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_defined()</code></h3>
+<p>Assert key to be defined.</p>
+<pre><code class="hljs cmake">assert_defined(my_variable)
+</code></pre>
+<p>See <a href="https://cmake.org/cmake/help/latest/command/if.html#defined" class="Link--external" rel="noopener noreferrer">https://cmake.org/cmake/help/latest/command/if.html#defined</a>.</p>
+<h3><a id="assert-not-defined" href="#assert-not-defined" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_not_defined()</code></h3>
+<p>The opposite of <code>assert_defined()</code>.</p>
+<pre><code class="hljs cmake">assert_not_defined(my_variable)
+</code></pre>
+<h2><a id="boolean" href="#boolean" class="Permalink" aria-hidden="true" title="Permalink">#</a>Boolean</h2>
+<h3><a id="assert-truthy" href="#assert-truthy" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_truthy()</code></h3>
+<p>Assert key to be truthy.</p>
+<pre><code class="hljs cmake">assert_truthy(my_variable)
+</code></pre>
+<p>See <a href="https://cmake.org/cmake/help/latest/command/if.html#basic-expressions" class="Link--external" rel="noopener noreferrer">https://cmake.org/cmake/help/latest/command/if.html#basic-expressions</a>.</p>
+<h3><a id="assert-falsy" href="#assert-falsy" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_falsy()</code></h3>
+<p>The opposite of <code>assert_truthy()</code>.</p>
+<pre><code class="hljs cmake">assert_falsy(my_variable)
+</code></pre>
+<h2><a id="numbers" href="#numbers" class="Permalink" aria-hidden="true" title="Permalink">#</a>Numbers</h2>
+<h3><a id="assert-equals" href="#assert-equals" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_equals()</code></h3>
+<p>Assert numeric keys or values equal each other..</p>
+<pre><code class="hljs cmake">assert_equals(expected actual)
+</code></pre>
+<p>See <a href="https://cmake.org/cmake/help/latest/command/if.html#equal" class="Link--external" rel="noopener noreferrer">https://cmake.org/cmake/help/latest/command/if.html#equal</a>.</p>
+<h3><a id="assert-not-equals" href="#assert-not-equals" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_not_equals()</code></h3>
+<p>The opposite of <code>assert_equals()</code>.</p>
+<pre><code class="hljs cmake">assert_not_equals(expected actual)
+</code></pre>
+<h3><a id="assert-less-than" href="#assert-less-than" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_less_than()</code></h3>
+<p>Assert numeric key or value is less than specified value.</p>
+<pre><code class="hljs cmake">assert_less_than(expected actual)
+</code></pre>
+<p>See <a href="https://cmake.org/cmake/help/latest/command/if.html#less" class="Link--external" rel="noopener noreferrer">https://cmake.org/cmake/help/latest/command/if.html#less</a>.</p>
+<h3><a id="assert-less-than-or-equal" href="#assert-less-than-or-equal" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_less_than_or_equal()</code></h3>
+<p>Assert numeric key or value is less than or equal to the specified value.</p>
+<pre><code class="hljs cmake">assert_less_than_or_equal(expected actual)
+</code></pre>
+<p>See <a href="https://cmake.org/cmake/help/latest/command/if.html#less-equal" class="Link--external" rel="noopener noreferrer">https://cmake.org/cmake/help/latest/command/if.html#less-equal</a>.</p>
+<h3><a id="assert-greater-than" href="#assert-greater-than" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_greater_than()</code></h3>
+<p>Assert numeric key or value is greater than specified value.</p>
+<pre><code class="hljs cmake">assert_greater_than(expected actual)
+</code></pre>
+<p>See <a href="https://cmake.org/cmake/help/latest/command/if.html#greater" class="Link--external" rel="noopener noreferrer">https://cmake.org/cmake/help/latest/command/if.html#greater</a>.</p>
+<h3><a id="assert-greater-than-or-equal" href="#assert-greater-than-or-equal" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_greater_than_or_equal()</code></h3>
+<p>Assert numeric key or value is greater than or equal to the specified value.</p>
+<pre><code class="hljs cmake">assert_greater_than_or_equal(expected actual)
+</code></pre>
+<p>See <a href="https://cmake.org/cmake/help/latest/command/if.html#greater-equal" class="Link--external" rel="noopener noreferrer">https://cmake.org/cmake/help/latest/command/if.html#greater-equal</a>.</p>
+<h2><a id="strings" href="#strings" class="Permalink" aria-hidden="true" title="Permalink">#</a>Strings</h2>
+<h3><a id="assert-string-equals" href="#assert-string-equals" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_string_equals()</code></h3>
+<p>Assert string keys or values equal each other.</p>
+<pre><code class="hljs cmake">assert_string_equals(expected actual)
+</code></pre>
+<p>See <a href="https://cmake.org/cmake/help/latest/command/if.html#strequal" class="Link--external" rel="noopener noreferrer">https://cmake.org/cmake/help/latest/command/if.html#strequal</a></p>
+<h3><a id="assert-string-not-equals" href="#assert-string-not-equals" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_string_not_equals()</code></h3>
+<p>Opposite of <code>assert_string_equals()</code>.</p>
+<pre><code class="hljs cmake">assert_string_not_equals(expected actual)
+</code></pre>
+<h3><a id="assert-string-empty" href="#assert-string-empty" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_string_empty()</code></h3>
+<p>Assert given string is empty.</p>
+<pre><code class="hljs cmake">assert_string_empty(<span class="hljs-string">"${my_string}"</span>)
+</code></pre>
+<p>See <a href="https://cmake.org/cmake/help/latest/command/string.html#length" class="Link--external" rel="noopener noreferrer">https://cmake.org/cmake/help/latest/command/string.html#length</a></p>
+<h3><a id="assert-string-not-empty" href="#assert-string-not-empty" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_string_not_empty()</code></h3>
+<p>Opposite of <code>assert_string_empty()</code>.</p>
+<pre><code class="hljs cmake">assert_string_not_empty(<span class="hljs-string">"${my_string}"</span>)
+</code></pre>
+<h2><a id="lists" href="#lists" class="Permalink" aria-hidden="true" title="Permalink">#</a>Lists</h2>
+<h3><a id="assert-in-list" href="#assert-in-list" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_in_list()</code></h3>
+<p>Assert key (value) to be in given list.</p>
+<pre><code class="hljs cmake">assert_in_list(item <span class="hljs-keyword">list</span>)
+</code></pre>
+<p>See <a href="https://cmake.org/cmake/help/latest/command/if.html#in-list" class="Link--external" rel="noopener noreferrer">https://cmake.org/cmake/help/latest/command/if.html#in-list</a>.</p>
+<h3><a id="assert-not-in-list" href="#assert-not-in-list" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_not_in_list()</code></h3>
+<p>Opposite of <code>assert_in_list()</code>.</p>
+<pre><code class="hljs cmake">assert_not_in_list(item <span class="hljs-keyword">list</span>)
+</code></pre>
+<h2><a id="commands-macros" href="#commands-macros" class="Permalink" aria-hidden="true" title="Permalink">#</a>Commands &amp; Macros</h2>
+<h3><a id="assert-is-callable" href="#assert-is-callable" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_is_callable()</code></h3>
+<p>Assert key to be a callable command or macro.</p>
+<pre><code class="hljs cmake">assert_is_callable(<span class="hljs-string">"my_function"</span>)
+</code></pre>
+<p>See <a href="https://cmake.org/cmake/help/latest/command/if.html#command" class="Link--external" rel="noopener noreferrer">https://cmake.org/cmake/help/latest/command/if.html#command</a>.</p>
+<h3><a id="assert-is-not-callable" href="#assert-is-not-callable" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_is_not_callable()</code></h3>
+<p>Opposite of <code>assert_is_callable()</code>.</p>
+<pre><code class="hljs cmake">assert_is_not_callable(<span class="hljs-string">"my_unknown_function"</span>)
+</code></pre>
+<h2><a id="files-paths" href="#files-paths" class="Permalink" aria-hidden="true" title="Permalink">#</a>Files &amp; Paths</h2>
+<h3><a id="assert-file-exists" href="#assert-file-exists" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_file_exists()</code></h3>
+<p>Assert file exists.</p>
+<pre><code class="hljs cmake">assert_file_exists(<span class="hljs-string">"${my_file_path}"</span>)
+</code></pre>
+<p>See <a href="https://cmake.org/cmake/help/latest/command/if.html#exists" class="Link--external" rel="noopener noreferrer">https://cmake.org/cmake/help/latest/command/if.html#exists</a>.</p>
+<h3><a id="assert-file-not-exists" href="#assert-file-not-exists" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>assert_file_not_exists()</code></h3>
+<p>Opposite of <code>assert_file_exists()</code>.</p>
+<pre><code class="hljs cmake">assert_file_not_exists(<span class="hljs-string">"${my_file_path}"</span>)
+</code></pre>
+    </div>
+
+        <nav>
+        <ul class="Pager">
+            <li class=Pager--prev><a href="../../../../current/modules/testing/cmake/executor.html">Previous</a></li>            <li class=Pager--next><a href="../../../../current/modules/version/index.html">Next</a></li>        </ul>
+    </nav>
+    </article>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    <!-- JS -->
+            <script src="../../../../themes/rsp/js/main.mjs"></script>
+    
+        <script>
+        
+        window.searchLanguage = "";
+        window.searchTranslation = {"Search_one_result":"1 result","Search_results":"!count results","Search_no_results":"Nothing found","Search_common_words_ignored":"Common words are largely ignored","Search_too_short":"Search too short","Search_one_character_or_more":"Should be one character or more","Search_should_be_x_or_more":"Should be !min characters or more","Link_previous":"Previous","Link_next":"Next"};
+    </script>
+
+    <!-- Search -->
+    <script type="text/javascript" src="../../../../daux_libraries/search.min.js"></script>
+
+    <script>
+        window.search({'base_url': '../../../../'})
+    </script>
+</body>
+</html>

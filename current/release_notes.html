@@ -71,11 +71,27 @@
 <li class='Nav__item '><a href="../current/security_policy.html">Security Policy</a></li>
 <li class='Nav__item '><a href="../current/code_of_conduct.html">Code of Conduct</a></li>
 <li class='Nav__item  has-children'><a href="../current/modules/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules</a><ul class='Nav'>
-<li class='Nav__item '><a href="../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'></ul></li>
-<li class='Nav__item '><a href="../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'></ul></li>
+<li class='Nav__item  has-children'><a href="../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'>
+<li class='Nav__item '><a href="../current/modules/cache/set.html">Set</a></li>
+<li class='Nav__item '><a href="../current/modules/cache/get.html">Get</a></li>
+<li class='Nav__item '><a href="../current/modules/cache/has.html">Has</a></li>
+<li class='Nav__item '><a href="../current/modules/cache/remember.html">Remember</a></li>
+<li class='Nav__item '><a href="../current/modules/cache/forget.html">Forget</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'>
+<li class='Nav__item '><a href="../current/modules/git/find_version_tag.html">Find Version Tag</a></li></ul></li>
 <li class='Nav__item '><a href="../current/modules/helpers/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Helpers</a><ul class='Nav'></ul></li>
-<li class='Nav__item '><a href="../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'></ul></li>
-<li class='Nav__item '><a href="../current/modules/version/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version</a><ul class='Nav'></ul></li></ul></li></ul></li>
+<li class='Nav__item  has-children'><a href="../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../current/modules/testing/cmake/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules & Scripts</a><ul class='Nav'>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/test_suite.html">Test Suite</a></li>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/test_case.html">Test Case</a></li>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/test.html">Test</a></li>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/run_tests.html">Run Tests</a></li>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/executor.html">Executor</a></li>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/asserts.html">Asserts</a></li></ul></li></ul></li>
+<li class='Nav__item  has-children'><a href="../current/modules/version/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../current/modules/version/semver/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Semantic Version</a><ul class='Nav'>
+<li class='Nav__item '><a href="../current/modules/version/semver/parse.html">Parse</a></li></ul></li>
+<li class='Nav__item '><a href="../current/modules/version/version_file.html">Version File</a></li></ul></li></ul></li></ul></li>
 <li class='Nav__item  has-children'><a href="../archive/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Archive</a><ul class='Nav'>
 <li class='Nav__item '><a href="../archive/v_next/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>next</a><ul class='Nav'></ul></li></ul></li></ul>
             <div class="Links">
@@ -112,7 +128,7 @@
     <div class="Page__header">
         <h1><a href="../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../current/release_notes.html">Release Notes</a></h1>
                 <span class="ModifiedDate">
-            January 24, 2025 at 5:54 AM        </span>
+            January 28, 2025 at 5:37 AM        </span>
                         <span class="EditOn">
             <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/01_release-notes.md" target="_blank">
                 Edit on GitHub            </a>
@@ -128,15 +144,102 @@
 <li><a href="#release-notes">Release Notes</a>
 <ul>
 <li><a href="#support-policy">Support Policy</a></li>
-<li><a href="#v0-x-highlights">v0.x Highlights</a></li>
+<li><a href="#v0-x-highlights">v0.x Highlights</a>
+<ul>
+<li><a href="#mini-testing-framework">“Mini” Testing Framework</a></li>
+<li><a href="#git">Git</a></li>
+<li><a href="#version">Version</a></li>
+<li><a href="#cache">Cache</a></li>
+</ul>
+</li>
+<li><a href="#changelog">Changelog</a></li>
 </ul>
 </li>
 </ul>    </div>
 </div>
 <h2><a id="support-policy" href="#support-policy" class="Permalink" aria-hidden="true" title="Permalink">#</a>Support Policy</h2>
-<p><em>TODO: …incomplete, please review documentation at a later point</em></p>
+<p>The following shows the supported versions of the “CMake Scripts” project.</p>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>CMake</th>
+<th>Release</th>
+<th>Security Fixes Until</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1.x</code></td>
+<td><code>3.30 - ?</code></td>
+<td><em>TBD</em></td>
+<td><em>TBD</em></td>
+</tr>
+<tr>
+<td><code>0.x</code>*</td>
+<td><code>3.30 - ? </code></td>
+<td><em>TBD</em></td>
+<td><em>N/A</em></td>
+</tr>
+</tbody>
+</table>
+<p><em>* - current supported version.</em> <br />
+<em>TBD - “To be decided”.</em> <br />
+<em>N/A - “Not available”.</em></p>
 <h2><a id="v0-x-highlights" href="#v0-x-highlights" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>v0.x</code> Highlights</h2>
-<p><em>TODO: …incomplete, please review documentation at a later point</em></p>
+<h3><a id="mini-testing-framework" href="#mini-testing-framework" class="Permalink" aria-hidden="true" title="Permalink">#</a>“Mini” Testing Framework</h3>
+<p>(<em>available since <code>v0.1</code></em>)</p>
+<p>A “mini” testing framework for testing your CMake modules and scripts.</p>
+<pre><code class="hljs cmake">define_test(<span class="hljs-string">"has built assets"</span> <span class="hljs-string">"has_built_assets"</span>)
+<span class="hljs-keyword">function</span>(has_built_assets)
+    assert_file_exists(<span class="hljs-string">"resources/images/menu_bg.png"</span> <span class="hljs-keyword">MESSAGE</span> <span class="hljs-string">"No menu bg"</span>)
+    assert_file_exists(<span class="hljs-string">"resources/images/bg.png"</span> <span class="hljs-keyword">MESSAGE</span> <span class="hljs-string">"No background"</span>)
+    
+    <span class="hljs-comment"># ...etc</span>
+<span class="hljs-keyword">endfunction</span>()
+</code></pre>
+<p>See <a href="modules/testing/cmake/index.html">testing module</a> for additional information.</p>
+<h3><a id="git" href="#git" class="Permalink" aria-hidden="true" title="Permalink">#</a>Git</h3>
+<p>(<em>available since <code>v0.1</code></em>)</p>
+<p>Git related utilities.</p>
+<pre><code class="hljs cmake">git_find_version_tag(
+    OUTPUT version
+    WORKING_DIRECTORY <span class="hljs-variable">${CMAKE_CURRENT_SOURCE_DIR}</span>
+)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${version}"</span>) <span class="hljs-comment"># 1.15.2</span>
+</code></pre>
+<p>See <a href="modules/git/index.html">git module</a> for additional information.</p>
+<h3><a id="version" href="#version" class="Permalink" aria-hidden="true" title="Permalink">#</a>Version</h3>
+<p>(<em>available since <code>v0.1</code></em>)</p>
+<p>Helpers for dealing with a project’s versioning</p>
+<pre><code class="hljs cmake">version_from_file(
+    <span class="hljs-keyword">FILE</span> <span class="hljs-string">"version"</span>
+    OUTPUT my_package
+)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${my_package}_SEMVER"</span>) <span class="hljs-comment"># 2.0.0-beta.3+AF1004</span>
+</code></pre>
+<p>See <a href="modules/version/index.html">version module</a> for additional information.</p>
+<h3><a id="cache" href="#cache" class="Permalink" aria-hidden="true" title="Permalink">#</a>Cache</h3>
+<p>(<em>available since <code>v0.1</code></em>)</p>
+<p>Module that offers additional caching functionality (<em>via CMake’s Cache Entry mechanism</em>).</p>
+<pre><code class="hljs cmake">cache_set(
+    KEY foo
+    VALUE <span class="hljs-string">"bar"</span>
+    TTL <span class="hljs-number">5</span>
+)
+
+<span class="hljs-comment"># ... Elsewhere in your cmake scripts, 5 seconds later...</span>
+
+cache_get(KEY foo)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${foo}"</span>) <span class="hljs-comment"># (empty string)</span>
+</code></pre>
+<p>See <a href="modules/cache/index.html">cache module</a> for additional information.</p>
+<h2><a id="changelog" href="#changelog" class="Permalink" aria-hidden="true" title="Permalink">#</a>Changelog</h2>
+<p>For additional information about the latest release, new features, changes or defect fixes, please review the
+<a href="https://github.com/rsps/cmake-scripts/blob/main/CHANGELOG.md" class="Link--external" rel="noopener noreferrer">Changelog</a>.</p>
     </div>
 
         <nav>

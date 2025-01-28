@@ -71,11 +71,27 @@
 <li class='Nav__item Nav__item--active'><a href="../current/security_policy.html">Security Policy</a></li>
 <li class='Nav__item '><a href="../current/code_of_conduct.html">Code of Conduct</a></li>
 <li class='Nav__item  has-children'><a href="../current/modules/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules</a><ul class='Nav'>
-<li class='Nav__item '><a href="../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'></ul></li>
-<li class='Nav__item '><a href="../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'></ul></li>
+<li class='Nav__item  has-children'><a href="../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'>
+<li class='Nav__item '><a href="../current/modules/cache/set.html">Set</a></li>
+<li class='Nav__item '><a href="../current/modules/cache/get.html">Get</a></li>
+<li class='Nav__item '><a href="../current/modules/cache/has.html">Has</a></li>
+<li class='Nav__item '><a href="../current/modules/cache/remember.html">Remember</a></li>
+<li class='Nav__item '><a href="../current/modules/cache/forget.html">Forget</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'>
+<li class='Nav__item '><a href="../current/modules/git/find_version_tag.html">Find Version Tag</a></li></ul></li>
 <li class='Nav__item '><a href="../current/modules/helpers/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Helpers</a><ul class='Nav'></ul></li>
-<li class='Nav__item '><a href="../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'></ul></li>
-<li class='Nav__item '><a href="../current/modules/version/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version</a><ul class='Nav'></ul></li></ul></li></ul></li>
+<li class='Nav__item  has-children'><a href="../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../current/modules/testing/cmake/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules & Scripts</a><ul class='Nav'>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/test_suite.html">Test Suite</a></li>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/test_case.html">Test Case</a></li>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/test.html">Test</a></li>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/run_tests.html">Run Tests</a></li>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/executor.html">Executor</a></li>
+<li class='Nav__item '><a href="../current/modules/testing/cmake/asserts.html">Asserts</a></li></ul></li></ul></li>
+<li class='Nav__item  has-children'><a href="../current/modules/version/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../current/modules/version/semver/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Semantic Version</a><ul class='Nav'>
+<li class='Nav__item '><a href="../current/modules/version/semver/parse.html">Parse</a></li></ul></li>
+<li class='Nav__item '><a href="../current/modules/version/version_file.html">Version File</a></li></ul></li></ul></li></ul></li>
 <li class='Nav__item  has-children'><a href="../archive/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Archive</a><ul class='Nav'>
 <li class='Nav__item '><a href="../archive/v_next/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>next</a><ul class='Nav'></ul></li></ul></li></ul>
             <div class="Links">
@@ -112,7 +128,7 @@
     <div class="Page__header">
         <h1><a href="../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../current/security_policy.html">Security Policy</a></h1>
                 <span class="ModifiedDate">
-            January 24, 2025 at 5:54 AM        </span>
+            January 28, 2025 at 5:37 AM        </span>
                         <span class="EditOn">
             <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/04_security-policy.md" target="_blank">
                 Edit on GitHub            </a>
@@ -121,7 +137,32 @@
 
     <div class="s-content">
         <h1><a id="security-policy" href="#security-policy" class="Permalink" aria-hidden="true" title="Permalink">#</a>Security Policy</h1>
-<p><em>TODO: …incomplete, please review documentation at a later point</em></p>
+<div class="Admonition Admonition--warning"><p class="Admonition__title">Warning</p><p>Please do NOT disclose security related issues publicly! Use GitHub’s “Security Advisories &gt;
+<a href="https://github.com/rsps/cmake-scripts/security/advisories/new" class="Link--external" rel="noopener noreferrer">Report Vulnerability</a>” mechanism instead.</p>
+<p><em>For additional details, please read the “How to report a vulnerability” for instructions.</em></p></div>
+<div class="TableOfContentsContainer">
+    <h4 class="TableOfContentsContainer__title">Table of Contents</h4>
+    <div class="TableOfContentsContainer__content">
+        <ul class="TableOfContents">
+<li><a href="#security-policy">Security Policy</a>
+<ul>
+<li><a href="#how-to-report-a-vulnerability">How to report a vulnerability</a></li>
+<li><a href="#supported-versions">Supported Versions</a></li>
+</ul>
+</li>
+</ul>    </div>
+</div>
+<h2><a id="how-to-report-a-vulnerability" href="#how-to-report-a-vulnerability" class="Permalink" aria-hidden="true" title="Permalink">#</a>How to report a vulnerability</h2>
+<p>To report a security related issue, please use GitHub’s vulnerability reporting mechanism. Follow the
+on-screen instructions.</p>
+<ul>
+<li><a href="https://github.com/rsps/cmake-scripts/security/advisories/new" class="Link--external" rel="noopener noreferrer">Report new Vulnerability</a></li>
+</ul>
+<p>For additional help, please consider reading <a href="https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/best-practices-for-writing-repository-security-advisories" class="Link--external" rel="noopener noreferrer">“Best practices for writing repository security advisories“</a>.</p>
+<p>Once we have received the security related issue, we will address it to the best of our ability, as soon as
+possible.</p>
+<h2><a id="supported-versions" href="#supported-versions" class="Permalink" aria-hidden="true" title="Permalink">#</a>Supported Versions</h2>
+<p>Please review the <a href="release_notes.html#support-policy">Support Policy</a> before reporting security related issues.</p>
     </div>
 
         <nav>
