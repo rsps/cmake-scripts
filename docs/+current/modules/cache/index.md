@@ -7,5 +7,12 @@ author: RSP Systems A/S
 
 # Cache
 
-_TODO: ...incomplete, please review documentation at a later point_
+The cache module offers additional functionality for CMake's [Cache Entry](https://cmake.org/cmake/help/latest/command/set.html#set-cache-entry)
+mechanism.
+
+## How to include
+
+```cmake
+include("rsp/cache")
+```
 

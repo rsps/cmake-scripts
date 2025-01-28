@@ -7,5 +7,14 @@ author: RSP Systems A/S
 
 # Version
 
-_TODO: ...incomplete, please review documentation at a later point_
+This module contains helpers for dealing with a project's versioning.
 
+## Requirements
+
+The same requirements as for the [git module](../git/index.md).
+
+## How to include
+
+```cmake
+include("rsp/version")
+```
