@@ -7,7 +7,7 @@ author: RSP Systems A/S
 
 # Upgrade Guide
 
-_There is no upgrade guide for the following version!_
+_There is no upgrade guide for this version!_
 
 ## Onward
 
