@@ -8,7 +8,13 @@ author: RSP Systems A/S
 # Test Suite
 
 The `define_test_suite()` function is used to group related test cases into a
-[test suite](https://en.wikipedia.org/wiki/Test_suite). It accepts the following parameters:
+[test suite](https://en.wikipedia.org/wiki/Test_suite).
+
+[TOC]
+
+## Parameters
+
+The following parameters are accepted:
 
 * < name >:  _Human readable name of test suite. The parameter is also used to label tests (see [labels](#labels))._
 * `DIRECTORY`: _Path to directory that contains test-cases._
