@@ -50,7 +50,7 @@ endif ()
 
 if (NOT COMMAND "requires_arguments")
 
-    #! requires_arguments : Verifies that specified arguments have been defined, fails otherwise
+    #! requires_arguments : Ensures that specified arguments have been defined, fails otherwise
     #
     # Macro is intended to be used within a custom function, after `cmake_parse_arguments()` has
     # been used.
