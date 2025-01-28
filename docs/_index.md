@@ -13,10 +13,6 @@ for your C++ projects.
 !!! warning "Work in progress"
     The documentation is in a very early stage. Feel free to review it, but please do not expect it to be complete!  
 
-## Features
-
-_TODO: ...(please review docs for details.)_
-
 ## Authors
 
 "CMake Scripts" is developed and maintained by [RSP System A/S](https://rspsystems.com/).
