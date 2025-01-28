@@ -17,8 +17,8 @@ a test case can be interpreted as a collection or related tests.
 The following parameters are accepted:
 
 * < name >:  _Human readable name of test case. The parameter is also used as an affix for test names, in ctest._
-* `BEFORE`: (_optional_), _Command or macro to execute before each test in test-case (see [Before / After Callbacks](#before--after-callbacks))._
-* `AFTER`: (_optional_), _Command or macro to execute after each test in test-case (see [Before / After Callbacks](#before--after-callbacks))._
+* `BEFORE`: (_optional_), _Command or macro to execute before each test in test-case (see [Before / After Callbacks](#before-after-callbacks))._
+* `AFTER`: (_optional_), _Command or macro to execute after each test in test-case (see [Before / After Callbacks](#before-after-callbacks))._
 * `LABELS`: (_optional_), _List of labels to associate subsequent tests with (see [labels](#labels))._
 * `RUN_SERIAL`: (_optional_), _Option that prevents test-case's tests from running in parallel with other tests._
 
