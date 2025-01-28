@@ -17,14 +17,14 @@ author: RSP Systems A/S
 
 ## How to report a vulnerability
 
-To report a security related issue, please use GitHub's vulnerability reporting mechanism and follow the
+To report a security related issue, please use GitHub's vulnerability reporting mechanism. Follow the
 on-screen instructions.
 
 * [Report new Vulnerability](https://github.com/rsps/cmake-scripts/security/advisories/new)
 
 For additional help, please consider reading ["Best practices for writing repository security advisories"](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/best-practices-for-writing-repository-security-advisories).
 
-Once we have received the security related issue, we will address it to the best of our ability, as soon as it is
+Once we have received the security related issue, we will address it to the best of our ability, as soon as
 possible.
 
 ## Supported Versions
