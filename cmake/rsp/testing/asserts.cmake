@@ -171,7 +171,7 @@ endif ()
 
 if (NOT COMMAND "assert_in_list")
 
-    #! assert_in_list : Assert key (value) to be inlist
+    #! assert_in_list : Assert key (value) to be in given list
     #
     # @see https://cmake.org/cmake/help/latest/command/if.html#in-list
     #
@@ -196,7 +196,7 @@ endif ()
 
 if (NOT COMMAND "assert_not_in_list")
 
-    #! assert_not_in_list : Assert key (value) not to be inlist
+    #! assert_not_in_list : Assert key (value) not to be in given list
     #
     # @see https://cmake.org/cmake/help/latest/command/if.html#in-list
     #
