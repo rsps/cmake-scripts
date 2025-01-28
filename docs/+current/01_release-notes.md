@@ -16,10 +16,11 @@ The following shows the supported versions of the "CMake Scripts" project.
 | Version | CMake       | Release | Security Fixes Until |
 |---------|-------------|---------|----------------------|
 | `1.x`   | `3.30 - ?`  | _TBD_   | _TBD_                |
-| `0.x`*  | `3.30 - ? ` | _TBD_   | _TBD_                |
+| `0.x`*  | `3.30 - ? ` | _TBD_   | _N/A_                |
 
 _* - current supported version._ \
-_TBD - "To be decided"._
+_TBD - "To be decided"._ \
+_N/A - "Not available"._
 
 ## `v0.x` Highlights
 
