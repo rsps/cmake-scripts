@@ -7,6 +7,8 @@ include_guard(GLOBAL)
 # Debug
 message(VERBOSE "rsp/cache module included")
 
+include("rsp/helpers")
+
 if (NOT DEFINED RSP_CACHE_EXPIRES_AT_KEY_AFFIX)
     set(RSP_CACHE_EXPIRES_AT_KEY_AFFIX "[rsp@expires_at]")
 endif ()
@@ -37,14 +39,7 @@ if (NOT COMMAND "cache_set")
         set(multiValueArgs "") # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-
-        # Ensure required arguments are defined
-        set(requiredArgs "KEY;VALUE")
-        foreach (name ${requiredArgs})
-            if (NOT DEFINED INPUT_${name})
-                message(FATAL_ERROR "${name} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
-            endif ()
-        endforeach ()
+        requires_arguments(INPUT "KEY;VALUE")
 
         # Resolve optional arguments
         if (NOT DEFINED INPUT_TYPE)
@@ -104,14 +99,7 @@ if (NOT COMMAND "cache_get")
         set(multiValueArgs "") # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-
-        # Ensure required arguments are defined
-        set(requiredArgs "KEY")
-        foreach (name ${requiredArgs})
-            if (NOT DEFINED INPUT_${name})
-                message(FATAL_ERROR "${name} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
-            endif ()
-        endforeach ()
+        requires_arguments(INPUT "KEY")
 
         # Resolve optional arguments
         if (NOT DEFINED INPUT_DEFAULT)
@@ -160,14 +148,7 @@ if (NOT COMMAND "cache_has")
         set(multiValueArgs "") # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-
-        # Ensure required arguments are defined
-        set(requiredArgs "KEY;OUTPUT")
-        foreach (name ${requiredArgs})
-            if (NOT DEFINED INPUT_${name})
-                message(FATAL_ERROR "${name} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
-            endif ()
-        endforeach ()
+        requires_arguments(INPUT "KEY;OUTPUT")
 
         # Determine if entry exists in cache
         if (DEFINED CACHE{${INPUT_KEY}})
@@ -227,14 +208,7 @@ if (NOT COMMAND "cache_forget")
         set(multiValueArgs "") # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-
-        # Ensure required arguments are defined
-        set(requiredArgs "KEY")
-        foreach (name ${requiredArgs})
-            if (NOT DEFINED INPUT_${name})
-                message(FATAL_ERROR "${name} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
-            endif ()
-        endforeach ()
+        requires_arguments(INPUT "KEY")
 
         # Remove entry if it exists
         if (DEFINED CACHE{${INPUT_KEY}})
@@ -305,14 +279,7 @@ if (NOT COMMAND "cache_remember")
         set(multiValueArgs "") # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-
-        # Ensure required arguments are defined
-        set(requiredArgs "KEY;CALLBACK")
-        foreach (name ${requiredArgs})
-            if (NOT DEFINED INPUT_${name})
-                message(FATAL_ERROR "${name} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
-            endif ()
-        endforeach ()
+        requires_arguments(INPUT "KEY;CALLBACK")
 
         # Ensure that callback exists
         if (NOT COMMAND ${INPUT_CALLBACK})
@@ -389,14 +356,7 @@ if (NOT COMMAND "cache_has_expired")
         set(multiValueArgs "") # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-
-        # Ensure required arguments are defined
-        set(requiredArgs "KEY;OUTPUT")
-        foreach (name ${requiredArgs})
-            if (NOT DEFINED INPUT_${name})
-                message(FATAL_ERROR "${name} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
-            endif ()
-        endforeach ()
+        requires_arguments(INPUT "KEY;OUTPUT")
 
         # Make expires at key...
         cache_make_expires_at_key(EXPIRES_AT_KEY INPUT_KEY)

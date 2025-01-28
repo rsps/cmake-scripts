@@ -100,14 +100,7 @@ if (NOT COMMAND "safeguard_properties")
         set(multiValueArgs PROPERTIES)
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-
-        # Ensure required arguments are defined
-        set(requiredArgs "CALLBACK;PROPERTIES")
-        foreach (arg ${requiredArgs})
-            if (NOT DEFINED INPUT_${arg})
-                message(FATAL_ERROR "${arg} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
-            endif ()
-        endforeach ()
+        requires_arguments(INPUT "CALLBACK;PROPERTIES")
 
         # ---------------------------------------------------------------------------------------------- #
 
