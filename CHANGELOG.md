@@ -12,7 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Project's root `CMakeLists.txt`.
 * `dependencies.cmake` and `dev-dependencies.cmake` scripts.
 * `CPM.cmake` script that downloads specified version of [CPM](https://github.com/cpm-cmake/CPM.cmake).
-* `dump()`, `dd()`, `fail_in_source_build()`, `extract_value()` and `safeguard_properties()` utils functions, in `helpers.cmake`.
+* `fail_in_source_build()`, `extract_value()`, `requires_arguments()` and `safeguard_properties()` utils functions, in `helpers.cmake`.
+* `dump()` and `dd()` in `debug.cmake`.
 * `semver_parse()`, `write_version_file` and `version_from_file()` utils, in `version.cmake`.
 * `git_find_version_tag()` util, in `git.cmake`.
 * `VERSION` file.

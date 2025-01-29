@@ -7,6 +7,7 @@ include_guard(GLOBAL)
 # Debug
 message(VERBOSE "rsp/version module included")
 
+include("rsp/helpers")
 include("rsp/git")
 include("rsp/version/semver")
 
@@ -20,6 +21,7 @@ if (NOT COMMAND "write_version_file")
     # @example
     #       # Defaults to version obtained via git
     #       write_version_file(FILE "version.txt")
+    #
     #       # Or, use custom version
     #       write_version_file(FILE "version.txt" VERSION "v1.4.3")
     #
@@ -43,14 +45,7 @@ if (NOT COMMAND "write_version_file")
         set(multiValueArgs "") # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-
-        # Ensure required arguments are defined
-        set(requiredArgs "FILE")
-        foreach (name ${requiredArgs})
-            if (NOT DEFINED INPUT_${name})
-                message(FATAL_ERROR "${name} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
-            endif ()
-        endforeach ()
+        requires_arguments("FILE" INPUT)
 
         # Resolve version, if none specified
         if (NOT DEFINED INPUT_VERSION)
@@ -123,14 +118,7 @@ if (NOT COMMAND "version_from_file")
         set(multiValueArgs "") # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-
-        # Ensure required arguments are defined
-        set(requiredArgs "FILE;OUTPUT")
-        foreach (name ${requiredArgs})
-            if (NOT DEFINED INPUT_${name})
-                message(FATAL_ERROR "${name} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
-            endif ()
-        endforeach ()
+        requires_arguments("FILE;OUTPUT" INPUT)
 
         # Resolve optional arguments
         if (NOT DEFINED INPUT_DEFAULT)
