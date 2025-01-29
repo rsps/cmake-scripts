@@ -7,7 +7,6 @@ include_guard(GLOBAL)
 # Debug
 message(VERBOSE "rsp/testing module included")
 
-include("rsp/helpers")
 include("rsp/cache")
 include("rsp/testing/asserts")
 
@@ -91,7 +90,14 @@ if (NOT COMMAND "define_test_suite")
         set(multiValueArgs "") # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-        requires_arguments(INPUT "DIRECTORY")
+
+        # Ensure required arguments are defined
+        set(requiredArgs "DIRECTORY")
+        foreach (arg ${requiredArgs})
+            if (NOT DEFINED INPUT_${arg})
+                message(FATAL_ERROR "${arg} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
+            endif ()
+        endforeach ()
 
         # ---------------------------------------------------------------------------------------------- #
 
@@ -444,7 +450,14 @@ if (NOT COMMAND "add_ctest_using_executor")
         set(multiValueArgs LABELS CALLBACK_ARG) # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-        requires_arguments(INPUT "NAME;CALLBACK;TEST_CASE")
+
+        # Ensure required arguments are defined
+        set(requiredArgs "NAME;CALLBACK;TEST_CASE")
+        foreach (arg ${requiredArgs})
+            if (NOT DEFINED INPUT_${arg})
+                message(FATAL_ERROR "${arg} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
+            endif ()
+        endforeach ()
 
         # ---------------------------------------------------------------------------------------------- #
         # Resolve optional arguments
