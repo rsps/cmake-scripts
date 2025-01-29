@@ -58,14 +58,26 @@ if (NOT COMMAND "requires_arguments")
     # @see https://cmake.org/cmake/help/latest/command/cmake_parse_arguments.html#cmake-parse-arguments
     # @see https://cmake.org/cmake/help/latest/command/if.html#defined
     #
-    # @param <variable|string> input  The parsed arguments prefix
-    # @param <list> required          List of required arguments
+    # @param <list> required                List of required arguments
+    # @param <variable|string> prefix       The parsed input arguments prefix
+    #                                       used in your cmake_parse_arguments() call.
     #
     # @throws If required arguments are not defined
     #
-    macro(requires_arguments input required)
+    macro(requires_arguments required prefix)
+        # Note: the "prefix" parameter cannot be made optional for this macro.
+        # It is unsafe to rely on any ${ARGV} in this context, ...
+        # @see https://cmake.org/cmake/help/latest/command/macro.html#argument-caveats
+
+        # Append "_" to the prefix, if given.
+        # @see https://cmake.org/cmake/help/latest/command/cmake_parse_arguments.html#cmake-parse-arguments
+        set(resolved_prefix "${prefix}")
+        if(NOT ${prefix} EQUAL "")
+            set(resolved_prefix "${prefix}_")
+        endif ()
+
         foreach (arg ${required})
-            if (NOT DEFINED "${input}_${arg}")
+            if (NOT DEFINED "${resolved_prefix}${arg}")
                 message(FATAL_ERROR "${arg} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
             endif ()
         endforeach ()
