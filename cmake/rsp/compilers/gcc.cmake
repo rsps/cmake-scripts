@@ -184,11 +184,9 @@ if (NOT DEFINED RSP_GCC_STRICT_COMPILE_OPTIONS)
         #
         #-v
 
-        # TODO: Not sure what this is...
+        # Dump all macro definitions, at the end of preprocessing, in addition to normal output.
         #
         # @see https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Preprocessor-Options.html#index-dD
-        #
-        # Or is it this one...?
         # @see https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Developer-Options.html#index-dD-1
         #
         #-dD
