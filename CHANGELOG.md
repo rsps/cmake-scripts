@@ -17,8 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `semver_parse()`, `write_version_file` and `version_from_file()` utils, in `version.cmake`.
 * `git_find_version_tag()` util, in `git.cmake`.
 * `VERSION` file.
+* RSP's GCC strict compile options, in `gcc.cmake` (_exposed via `compiler.cmake` module_).
 * Caching utilities, `cache.cmake`.
-* A "mini" testing framework for cmake modules and scripts, in `testing.cmake`. 
+* A "mini" testing framework for cmake modules and scripts, in `testing.cmake`.
 * `RSP_CMAKE_SCRIPTS_BUILD_TESTS` project option for building tests.
 * `tests.yaml` and `deploy-docs.yaml` GitHub Actions workflows.
 * `composer.json` to install [Daux.io](https://daux.io) dev-dependency (_documentation generator_).
