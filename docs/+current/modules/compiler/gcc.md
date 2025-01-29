@@ -11,11 +11,11 @@ Helpers and utilities that are specific for [GNU Compiler Collection (GCC)](http
 
 [TOC]
 
-## Compile Options
+## Compile Option Presets
 
 ### Strict
 
-Use `RSP_GCC_STRICT_COMPILE_OPTIONS` when you wish to enable strict compile options.
+Use `RSP_GCC_STRICT_COMPILE_OPTIONS` preset when you wish to enable strict compile options.
 
 ```cmake
 include("rsp/compiler")
