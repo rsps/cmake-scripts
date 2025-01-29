@@ -7,6 +7,8 @@ include_guard(GLOBAL)
 # Debug
 message(VERBOSE "rsp/version/semver module included")
 
+include("rsp/helpers")
+
 if (NOT COMMAND "semver_parse")
 
     #! semver_parse : Parses a semantic version string
@@ -38,13 +40,7 @@ if (NOT COMMAND "semver_parse")
         set(multiValueArgs "") # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-
-        # Ensure required arguments are defined
-        foreach (name ${oneValueArgs})
-            if (NOT DEFINED INPUT_${name})
-                message(FATAL_ERROR "${name} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
-            endif ()
-        endforeach ()
+        requires_arguments("VERSION;OUTPUT" INPUT)
 
         # Remove eventual "v" prefix from given version string
         string(REGEX REPLACE "^[v]" "" cleanVersion "${INPUT_VERSION}")

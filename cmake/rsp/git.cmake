@@ -7,6 +7,8 @@ include_guard(GLOBAL)
 # Debug
 message(VERBOSE "rsp/git module included")
 
+include("rsp/helpers")
+
 # Ensure that git is available or this module will not work
 find_package(Git REQUIRED)
 
@@ -40,14 +42,7 @@ if (NOT COMMAND "git_find_version_tag")
         set(multiValueArgs "") # N/A
 
         cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-
-        # Ensure required arguments are defined
-        set(requiredArgs "OUTPUT;WORKING_DIRECTORY")
-        foreach (name ${requiredArgs})
-            if (NOT DEFINED INPUT_${name})
-                message(FATAL_ERROR "${name} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
-            endif ()
-        endforeach ()
+        requires_arguments("OUTPUT;WORKING_DIRECTORY" INPUT)
 
         # Resolve optional arguments
         if (NOT DEFINED INPUT_MATCH_PATTERN)
