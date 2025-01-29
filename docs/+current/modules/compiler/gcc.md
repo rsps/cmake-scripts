@@ -24,3 +24,16 @@ add_compile_options(${RSP_GCC_STRICT_COMPILE_OPTIONS})
 ```
 
 For additional information, please review the `RSP_GCC_STRICT_COMPILE_OPTIONS` list, in the source code.
+
+### Customize
+
+If you need to customise a preset, create a copy of the desired preset, and use cmake's
+[list](https://cmake.org/cmake/help/latest/command/list.html#list) operations to remove or append options.
+
+```cmake
+# Copy provided preset into new variable
+set(my_compile_options "${RSP_GCC_STRICT_COMPILE_OPTIONS}")
+
+# Modify your preset...
+list(REMOVE_ITEM my_compile_options "-Wswitch-default")
+```
