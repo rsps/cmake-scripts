@@ -257,22 +257,23 @@ if (NOT COMMAND "ansi_escape_sequence")
     #     [OUTPUT]                  The escape sequence
     #
     function(ansi_escape_sequence)
-        set(oneValueArgs OUTPUT CODE ESCAPE_CHARACTER)
+        set(oneValueArgs OUTPUT ESCAPE)
+        set(multiValueArgs CODE)
 
-        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
         requires_arguments("OUTPUT;CODE" INPUT)
 
         # ---------------------------------------------------------------------------------------------- #
         # Resolve optional arguments
 
         # Escape character
-        if (NOT DEFINED INPUT_ESCAPE_CHARACTER)
-            set(INPUT_ESCAPE_CHARACTER "${RSP_DEFAULT_ESCAPE_CHARACTER}")
+        if (NOT DEFINED INPUT_ESCAPE)
+            set(INPUT_ESCAPE "${RSP_DEFAULT_ESCAPE_CHARACTER}")
         endif ()
 
         # ---------------------------------------------------------------------------------------------- #
 
-        set("${INPUT_OUTPUT}" "${INPUT_ESCAPE_CHARACTER}${INPUT_CODE}")
+        set("${INPUT_OUTPUT}" "${INPUT_ESCAPE}${INPUT_CODE}")
 
         return(PROPAGATE "${INPUT_OUTPUT}")
     endfunction()
