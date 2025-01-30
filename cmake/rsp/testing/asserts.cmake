@@ -662,15 +662,8 @@ if (NOT COMMAND "assert_compare_values")
     function(assert_compare_values)
         set(oneValueArgs OUTPUT EXPECTED ACTUAL OPERATOR)
 
-        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
-
-        # Ensure required arguments are defined
-        set(requiredArgs "OUTPUT;EXPECTED;ACTUAL;OPERATOR")
-        foreach (arg ${requiredArgs})
-            if (NOT DEFINED INPUT_${arg})
-                message(FATAL_ERROR "${arg} argument is missing, for ${CMAKE_CURRENT_FUNCTION}()")
-            endif ()
-        endforeach ()
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+        requires_arguments("OUTPUT;EXPECTED;ACTUAL;OPERATOR" INPUT)
 
         # ------------------------------------------------------------------------------------- #
 
