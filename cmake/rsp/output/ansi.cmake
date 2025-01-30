@@ -278,3 +278,73 @@ if (NOT COMMAND "ansi_escape_sequence")
         return(PROPAGATE "${INPUT_OUTPUT}")
     endfunction()
 endif ()
+
+if (NOT COMMAND "output_ansi_demo")
+
+    #! output_ansi_demo : Outputs a demo of the predefined ANSI variables
+    #
+    # NOTE: You must ensure that ANSI has been enabled, to see the effect
+    # in your terminal.
+    #
+    # @see enable_ansi()
+    #
+    function(output_ansi_demo)
+        set(txt "Mash up each side of the spinach with one cup of pickles.")
+        
+        message("\nANSI output demo:")
+
+        message("Text:")
+        message("bold: ${TEXT_BOLD}${txt}${RESTORE}")
+        message("dim/faint: ${TEXT_DIM}${txt}${RESTORE}")
+        message("italic: ${TEXT_ITALIC}${txt}${RESTORE}")
+        message("underline: ${TEXT_UNDERLINE}${txt}${RESTORE}")
+        message("blink: ${TEXT_BLINK}${txt}${RESTORE}")
+        message("inverse/reverse: ${TEXT_INVERSE}${txt}${RESTORE}")
+        message("hidden/invisible: ${TEXT_HIDDEN}${txt}${RESTORE}")
+        message("Strikethrough: ${TEXT_STRIKETHROUGH}${txt}${RESTORE}")
+        
+        message("\nColors")
+        message("black: ${COLOR_BLACK}${txt}${RESTORE}")
+        message("black bg: ${COLOR_BG_BLACK}${txt}${RESTORE}")
+        message("black (bright): ${COLOR_BRIGHT_BLACK}${txt}${RESTORE}")
+        message("black (bright) bg: ${COLOR_BRIGHT_BG_BLACK}${txt}${RESTORE}")
+
+        message("red: ${COLOR_RED}${txt}${RESTORE}")
+        message("red bg: ${COLOR_BG_RED}${txt}${RESTORE}")
+        message("red (bright): ${COLOR_BRIGHT_RED}${txt}${RESTORE}")
+        message("red (bright) bg: ${COLOR_BRIGHT_BG_RED}${txt}${RESTORE}")
+
+        message("green: ${COLOR_GREEN}${txt}${RESTORE}")
+        message("green bg: ${COLOR_BG_GREEN}${txt}${RESTORE}")
+        message("green (bright): ${COLOR_BRIGHT_GREEN}${txt}${RESTORE}")
+        message("green (bright) bg: ${COLOR_BRIGHT_BG_GREEN}${txt}${RESTORE}")
+
+        message("yellow: ${COLOR_YELLOW}${txt}${RESTORE}")
+        message("yellow bg: ${COLOR_BG_YELLOW}${txt}${RESTORE}")
+        message("yellow (bright): ${COLOR_BRIGHT_YELLOW}${txt}${RESTORE}")
+        message("yellow (bright) bg: ${COLOR_BRIGHT_BG_YELLOW}${txt}${RESTORE}")
+
+        message("blue: ${COLOR_BLUE}${txt}${RESTORE}")
+        message("blue bg: ${COLOR_BG_BLUE}${txt}${RESTORE}")
+        message("blue (bright): ${COLOR_BRIGHT_BLUE}${txt}${RESTORE}")
+        message("blue (bright) bg: ${COLOR_BRIGHT_BG_BLUE}${txt}${RESTORE}")
+
+        message("magenta: ${COLOR_MAGENTA}${txt}${RESTORE}")
+        message("magenta bg: ${COLOR_BG_MAGENTA}${txt}${RESTORE}")
+        message("magenta (bright): ${COLOR_BRIGHT_MAGENTA}${txt}${RESTORE}")
+        message("magenta (bright) bg: ${COLOR_BRIGHT_BG_MAGENTA}${txt}${RESTORE}")
+
+        message("cyan: ${COLOR_CYAN}${txt}${RESTORE}")
+        message("cyan bg: ${COLOR_BG_CYAN}${txt}${RESTORE}")
+        message("cyan (bright): ${COLOR_BRIGHT_CYAN}${txt}${RESTORE}")
+        message("cyan (bright) bg: ${COLOR_BRIGHT_BG_CYAN}${txt}${RESTORE}")
+
+        message("white: ${COLOR_WHITE}${txt}${RESTORE}")
+        message("white bg: ${COLOR_BG_WHITE}${txt}${RESTORE}")
+        message("white (bright): ${COLOR_BRIGHT_WHITE}${txt}${RESTORE}")
+        message("white (bright) bg: ${COLOR_BRIGHT_BG_WHITE}${txt}${RESTORE}")
+
+        message("default: ${COLOR_DEFAULT}${txt}${RESTORE}")
+        message("default bg: ${COLOR_BG_DEFAULT}${txt}${RESTORE}")
+    endfunction()
+endif ()
