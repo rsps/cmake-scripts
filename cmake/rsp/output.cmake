@@ -6,3 +6,5 @@ include_guard(GLOBAL)
 
 # Debug
 message(VERBOSE "rsp/output module included")
+
+include("rsp/output/ansi")
