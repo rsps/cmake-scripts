@@ -78,6 +78,13 @@ endif ()
 # Misc.
 # -------------------------------------------------------------------------------------------------------------- #
 
-# include("rsp/debug")
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+    include("rsp/debug")
+    include("rsp/output")
 
-# dump(CMAKE_MODULE_PATH FOO BAR PROJECT_NAME)
+    enable_ansi()
+
+    # output_ansi_demo()
+
+    # dump(CMAKE_MODULE_PATH FOO BAR PROJECT_NAME)
+endif()
