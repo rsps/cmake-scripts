@@ -1,5 +1,5 @@
 # -------------------------------------------------------------------------------------------------------------- #
-# Output Utilities
+# Output
 # -------------------------------------------------------------------------------------------------------------- #
 
 include_guard(GLOBAL)
@@ -8,33 +8,12 @@ include_guard(GLOBAL)
 message(VERBOSE "rsp/output module included")
 
 include("rsp/helpers")
+include("rsp/output/utils")
 include("rsp/output/ansi")
 
 # -------------------------------------------------------------------------------------------------------------- #
 # Defaults...
 # -------------------------------------------------------------------------------------------------------------- #
-
-if (NOT DEFINED RSP_CMAKE_MESSAGE_MODES)
-
-    # CMake's message modes / types
-    #
-    # @see https://cmake.org/cmake/help/latest/command/message.html#general-messages
-    #
-    set(RSP_CMAKE_MESSAGE_MODES
-        TRACE
-        DEBUG
-        VERBOSE
-        STATUS
-        NOTICE
-        DEPRECATION
-        AUTHOR_WARNING
-        WARNING
-        SEND_ERROR
-        FATAL_ERROR
-
-        CACHE STRING " RSP cmake message modes / types"
-    )
-endif ()
 
 if (NOT DEFINED RSP_DEFAULT_LABEL_FORMAT)
 
@@ -102,15 +81,7 @@ if (NOT COMMAND "output")
         # ---------------------------------------------------------------------------------------------- #
 
         # Message mode
-        set(mode "NOTICE")
-        foreach (m IN LISTS options)
-            if (INPUT_${m})
-                message(VERBOSE "Message mode set to: ${m}")
-
-                set(mode "${m}")
-                break()
-            endif ()
-        endforeach ()
+        resolve_msg_mode()
 
         # Label format
         set(label_format "${RSP_DEFAULT_LABEL_FORMAT}")
@@ -168,7 +139,7 @@ if (NOT COMMAND "output")
         endif ()
 
         # Finally, output the message...
-        message(${mode} "${formatted_output}")
+        message(${msg_mode} "${formatted_output}")
 
     endfunction()
 endif ()
