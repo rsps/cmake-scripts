@@ -31,6 +31,8 @@ if (NOT DEFINED RSP_CMAKE_MESSAGE_MODES)
         WARNING
         SEND_ERROR
         FATAL_ERROR
+
+        CACHE STRING " RSP cmake message modes / types"
     )
 endif ()
 
@@ -43,7 +45,7 @@ if (NOT DEFINED RSP_DEFAULT_LABEL_FORMAT)
     #
     # @see output()
     #
-    set(RSP_DEFAULT_LABEL_FORMAT "%label%: ")
+    set(RSP_DEFAULT_LABEL_FORMAT "%label%: " CACHE STRING " RSP Default label format for output()")
 endif ()
 
 if (NOT DEFINED RSP_DEFAULT_LIST_SEPARATOR)
@@ -54,7 +56,7 @@ if (NOT DEFINED RSP_DEFAULT_LIST_SEPARATOR)
     #
     # @see output()
     #
-    set(RSP_DEFAULT_LIST_SEPARATOR "\n")
+    set(RSP_DEFAULT_LIST_SEPARATOR "\\n" CACHE STRING " RSP Default list separator for output()")
 endif ()
 
 # -------------------------------------------------------------------------------------------------------------- #

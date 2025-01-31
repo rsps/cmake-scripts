@@ -1,13 +1,6 @@
 include("rsp/testing")
 include("rsp/debug")
-
-# All tests are included via tests/CMakeLists.txt, using the define_test_suite().
-# Yet, it seems that when "rsp/output" is included here, the RSP_ANSI_PRESET list
-# either reset or simply not defined! The "include_guard(GLOBAL)" might not
-# behave as desired! Therefore, we ONLY include "rsp/output" when executing tests!
-if (_RSP_TEST_EXECUTOR_RUNNING)
-    include("rsp/output")
-endif ()
+include("rsp/output")
 
 define_test_case(
     "ANSI Test"

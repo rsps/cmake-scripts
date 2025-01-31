@@ -13,7 +13,7 @@ if (NOT DEFINED RSP_IS_ANSI_ENABLED)
     #
     # @internal
     #
-    set(RSP_IS_ANSI_ENABLED false)
+    set(RSP_IS_ANSI_ENABLED false CACHE BOOL "RSP ANSI enable state")
 endif ()
 
 if (NOT DEFINED RSP_DEFAULT_ESCAPE_CHARACTER)
@@ -24,6 +24,7 @@ if (NOT DEFINED RSP_DEFAULT_ESCAPE_CHARACTER)
     # @see ansi_escape_sequence()
     #
     string(ASCII 27 RSP_DEFAULT_ESCAPE_CHARACTER)
+    set(RSP_DEFAULT_ESCAPE_CHARACTER "${RSP_DEFAULT_ESCAPE_CHARACTER}" CACHE STRING " RSP default escape character")
 endif ()
 
 if (NOT DEFINED RSP_ANSI_PRESET)
@@ -112,6 +113,8 @@ if (NOT DEFINED RSP_ANSI_PRESET)
 
         "COLOR_DEFAULT 39"
         "COLOR_BG_DEFAULT 49"
+
+        CACHE STRING " RSP ANSI preset"
     )
 endif ()
 
@@ -126,6 +129,8 @@ if (NOT COMMAND "enable_ansi")
     #                               ANSI codes. Defaults to RSP_ANSI_PRESET.
     #
     function(enable_ansi)
+        message(VERBOSE "Enabling ANSI")
+
         set(multiValueArgs PRESET)
         cmake_parse_arguments(INPUT "" "" "${multiValueArgs}" ${ARGN})
 
@@ -138,6 +143,10 @@ if (NOT COMMAND "enable_ansi")
         endif ()
 
         # ---------------------------------------------------------------------------------------------- #
+
+        # Debug
+        # list(LENGTH INPUT_PRESET length )
+        # message(">>     Processing (${length}): ${INPUT_PRESET}")
 
         foreach(item IN LISTS INPUT_PRESET)
 
@@ -153,13 +162,15 @@ if (NOT COMMAND "enable_ansi")
 
             ansi_sgr(OUTPUT sequence CODE "${value}")
 
-            set("${name}" "${sequence}" PARENT_SCOPE)
+            # Define the variable and sequence "globally"!
+            #   set("${name}" "${sequence}" PARENT_SCOPE) # Will ONLY affect parent scope, ...
+            set("${name}" "${sequence}" CACHE STRING " RSP ANSI sequence" FORCE)
         endforeach()
 
         # ---------------------------------------------------------------------------------------------- #
 
         # Change state
-        set(RSP_IS_ANSI_ENABLED true PARENT_SCOPE)
+        set(RSP_IS_ANSI_ENABLED true CACHE BOOL "RSP ANSI enable state" FORCE)
     endfunction()
 endif ()
 
@@ -174,6 +185,8 @@ if (NOT COMMAND "disable_ansi")
     #                               ANSI codes. Defaults to RSP_ANSI_PRESET.
     #
     function(disable_ansi)
+        message(VERBOSE "Disabling ANSI")
+
         set(multiValueArgs PRESET)
         cmake_parse_arguments(INPUT "" "" "${multiValueArgs}" ${ARGN})
 
@@ -195,13 +208,15 @@ if (NOT COMMAND "disable_ansi")
             # Debug
             # dump(name value)
 
-            unset("${name}" PARENT_SCOPE)
+            # Remove variable and sequence "globally"!
+            #   unset("${name}" PARENT_SCOPE) # Will ONLY affect parent scope, ...
+            unset("${name}" CACHE)
         endforeach()
 
         # ---------------------------------------------------------------------------------------------- #
 
         # Change state
-        set(RSP_IS_ANSI_ENABLED false PARENT_SCOPE)
+        set(RSP_IS_ANSI_ENABLED false CACHE BOOL "RSP ANSI enable state" FORCE)
     endfunction()
 endif ()
 
