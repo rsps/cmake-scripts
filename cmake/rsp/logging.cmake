@@ -22,7 +22,7 @@ include("rsp/logging/utils")
 # Defaults...
 # -------------------------------------------------------------------------------------------------------------- #
 
-# See RSP_LOG_LEVELS and RSP_LOG_LEVELS_CMAKE, in `rsp/logging/utils`.
+# See `RSP_LOG_LEVELS` and `RSP_LOG_LEVELS_CMAKE`, in `rsp/logging/utils`.
 
 # -------------------------------------------------------------------------------------------------------------- #
 # Log functions
