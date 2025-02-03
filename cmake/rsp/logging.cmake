@@ -76,6 +76,12 @@ if (NOT DEFINED RSP_LOG_TIMESTAMP_FORMAT)
     set(RSP_LOG_TIMESTAMP_FORMAT "%Y-%m-%d %H:%M:%S.%f" CACHE BOOL " RSP log timestamp format")
 endif ()
 
+if (NOT DEFINED RSP_LOG_INDENT)
+
+    # Indentation for log context, timestamp,...etc
+    set(RSP_LOG_INDENT "   " CACHE STRING " RSP ident for log context, timestamp...etc")
+endif ()
+
 # -------------------------------------------------------------------------------------------------------------- #
 # Log functions
 # -------------------------------------------------------------------------------------------------------------- #
@@ -180,9 +186,9 @@ if (NOT COMMAND "format_log_level_label")
     #   output                  The formatted label
     #
     function(format_log_level_label level output)
-        set(style_affix "_LABEL_STYLE")
+        set(style_affix "_style")
 
-        set("${EMERGENCY_LEVEL}${style_affix}" "${COLOR_BRIGHT_RED}${TEXT_BOLD}${TEXT_ITALIC}")
+        set("${EMERGENCY_LEVEL}${style_affix}" "${COLOR_BRIGHT_RED}${TEXT_BOLD}")
         set("${ALERT_LEVEL}${style_affix}" "${COLOR_BRIGHT_RED}${TEXT_BOLD}")
         set("${CRITICAL_LEVEL}${style_affix}" "${COLOR_RED}${TEXT_BOLD}")
         set("${ERROR_LEVEL}${style_affix}" "${COLOR_RED}${TEXT_BOLD}")
@@ -217,13 +223,13 @@ if (NOT COMMAND "format_log_message")
     #   output                      The formatted message
     #
     function(format_log_message level message output)
-        set(style_affix "_MESSAGE_STYLE")
+        set(style_affix "_style")
 
-        set("${EMERGENCY_LEVEL}${style_affix}" "${TEXT_BOLD}")
+        set("${EMERGENCY_LEVEL}${style_affix}" "${TEXT_BOLD}${TEXT_ITALIC}")
         set("${ALERT_LEVEL}${style_affix}" "${TEXT_BOLD}")
         set("${CRITICAL_LEVEL}${style_affix}" "${TEXT_BOLD}")
         set("${ERROR_LEVEL}${style_affix}" "")
-        set("${WARNING_LEVEL}${style_affix}" "")
+        set("${WARNING_LEVEL}${style_affix}" "${TEXT_ITALIC}")
         set("${NOTICE_LEVEL}${style_affix}" "")
         set("${INFO_LEVEL}${style_affix}" "")
         set("${DEBUG_LEVEL}${style_affix}" "${TEXT_ITALIC}")
@@ -255,7 +261,7 @@ if (NOT COMMAND "format_log_context")
     #   output                      The formatted log context
     #
     function(format_log_context level context output)
-        set(style_affix "_CONTEXT_STYLE")
+        set(style_affix "_style")
 
         set("${EMERGENCY_LEVEL}${style_affix}" "")
         set("${ALERT_LEVEL}${style_affix}" "")
@@ -273,7 +279,7 @@ if (NOT COMMAND "format_log_context")
 
         # ---------------------------------------------------------------------------------------------- #
 
-        set(indent "\t")
+        set(indent "${RSP_LOG_INDENT}")
         set(buffer "")
 
         # ---------------------------------------------------------------------------------------------- #
@@ -290,13 +296,11 @@ if (NOT COMMAND "format_log_context")
 
         string(APPEND buffer "\n${indent}]")
 
-        # ---------------------------------------------------------------------------------------------- #
-
-        set(formatted "\n\t${COLOR_MAGENTA}Context${RESTORE}: ${buffer}")
+        set(formatted "${COLOR_MAGENTA}Context${RESTORE}: ${buffer}")
 
         # ---------------------------------------------------------------------------------------------- #
 
-        set("${output}" "${${level}${style_affix}}${formatted}${RESTORE}")
+        set("${output}" "\n${indent}${${level}${style_affix}}${formatted}${RESTORE}")
 
         return(PROPAGATE "${output}")
     endfunction()
@@ -313,7 +317,7 @@ if (NOT COMMAND "format_log_timestamp")
     #   output                      The formatted timestamp
     #
     function(format_log_timestamp level output)
-        set(style_affix "_TIMESTAMP_STYLE")
+        set(style_affix "_style")
 
         set("${EMERGENCY_LEVEL}${style_affix}" "")
         set("${ALERT_LEVEL}${style_affix}" "")
@@ -331,9 +335,9 @@ if (NOT COMMAND "format_log_timestamp")
 
         # Timestamp
         string(TIMESTAMP now "${RSP_LOG_TIMESTAMP_FORMAT}")
-        set(formatted "\n\t${COLOR_MAGENTA}${TEXT_ITALIC}Timestamp${RESTORE}: ${now}")
+        set(formatted "${COLOR_MAGENTA}${TEXT_ITALIC}Timestamp${RESTORE}: ${now}")
 
-        set("${output}" "${${level}${style_affix}}${formatted}${RESTORE}")
+        set("${output}" "\n${RSP_LOG_INDENT}${${level}${style_affix}}${formatted}${RESTORE}")
 
         return(PROPAGATE "${output}")
     endfunction()
