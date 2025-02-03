@@ -84,7 +84,7 @@ if (NOT COMMAND "output")
         # ---------------------------------------------------------------------------------------------- #
 
         # Message mode
-        resolve_msg_mode()
+        resolve_msg_mode("NOTICE")
 
         # Label format
         set(label_format "${RSP_DEFAULT_LABEL_FORMAT}")
