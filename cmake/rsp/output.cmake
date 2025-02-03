@@ -99,10 +99,7 @@ if (NOT COMMAND "output")
         endif ()
 
         # List separator
-        set(separator "${RSP_DEFAULT_LIST_SEPARATOR}")
-        if (DEFINED INPUT_LIST_SEPARATOR)
-            set(separator "${INPUT_LIST_SEPARATOR}")
-        endif ()
+        resolve_list_separator()
 
         # ---------------------------------------------------------------------------------------------- #
         # Resolve message

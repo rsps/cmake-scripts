@@ -62,3 +62,25 @@ if (NOT COMMAND "resolve_msg_mode")
         endforeach ()
     endmacro()
 endif ()
+
+if (NOT COMMAND "resolve_list_separator")
+
+    #! resolve_list_separator : Resolves requested list separator
+    #
+    # WARNING: Macro is intended to be used internally within misc. output
+    # functions. Sets a `variable` to requested separator, or defaults to
+    # RSP_DEFAULT_LIST_SEPARATOR, when none requested.
+    #
+    # @see RSP_DEFAULT_LIST_SEPARATOR
+    #
+    # @internal
+    #
+    macro(resolve_list_separator)
+        # List separator
+        set(separator "${RSP_DEFAULT_LIST_SEPARATOR}")
+
+        if (DEFINED INPUT_LIST_SEPARATOR)
+            set(separator "${INPUT_LIST_SEPARATOR}")
+        endif ()
+    endmacro()
+endif ()
