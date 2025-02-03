@@ -48,6 +48,10 @@ if (NOT DEFINED RSP_LOG_LEVELS)
     # Detailed debug information.
     set(DEBUG_LEVEL "debug" CACHE STRING "RSP log level")
 
+    # PSR Log levels
+    #
+    # @see https://www.php-fig.org/psr/psr-3/#5-psrlogloglevel
+    #
     set(RSP_LOG_LEVELS
         "${EMERGENCY_LEVEL}"
         "${ALERT_LEVEL}"
@@ -62,7 +66,31 @@ if (NOT DEFINED RSP_LOG_LEVELS)
     )
 endif ()
 
-# TODO: Pre-defined message modes for each log-level!
+
+if (NOT DEFINED RSP_LOG_LEVELS_CMAKE)
+
+    # A "map" of the PSR defined log levels and what each
+    # level corresponds to for cmake's modes / types.
+    #
+    # This "map" is used internally by log(), when no `mode`
+    # argument has been specified.
+    #
+    # @see https://www.php-fig.org/psr/psr-3/#5-psrlogloglevel
+    # @see https://cmake.org/cmake/help/latest/command/message.html#general-messages
+    #
+    set(RSP_LOG_LEVELS_CMAKE
+        "${EMERGENCY_LEVEL} FATAL_ERROR"
+        "${ALERT_LEVEL} FATAL_ERROR"
+        "${CRITICAL_LEVEL} FATAL_ERROR"
+        "${ERROR_LEVEL} SEND_ERROR"
+        "${WARNING_LEVEL} WARNING"
+        "${NOTICE_LEVEL} NOTICE"
+        "${INFO_LEVEL} NOTICE"
+        "${DEBUG_LEVEL} DEBUG"
+
+        CACHE STRING " RSP log levels map for cmake's message mode"
+    )
+endif ()
 
 if (NOT DEFINED RSP_LOG_SHOW_TIMESTAMP)
 
@@ -88,7 +116,24 @@ endif ()
 
 if (NOT COMMAND "log")
 
-    #! log : TODO
+    #! log : Log a message with an arbitrary level
+    #
+    # @see rsp/output::output()
+    #
+    # @param <string> level                     The log level (see RSP_LOG_LEVELS)
+    # @param <string|variable|list> message     The message to output. If a variable is given, its value will be used.
+    #                                           If a list is detected given, then each item in the list will be output,
+    #                                           using the LIST_SEPARATOR.
+    # @param [<mode>]                           Option - Cmake's message type. Defaults to the `mode` that is
+    #                                           associated with the specified `level`, defined in RSP_LOG_LEVELS_CMAKE.
+    #                                           NOTICE, when not specified.
+    # @param [OUTPUT <variable>]                Optional - If specified, message is assigned to output variable instead of
+    #                                           being printed to stdout or stderr.
+    # @param [LIST_SEPARATOR <string>]          Optional - Separator to used, if a list variable is given as message.
+    #                                           Defaults to RSP_DEFAULT_LIST_SEPARATOR.
+    #
+    # @return
+    #       [OUTPUT]                            The resulting output variable, if OUTPUT was specified.
     #
     function(log level message)
         set(options "${RSP_CMAKE_MESSAGE_MODES}")
@@ -105,10 +150,29 @@ if (NOT COMMAND "log")
         if (level_exists EQUAL -1)
             message(FATAL_ERROR "Log level '${log_level}' is NOT supported")
         endif ()
-        
-        # TODO: Message mode - should perhaps use a list, in combination to given level
-        resolve_msg_mode()
-        
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Resolve CMake's message mode, acc. to specified log level.
+        set(default_cmake_msg_mode "NOTICE")
+        foreach (lvl IN LISTS RSP_LOG_LEVELS_CMAKE)
+            string(REPLACE " " ";" parts "${lvl}")
+
+            # name = PSR log level, value = CMake message mode
+            list(GET parts 0 name)
+            list(GET parts 1 value)
+
+            if ("${name}" STREQUAL "${log_level}")
+                message(VERBOSE "Mapping ${log_level} level to cmake message mode ${value}")
+
+                set(default_cmake_msg_mode "${value}")
+                break()
+            endif ()
+        endforeach ()
+
+        # - Resolve the actual `msg_mode`. If none is given, then `default_cmake_msg_mode` is used!
+        resolve_msg_mode("${default_cmake_msg_mode}")
+
         # ---------------------------------------------------------------------------------------------- #
         
         # Format message label, acc. to the log level
@@ -161,13 +225,21 @@ if (NOT COMMAND "log")
 
         set(formatted_output "${buffer}")
 
-        # TODO: Capture to OUTPUT...?
+        # ---------------------------------------------------------------------------------------------- #
 
+        # Assign to output variable, if requested and stop any further processing.
+        if (DEFINED INPUT_OUTPUT)
+            set("${INPUT_OUTPUT}" "${label}${formatted_output}")
+            return(PROPAGATE "${INPUT_OUTPUT}")
+        endif ()
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Finally, output the log message
         output(${formatted_output}
             "${msg_mode}"
             LABEL "${label}"
         )
-        
     endfunction()
 endif ()
 
