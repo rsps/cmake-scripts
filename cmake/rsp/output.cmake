@@ -27,17 +27,6 @@ if (NOT DEFINED RSP_DEFAULT_LABEL_FORMAT)
     set(RSP_DEFAULT_LABEL_FORMAT "%label%: " CACHE STRING " RSP Default label format for output()")
 endif ()
 
-if (NOT DEFINED RSP_DEFAULT_LIST_SEPARATOR)
-
-    # Default list separator
-    #
-    # Used when a list is requested printed
-    #
-    # @see output()
-    #
-    set(RSP_DEFAULT_LIST_SEPARATOR "\\n" CACHE STRING " RSP Default list separator for output()")
-endif ()
-
 # -------------------------------------------------------------------------------------------------------------- #
 # Output related functions & macros
 # -------------------------------------------------------------------------------------------------------------- #
@@ -117,11 +106,6 @@ if (NOT COMMAND "output")
             if (length GREATER 1)
                 # Replace every semicolon with a newline character.
                 string(REPLACE ";" "${separator}" resolved_msg "${resolved_msg}")
-
-                # Debug
-                # foreach (item IN LISTS resolved_msg)
-                #     message(NOTICE "Item: ${item}")
-                # endforeach ()
             endif ()
 
             # Use the resolved message to buffer.
@@ -153,6 +137,7 @@ if (NOT COMMAND "output")
             string(ASCII 13 CR)
             set(formatted_output "${CR}${formatted_output}")
             string(REPLACE "\n\t" "\n   " formatted_output "${formatted_output}")
+            string(REPLACE "\n" "\n " formatted_output "${formatted_output}")
         endif ()
 
         # Finally, output the message...
