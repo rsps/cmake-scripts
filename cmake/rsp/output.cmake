@@ -118,6 +118,7 @@ if (NOT COMMAND "output")
                 # Replace every semicolon with a newline character.
                 string(REPLACE ";" "${separator}" resolved_msg "${resolved_msg}")
 
+                # Debug
                 # foreach (item IN LISTS resolved_msg)
                 #     message(NOTICE "Item: ${item}")
                 # endforeach ()
@@ -132,10 +133,26 @@ if (NOT COMMAND "output")
 
         # ---------------------------------------------------------------------------------------------- #
 
-        # Assign to output variable, if requested and return...
+        # Assign to output variable, if requested and stop any further processing.
         if (DEFINED INPUT_OUTPUT)
             set("${INPUT_OUTPUT}" "${formatted_output}")
             return(PROPAGATE "${INPUT_OUTPUT}")
+        endif ()
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Attempt to keep the formatting, even when the message mode is
+        # one that cmake formats.
+        set(target_modes "AUTHOR_WARNING;WARNING;SEND_ERROR;FATAL_ERROR")
+        list(FIND target_modes ${msg_mode} mode_exists)
+        if (NOT mode_exists EQUAL -1)
+
+            # The "Carriage return (enter key)" seems to abort cmake's default
+            # formatting. However, each newline must be indented with a space,
+            # such that message() interprets it as a formatted message.
+            string(ASCII 13 CR)
+            set(formatted_output "${CR}${formatted_output}")
+            string(REPLACE "\n\t" "\n   " formatted_output "${formatted_output}")
         endif ()
 
         # Finally, output the message...
