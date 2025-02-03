@@ -92,7 +92,13 @@ endif ()
 if (NOT DEFINED RSP_LOG_TIMESTAMP_FORMAT)
 
     # Log timestamp format
-    set(RSP_LOG_TIMESTAMP_FORMAT "%Y-%m-%d %H:%M:%S.%f" CACHE BOOL " RSP log timestamp format")
+    set(RSP_LOG_TIMESTAMP_FORMAT "%Y-%m-%d %H:%M:%S.%f" CACHE STRING " RSP log timestamp format")
+endif ()
+
+if (NOT DEFINED RSP_LOG_TIMESTAMP_UTC)
+
+    # Use UTC or local time...
+    set(RSP_LOG_TIMESTAMP_UTC false CACHE BOOL " RSP log timestamp UTC state (true if UTC, false if local)")
 endif ()
 
 if (NOT DEFINED RSP_LOG_INDENT)
@@ -299,8 +305,14 @@ if (NOT COMMAND "format_log_timestamp")
             message(FATAL_ERROR "Unable to style timestamp for log level: ${level}")
         endif ()
 
-        # Timestamp
-        string(TIMESTAMP now "${RSP_LOG_TIMESTAMP_FORMAT}")
+        # Obtain current timestamp
+        if (RSP_LOG_TIMESTAMP_UTC)
+            string(TIMESTAMP now "${RSP_LOG_TIMESTAMP_FORMAT}" UTC)
+        else()
+            string(TIMESTAMP now "${RSP_LOG_TIMESTAMP_FORMAT}")
+        endif ()
+
+        # Format output...
         set(formatted "${COLOR_MAGENTA}${TEXT_ITALIC}Timestamp${RESTORE}: ${now}")
 
         set("${output}" "\n${RSP_LOG_INDENT}${${level}${style_affix}}${formatted}${RESTORE}")
