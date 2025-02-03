@@ -105,6 +105,43 @@ endif ()
 # Functions & Macros
 # -------------------------------------------------------------------------------------------------------------- #
 
+if (NOT COMMAND "resolve_cmake_message_mode")
+
+    #! resolve_cmake_message_mode : Resolves the CMake message mode acc. to requested
+    # PSR log level.
+    #
+    # WARNING: Macro is intended to be used internally within misc. log
+    # functions.
+    #
+    # @see https://cmake.org/cmake/help/latest/command/message.html#general-messages
+    # @see rsp/output/utils::resolve_msg_mode
+    #
+    # @internal
+    #
+    macro(resolve_cmake_message_mode)
+        # Resolve CMake's message mode, acc. to specified log level.
+        set(default_cmake_msg_mode "NOTICE")
+
+        foreach (lvl IN LISTS RSP_LOG_LEVELS_CMAKE)
+            string(REPLACE " " ";" parts "${lvl}")
+
+            # name = PSR log level, value = CMake message mode
+            list(GET parts 0 name)
+            list(GET parts 1 value)
+
+            if ("${name}" STREQUAL "${log_level}")
+                message(VERBOSE "Mapping ${log_level} level to cmake message mode ${value}")
+
+                set(default_cmake_msg_mode "${value}")
+                break()
+            endif ()
+        endforeach ()
+
+        # - Resolve the actual `msg_mode`. If none is given, then `default_cmake_msg_mode` is used!
+        resolve_msg_mode("${default_cmake_msg_mode}")
+    endmacro()
+endif ()
+
 if (NOT COMMAND "format_log_level_label")
 
     #! format_log_level_label : Formats a label, acc. to specified log level
@@ -113,7 +150,7 @@ if (NOT COMMAND "format_log_level_label")
     # @param <variable> output  The output variable to assign result to
     #
     # @return
-    #   output                  The formatted label
+    #       output                  The formatted label
     #
     function(format_log_level_label level output)
         set(style_affix "_style")
@@ -150,7 +187,7 @@ if (NOT COMMAND "format_log_message")
     # @param <variable> output      The output variable to assign result to
     #
     # @return
-    #   output                      The formatted message
+    #       output                      The formatted message
     #
     function(format_log_message level message output)
         set(style_affix "_style")
@@ -187,7 +224,7 @@ if (NOT COMMAND "format_log_context")
     # @param <variable> output      The output variable to assign result to
     #
     # @return
-    #   output                      The formatted log context
+    #       output                      The formatted log context
     #
     function(format_log_context level context output)
         set(style_affix "_style")
@@ -243,7 +280,7 @@ if (NOT COMMAND "format_log_timestamp")
     # @param <variable> output      The output variable to assign result to
     #
     # @return
-    #   output                      The formatted timestamp
+    #       output                      The formatted timestamp
     #
     function(format_log_timestamp level output)
         set(style_affix "_style")

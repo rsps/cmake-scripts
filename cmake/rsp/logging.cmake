@@ -68,24 +68,7 @@ if (NOT COMMAND "log")
         # ---------------------------------------------------------------------------------------------- #
 
         # Resolve CMake's message mode, acc. to specified log level.
-        set(default_cmake_msg_mode "NOTICE")
-        foreach (lvl IN LISTS RSP_LOG_LEVELS_CMAKE)
-            string(REPLACE " " ";" parts "${lvl}")
-
-            # name = PSR log level, value = CMake message mode
-            list(GET parts 0 name)
-            list(GET parts 1 value)
-
-            if ("${name}" STREQUAL "${log_level}")
-                message(VERBOSE "Mapping ${log_level} level to cmake message mode ${value}")
-
-                set(default_cmake_msg_mode "${value}")
-                break()
-            endif ()
-        endforeach ()
-
-        # - Resolve the actual `msg_mode`. If none is given, then `default_cmake_msg_mode` is used!
-        resolve_msg_mode("${default_cmake_msg_mode}")
+        resolve_cmake_message_mode()
 
         # ---------------------------------------------------------------------------------------------- #
         
