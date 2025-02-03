@@ -64,6 +64,9 @@ if (NOT COMMAND "output")
     # @param [LIST_SEPARATOR <string>]          Optional - Separator to used, if a list variable is given as message.
     #                                           Defaults to RSP_DEFAULT_LIST_SEPARATOR.
     #
+    # @return
+    #       [OUTPUT]                            The resulting output variable, if OUTPUT was specified.
+    #
     function(output message)
         set(options "${RSP_CMAKE_MESSAGE_MODES}")
         set(oneValueArgs OUTPUT LABEL LABEL_FORMAT LIST_SEPARATOR)
