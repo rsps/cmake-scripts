@@ -265,6 +265,22 @@ function(asserts_str_not_empty)
     assert_string_not_empty("abc" MESSAGE "values")
 endfunction()
 
+define_test("can assert string contains" "asserts_str_contains")
+function(asserts_str_contains)
+    set(str "None of these machines experience harmless, crazy teleporters.")
+    set(sub_str "harmless")
+
+    assert_string_contains(${str} ${sub_str} MESSAGE "assert failed to find sub-string")
+endfunction()
+
+define_test("can assert string not contains" "asserts_str_not_contains")
+function(asserts_str_not_contains)
+    set(str "None of these machines experience harmless, crazy teleporters.")
+    set(sub_str "does not exist...")
+
+    assert_string_not_contains(${str} ${sub_str} MESSAGE "assertion failure...")
+endfunction()
+
 # TODO: ...gt, gte, lt, lte... etc
 # TODO: ...regex
 
