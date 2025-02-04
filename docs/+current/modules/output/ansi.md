@@ -137,8 +137,8 @@ supported:
 
 ## Your own styles
 
-To customise the default preset, set the `RSP_ANSI_PRESET` list property, before [enabling ANSI](#how-to-enable).
-Use the following format for declaring your own styles and colours:
+To customise the default preset, set the `RSP_ANSI_PRESET` list property, before including the `rsp/output` module, and
+before [enabling ANSI](#how-to-enable). Use the following format for declaring your own styles and colours:
 
 ```
 "<variable> <code>[|<code>]..." 
@@ -150,8 +150,7 @@ Use the following format for declaring your own styles and colours:
 
 ```cmake
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    include("rsp/output")
-
+    # Define your own ANSI preset...
     set(RSP_ANSI_PRESET
         "RESTORE 0"
 
@@ -165,6 +164,8 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
         # RECOMMENDED: you should cache your preset!
         CACHE STRING "My custom ANSI preset"
     )
+    
+    include("rsp/output")
     
     enable_ansi()
 endif()
