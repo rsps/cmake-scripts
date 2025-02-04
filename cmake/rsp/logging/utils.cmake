@@ -131,14 +131,17 @@ if (NOT COMMAND "resolve_cmake_message_mode")
         foreach (lvl IN LISTS RSP_LOG_LEVELS_CMAKE)
             string(REPLACE " " ";" parts "${lvl}")
 
-            # name = PSR log level, value = CMake message mode
-            list(GET parts 0 name)
-            list(GET parts 1 value)
+            # psr = PSR log level, value = CMake message mode
+            list(GET parts 0 psr)
+            list(GET parts 1 msg_mode_cmake)
 
-            if ("${name}" STREQUAL "${log_level}")
-                message(VERBOSE "Mapping ${log_level} level to cmake message mode ${value}")
+            if ("${psr}" STREQUAL "${log_level}")
+                message(VERBOSE "Mapping ${log_level} level to cmake message mode ${msg_mode_cmake}")
 
-                set(default_cmake_msg_mode "${value}")
+                set(default_cmake_msg_mode "${msg_mode_cmake}")
+                unset(psr)
+                unset(msg_mode_cmake)
+
                 break()
             endif ()
         endforeach ()
