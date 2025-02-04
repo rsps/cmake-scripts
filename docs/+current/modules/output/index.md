@@ -7,7 +7,7 @@ author: RSP Systems A/S
 
 # Output
 
-This module offers a few console output utilities.
+This module offers console output utilities.
 
 ## How to include
 
