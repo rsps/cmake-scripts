@@ -76,6 +76,20 @@ message("${my_package}_SEMVER") # 2.0.0-beta.3+AF1004
 
 See [version module](./modules/version/index.md) for additional information.
 
+### Output
+
+Various output and [ANSI](./modules/output/ansi.md) utilities.
+
+```cmake
+output("Building package assets" NOTICE LABEL "✓" LABEL_FORMAT "[ %label% ] ")
+```
+
+```txt
+[ ✓ ] Building package assets
+```
+
+See [output module](./modules/output/index.md) for additional information.
+
 ### Cache
 
 (_available since `v0.1`_)
