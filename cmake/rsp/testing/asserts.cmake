@@ -573,6 +573,62 @@ if (NOT COMMAND "assert_string_not_empty")
     endfunction()
 endif ()
 
+if (NOT COMMAND "assert_string_contains")
+
+    #! assert_string_contains : Assert given string contains given substring
+    #
+    # @see https://cmake.org/cmake/help/latest/command/string.html#length
+    #
+    # @param <string> str        The target string value
+    # @param <string> sub_str    The substring
+    # @param [MESSAGE <string>]  Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_string_contains str sub_str)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        string(FIND "${str}" "${sub_str}" result)
+
+        if (result EQUAL -1)
+            message(FATAL_ERROR "String '${str}' does not contain '${sub_str}'." "${msg}")
+        endif ()
+
+    endfunction()
+endif ()
+
+if (NOT COMMAND "assert_string_not_contains")
+
+    #! assert_string_not_contains : Assert given string does not contain given substring
+    #
+    # @see https://cmake.org/cmake/help/latest/command/string.html#length
+    #
+    # @param <string> str        The target string value
+    # @param <string> sub_str    The substring
+    # @param [MESSAGE <string>]  Optional message to output if assertion fails
+    #
+    # @throws
+    #
+    function(assert_string_not_contains str sub_str)
+        set(oneValueArgs MESSAGE)
+        cmake_parse_arguments(INPUT "" "${oneValueArgs}" "" ${ARGN})
+        format_assert_message(msg "${INPUT_MESSAGE}")
+
+        # ------------------------------------------------------------------------------------- #
+
+        string(FIND "${str}" "${sub_str}" result)
+
+        if (NOT result EQUAL -1)
+            message(FATAL_ERROR "String '${str}' contains '${sub_str}', but was not expected to." "${msg}")
+        endif ()
+
+    endfunction()
+endif ()
+
 # TODO: ...
 # TODO: ...gt, gte, lt, lte... etc
 # TODO: ...regex
