@@ -95,7 +95,7 @@ output("Building package assets" NOTICE LABEL "ok")
     _If your custom label format does not take effect, then it is most likely because `RSP_DEFAULT_LABEL_FORMAT` is
     cached property._
 
-    _Consider setting `RSP_DEFAULT_LABEL_FORMAT` before you include the `rsp/module`, or
+    _Consider setting `RSP_DEFAULT_LABEL_FORMAT` before you include the `rsp/output` module, or
     [force](https://cmake.org/cmake/help/latest/command/set.html#set-cache-entry) cache the property._
 
 ### Lists
