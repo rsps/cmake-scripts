@@ -82,7 +82,7 @@ endif ()
 
 if (NOT COMMAND "critical")
 
-    #! critical : Log an "critical" level message - Critical conditions.
+    #! critical : Log a "critical" level message - Critical conditions.
     # E.g. Application component unavailable, unexpected exception.
     #
     # @see log()
