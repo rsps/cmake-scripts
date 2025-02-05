@@ -90,6 +90,39 @@ output("Building package assets" NOTICE LABEL "✓" LABEL_FORMAT "[ %label% ] ")
 
 See [output module](./modules/output/index.md) for additional information.
 
+### Logging
+
+[PSR-3](https://www.php-fig.org/psr/psr-3/) inspired logging utilities.
+
+```cmake
+warning("Build incomplete"
+    CONTEXT
+        PROJECT_NAME
+        CMAKE_BINARY_DIR
+        CMAKE_PROJECT_NAME
+)
+```
+
+```txt
+CMake Warning at cmake/rsp/output.cmake:144 (message):
+warning: Build incomplete
+
+      Context: 
+      [
+         PROJECT_NAME = my-project
+         CMAKE_BINARY_DIR = /home/user/code/my-project/build
+         CMAKE_PROJECT_NAME = my-project
+      ]
+      Timestamp: 2025-02-05 14:49:16.087085
+Call Stack (most recent call first):
+  cmake/rsp/logging.cmake:335 (output)
+  cmake/rsp/logging.cmake:381 (log)
+  cmake/rsp/logging.cmake:158 (forward_to_log)
+  CMakeLists.txt:103 (warning)
+```
+
+See [logging module](./modules/logging/index.md) for additional information.
+
 ### Cache
 
 (_available since `v0.1`_)
