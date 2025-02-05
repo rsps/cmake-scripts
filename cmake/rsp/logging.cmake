@@ -135,7 +135,7 @@ endif ()
 
 if (NOT COMMAND "warning")
 
-    #! warning : Log an "warning" level message - Exceptional occurrences that are not errors.
+    #! warning : Log a "warning" level message - Exceptional occurrences that are not errors.
     #
     # @see log()
     #
@@ -161,7 +161,7 @@ endif ()
 
 if (NOT COMMAND "notice")
 
-    #! notice : Log an "notice" level message - Normal but significant events.
+    #! notice : Log a "notice" level message - Normal but significant events.
     #
     # @see log()
     #
