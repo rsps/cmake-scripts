@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-    <title>Cache - CMake Scripts</title>
-    <meta name="description" content="How to use the cache module.">
-    <meta name="keywords" content="cache, cmake">
+    <title>Helpers - CMake Scripts</title>
+    <meta name="description" content="How to use the output helpers.">
+    <meta name="keywords" content="output, helpers, cmake">
     <meta name="author" content="RSP Systems A/S">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -71,7 +71,7 @@
 <li class='Nav__item '><a href="../../../current/security_policy.html">Security Policy</a></li>
 <li class='Nav__item '><a href="../../../current/code_of_conduct.html">Code of Conduct</a></li>
 <li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules</a><ul class='Nav'>
-<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/cache/set.html">Set</a></li>
 <li class='Nav__item '><a href="../../../current/modules/cache/get.html">Get</a></li>
 <li class='Nav__item '><a href="../../../current/modules/cache/has.html">Has</a></li>
@@ -85,9 +85,9 @@
 <li class='Nav__item  has-children'><a href="../../../current/modules/logging/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Logging</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/logging/levels.html">Log Levels</a></li>
 <li class='Nav__item '><a href="../../../current/modules/logging/functions.html">Log Functions</a></li></ul></li>
-<li class='Nav__item  has-children'><a href="../../../current/modules/output/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Output</a><ul class='Nav'>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/output/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Output</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/output/ansi.html">ANSI</a></li>
-<li class='Nav__item '><a href="../../../current/modules/output/helpers.html">Helpers</a></li></ul></li>
+<li class='Nav__item Nav__item--active'><a href="../../../current/modules/output/helpers.html">Helpers</a></li></ul></li>
 <li class='Nav__item  has-children'><a href="../../../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'>
 <li class='Nav__item  has-children'><a href="../../../current/modules/testing/cmake/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules & Scripts</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/testing/cmake/test_suite.html">Test Suite</a></li>
@@ -134,27 +134,114 @@
                 <article class="Page">
 
     <div class="Page__header">
-        <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/cache/index.html">Cache</a></h1>
+        <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/output/index.html">Output</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/output/helpers.html">Helpers</a></h1>
                 <span class="ModifiedDate">
             February 5, 2025 at 6:09 AM        </span>
                         <span class="EditOn">
-            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/cache/index.md" target="_blank">
+            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/output/helpers.md" target="_blank">
                 Edit on GitHub            </a>
         </span>
             </div>
 
     <div class="s-content">
-        <h1><a id="cache" href="#cache" class="Permalink" aria-hidden="true" title="Permalink">#</a>Cache</h1>
-<p>The cache module offers additional functionality for CMake’s <a href="https://cmake.org/cmake/help/latest/command/set.html#set-cache-entry" class="Link--external" rel="noopener noreferrer">Cache Entry</a>
-mechanism.</p>
-<h2><a id="how-to-include" href="#how-to-include" class="Permalink" aria-hidden="true" title="Permalink">#</a>How to include</h2>
-<pre><code class="hljs cmake"><span class="hljs-keyword">include</span>(<span class="hljs-string">"rsp/cache"</span>)
+        <h1><a id="output-helpers" href="#output-helpers" class="Permalink" aria-hidden="true" title="Permalink">#</a>Output Helpers</h1>
+<div class="TableOfContentsContainer">
+    <h4 class="TableOfContentsContainer__title">Table of Contents</h4>
+    <div class="TableOfContentsContainer__content">
+        <ul class="TableOfContents">
+<li><a href="#output-helpers">Output Helpers</a>
+<ul>
+<li><a href="#output">output()</a>
+<ul>
+<li><a href="#example">Example</a></li>
+<li><a href="#capture-output">Capture Output</a></li>
+<li><a href="#label-label-format">Label &amp; Label Format</a></li>
+<li><a href="#lists">Lists</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>    </div>
+</div>
+<h2><a id="output" href="#output" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>output()</code></h2>
+<p>Outputs a message to <code>stdout</code> or <code>stderr</code>
+(<em><a href="https://cmake.org/cmake/help/latest/command/message.html#general-messages" class="Link--external" rel="noopener noreferrer">message mode</a> specific</em>).
+Behind the scene, the <code>output()</code> function is a wrapper for cmake’s <a href="https://cmake.org/cmake/help/latest/command/message.html" class="Link--external" rel="noopener noreferrer"><code>message()</code></a>.</p>
+<p>It accepts the following parameters:</p>
+<ul>
+<li>&lt; message &gt;: <em><code>string</code>, <code>variable</code> or <code>list</code> message to output.</em></li>
+<li>&lt; mode &gt;: (<em>option</em>), <em>cmake <a href="https://cmake.org/cmake/help/latest/command/message.html#general-messages" class="Link--external" rel="noopener noreferrer">message mode</a>, e.g. <code>WARNING</code>, <code>NOTICE</code>, <code>STATUS</code>, …etc.</em>
+<em>Defaults to <code>NOTICE</code> is mode is not specified.</em></li>
+<li><code>OUTPUT</code>: (<em>optional</em>), <em>output variable. If specified, message is assigned to variable, instead of being printed to <code>stdout</code> or <code>stderr</code>.</em></li>
+<li><code>LABEL</code>: (<em>optional</em>), <em>A label to display before the message.</em></li>
+<li><code>LABEL_FORMAT</code>: (<em>optional</em>), <em>A format string in which the actual label is inserted. Use the <code>%label%</code> token, in which the actual label is inserted.</em></li>
+<li><code>LIST_SEPARATOR</code>: (<em>optional</em>), <em>Separator to used, if a list variable is given as message. Defaults to <code>\n</code> (newline).</em></li>
+</ul>
+<h3><a id="example" href="#example" class="Permalink" aria-hidden="true" title="Permalink">#</a>Example</h3>
+<pre><code class="hljs cmake">output(<span class="hljs-string">"Building package assets"</span> NOTICE LABEL <span class="hljs-string">"info"</span>)
+</code></pre>
+<p>The above example will print the following, using cmake’s <code>NOTICE</code> mode.</p>
+<pre><code class="language-txt">info: Building package assets
+</code></pre>
+<h3><a id="capture-output" href="#capture-output" class="Permalink" aria-hidden="true" title="Permalink">#</a>Capture Output</h3>
+<p>If you specify a variable for the <code>OUTPUT</code> parameter, then your message is assigned to that variable, instead of
+being printed in the console.</p>
+<pre><code class="hljs cmake">output(<span class="hljs-string">"Building package assets"</span> NOTICE OUTPUT result)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"result = ${result}"</span>)
+</code></pre>
+<pre><code class="language-txt">result = Building package assets
+</code></pre>
+<div class="Admonition Admonition--note"><p class="Admonition__title">Note</p><p>When you specify the <code>OUTPUT</code> parameter, then the message <code>&lt; mode &gt;</code> argument is ignored.
+As such, the following will never yield an error:</p>
+<pre><code class="hljs cmake"><span class="hljs-comment"># FATAL_ERROR message mode used, but OUTPUT specified... this never fails!</span>
+output(<span class="hljs-string">"Should fail..."</span> FATAL_ERROR OUTPUT output)
+
+<span class="hljs-comment"># Message is printed...</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${output} but doesn't"</span>)
+</code></pre></div>
+<h3><a id="label-label-format" href="#label-label-format" class="Permalink" aria-hidden="true" title="Permalink">#</a>Label &amp; Label Format</h3>
+<p>When you specify a <code>LABEL</code>, then it will be printed before the actual message.
+By default, the format for the rendered label is: <code>%label%: </code>, where the <code>%label%</code> token is where the label is injected.
+You can customise this format, by specifying the <code>LABEL_FORMAT</code> parameter.</p>
+<pre><code class="hljs cmake">output(<span class="hljs-string">"Building package assets"</span> NOTICE LABEL <span class="hljs-string">"✓"</span> LABEL_FORMAT <span class="hljs-string">"[ %label% ] "</span>)
+</code></pre>
+<pre><code class="language-txt">[ ✓ ] Building package assets
+</code></pre>
+<p>You can also change the default label format, by setting the <code>RSP_DEFAULT_LABEL_FORMAT</code> property.</p>
+<pre><code class="hljs cmake"><span class="hljs-keyword">set</span>(RSP_DEFAULT_LABEL_FORMAT <span class="hljs-string">"( %label% ) - "</span> CACHE <span class="hljs-keyword">STRING</span> <span class="hljs-string">"Default label format..."</span>)
+
+<span class="hljs-comment"># ...Later in your cmake script...</span>
+output(<span class="hljs-string">"Building package assets"</span> NOTICE LABEL <span class="hljs-string">"ok"</span>)
+</code></pre>
+<pre><code class="language-txt">( ok ) - Building package assets
+</code></pre>
+<div class="Admonition Admonition--warning"><p class="Admonition__title">Troubleshooting</p><p><em>If your custom label format does not take effect, then it is most likely because <code>RSP_DEFAULT_LABEL_FORMAT</code> is
+cached property.</em></p>
+<p><em>Consider setting <code>RSP_DEFAULT_LABEL_FORMAT</code> before you include the <code>rsp/output</code> module, or
+<a href="https://cmake.org/cmake/help/latest/command/set.html#set-cache-entry" class="Link--external" rel="noopener noreferrer">force</a> cache the property.</em></p></div>
+<h3><a id="lists" href="#lists" class="Permalink" aria-hidden="true" title="Permalink">#</a>Lists</h3>
+<p><code>output()</code> is also able to print lists. By default, each item is printed on a new line.</p>
+<pre><code class="hljs cmake"><span class="hljs-keyword">set</span>(my_list <span class="hljs-string">"a;b;c"</span>)
+
+output(my_list)
+</code></pre>
+<pre><code class="language-txt">a
+b
+c
+</code></pre>
+<p>Use the <code>LIST_SEPARATOR</code> parameter to use a custom list item separator:</p>
+<pre><code class="hljs cmake"><span class="hljs-keyword">set</span>(my_list <span class="hljs-string">"a;b;c"</span>)
+
+output(my_list LIST_SEPARATOR <span class="hljs-string">", "</span>)
+</code></pre>
+<pre><code class="language-txt">a, b, c 
 </code></pre>
     </div>
 
         <nav>
         <ul class="Pager">
-            <li class=Pager--prev><a href="../../../current/modules/index.html">Previous</a></li>            <li class=Pager--next><a href="../../../current/modules/cache/set.html">Next</a></li>        </ul>
+            <li class=Pager--prev><a href="../../../current/modules/output/ansi.html">Previous</a></li>            <li class=Pager--next><a href="../../../current/modules/testing/index.html">Next</a></li>        </ul>
     </nav>
     </article>
 

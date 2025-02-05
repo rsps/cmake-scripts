@@ -82,6 +82,12 @@
 <li class='Nav__item  has-children'><a href="../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'>
 <li class='Nav__item '><a href="../current/modules/git/find_version_tag.html">Find Version Tag</a></li></ul></li>
 <li class='Nav__item '><a href="../current/modules/helpers/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Helpers</a><ul class='Nav'></ul></li>
+<li class='Nav__item  has-children'><a href="../current/modules/logging/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Logging</a><ul class='Nav'>
+<li class='Nav__item '><a href="../current/modules/logging/levels.html">Log Levels</a></li>
+<li class='Nav__item '><a href="../current/modules/logging/functions.html">Log Functions</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../current/modules/output/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Output</a><ul class='Nav'>
+<li class='Nav__item '><a href="../current/modules/output/ansi.html">ANSI</a></li>
+<li class='Nav__item '><a href="../current/modules/output/helpers.html">Helpers</a></li></ul></li>
 <li class='Nav__item  has-children'><a href="../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'>
 <li class='Nav__item  has-children'><a href="../current/modules/testing/cmake/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules & Scripts</a><ul class='Nav'>
 <li class='Nav__item '><a href="../current/modules/testing/cmake/test_suite.html">Test Suite</a></li>
@@ -130,7 +136,7 @@
     <div class="Page__header">
         <h1><a href="../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../current/release_notes.html">Release Notes</a></h1>
                 <span class="ModifiedDate">
-            January 29, 2025 at 5:02 AM        </span>
+            February 5, 2025 at 6:09 AM        </span>
                         <span class="EditOn">
             <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/01_release-notes.md" target="_blank">
                 Edit on GitHub            </a>
@@ -151,6 +157,8 @@
 <li><a href="#mini-testing-framework">“Mini” Testing Framework</a></li>
 <li><a href="#git">Git</a></li>
 <li><a href="#version">Version</a></li>
+<li><a href="#output">Output</a></li>
+<li><a href="#logging">Logging</a></li>
 <li><a href="#cache">Cache</a></li>
 </ul>
 </li>
@@ -223,6 +231,39 @@
 <span class="hljs-keyword">message</span>(<span class="hljs-string">"${my_package}_SEMVER"</span>) <span class="hljs-comment"># 2.0.0-beta.3+AF1004</span>
 </code></pre>
 <p>See <a href="modules/version/index.html">version module</a> for additional information.</p>
+<h3><a id="output" href="#output" class="Permalink" aria-hidden="true" title="Permalink">#</a>Output</h3>
+<p>Various output and <a href="modules/output/ansi.html">ANSI</a> utilities.</p>
+<pre><code class="hljs cmake">output(<span class="hljs-string">"Building package assets"</span> NOTICE LABEL <span class="hljs-string">"✓"</span> LABEL_FORMAT <span class="hljs-string">"[ %label% ] "</span>)
+</code></pre>
+<pre><code class="language-txt">[ ✓ ] Building package assets
+</code></pre>
+<p>See <a href="modules/output/index.html">output module</a> for additional information.</p>
+<h3><a id="logging" href="#logging" class="Permalink" aria-hidden="true" title="Permalink">#</a>Logging</h3>
+<p><a href="https://www.php-fig.org/psr/psr-3/" class="Link--external" rel="noopener noreferrer">PSR-3</a> inspired logging utilities.</p>
+<pre><code class="hljs cmake">warning(<span class="hljs-string">"Build incomplete"</span>
+    CONTEXT
+        PROJECT_NAME
+        CMAKE_BINARY_DIR
+        CMAKE_PROJECT_NAME
+)
+</code></pre>
+<pre><code class="language-txt">CMake Warning at cmake/rsp/output.cmake:144 (message):
+warning: Build incomplete
+
+      Context: 
+      [
+         PROJECT_NAME = my-project
+         CMAKE_BINARY_DIR = /home/user/code/my-project/build
+         CMAKE_PROJECT_NAME = my-project
+      ]
+      Timestamp: 2025-02-05 14:49:16.087085
+Call Stack (most recent call first):
+  cmake/rsp/logging.cmake:335 (output)
+  cmake/rsp/logging.cmake:381 (log)
+  cmake/rsp/logging.cmake:158 (forward_to_log)
+  CMakeLists.txt:103 (warning)
+</code></pre>
+<p>See <a href="modules/logging/index.html">logging module</a> for additional information.</p>
 <h3><a id="cache" href="#cache" class="Permalink" aria-hidden="true" title="Permalink">#</a>Cache</h3>
 <p>(<em>available since <code>v0.1</code></em>)</p>
 <p>Module that offers additional caching functionality (<em>via CMake’s Cache Entry mechanism</em>).</p>

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <title>ANSI - CMake Scripts</title>
+    <meta name="description" content="How to use the ansi module.">
+    <meta name="keywords" content="output, ansi, cmake">
+    <meta name="author" content="RSP Systems A/S">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="icon" href="../../../themes/rsp/favicon/favicon-16x16.png" type="image/x-icon">
+
+    <!-- Mobile -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- JS -->
+    <script>
+        window.base_url = "../../../";
+        document.documentElement.classList.remove('no-js');
+    </script>
+
+    <!-- Font -->
+    
+    <!-- CSS -->
+            <link href='../../../themes/rsp/css/daux-blue.min.css' rel='stylesheet' type='text/css'>
+            <link href='../../../themes/rsp/css/style.css' rel='stylesheet' type='text/css'>
+            <link href='../../../daux_libraries/search.css' rel='stylesheet' type='text/css'>
+    </head>
+<body class="">
+    <div class="Columns content">
+    <aside class="Columns__left Collapsible">
+        <button type="button" class="Button Collapsible__trigger" aria-controls="sidebar_content" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="Collapsible__trigger__bar"></span>
+            <span class="Collapsible__trigger__bar"></span>
+            <span class="Collapsible__trigger__bar"></span>
+        </button>
+
+        <a class="Brand" href="../../../index.html">CMake Scripts</a>
+
+    <form role='search' action="/" method="get" class="Search" id="search_form">
+        <label for="search_input">
+            <span class='u-visuallyHidden'>Search</span>
+        </label>
+        <input
+            type="search"
+            id="search_input"
+            class="Search__field"
+            placeholder="Search..."
+            aria-label="Search..."
+            autocomplete="on"
+            results=25
+            autosave=text_search
+        >
+        <label>
+            <input type="submit" class='u-visuallyHidden' />
+            <span class='u-visuallyHidden'>Search...</span>
+            <svg class="Search__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 451 451">
+                <path d="M447.05 428l-109.6-109.6c29.4-33.8 47.2-77.9 47.2-126.1C384.65 86.2 298.35 0 192.35 0 86.25 0 .05 86.3.05 192.3s86.3 192.3 192.3 192.3c48.2 0 92.3-17.8 126.1-47.2L428.05 447c2.6 2.6 6.1 4 9.5 4s6.9-1.3 9.5-4c5.2-5.2 5.2-13.8 0-19zM26.95 192.3c0-91.2 74.2-165.3 165.3-165.3 91.2 0 165.3 74.2 165.3 165.3s-74.1 165.4-165.3 165.4c-91.1 0-165.3-74.2-165.3-165.4z"/>
+            </svg>
+        </label>
+    </form>
+
+        <div class="Collapsible__content" id="sidebar_content">
+            <!-- Navigation -->
+            <ul class='Nav'>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../current/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version 0.x</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/release_notes.html">Release Notes</a></li>
+<li class='Nav__item '><a href="../../../current/upgrade_guide.html">Upgrade Guide</a></li>
+<li class='Nav__item '><a href="../../../current/contribution_guide.html">Contribution Guide</a></li>
+<li class='Nav__item '><a href="../../../current/security_policy.html">Security Policy</a></li>
+<li class='Nav__item '><a href="../../../current/code_of_conduct.html">Code of Conduct</a></li>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/cache/set.html">Set</a></li>
+<li class='Nav__item '><a href="../../../current/modules/cache/get.html">Get</a></li>
+<li class='Nav__item '><a href="../../../current/modules/cache/has.html">Has</a></li>
+<li class='Nav__item '><a href="../../../current/modules/cache/remember.html">Remember</a></li>
+<li class='Nav__item '><a href="../../../current/modules/cache/forget.html">Forget</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../current/modules/compiler/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Compiler</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/compiler/gcc.html">GCC</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/git/find_version_tag.html">Find Version Tag</a></li></ul></li>
+<li class='Nav__item '><a href="../../../current/modules/helpers/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Helpers</a><ul class='Nav'></ul></li>
+<li class='Nav__item  has-children'><a href="../../../current/modules/logging/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Logging</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/logging/levels.html">Log Levels</a></li>
+<li class='Nav__item '><a href="../../../current/modules/logging/functions.html">Log Functions</a></li></ul></li>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/output/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Output</a><ul class='Nav'>
+<li class='Nav__item Nav__item--active'><a href="../../../current/modules/output/ansi.html">ANSI</a></li>
+<li class='Nav__item '><a href="../../../current/modules/output/helpers.html">Helpers</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../current/modules/testing/cmake/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules & Scripts</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/test_suite.html">Test Suite</a></li>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/test_case.html">Test Case</a></li>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/test.html">Test</a></li>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/run_tests.html">Run Tests</a></li>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/executor.html">Executor</a></li>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/asserts.html">Asserts</a></li></ul></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../current/modules/version/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../current/modules/version/semver/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Semantic Version</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/version/semver/parse.html">Parse</a></li></ul></li>
+<li class='Nav__item '><a href="../../../current/modules/version/version_file.html">Version File</a></li></ul></li></ul></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../archive/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Archive</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../archive/v_next/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>next</a><ul class='Nav'></ul></li></ul></li></ul>
+            <div class="Links">
+                                    <hr/>
+                                            <a href="https://github.com/rsps/cmake-scripts/blob/main/CHANGELOG.md" target="_blank"  rel="noopener noreferrer">Changelog</a>
+                        <br />
+                                            <a href="https://github.com/rsps/cmake-scripts" target="_blank"  rel="noopener noreferrer">GitHub</a>
+                        <br />
+                                            <a href="https://github.com/rsps/cmake-scripts/issues" target="_blank"  rel="noopener noreferrer">Issues</a>
+                        <br />
+                                            <a href="https://rspsystems.com/" target="_blank"  rel="noopener noreferrer">RSP Systems</a>
+                        <br />
+                                                </div>
+
+            
+            <div class="DarkModeToggler">
+                <hr/>
+                <label class="Checkbox">Dark Mode                    <input type="checkbox" class="ColorMode__button" />
+                    <div class="Checkbox__indicator"></div>
+                </label>
+            </div>
+
+                
+                                    <div class="PoweredBy">
+                        <hr/>
+                        © RSP Systems A/S                    </div>
+                        </div>
+    </aside>
+    <div class="Columns__right">
+        <div class="Columns__right__content">
+            <div class="doc_content">
+                <article class="Page">
+
+    <div class="Page__header">
+        <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/output/index.html">Output</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/output/ansi.html">ANSI</a></h1>
+                <span class="ModifiedDate">
+            February 5, 2025 at 6:09 AM        </span>
+                        <span class="EditOn">
+            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/output/ansi.md" target="_blank">
+                Edit on GitHub            </a>
+        </span>
+            </div>
+
+    <div class="s-content">
+        <h1><a id="ansi" href="#ansi" class="Permalink" aria-hidden="true" title="Permalink">#</a>ANSI</h1>
+<p>The <code>rsp/output</code> modules comes with support for <a href="https://en.wikipedia.org/wiki/ANSI_escape_code" class="Link--external" rel="noopener noreferrer">ANSI</a>, which will
+allow you to format and style your console output.</p>
+<div class="TableOfContentsContainer">
+    <h4 class="TableOfContentsContainer__title">Table of Contents</h4>
+    <div class="TableOfContentsContainer__content">
+        <ul class="TableOfContents">
+<li><a href="#ansi">ANSI</a>
+<ul>
+<li><a href="#how-to-enable-disable">How to enable / disable</a></li>
+<li><a href="#example">Example</a></li>
+<li><a href="#restore">Restore</a></li>
+<li><a href="#text-styles">Text Styles</a></li>
+<li><a href="#colours">Colours</a></li>
+<li><a href="#your-own-styles">Your own styles</a></li>
+</ul>
+</li>
+</ul>    </div>
+</div>
+<h2><a id="how-to-enable-disable" href="#how-to-enable-disable" class="Permalink" aria-hidden="true" title="Permalink">#</a>How to enable / disable</h2>
+<p>To enable ANSI output, set the <code>RSP_ENABLE_ANSI</code> option to <code>true</code>, when importing this project.
+By default, the option is set to <code>false</code>.</p>
+<pre><code class="hljs cmake">CPMAddPackage(
+    NAME                rsp-cmake-scripts
+    GITHUB_REPOSITORY   <span class="hljs-string">"https://github.com/rsps/cmake-scripts.git"</span>
+    VERSION             x.y.z
+    OPTIONS
+        <span class="hljs-string">"RSP_ENABLE_ANSI true"</span>
+    <span class="hljs-comment"># ...remaining not shown ...</span>
+)
+</code></pre>
+<h2><a id="example" href="#example" class="Permalink" aria-hidden="true" title="Permalink">#</a>Example</h2>
+<p>Once you have enabled ANSI for your project, then you can use a series of predefined properties (<em>ANSI escape sequences</em>)
+are available throughout your cmake scripts. These can be used to format your console output messages.</p>
+<pre><code class="hljs cmake"><span class="hljs-keyword">message</span>(<span class="hljs-string">"${COLOR_GREEN}${TEXT_ITALIC}Build success${RESTORE}, for ${PROJECT_NAME}"</span>)
+</code></pre>
+<p>The above shown example should output a message, where the first part is in green coloured, and italic styled text.
+The second part should be in normal styled text.</p>
+<blockquote>
+<p><span style="color: green; font-style: italic;">Build success</span>, for &lt; your-cmake-project-name &gt;</p>
+</blockquote>
+<h2><a id="restore" href="#restore" class="Permalink" aria-hidden="true" title="Permalink">#</a>Restore</h2>
+<p>Use the <code>RESTORE</code> (<em><a href="https://en.wikipedia.org/wiki/ANSI_escape_code#Control_Sequence_Introducer_commands" class="Link--external" rel="noopener noreferrer"><code>ESC[0m</code></a></em>)
+property if you wish to reset any previous set colour or style.</p>
+<pre><code class="hljs cmake"><span class="hljs-keyword">message</span>(<span class="hljs-string">"${TEXT_BOLD}Component:${RESTORE} ready"</span>)
+</code></pre>
+<blockquote>
+<p><strong>Component:</strong> ready</p>
+</blockquote>
+<h2><a id="text-styles" href="#text-styles" class="Permalink" aria-hidden="true" title="Permalink">#</a>Text Styles</h2>
+<p>The following shows the default preset <a href="https://en.wikipedia.org/wiki/ANSI_escape_code#Select_Graphic_Rendition_parameters" class="Link--external" rel="noopener noreferrer">text styles</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Name</th>
+<th align="right">Control Sequence Code</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TEXT_BOLD</code></td>
+<td>bold</td>
+<td align="right">1</td>
+<td><strong>My style</strong></td>
+</tr>
+<tr>
+<td><code>TEXT_BOLD_RESTORE</code></td>
+<td>bold (<em>restore</em>)</td>
+<td align="right">22</td>
+<td>My style</td>
+</tr>
+<tr>
+<td><code>TEXT_DIM</code></td>
+<td>dim</td>
+<td align="right">2</td>
+<td><span style="filter: brightness(50%)">My style</span></td>
+</tr>
+<tr>
+<td><code>TEXT_DIM_RESTORE</code></td>
+<td>dim (<em>restore</em>)</td>
+<td align="right">22</td>
+<td>My style</td>
+</tr>
+<tr>
+<td><code>TEXT_ITALIC</code></td>
+<td>italic</td>
+<td align="right">3</td>
+<td><em>My style</em></td>
+</tr>
+<tr>
+<td><code>TEXT_ITALIC_RESTORE</code></td>
+<td>italic (<em>restore</em>)</td>
+<td align="right">23</td>
+<td>My style</td>
+</tr>
+<tr>
+<td><code>TEXT_UNDERLINE</code></td>
+<td>underline</td>
+<td align="right">4</td>
+<td><span style="text-decoration: underline">My style</span></td>
+</tr>
+<tr>
+<td><code>TEXT_UNDERLINE_RESTORE</code></td>
+<td>underline (<em>restore</em>)</td>
+<td align="right">24</td>
+<td>My style</td>
+</tr>
+<tr>
+<td><code>TEXT_BLINK</code></td>
+<td>blink</td>
+<td align="right">5</td>
+<td><style>.blink { animation: blinker 1s linear infinite; } @keyframes blinker { 50% { opacity: 35% } }</style><span class="blink">My style</span></td>
+</tr>
+<tr>
+<td><code>TEXT_BLINK_RESTORE</code></td>
+<td>blink (<em>restore</em>)</td>
+<td align="right">25</td>
+<td>My style</td>
+</tr>
+<tr>
+<td><code>TEXT_INVERSE</code></td>
+<td>inverse</td>
+<td align="right">7</td>
+<td><span style="filter: invert(100%);">My style</span></td>
+</tr>
+<tr>
+<td><code>TEXT_INVERSE_RESTORE</code></td>
+<td>inverse (<em>restore</em>)</td>
+<td align="right">27</td>
+<td>My style</td>
+</tr>
+<tr>
+<td><code>TEXT_HIDDEN</code></td>
+<td>hidden</td>
+<td align="right">8</td>
+<td><span style="visibility: hidden;">My style</span></td>
+</tr>
+<tr>
+<td><code>TEXT_HIDDEN_RESTORE</code></td>
+<td>inverse (<em>restore</em>)</td>
+<td align="right">28</td>
+<td>My style</td>
+</tr>
+<tr>
+<td><code>TEXT_STRIKETHROUGH</code></td>
+<td>strikethrough</td>
+<td align="right">9</td>
+<td><span style="text-decoration: line-through;">My style</span></td>
+</tr>
+<tr>
+<td><code>TEXT_STRIKETHROUGH_RESTORE</code></td>
+<td>strikethrough (<em>restore</em>)</td>
+<td align="right">29</td>
+<td>My style</td>
+</tr>
+</tbody>
+</table>
+<div class="Admonition Admonition--note"><p class="Admonition__title">Note</p><p><em>Depending on your terminal, not all text styles might be supported!</em></p></div>
+<h2><a id="colours" href="#colours" class="Permalink" aria-hidden="true" title="Permalink">#</a>Colours</h2>
+<p>The following default foreground and background <a href="https://en.wikipedia.org/wiki/ANSI_escape_code#Colors" class="Link--external" rel="noopener noreferrer">colours</a> are
+supported:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Name</th>
+<th align="right">Control Sequence Code</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>COLOR_BLACK</code></td>
+<td>black</td>
+<td align="right">30</td>
+<td><div>My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BG_BLACK</code></td>
+<td>black (<em>background</em>)</td>
+<td align="right">40</td>
+<td><div style="background-color: #000; color: #fff">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BRIGHT_BLACK</code></td>
+<td>black bright</td>
+<td align="right">90</td>
+<td><div style="color: rgb(85, 85, 85);">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BRIGHT_BG_BLACK</code></td>
+<td>black bright (<em>background</em>)</td>
+<td align="right">100</td>
+<td><div style="background-color: rgb(85, 85, 85); color: #fff">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_RED</code></td>
+<td>red</td>
+<td align="right">31</td>
+<td><div style="color: rgb(170, 0, 0);">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BG_RED</code></td>
+<td>red (<em>background</em>)</td>
+<td align="right">41</td>
+<td><div style="background-color: rgb(170, 0, 0); color: #fff">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BRIGHT_RED</code></td>
+<td>red bright</td>
+<td align="right">91</td>
+<td><div style="color: rgb(255, 85, 85);">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BRIGHT_BG_RED</code></td>
+<td>red bright (<em>background</em>)</td>
+<td align="right">101</td>
+<td><div style="background-color: rgb(255, 85, 85); color: #fff;">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_GREEN</code></td>
+<td>green</td>
+<td align="right">32</td>
+<td><div style="color: rgb(0, 170, 0);">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BG_GREEN</code></td>
+<td>green (<em>background</em>)</td>
+<td align="right">42</td>
+<td><div style="background-color: rgb(0, 170, 0); color: #fff">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BRIGHT_GREEN</code></td>
+<td>green bright</td>
+<td align="right">92</td>
+<td><div style="color: rgb(85, 255, 85);">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BRIGHT_BG_GREEN</code></td>
+<td>green bright (<em>background</em>)</td>
+<td align="right">102</td>
+<td><div style="background-color: rgb(85, 255, 85); color: #000;">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_YELLOW</code></td>
+<td>yellow</td>
+<td align="right">33</td>
+<td><div style="color: rgb(170, 85, 0);">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BG_YELLOW</code></td>
+<td>yellow (<em>background</em>)</td>
+<td align="right">43</td>
+<td><div style="background-color: rgb(170, 85, 0); color: #fff">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BRIGHT_YELLOW</code></td>
+<td>yellow bright</td>
+<td align="right">93</td>
+<td><div style="color: rgb(255, 255, 85);">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BRIGHT_BG_YELLOW</code></td>
+<td>yellow bright (<em>background</em>)</td>
+<td align="right">103</td>
+<td><div style="background-color: rgb(255, 255, 85); color: #000;">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BLUE</code></td>
+<td>blue</td>
+<td align="right">34</td>
+<td><div style="color: rgb(0, 0, 170);">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BG_BLUE</code></td>
+<td>blue (<em>background</em>)</td>
+<td align="right">44</td>
+<td><div style="background-color: rgb(0, 0, 170); color: #fff">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BRIGHT_BLUE</code></td>
+<td>blue bright</td>
+<td align="right">94</td>
+<td><div style="color: rgb(85, 85, 255);">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BRIGHT_BG_BLUE</code></td>
+<td>blue bright (<em>background</em>)</td>
+<td align="right">104</td>
+<td><div style="background-color: rgb(85, 85, 255); color: #fff;">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_MAGENTA</code></td>
+<td>magenta</td>
+<td align="right">35</td>
+<td><div style="color: rgb(170, 0, 170);">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BG_MAGENTA</code></td>
+<td>magenta (<em>background</em>)</td>
+<td align="right">45</td>
+<td><div style="background-color: rgb(170, 0, 170); color: #fff">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BRIGHT_MAGENTA</code></td>
+<td>magenta bright</td>
+<td align="right">95</td>
+<td><div style="color: rgb(255, 85, 255);">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BRIGHT_BG_MAGENTA</code></td>
+<td>magenta bright (<em>background</em>)</td>
+<td align="right">105</td>
+<td><div style="background-color: rgb(255, 85, 255); color: #fff;">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_CYAN</code></td>
+<td>cyan</td>
+<td align="right">36</td>
+<td><div style="color: rgb(0, 170, 170);">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BG_CYAN</code></td>
+<td>cyan (<em>background</em>)</td>
+<td align="right">46</td>
+<td><div style="background-color: rgb(0, 170, 170); color: #fff">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BRIGHT_CYAN</code></td>
+<td>cyan bright</td>
+<td align="right">96</td>
+<td><div style="color: rgb(85, 255, 255);">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BRIGHT_BG_CYAN</code></td>
+<td>cyan bright (<em>background</em>)</td>
+<td align="right">106</td>
+<td><div style="background-color: rgb(85, 255, 255); color: #000;">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_WHITE</code></td>
+<td>white</td>
+<td align="right">37</td>
+<td><div style="color: rgb(170, 170, 170);">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BG_WHITE</code></td>
+<td>white (<em>background</em>)</td>
+<td align="right">47</td>
+<td><div style="background-color: rgb(170, 170, 170); color: #fff">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BRIGHT_WHITE</code></td>
+<td>white bright</td>
+<td align="right">97</td>
+<td><div style="color: rgb(255, 255, 255);">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_BRIGHT_BG_WHITE</code></td>
+<td>white bright (<em>background</em>)</td>
+<td align="right">107</td>
+<td><div style="background-color: rgb(255, 255, 255); color: #000;">My Style</div></td>
+</tr>
+<tr>
+<td><code>COLOR_DEFAULT</code></td>
+<td>default (<em>reset foreground</em>)</td>
+<td align="right">39</td>
+<td>My Style</td>
+</tr>
+<tr>
+<td><code>COLOR_BG_DEFAULT</code></td>
+<td>default (<em>reset background</em>)</td>
+<td align="right">49</td>
+<td>My Style</td>
+</tr>
+</tbody>
+</table>
+<div class="Admonition Admonition--note"><p class="Admonition__title">Note</p><p><em>Depending on your terminal, colours might be rendered different from the above shown examples!</em></p></div>
+<h2><a id="your-own-styles" href="#your-own-styles" class="Permalink" aria-hidden="true" title="Permalink">#</a>Your own styles</h2>
+<p>To customise the default preset, set the <code>RSP_ANSI_PRESET</code> list property, before including the <code>rsp/output</code> module, and
+before <a href="#how-to-enable">enabling ANSI</a>. Use the following format for declaring your own styles and colours:</p>
+<pre><code>&quot;&lt;variable&gt; &lt;code&gt;[|&lt;code&gt;]...&quot; 
+</code></pre>
+<ul>
+<li><em><code>&lt;variable&gt;</code></em>: name of your style or colour.</li>
+<li><em><code>&lt;code&gt;</code></em>: control sequence <a href="https://en.wikipedia.org/wiki/ANSI_escape_code#Select_Graphic_Rendition_parameters" class="Link--external" rel="noopener noreferrer">code</a>.</li>
+<li><em><code>|</code></em>: separator (<em>when you define a style that uses multiple codes</em>)</li>
+</ul>
+<pre><code class="hljs cmake"><span class="hljs-keyword">if</span>(CMAKE_PROJECT_NAME <span class="hljs-keyword">STREQUAL</span> PROJECT_NAME)
+    <span class="hljs-comment"># Define your own ANSI preset...</span>
+    <span class="hljs-keyword">set</span>(RSP_ANSI_PRESET
+        <span class="hljs-string">"RESTORE 0"</span>
+
+        <span class="hljs-string">"MY_STYLE 1|31|23"</span> <span class="hljs-comment"># Set style to bold, italic, and red foreground.</span>
+
+        <span class="hljs-string">"TEXT_BOLD 1"</span>
+        <span class="hljs-string">"TEXT_DIM 2"</span>
+
+        <span class="hljs-comment"># ... remaining not shown ...</span>
+
+        <span class="hljs-comment"># RECOMMENDED: you should cache your preset!</span>
+        CACHE <span class="hljs-keyword">STRING</span> <span class="hljs-string">"My custom ANSI preset"</span>
+    )
+    
+    <span class="hljs-keyword">include</span>(<span class="hljs-string">"rsp/output"</span>)
+    
+    enable_ansi()
+<span class="hljs-keyword">endif</span>()
+</code></pre>
+<div class="Admonition Admonition--info"><p class="Admonition__title">Tip: disable and re-enable</p><p><em>If you have customised the default provided ANSI preset, and your styles and colours have not taken effect,
+it could be caused of by previous cached preset.</em></p>
+<p><em>To resolve such an issue, <a href="#how-to-disable">disable</a> and then <a href="#how-to-enable">re-enable</a> ANSI. Doing so will clear previous
+cached properties and cache your custom preset.</em></p></div>
+    </div>
+
+        <nav>
+        <ul class="Pager">
+            <li class=Pager--prev><a href="../../../current/modules/output/index.html">Previous</a></li>            <li class=Pager--next><a href="../../../current/modules/output/helpers.html">Next</a></li>        </ul>
+    </nav>
+    </article>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    <!-- JS -->
+            <script src="../../../themes/rsp/js/main.mjs"></script>
+    
+        <script>
+        
+        window.searchLanguage = "";
+        window.searchTranslation = {"Search_one_result":"1 result","Search_results":"!count results","Search_no_results":"Nothing found","Search_common_words_ignored":"Common words are largely ignored","Search_too_short":"Search too short","Search_one_character_or_more":"Should be one character or more","Search_should_be_x_or_more":"Should be !min characters or more","Link_previous":"Previous","Link_next":"Next"};
+    </script>
+
+    <!-- Search -->
+    <script type="text/javascript" src="../../../daux_libraries/search.min.js"></script>
+
+    <script>
+        window.search({'base_url': '../../../'})
+    </script>
+</body>
+</html>

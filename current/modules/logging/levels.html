@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-    <title>Cache - CMake Scripts</title>
-    <meta name="description" content="How to use the cache module.">
-    <meta name="keywords" content="cache, cmake">
+    <title>Log Levels - CMake Scripts</title>
+    <meta name="description" content="How customise log levels.">
+    <meta name="keywords" content="logging, log, levels, setup, cmake">
     <meta name="author" content="RSP Systems A/S">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -71,7 +71,7 @@
 <li class='Nav__item '><a href="../../../current/security_policy.html">Security Policy</a></li>
 <li class='Nav__item '><a href="../../../current/code_of_conduct.html">Code of Conduct</a></li>
 <li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules</a><ul class='Nav'>
-<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/cache/set.html">Set</a></li>
 <li class='Nav__item '><a href="../../../current/modules/cache/get.html">Get</a></li>
 <li class='Nav__item '><a href="../../../current/modules/cache/has.html">Has</a></li>
@@ -82,8 +82,8 @@
 <li class='Nav__item  has-children'><a href="../../../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/git/find_version_tag.html">Find Version Tag</a></li></ul></li>
 <li class='Nav__item '><a href="../../../current/modules/helpers/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Helpers</a><ul class='Nav'></ul></li>
-<li class='Nav__item  has-children'><a href="../../../current/modules/logging/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Logging</a><ul class='Nav'>
-<li class='Nav__item '><a href="../../../current/modules/logging/levels.html">Log Levels</a></li>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/logging/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Logging</a><ul class='Nav'>
+<li class='Nav__item Nav__item--active'><a href="../../../current/modules/logging/levels.html">Log Levels</a></li>
 <li class='Nav__item '><a href="../../../current/modules/logging/functions.html">Log Functions</a></li></ul></li>
 <li class='Nav__item  has-children'><a href="../../../current/modules/output/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Output</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/output/ansi.html">ANSI</a></li>
@@ -134,27 +134,159 @@
                 <article class="Page">
 
     <div class="Page__header">
-        <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/cache/index.html">Cache</a></h1>
+        <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/logging/index.html">Logging</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/logging/levels.html">Log Levels</a></h1>
                 <span class="ModifiedDate">
             February 5, 2025 at 6:09 AM        </span>
                         <span class="EditOn">
-            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/cache/index.md" target="_blank">
+            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/logging/01_levels.md" target="_blank">
                 Edit on GitHub            </a>
         </span>
             </div>
 
     <div class="s-content">
-        <h1><a id="cache" href="#cache" class="Permalink" aria-hidden="true" title="Permalink">#</a>Cache</h1>
-<p>The cache module offers additional functionality for CMake’s <a href="https://cmake.org/cmake/help/latest/command/set.html#set-cache-entry" class="Link--external" rel="noopener noreferrer">Cache Entry</a>
-mechanism.</p>
-<h2><a id="how-to-include" href="#how-to-include" class="Permalink" aria-hidden="true" title="Permalink">#</a>How to include</h2>
-<pre><code class="hljs cmake"><span class="hljs-keyword">include</span>(<span class="hljs-string">"rsp/cache"</span>)
+        <h1><a id="log-levels" href="#log-levels" class="Permalink" aria-hidden="true" title="Permalink">#</a>Log Levels</h1>
+<div class="TableOfContentsContainer">
+    <h4 class="TableOfContentsContainer__title">Table of Contents</h4>
+    <div class="TableOfContentsContainer__content">
+        <ul class="TableOfContents">
+<li><a href="#log-levels">Log Levels</a>
+<ul>
+<li><a href="#psr-log-levels">PSR Log Levels</a></li>
+<li><a href="#cmake-message-modes">CMake Message Modes</a></li>
+<li><a href="#customize">Customize</a></li>
+</ul>
+</li>
+</ul>    </div>
+</div>
+<h2><a id="psr-log-levels" href="#psr-log-levels" class="Permalink" aria-hidden="true" title="Permalink">#</a>PSR Log Levels</h2>
+<p>The logging module defines the following log levels (<em>severities</em>), from
+<a href="https://www.php-fig.org/psr/psr-3/" class="Link--external" rel="noopener noreferrer">PSR-3: Logger Interface</a> - (<em>In accordance with <a href="https://datatracker.ietf.org/doc/html/rfc5424" class="Link--external" rel="noopener noreferrer">RFC 5424</a></em>).</p>
+<table>
+<thead>
+<tr>
+<th>Psr Log Level</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EMERGENCY_LEVEL</code></td>
+<td>System is unusable.</td>
+</tr>
+<tr>
+<td><code>ALERT_LEVEL</code></td>
+<td>Action must be taken immediately.</td>
+</tr>
+<tr>
+<td><code>CRITICAL_LEVEL</code></td>
+<td>Critical conditions.</td>
+</tr>
+<tr>
+<td><code>ERROR_LEVEL</code></td>
+<td>Error conditions.</td>
+</tr>
+<tr>
+<td><code>WARNING_LEVEL</code></td>
+<td>Warning conditions.</td>
+</tr>
+<tr>
+<td><code>NOTICE_LEVEL</code></td>
+<td>Normal but significant condition.</td>
+</tr>
+<tr>
+<td><code>INFO_LEVEL</code></td>
+<td>Informational messages.</td>
+</tr>
+<tr>
+<td><code>DEBUG_LEVEL</code></td>
+<td>Debug-level messages.</td>
+</tr>
+</tbody>
+</table>
+<h2><a id="cmake-message-modes" href="#cmake-message-modes" class="Permalink" aria-hidden="true" title="Permalink">#</a>CMake Message Modes</h2>
+<p>All the PSR log levels are associated with the following cmake <a href="https://cmake.org/cmake/help/latest/command/message.html#general-messages" class="Link--external" rel="noopener noreferrer">message modes</a>.
+This means that cmake’s <a href="https://cmake.org/cmake/help/latest/command/cmake_language.html#get-message-log-level" class="Link--external" rel="noopener noreferrer">current log level</a>
+is respected, when using any of the logging functions that are offered by this module.</p>
+<table>
+<thead>
+<tr>
+<th>Psr Log Level</th>
+<th>CMake Message Mode</th>
+<th>Mode Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EMERGENCY_LEVEL</code></td>
+<td><code>FATAL_ERROR</code></td>
+<td>CMake Error, stops processing and generation.</td>
+</tr>
+<tr>
+<td><code>ALERT_LEVEL</code></td>
+<td><code>FATAL_ERROR</code></td>
+<td>CMake Error, stops processing and generation.</td>
+</tr>
+<tr>
+<td><code>CRITICAL_LEVEL</code></td>
+<td><code>FATAL_ERROR</code></td>
+<td>CMake Error, stops processing and generation.</td>
+</tr>
+<tr>
+<td><code>ERROR_LEVEL</code></td>
+<td><code>SEND_ERROR</code></td>
+<td>CMake Error, continues processing, but skips generation.</td>
+</tr>
+<tr>
+<td><code>WARNING_LEVEL</code></td>
+<td><code>WARNING</code></td>
+<td>CMake Warning, continues processing.</td>
+</tr>
+<tr>
+<td><code>NOTICE_LEVEL</code></td>
+<td><code>NOTICE</code></td>
+<td>Important message printed to stderr.</td>
+</tr>
+<tr>
+<td><code>INFO_LEVEL</code></td>
+<td><code>NOTICE</code></td>
+<td>Important message printed to stderr.</td>
+</tr>
+<tr>
+<td><code>DEBUG_LEVEL</code></td>
+<td><code>DEBUG</code></td>
+<td>Detailed informational messages intended for developers.</td>
+</tr>
+</tbody>
+</table>
+<h2><a id="customize" href="#customize" class="Permalink" aria-hidden="true" title="Permalink">#</a>Customize</h2>
+<p>To change the default PSR log level / cmake message mode association, set the <code>RSP_LOG_LEVELS_CMAKE</code> list property,
+before you include the <code>rsp/logging</code> module
+or by <a href="https://cmake.org/cmake/help/latest/command/set.html#set-cache-entry" class="Link--external" rel="noopener noreferrer">force</a> caching the property.</p>
+<p>Use the following format for associating the levels:</p>
+<pre><code class="language-txt">&quot;&lt;psr&gt; &lt;cmake_mode&gt;&quot; 
+</code></pre>
+<ul>
+<li><em><code>&lt;psr&gt;</code></em>: PSR log level name.</li>
+<li><em><code>&lt;cmake_mode&gt;</code></em>: cmake’s <a href="https://cmake.org/cmake/help/latest/command/message.html#general-messages" class="Link--external" rel="noopener noreferrer">message modes</a>.</li>
+</ul>
+<pre><code class="hljs cmake"><span class="hljs-keyword">set</span>(RSP_LOG_LEVELS_CMAKE
+    <span class="hljs-string">"${EMERGENCY_LEVEL} FATAL_ERROR"</span>
+    <span class="hljs-string">"${ALERT_LEVEL} FATAL_ERROR"</span>
+    <span class="hljs-string">"${CRITICAL_LEVEL} FATAL_ERROR"</span>
+    <span class="hljs-string">"${ERROR_LEVEL} FATAL_ERROR"</span>
+    <span class="hljs-string">"${WARNING_LEVEL} WARNING"</span>
+    <span class="hljs-string">"${NOTICE_LEVEL} NOTICE"</span>
+    <span class="hljs-string">"${INFO_LEVEL} STATUS"</span>
+    <span class="hljs-string">"${DEBUG_LEVEL} STATUS"</span>
+
+    CACHE <span class="hljs-keyword">STRING</span> <span class="hljs-string">"Log levels / message mode"</span>
+)
 </code></pre>
     </div>
 
         <nav>
         <ul class="Pager">
-            <li class=Pager--prev><a href="../../../current/modules/index.html">Previous</a></li>            <li class=Pager--next><a href="../../../current/modules/cache/set.html">Next</a></li>        </ul>
+            <li class=Pager--prev><a href="../../../current/modules/logging/index.html">Previous</a></li>            <li class=Pager--next><a href="../../../current/modules/logging/functions.html">Next</a></li>        </ul>
     </nav>
     </article>
 

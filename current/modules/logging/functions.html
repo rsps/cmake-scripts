@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <title>Log Functions - CMake Scripts</title>
+    <meta name="description" content="How use log functions.">
+    <meta name="keywords" content="logging, log, functions, cmake">
+    <meta name="author" content="RSP Systems A/S">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="icon" href="../../../themes/rsp/favicon/favicon-16x16.png" type="image/x-icon">
+
+    <!-- Mobile -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- JS -->
+    <script>
+        window.base_url = "../../../";
+        document.documentElement.classList.remove('no-js');
+    </script>
+
+    <!-- Font -->
+    
+    <!-- CSS -->
+            <link href='../../../themes/rsp/css/daux-blue.min.css' rel='stylesheet' type='text/css'>
+            <link href='../../../themes/rsp/css/style.css' rel='stylesheet' type='text/css'>
+            <link href='../../../daux_libraries/search.css' rel='stylesheet' type='text/css'>
+    </head>
+<body class="">
+    <div class="Columns content">
+    <aside class="Columns__left Collapsible">
+        <button type="button" class="Button Collapsible__trigger" aria-controls="sidebar_content" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="Collapsible__trigger__bar"></span>
+            <span class="Collapsible__trigger__bar"></span>
+            <span class="Collapsible__trigger__bar"></span>
+        </button>
+
+        <a class="Brand" href="../../../index.html">CMake Scripts</a>
+
+    <form role='search' action="/" method="get" class="Search" id="search_form">
+        <label for="search_input">
+            <span class='u-visuallyHidden'>Search</span>
+        </label>
+        <input
+            type="search"
+            id="search_input"
+            class="Search__field"
+            placeholder="Search..."
+            aria-label="Search..."
+            autocomplete="on"
+            results=25
+            autosave=text_search
+        >
+        <label>
+            <input type="submit" class='u-visuallyHidden' />
+            <span class='u-visuallyHidden'>Search...</span>
+            <svg class="Search__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 451 451">
+                <path d="M447.05 428l-109.6-109.6c29.4-33.8 47.2-77.9 47.2-126.1C384.65 86.2 298.35 0 192.35 0 86.25 0 .05 86.3.05 192.3s86.3 192.3 192.3 192.3c48.2 0 92.3-17.8 126.1-47.2L428.05 447c2.6 2.6 6.1 4 9.5 4s6.9-1.3 9.5-4c5.2-5.2 5.2-13.8 0-19zM26.95 192.3c0-91.2 74.2-165.3 165.3-165.3 91.2 0 165.3 74.2 165.3 165.3s-74.1 165.4-165.3 165.4c-91.1 0-165.3-74.2-165.3-165.4z"/>
+            </svg>
+        </label>
+    </form>
+
+        <div class="Collapsible__content" id="sidebar_content">
+            <!-- Navigation -->
+            <ul class='Nav'>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../current/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version 0.x</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/release_notes.html">Release Notes</a></li>
+<li class='Nav__item '><a href="../../../current/upgrade_guide.html">Upgrade Guide</a></li>
+<li class='Nav__item '><a href="../../../current/contribution_guide.html">Contribution Guide</a></li>
+<li class='Nav__item '><a href="../../../current/security_policy.html">Security Policy</a></li>
+<li class='Nav__item '><a href="../../../current/code_of_conduct.html">Code of Conduct</a></li>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/cache/set.html">Set</a></li>
+<li class='Nav__item '><a href="../../../current/modules/cache/get.html">Get</a></li>
+<li class='Nav__item '><a href="../../../current/modules/cache/has.html">Has</a></li>
+<li class='Nav__item '><a href="../../../current/modules/cache/remember.html">Remember</a></li>
+<li class='Nav__item '><a href="../../../current/modules/cache/forget.html">Forget</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../current/modules/compiler/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Compiler</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/compiler/gcc.html">GCC</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/git/find_version_tag.html">Find Version Tag</a></li></ul></li>
+<li class='Nav__item '><a href="../../../current/modules/helpers/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Helpers</a><ul class='Nav'></ul></li>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/logging/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Logging</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/logging/levels.html">Log Levels</a></li>
+<li class='Nav__item Nav__item--active'><a href="../../../current/modules/logging/functions.html">Log Functions</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../current/modules/output/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Output</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/output/ansi.html">ANSI</a></li>
+<li class='Nav__item '><a href="../../../current/modules/output/helpers.html">Helpers</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../current/modules/testing/cmake/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules & Scripts</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/test_suite.html">Test Suite</a></li>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/test_case.html">Test Case</a></li>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/test.html">Test</a></li>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/run_tests.html">Run Tests</a></li>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/executor.html">Executor</a></li>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/asserts.html">Asserts</a></li></ul></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../current/modules/version/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../current/modules/version/semver/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Semantic Version</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/version/semver/parse.html">Parse</a></li></ul></li>
+<li class='Nav__item '><a href="../../../current/modules/version/version_file.html">Version File</a></li></ul></li></ul></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../archive/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Archive</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../archive/v_next/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>next</a><ul class='Nav'></ul></li></ul></li></ul>
+            <div class="Links">
+                                    <hr/>
+                                            <a href="https://github.com/rsps/cmake-scripts/blob/main/CHANGELOG.md" target="_blank"  rel="noopener noreferrer">Changelog</a>
+                        <br />
+                                            <a href="https://github.com/rsps/cmake-scripts" target="_blank"  rel="noopener noreferrer">GitHub</a>
+                        <br />
+                                            <a href="https://github.com/rsps/cmake-scripts/issues" target="_blank"  rel="noopener noreferrer">Issues</a>
+                        <br />
+                                            <a href="https://rspsystems.com/" target="_blank"  rel="noopener noreferrer">RSP Systems</a>
+                        <br />
+                                                </div>
+
+            
+            <div class="DarkModeToggler">
+                <hr/>
+                <label class="Checkbox">Dark Mode                    <input type="checkbox" class="ColorMode__button" />
+                    <div class="Checkbox__indicator"></div>
+                </label>
+            </div>
+
+                
+                                    <div class="PoweredBy">
+                        <hr/>
+                        © RSP Systems A/S                    </div>
+                        </div>
+    </aside>
+    <div class="Columns__right">
+        <div class="Columns__right__content">
+            <div class="doc_content">
+                <article class="Page">
+
+    <div class="Page__header">
+        <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/logging/index.html">Logging</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/logging/functions.html">Log Functions</a></h1>
+                <span class="ModifiedDate">
+            February 5, 2025 at 6:09 AM        </span>
+                        <span class="EditOn">
+            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/logging/02_functions.md" target="_blank">
+                Edit on GitHub            </a>
+        </span>
+            </div>
+
+    <div class="s-content">
+        <h1><a id="log-functions" href="#log-functions" class="Permalink" aria-hidden="true" title="Permalink">#</a>Log Functions</h1>
+<div class="TableOfContentsContainer">
+    <h4 class="TableOfContentsContainer__title">Table of Contents</h4>
+    <div class="TableOfContentsContainer__content">
+        <ul class="TableOfContents">
+<li><a href="#log-functions">Log Functions</a>
+<ul>
+<li><a href="#emergency">emergency()</a></li>
+<li><a href="#alert">alert()</a></li>
+<li><a href="#critical">critical()</a></li>
+<li><a href="#error">error()</a></li>
+<li><a href="#warning">warning()</a></li>
+<li><a href="#notice">notice()</a></li>
+<li><a href="#info">info()</a></li>
+<li><a href="#debug">debug()</a></li>
+<li><a href="#log">log()</a>
+<ul>
+<li><a href="#mode">Mode</a></li>
+<li><a href="#context">Context</a></li>
+<li><a href="#timestamp">Timestamp</a></li>
+<li><a href="#output">Output</a></li>
+<li><a href="#lists">Lists</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>    </div>
+</div>
+<h2><a id="emergency" href="#emergency" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>emergency()</code></h2>
+<p>Logs an “emergency” level message.</p>
+<pre><code class="hljs cmake">emergency(<span class="hljs-string">"External power supply is unavailable"</span>)
+</code></pre>
+<p>The following parameters are supported:</p>
+<ul>
+<li>&lt; message &gt;</li>
+<li>&lt; mode &gt;: (<em>option</em>)</li>
+<li><code>CONTEXT</code>: (<em>optional</em>)</li>
+<li><code>OUTPUT</code>: (<em>optional</em>)</li>
+<li><code>LIST_SEPARATOR</code>: (<em>optional</em>)</li>
+</ul>
+<p><em>See <a href="#log"><code>log()</code></a> function for parameter descriptions and examples.</em></p>
+<h2><a id="alert" href="#alert" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>alert()</code></h2>
+<p>Logs an “alert” level message.</p>
+<pre><code class="hljs cmake">alert(<span class="hljs-string">"Storage disk is above 90% full, cleanup is required"</span>)
+</code></pre>
+<p>The following parameters are supported:</p>
+<ul>
+<li>&lt; message &gt;</li>
+<li>&lt; mode &gt;: (<em>option</em>)</li>
+<li><code>CONTEXT</code>: (<em>optional</em>)</li>
+<li><code>OUTPUT</code>: (<em>optional</em>)</li>
+<li><code>LIST_SEPARATOR</code>: (<em>optional</em>)</li>
+</ul>
+<p><em>See <a href="#log"><code>log()</code></a> function for parameter descriptions and examples.</em></p>
+<h2><a id="critical" href="#critical" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>critical()</code></h2>
+<p>Logs a “critical” level message.</p>
+<pre><code class="hljs cmake">critical(<span class="hljs-string">"Acme 3.7V Li-Po Battery Driver is unavailable, unable to continue build"</span>)
+</code></pre>
+<p>The following parameters are supported:</p>
+<ul>
+<li>&lt; message &gt;</li>
+<li>&lt; mode &gt;: (<em>option</em>)</li>
+<li><code>CONTEXT</code>: (<em>optional</em>)</li>
+<li><code>OUTPUT</code>: (<em>optional</em>)</li>
+<li><code>LIST_SEPARATOR</code>: (<em>optional</em>)</li>
+</ul>
+<p><em>See <a href="#log"><code>log()</code></a> function for parameter descriptions and examples.</em></p>
+<h2><a id="error" href="#error" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>error()</code></h2>
+<p>Log an “error” level message.</p>
+<pre><code class="hljs cmake">error(<span class="hljs-string">"Acme LDSv6 Driver failed loading device.ini"</span>)
+</code></pre>
+<p>The following parameters are supported:</p>
+<ul>
+<li>&lt; message &gt;</li>
+<li>&lt; mode &gt;: (<em>option</em>)</li>
+<li><code>CONTEXT</code>: (<em>optional</em>)</li>
+<li><code>OUTPUT</code>: (<em>optional</em>)</li>
+<li><code>LIST_SEPARATOR</code>: (<em>optional</em>)</li>
+</ul>
+<p><em>See <a href="#log"><code>log()</code></a> function for parameter descriptions and examples.</em></p>
+<h2><a id="warning" href="#warning" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>warning()</code></h2>
+<p>Logs a “warning” level message.</p>
+<pre><code class="hljs cmake">warning(<span class="hljs-string">"No configuration found for Acme VCMx Driver, using driver defaults"</span>)
+</code></pre>
+<p>The following parameters are supported:</p>
+<ul>
+<li>&lt; message &gt;</li>
+<li>&lt; mode &gt;: (<em>option</em>)</li>
+<li><code>CONTEXT</code>: (<em>optional</em>)</li>
+<li><code>OUTPUT</code>: (<em>optional</em>)</li>
+<li><code>LIST_SEPARATOR</code>: (<em>optional</em>)</li>
+</ul>
+<p><em>See <a href="#log"><code>log()</code></a> function for parameter descriptions and examples.</em></p>
+<h2><a id="notice" href="#notice" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>notice()</code></h2>
+<p>Logs a “notice” level message.</p>
+<pre><code class="hljs cmake">notice(<span class="hljs-string">"Acme CPU32v6xx Power Control Driver build completed"</span>)
+</code></pre>
+<p>The following parameters are supported:</p>
+<ul>
+<li>&lt; message &gt;</li>
+<li>&lt; mode &gt;: (<em>option</em>)</li>
+<li><code>CONTEXT</code>: (<em>optional</em>)</li>
+<li><code>OUTPUT</code>: (<em>optional</em>)</li>
+<li><code>LIST_SEPARATOR</code>: (<em>optional</em>)</li>
+</ul>
+<p><em>See <a href="#log"><code>log()</code></a> function for parameter descriptions and examples.</em></p>
+<h2><a id="info" href="#info" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>info()</code></h2>
+<p>Log an “info” level message.</p>
+<pre><code class="hljs cmake">info(<span class="hljs-string">"Started building external system assets"</span>)
+</code></pre>
+<p>The following parameters are supported:</p>
+<ul>
+<li>&lt; message &gt;</li>
+<li>&lt; mode &gt;: (<em>option</em>)</li>
+<li><code>CONTEXT</code>: (<em>optional</em>)</li>
+<li><code>OUTPUT</code>: (<em>optional</em>)</li>
+<li><code>LIST_SEPARATOR</code>: (<em>optional</em>)</li>
+</ul>
+<p><em>See <a href="#log"><code>log()</code></a> function for parameter descriptions and examples.</em></p>
+<h2><a id="debug" href="#debug" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>debug()</code></h2>
+<p>Log a “debug” level message.</p>
+<pre><code class="hljs cmake">debug(<span class="hljs-string">"Network: eth4, via pci@0004:01:00.0 (serial: e4:1d:2d:67:83:56)"</span>)
+</code></pre>
+<p>The following parameters are supported:</p>
+<ul>
+<li>&lt; message &gt;</li>
+<li>&lt; mode &gt;: (<em>option</em>)</li>
+<li><code>CONTEXT</code>: (<em>optional</em>)</li>
+<li><code>OUTPUT</code>: (<em>optional</em>)</li>
+<li><code>LIST_SEPARATOR</code>: (<em>optional</em>)</li>
+</ul>
+<p><em>See <a href="#log"><code>log()</code></a> function for parameter descriptions and examples.</em></p>
+<h2><a id="log" href="#log" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>log()</code></h2>
+<p>Log a message with an arbitrary level.</p>
+<pre><code class="hljs cmake">log(INFO_LEVEL <span class="hljs-string">"Removing expired tmp files from cache storage"</span>)
+</code></pre>
+<p>Behind the scene, <code>log()</code> uses the <a href="../output/helpers.html#output"><code>output()</code></a> function to print messages to the console.
+It supports the following parameters:</p>
+<ul>
+<li>&lt; level &gt;: <em>The PSR log level (see <a href="levels.html#psr-log-levels"><code>RSP_LOG_LEVELS</code></a>)</em></li>
+<li>&lt; message &gt;: <em><code>string</code>, <code>variable</code> or <code>list</code> message to output.</em></li>
+<li>&lt; mode &gt;: (<em>option</em>), <em>cmake <a href="https://cmake.org/cmake/help/latest/command/message.html#general-messages" class="Link--external" rel="noopener noreferrer">message mode</a>, e.g. <code>WARNING</code>, <code>NOTICE</code>, <code>STATUS</code>, …etc.</em>
+<em>Defaults to the mode that is associated with the given log level (see <a href="levels.html#cmake-message-modes"><code>RSP_LOG_LEVELS_CMAKE</code></a>).</em></li>
+<li><code>CONTEXT</code>: (<em>optional</em>), <em>Evt. variables to output in a “context” associated with the log message.</em></li>
+<li><code>OUTPUT</code>: (<em>optional</em>), <em>output variable. If specified, message is assigned to variable, instead of being printed to <code>stdout</code> or <code>stderr</code>.</em></li>
+<li><code>LIST_SEPARATOR</code>: (<em>optional</em>), <em>Separator to used, if a list variable is given as message. Defaults to <code>\n</code> (newline).</em></li>
+</ul>
+<h3><a id="mode" href="#mode" class="Permalink" aria-hidden="true" title="Permalink">#</a>Mode</h3>
+<p>Unless you specify the cmake <a href="https://cmake.org/cmake/help/latest/command/message.html#general-messages" class="Link--external" rel="noopener noreferrer">message mode</a>, <code>log()</code> will automatically apply the mode that is associated with
+the specified PSR log level (<em>defined by the <a href="levels.html#cmake-message-modes"><code>RSP_LOG_LEVELS_CMAKE</code></a> property</em>).</p>
+<p>Consequently, in situations when you need to deviate from the default associated mode, simply specify the desired
+message mode.</p>
+<pre><code class="hljs cmake"><span class="hljs-comment"># Log a "warning" level message, but use a STATUS cmake message mode</span>
+log(WARNING_LEVEL <span class="hljs-string">"Config NOT found for VCMx Driver, using defaults"</span> STATUS)
+</code></pre>
+<p>The above example will print a message similar to this:</p>
+<pre><code class="language-txt">-- warning: Config NOT found for VCMx Driver, using defaults
+   Timestamp: 2025-02-05 11:33:32.190620
+</code></pre>
+<h3><a id="context" href="#context" class="Permalink" aria-hidden="true" title="Permalink">#</a>Context</h3>
+<p>The <code>CONTEXT</code> parameter allows you to associate one or more variables with the given log entry.</p>
+<pre><code class="hljs cmake">log(
+    NOTICE_LEVEL <span class="hljs-string">"Assets build completed"</span>
+    CONTEXT
+        assets_dir
+        my_assets_list
+)
+</code></pre>
+<p>The above shown example will print a message similar to this:</p>
+<pre><code class="language-txt">notice: Assets build completed
+   Context: 
+   [
+      assets_dir = build/resources/config
+      my_assets_list = graft.conf;ports.init;power.json
+   ]
+   Timestamp: 2025-02-05 11:08:40.912747
+</code></pre>
+<h3><a id="timestamp" href="#timestamp" class="Permalink" aria-hidden="true" title="Permalink">#</a>Timestamp</h3>
+<p>By default, a timestamp is appended at the end of each logged message.
+You can modify this behaviour, and the timestamp format by changing the following predefined properties:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RSP_LOG_SHOW_TIMESTAMP</code></td>
+<td><code>true</code></td>
+<td>State whether to append timestamp for log entries, or not</td>
+</tr>
+<tr>
+<td><code>RSP_LOG_TIMESTAMP_FORMAT</code></td>
+<td><code>%Y-%m-%d %H:%M:%S.%f</code></td>
+<td>Timestamp format. See <a href="https://cmake.org/cmake/help/latest/command/string.html#timestamp" class="Link--external" rel="noopener noreferrer">CMake documentation</a> for details.</td>
+</tr>
+<tr>
+<td><code>RSP_LOG_TIMESTAMP_UTC</code></td>
+<td><code>false</code></td>
+<td>True if timestamp is UTC, false if timestamp is local</td>
+</tr>
+</tbody>
+</table>
+<div class="Admonition Admonition--note"><p class="Admonition__title">Note</p><p>Properties should be set before you include the <code>rsp/logging</code> module or by <a href="https://cmake.org/cmake/help/latest/command/set.html#set-cache-entry" class="Link--external" rel="noopener noreferrer">force</a> caching the property.</p></div>
+<h3><a id="output" href="#output" class="Permalink" aria-hidden="true" title="Permalink">#</a>Output</h3>
+<p>See <a href="../output/helpers.html#capture-output">“Capture Output“</a> for additional information about the <code>OUTPUT</code> parameter.</p>
+<h3><a id="lists" href="#lists" class="Permalink" aria-hidden="true" title="Permalink">#</a>Lists</h3>
+<p>See <a href="../output/helpers.html#lists">output “Lists”</a> for additional information about the <code>LIST_SEPARATOR</code> parameter.</p>
+    </div>
+
+        <nav>
+        <ul class="Pager">
+            <li class=Pager--prev><a href="../../../current/modules/logging/levels.html">Previous</a></li>            <li class=Pager--next><a href="../../../current/modules/output/index.html">Next</a></li>        </ul>
+    </nav>
+    </article>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    <!-- JS -->
+            <script src="../../../themes/rsp/js/main.mjs"></script>
+    
+        <script>
+        
+        window.searchLanguage = "";
+        window.searchTranslation = {"Search_one_result":"1 result","Search_results":"!count results","Search_no_results":"Nothing found","Search_common_words_ignored":"Common words are largely ignored","Search_too_short":"Search too short","Search_one_character_or_more":"Should be one character or more","Search_should_be_x_or_more":"Should be !min characters or more","Link_previous":"Previous","Link_next":"Next"};
+    </script>
+
+    <!-- Search -->
+    <script type="text/javascript" src="../../../daux_libraries/search.min.js"></script>
+
+    <script>
+        window.search({'base_url': '../../../'})
+    </script>
+</body>
+</html>

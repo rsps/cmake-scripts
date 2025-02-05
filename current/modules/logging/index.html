@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-    <title>Cache - CMake Scripts</title>
-    <meta name="description" content="How to use the cache module.">
-    <meta name="keywords" content="cache, cmake">
+    <title>Logging - CMake Scripts</title>
+    <meta name="description" content="How to use the logging module.">
+    <meta name="keywords" content="logging, log, cmake">
     <meta name="author" content="RSP Systems A/S">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -71,7 +71,7 @@
 <li class='Nav__item '><a href="../../../current/security_policy.html">Security Policy</a></li>
 <li class='Nav__item '><a href="../../../current/code_of_conduct.html">Code of Conduct</a></li>
 <li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules</a><ul class='Nav'>
-<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/cache/set.html">Set</a></li>
 <li class='Nav__item '><a href="../../../current/modules/cache/get.html">Get</a></li>
 <li class='Nav__item '><a href="../../../current/modules/cache/has.html">Has</a></li>
@@ -82,7 +82,7 @@
 <li class='Nav__item  has-children'><a href="../../../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/git/find_version_tag.html">Find Version Tag</a></li></ul></li>
 <li class='Nav__item '><a href="../../../current/modules/helpers/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Helpers</a><ul class='Nav'></ul></li>
-<li class='Nav__item  has-children'><a href="../../../current/modules/logging/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Logging</a><ul class='Nav'>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/logging/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Logging</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/logging/levels.html">Log Levels</a></li>
 <li class='Nav__item '><a href="../../../current/modules/logging/functions.html">Log Functions</a></li></ul></li>
 <li class='Nav__item  has-children'><a href="../../../current/modules/output/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Output</a><ul class='Nav'>
@@ -134,27 +134,43 @@
                 <article class="Page">
 
     <div class="Page__header">
-        <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/cache/index.html">Cache</a></h1>
+        <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/logging/index.html">Logging</a></h1>
                 <span class="ModifiedDate">
             February 5, 2025 at 6:09 AM        </span>
                         <span class="EditOn">
-            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/cache/index.md" target="_blank">
+            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/logging/index.md" target="_blank">
                 Edit on GitHub            </a>
         </span>
             </div>
 
     <div class="s-content">
-        <h1><a id="cache" href="#cache" class="Permalink" aria-hidden="true" title="Permalink">#</a>Cache</h1>
-<p>The cache module offers additional functionality for CMake’s <a href="https://cmake.org/cmake/help/latest/command/set.html#set-cache-entry" class="Link--external" rel="noopener noreferrer">Cache Entry</a>
-mechanism.</p>
+        <h1><a id="logging" href="#logging" class="Permalink" aria-hidden="true" title="Permalink">#</a>Logging</h1>
+<p>The <code>logging</code> module offers an adaptation and implementation of the
+<a href="https://www.php-fig.org/psr/psr-3/" class="Link--external" rel="noopener noreferrer">PSR-3: Logger Interface</a>. It offers a series of predefined logging functions,
+that are able to print a pre-formatted message to the console.
+Behind the scene, the <a href="../output/helpers.html#output"><code>output()</code></a> function is used.</p>
 <h2><a id="how-to-include" href="#how-to-include" class="Permalink" aria-hidden="true" title="Permalink">#</a>How to include</h2>
-<pre><code class="hljs cmake"><span class="hljs-keyword">include</span>(<span class="hljs-string">"rsp/cache"</span>)
+<pre><code class="hljs cmake"><span class="hljs-keyword">include</span>(<span class="hljs-string">"rsp/logging"</span>)
+</code></pre>
+<h2><a id="example" href="#example" class="Permalink" aria-hidden="true" title="Permalink">#</a>Example</h2>
+<pre><code class="hljs cmake">warning(<span class="hljs-string">"Unable to find config.json"</span>)
+</code></pre>
+<p>The above shown example will print a message similar to this:</p>
+<pre><code class="language-txt">CMake Warning at cmake/rsp/output.cmake:144 (message):
+warning: Unable to find config.json
+
+      Timestamp: 2025-02-04 15:31:52.120599
+Call Stack (most recent call first):
+  cmake/rsp/logging.cmake:337 (output)
+  cmake/rsp/logging.cmake:383 (log)
+  cmake/rsp/logging.cmake:158 (forward_to_log)
+  CMakeLists.txt:10 (warning)
 </code></pre>
     </div>
 
         <nav>
         <ul class="Pager">
-            <li class=Pager--prev><a href="../../../current/modules/index.html">Previous</a></li>            <li class=Pager--next><a href="../../../current/modules/cache/set.html">Next</a></li>        </ul>
+            <li class=Pager--prev><a href="../../../current/modules/helpers/index.html">Previous</a></li>            <li class=Pager--next><a href="../../../current/modules/logging/levels.html">Next</a></li>        </ul>
     </nav>
     </article>
 
