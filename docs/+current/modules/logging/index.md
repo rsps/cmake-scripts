@@ -24,7 +24,7 @@ include("rsp/logging")
 warning("Unable to find config.json")
 ```
 
-The above shown example will print a message in the console, that is similar to the following:
+The above shown example will print a message similar to this:
 
 ```txt
 CMake Warning at cmake/rsp/output.cmake:144 (message):
