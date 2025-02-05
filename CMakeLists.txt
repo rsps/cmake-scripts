@@ -100,13 +100,5 @@ endif ()
 # Misc.
 # -------------------------------------------------------------------------------------------------------------- #
 
-log(
-    NOTICE_LEVEL "Assets build completed"
-    CONTEXT
-        CMAKE_BINARY_DIR
-        PROJECT_NAME
-        CMAKE_PROJECT_NAME
-)
-
 # output_ansi_demo()
 # dump(CMAKE_MODULE_PATH FOO BAR PROJECT_NAME)
