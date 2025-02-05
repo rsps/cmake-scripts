@@ -54,7 +54,7 @@ result = Building package assets
 
 !!! note "Note"
     When you specify the `OUTPUT` parameter, then the message `< mode >` argument is ignored.
-    As such, the following will never yield and error:
+    As such, the following will never yield an error:
 
     ```cmake
     # FATAL_ERROR message mode used, but OUTPUT specified... this never fails!
