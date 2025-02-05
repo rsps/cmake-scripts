@@ -66,6 +66,19 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 endif()
 
 # -------------------------------------------------------------------------------------------------------------- #
+# Post-dependencies project setup
+# -------------------------------------------------------------------------------------------------------------- #
+
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+    include("rsp/debug")
+    include("rsp/output")
+    include("rsp/logging")
+
+    enable_ansi()
+    # disable_ansi()
+endif()
+
+# -------------------------------------------------------------------------------------------------------------- #
 # Tests
 # -------------------------------------------------------------------------------------------------------------- #
 
@@ -78,13 +91,5 @@ endif ()
 # Misc.
 # -------------------------------------------------------------------------------------------------------------- #
 
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    include("rsp/debug")
-    include("rsp/output")
-
-    enable_ansi()
-
-    # output_ansi_demo()
-
-    # dump(CMAKE_MODULE_PATH FOO BAR PROJECT_NAME)
-endif()
+# output_ansi_demo()
+# dump(CMAKE_MODULE_PATH FOO BAR PROJECT_NAME)
