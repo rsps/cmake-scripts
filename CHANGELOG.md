@@ -20,6 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `VERSION` file.
 * RSP's GCC strict compile options, in `gcc.cmake` (_exposed via `compiler.cmake` module_).
 * Caching utilities, `cache.cmake`.
+* `output()` helper, in `output.cmake`.
+* Support for ANSI, in `output.cmake`.
+* PSR inspired logging functions, in `logging.cmake`.
 * A "mini" testing framework for cmake modules and scripts, in `testing.cmake`.
 * `RSP_CMAKE_SCRIPTS_BUILD_TESTS` project option for building tests.
 * `tests.yaml` and `deploy-docs.yaml` GitHub Actions workflows.
