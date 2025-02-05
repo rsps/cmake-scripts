@@ -187,7 +187,7 @@ endif ()
 
 if (NOT COMMAND "info")
 
-    #! info : Log an "info" level message - Normal but significant events.
+    #! info : Log an "info" level message - Informational events.
     #
     # @see log()
     #
@@ -196,7 +196,6 @@ if (NOT COMMAND "info")
     #                                           using the LIST_SEPARATOR.
     # @param [<mode>]                           Option - Cmake's message type. Defaults to the `mode` that is
     #                                           associated with the specified `level`, defined in RSP_LOG_LEVELS_CMAKE.
-    #                                           NOTICE, when not specified.
     # @param [CONTEXT <variable>...]            Optional - Evt. variables to output in a "context" associated with the
     #                                           log message.
     # @param [OUTPUT <variable>]                Optional - If specified, message is assigned to output variable instead
@@ -214,7 +213,7 @@ endif ()
 
 if (NOT COMMAND "debug")
 
-    #! debug : Log an "debug" level message - Normal but significant events.
+    #! debug : Log a "debug" level message - Debugging information or events.
     #
     # @see log()
     #
@@ -223,7 +222,6 @@ if (NOT COMMAND "debug")
     #                                           using the LIST_SEPARATOR.
     # @param [<mode>]                           Option - Cmake's message type. Defaults to the `mode` that is
     #                                           associated with the specified `level`, defined in RSP_LOG_LEVELS_CMAKE.
-    #                                           NOTICE, when not specified.
     # @param [CONTEXT <variable>...]            Optional - Evt. variables to output in a "context" associated with the
     #                                           log message.
     # @param [OUTPUT <variable>]                Optional - If specified, message is assigned to output variable instead
