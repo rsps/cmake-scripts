@@ -78,6 +78,8 @@ See [version module](./modules/version/index.md) for additional information.
 
 ### Output
 
+(_available since `v0.1`_)
+
 Various output and [ANSI](./modules/output/ansi.md) utilities.
 
 ```cmake
@@ -91,6 +93,8 @@ output("Building package assets" NOTICE LABEL "✓" LABEL_FORMAT "[ %label% ] ")
 See [output module](./modules/output/index.md) for additional information.
 
 ### Logging
+
+(_available since `v0.1`_)
 
 [PSR-3](https://www.php-fig.org/psr/psr-3/) inspired logging utilities.
 
