@@ -5,6 +5,7 @@
 cmake_minimum_required(VERSION 3.30)
 
 option(RSP_CMAKE_SCRIPTS_BUILD_TESTS "Build tests for the RSP CMake Scripts project" off)
+option(RSP_ENABLE_ANSI "Enable ANSI output" false)
 
 # -------------------------------------------------------------------------------------------------------------- #
 # Setup
@@ -66,16 +67,24 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 endif()
 
 # -------------------------------------------------------------------------------------------------------------- #
+# Toggle ANSI output
+# -------------------------------------------------------------------------------------------------------------- #
+
+include("rsp/output")
+
+if (RSP_ENABLE_ANSI)
+    enable_ansi()
+else ()
+    disable_ansi()
+endif ()
+
+# -------------------------------------------------------------------------------------------------------------- #
 # Post-dependencies project setup
 # -------------------------------------------------------------------------------------------------------------- #
 
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     include("rsp/debug")
-    include("rsp/output")
     include("rsp/logging")
-
-    enable_ansi()
-    # disable_ansi()
 endif()
 
 # -------------------------------------------------------------------------------------------------------------- #
@@ -90,6 +99,14 @@ endif ()
 # -------------------------------------------------------------------------------------------------------------- #
 # Misc.
 # -------------------------------------------------------------------------------------------------------------- #
+
+log(
+    NOTICE_LEVEL "Assets build completed"
+    CONTEXT
+        CMAKE_BINARY_DIR
+        PROJECT_NAME
+        CMAKE_PROJECT_NAME
+)
 
 # output_ansi_demo()
 # dump(CMAKE_MODULE_PATH FOO BAR PROJECT_NAME)
