@@ -155,6 +155,22 @@ Opposite of `assert_string_empty()`.
 assert_string_not_empty("${my_string}")
 ```
 
+### `assert_string_contains()`
+
+Assert given string contains substring.
+
+```cmake
+assert_string_contains("Name: John Doe" "John")
+```
+
+### `assert_string_not_contains()`
+
+Assert given string does not contain substring.
+
+```cmake
+assert_string_not_contains("Name: John Doe" "Jimmy")
+```
+
 ## Lists
 
 ### `assert_in_list()`

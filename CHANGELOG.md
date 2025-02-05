@@ -14,11 +14,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `CPM.cmake` script that downloads specified version of [CPM](https://github.com/cpm-cmake/CPM.cmake).
 * `fail_in_source_build()`, `extract_value()`, `requires_arguments()` and `safeguard_properties()` utils functions, in `helpers.cmake`.
 * `dump()` and `dd()` in `debug.cmake`.
+* ANSI utils, in `output.cmake`
 * `semver_parse()`, `write_version_file` and `version_from_file()` utils, in `version.cmake`.
 * `git_find_version_tag()` util, in `git.cmake`.
 * `VERSION` file.
 * RSP's GCC strict compile options, in `gcc.cmake` (_exposed via `compiler.cmake` module_).
 * Caching utilities, `cache.cmake`.
+* `output()` helper, in `output.cmake`.
+* Support for ANSI, in `output.cmake`.
+* PSR inspired logging functions, in `logging.cmake`.
 * A "mini" testing framework for cmake modules and scripts, in `testing.cmake`.
 * `RSP_CMAKE_SCRIPTS_BUILD_TESTS` project option for building tests.
 * `tests.yaml` and `deploy-docs.yaml` GitHub Actions workflows.
