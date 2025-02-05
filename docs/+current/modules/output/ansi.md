@@ -12,31 +12,20 @@ allow you to format and style your console output.
 
 [TOC]
 
-## How to enable
+## How to enable / disable
 
-To enable ANSI output, call the `enable_ansi()`. It is **recommended** that you only do so, if your project is the
-top-level cmake project.
-
-```cmake
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    include("rsp/output")
-
-    enable_ansi()
-endif()
-```
-
-!!! warning "Warning"
-    The `enable_ansi()` caches preset of ANSI escape sequences. This means that even if you remove
-    the function call, ANSI will remain enabled, unless you explicitly [disable it](#how-to-disable) again.
-
-## How to disable
+To enable ANSI output, set the `RSP_ENABLE_ANSI` option to `true`, when importing this project.
+By default, the option is set to `false`.
 
 ```cmake
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    include("rsp/output")
-
-    disable_ansi()
-endif()
+CPMAddPackage(
+    NAME                rsp-cmake-scripts
+    GITHUB_REPOSITORY   "https://github.com/rsps/cmake-scripts.git"
+    VERSION             x.y.z
+    OPTIONS
+        "RSP_ENABLE_ANSI true"
+    # ...remaining not shown ...
+)
 ```
 
 ## Example
