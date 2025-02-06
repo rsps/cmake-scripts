@@ -281,23 +281,13 @@ function(can_determine_if_cmd)
     is_command(my_function b)
     assert_truthy(b MESSAGE "b should be a command (function)")
 
-    # Not sure if this even can be tested...
-    #    add_custom_command(TARGET my_command
-    #        PRE_BUILD
-    #        COMMAND ${CMAKE_COMMAND} -E echo hello
-    #        COMMENT "FOR TESTING PURPOSES ONLY"
-    #        VERBATIM
-    #    )
-    #    is_command(my_command c)
-    #    assert_truthy(c MESSAGE "c should be a command (custom command)")
-
     set(my_var "")
-    is_command(my_var d)
-    assert_falsy(d MESSAGE "d should NOT be a command")
+    is_command(my_var c)
+    assert_falsy(c MESSAGE "c should NOT be a command")
 
     set(fn_ref "my_function")
-    is_command(fn_ref e)
-    assert_truthy(e MESSAGE "e should be a command (reference)")
+    is_command(fn_ref d)
+    assert_truthy(d MESSAGE "d should be a command (reference)")
 
 endfunction()
 
