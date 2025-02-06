@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `output()` helper, in `output.cmake`.
 * Support for ANSI, in `output.cmake`.
 * PSR inspired logging functions, in `logging.cmake`.
+* Utils for determining the datatype of a target variable or value, in `helpers.cmake`.
 * A "mini" testing framework for cmake modules and scripts, in `testing.cmake`.
 * `RSP_CMAKE_SCRIPTS_BUILD_TESTS` project option for building tests.
 * `tests.yaml` and `deploy-docs.yaml` GitHub Actions workflows.
