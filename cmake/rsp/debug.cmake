@@ -50,12 +50,14 @@ if (NOT COMMAND "var_dump")
     #                                       instead of being printed to stderr.
     # @param [PROPERTIES <variable>...]     One or more variables to dump information about.
     # @param [WITHOUT_NAMES]                Option, if given then property names are omitted from the output
+    # @param [IGNORE_LIST]                  Option, if specified the variable values of the type "list" are
+    #                                       treated as "string".
     #
     # @return
     #       [OUTPUT]                       The resulting output variable, if OUTPUT was specified.
     #
     function(var_dump)
-        set(options WITHOUT_NAMES)
+        set(options WITHOUT_NAMES IGNORE_LIST)
         set(oneValueArgs OUTPUT)
         set(multiValueArgs PROPERTIES)
 
@@ -69,7 +71,20 @@ if (NOT COMMAND "var_dump")
         foreach (key IN LISTS INPUT_PROPERTIES)
             # Attempt to resolve value and it's datatype
             set(value "${${key}}")
-            get_type(key type)
+            get_type("${key}" type)
+
+            # ---------------------------------------------------------------------------------------------- #
+
+            set(tmp_list_separator "<!list!>")
+            if (INPUT_IGNORE_LIST AND type STREQUAL "list")
+                # Debug
+                #message("Ignoring list: ${key} | ${value}")
+
+                set(type "string")
+                string(REPLACE ";" "${tmp_list_separator}" value "${value}")
+            endif ()
+
+            # ---------------------------------------------------------------------------------------------- #
 
             # If  key is defined as an environment variable, the value
             # must be obtained via ENV{}.
@@ -86,7 +101,12 @@ if (NOT COMMAND "var_dump")
 
             # Format the value...
             if (type STREQUAL "string")
-                string(LENGTH "${value}" str_length)
+                # Resolve string length, by ensuring to count the length of
+                # the original value, without list separator replacement.
+                set(tmp_str "${value}")
+                string(REPLACE "${tmp_list_separator}" ";" tmp_str "${tmp_str}")
+                string(LENGTH "${tmp_str}" str_length)
+
                 set(type "${type} ${str_length}")
                 set(value "${COLOR_GREEN}\"${value}\"${RESTORE}")
             elseif (type STREQUAL "int" OR type STREQUAL "float")
@@ -103,7 +123,10 @@ if (NOT COMMAND "var_dump")
                 set(i 0) # index counter
                 foreach (item IN LISTS value)
                     # Get property information about the "item", but without key name.
-                    var_dump(OUTPUT list_item WITHOUT_NAMES PROPERTIES item)
+                    # Also, ensure to ignore values of the type "list", to avoid
+                    # strange behaviour (caused by cmake's variable scopes...)
+                    set("list_item_${i}" "${item}")
+                    var_dump(OUTPUT list_item WITHOUT_NAMES IGNORE_LIST PROPERTIES "list_item_${i}")
 
                     # Append to list buffer and increment the "index" counter.
                     list(APPEND list_buffer "${COLOR_MAGENTA}${i}:${RESTORE} ${list_item}")
@@ -134,7 +157,14 @@ if (NOT COMMAND "var_dump")
             list(APPEND buffer "${formatted_key}${COLOR_WHITE}(${type}${COLOR_WHITE})${RESTORE} ${value}")
         endforeach ()
 
+        # ---------------------------------------------------------------------------------------------- #
+
         string(REPLACE ";" "\n" buffer "${buffer}")
+
+        # Restore list value (as a string) if needed.
+        if (INPUT_IGNORE_LIST)
+            string(REPLACE "${tmp_list_separator}" ";" buffer "${buffer}")
+        endif ()
 
         # ---------------------------------------------------------------------------------------------- #
 
