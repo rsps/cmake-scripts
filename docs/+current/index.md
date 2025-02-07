@@ -17,4 +17,37 @@ author: RSP Systems A/S
 
 ## How to install
 
-_TODO: ...incomplete, please review documentation at a later point_
+### Via CPM
+
+If you are using [CPM](https://github.com/cpm-cmake/CPM.cmake), then you can install "CMake Scripts" using the following:
+
+```cmake
+set(RSP_CMAKE_SCRIPTS_VERSION "0.1.0")
+
+CPMAddPackage(
+    NAME "rsp-cmake-scripts"
+    GIT_TAG "${RSP_CMAKE_SCRIPTS_VERSION}"
+    GITHUB_REPOSITORY "rsps/cmake-scripts"
+)
+```
+
+### Via Fetch Content
+
+Alternatively, you can also use cmake's [`FetchContent`](https://cmake.org/cmake/help/latest/module/FetchContent.html) module:
+
+```cmake
+set(RSP_CMAKE_SCRIPTS_VERSION "0.1.0")
+
+include(FetchContent)
+FetchContent_Declare(
+    rsp-cmake-scripts
+    GIT_REPOSITORY https://github.com/rsps/cmake-scripts
+    GIT_TAG ${RSP_CMAKE_SCRIPTS_VERSION}
+    FIND_PACKAGE_ARGS NAMES rsp-cmake-scripts
+)
+FetchContent_MakeAvailable(rsp-cmake-scripts)
+```
+
+!!! note "Note"
+    "CMake Scripts" depends on [CPM](https://github.com/cpm-cmake/CPM.cmake) for its dependencies. It will
+    automatically be included, even when you install this project using cmake's `FetchContent` module. 
