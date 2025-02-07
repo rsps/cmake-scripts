@@ -13,31 +13,45 @@ if (NOT COMMAND "dump")
 
     #! dump : Outputs given variables' name and value
     #
+    # Note: function outputs using cmake's WARNING message mode
+    #
+    # @see https://cmake.org/cmake/help/latest/command/message.html#general-messages
+    # @see var_dump()
+    #
     # @param ... Variables to output
     #
     function(dump)
-        foreach (var ${ARGN})
-            message("${var} = ${${var}}")
-        endforeach ()
+        var_dump(OUTPUT output PROPERTIES ${ARGN})
 
-        # Output as warning so that the developer is able to see call stack!
-        message(WARNING "   ${CMAKE_CURRENT_FUNCTION}() called from ${CMAKE_CURRENT_LIST_FILE}")
+        # Attempt to keep the formatting - see details in rsp/output::output()
+        string(ASCII 13 CR)
+        set(formatted_output "${CR}${COLOR_WHITE}dump:${RESTORE}\n${output}")
+        string(REPLACE "\n" "\n " formatted_output "${formatted_output}")
+
+        message(WARNING "${formatted_output}")
     endfunction()
 endif ()
 
 if (NOT COMMAND "dd")
 
-    #! dump and die: Outputs given variables' name and value and stops build
+    #! dd: Outputs given variables' name and value and stops build (dump and die)
+    #
+    # Note: function outputs using cmake's FATAL_ERROR message mode
+    #
+    # @see https://cmake.org/cmake/help/latest/command/message.html#general-messages
+    # @see var_dump()
     #
     # @param ... Variables to output
     #
     function(dd)
-        foreach (var ${ARGN})
-            message("${var} = ${${var}}")
-        endforeach ()
+        var_dump(OUTPUT output PROPERTIES ${ARGN})
 
-        # Output as fatal error to ensure that build stops.
-        message(FATAL_ERROR "   ${CMAKE_CURRENT_FUNCTION}() called from ${CMAKE_CURRENT_LIST_FILE}")
+        # Attempt to keep the formatting - see details in rsp/output::output()
+        string(ASCII 13 CR)
+        set(formatted_output "${CR}${COLOR_WHITE}dd:${RESTORE}\n${output}")
+        string(REPLACE "\n" "\n " formatted_output "${formatted_output}")
+
+        message(FATAL_ERROR "${formatted_output}")
     endfunction()
 endif ()
 
