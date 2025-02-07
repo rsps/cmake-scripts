@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-    <title>Helpers - CMake Scripts</title>
-    <meta name="description" content="How to use the helpers module.">
-    <meta name="keywords" content="helpers, cmake">
+    <title>Dump - CMake Scripts</title>
+    <meta name="description" content="How to dump variables.">
+    <meta name="keywords" content="debug, debugging, dump, dd, var_dump, cmake">
     <meta name="author" content="RSP Systems A/S">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -79,11 +79,11 @@
 <li class='Nav__item '><a href="../../../current/modules/cache/forget.html">Forget</a></li></ul></li>
 <li class='Nav__item  has-children'><a href="../../../current/modules/compiler/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Compiler</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/compiler/gcc.html">GCC</a></li></ul></li>
-<li class='Nav__item  has-children'><a href="../../../current/modules/debug/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Debug</a><ul class='Nav'>
-<li class='Nav__item '><a href="../../../current/modules/debug/dump.html">Dump</a></li></ul></li>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/debug/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Debug</a><ul class='Nav'>
+<li class='Nav__item Nav__item--active'><a href="../../../current/modules/debug/dump.html">Dump</a></li></ul></li>
 <li class='Nav__item  has-children'><a href="../../../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/git/find_version_tag.html">Find Version Tag</a></li></ul></li>
-<li class='Nav__item Nav__item--open'><a href="../../../current/modules/helpers/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Helpers</a><ul class='Nav'></ul></li>
+<li class='Nav__item '><a href="../../../current/modules/helpers/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Helpers</a><ul class='Nav'></ul></li>
 <li class='Nav__item  has-children'><a href="../../../current/modules/logging/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Logging</a><ul class='Nav'>
 <li class='Nav__item '><a href="../../../current/modules/logging/levels.html">Log Levels</a></li>
 <li class='Nav__item '><a href="../../../current/modules/logging/functions.html">Log Functions</a></li></ul></li>
@@ -136,27 +136,186 @@
                 <article class="Page">
 
     <div class="Page__header">
-        <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/helpers/index.html">Helpers</a></h1>
+        <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/debug/index.html">Debug</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/debug/dump.html">Dump</a></h1>
                 <span class="ModifiedDate">
             February 7, 2025 at 5:51 AM        </span>
                         <span class="EditOn">
-            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/helpers/index.md" target="_blank">
+            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/debug/dump.md" target="_blank">
                 Edit on GitHub            </a>
         </span>
             </div>
 
     <div class="s-content">
-        <h1><a id="helpers" href="#helpers" class="Permalink" aria-hidden="true" title="Permalink">#</a>Helpers</h1>
-<p>The helpers module contains miscellaneous functions that are used by “CMake Scripts”.
-Feel free to use them within your own project, if you find them helpful.</p>
-<h2><a id="how-to-include" href="#how-to-include" class="Permalink" aria-hidden="true" title="Permalink">#</a>How to include</h2>
-<pre><code class="hljs cmake"><span class="hljs-keyword">include</span>(<span class="hljs-string">"rsp/helpers"</span>)
+        <h1><a id="dump-variables" href="#dump-variables" class="Permalink" aria-hidden="true" title="Permalink">#</a>Dump Variables</h1>
+<div class="TableOfContentsContainer">
+    <h4 class="TableOfContentsContainer__title">Table of Contents</h4>
+    <div class="TableOfContentsContainer__content">
+        <ul class="TableOfContents">
+<li><a href="#dump-variables">Dump Variables</a>
+<ul>
+<li><a href="#dump">dump()</a></li>
+<li><a href="#dd">dd()</a></li>
+<li><a href="#var-dump">var_dump()</a>
+<ul>
+<li><a href="#without-names">Without Names</a></li>
+<li><a href="#ignore-list">Ignore List</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>    </div>
+</div>
+<h2><a id="dump" href="#dump" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>dump()</code></h2>
+<p>Outputs the names and values of given variables.
+Behind the scene, <a href="#var_dump"><code>var_dump()</code></a> is used.</p>
+<pre><code class="hljs cmake"><span class="hljs-keyword">set</span>(build_assets <span class="hljs-keyword">true</span>)
+<span class="hljs-keyword">set</span>(assets_dir <span class="hljs-string">"/home/code/my-project/resources"</span>)
+
+dump(
+    build_assets
+    assets_dir
+)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"Onward..."</span>)
+</code></pre>
+<p>The above will output a <a href="https://cmake.org/cmake/help/latest/command/message.html#general-messages" class="Link--external" rel="noopener noreferrer"><code>WARNING</code></a> message,
+and continue to process your cmake script:</p>
+<pre><code class="language-txt">CMake Warning at cmake/rsp/debug.cmake:31 (message):
+dump:
+
+   build_assets = (bool) true
+   assets_dir = (string 31) &quot;/home/code/my-project/resources&quot;
+Call Stack (most recent call first):
+  CMakeLists.txt:132 (dump)
+
+Onward...
+</code></pre>
+<h2><a id="dd" href="#dd" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>dd()</code></h2>
+<p>Outputs the names and values of given variables, and stops the build (<em>dump and die</em>).
+Behind the scene, <a href="#var_dump"><code>var_dump()</code></a> is used.</p>
+<pre><code class="hljs cmake"><span class="hljs-keyword">set</span>(build_assets <span class="hljs-keyword">true</span>)
+<span class="hljs-keyword">set</span>(assets_dir <span class="hljs-string">"/home/code/my-project/resources"</span>)
+
+dd(
+    build_assets
+    assets_dir
+)
+
+<span class="hljs-comment"># This message will never be reached!</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"Onward..."</span>)
+</code></pre>
+<p>The <code>dd()</code> function will output using cmake’s <a href="https://cmake.org/cmake/help/latest/command/message.html#general-messages" class="Link--external" rel="noopener noreferrer"><code>FATAL_ERROR</code></a>
+message mode. Your cmake script will not continue to be processed:</p>
+<pre><code class="language-txt">CMake Error at cmake/rsp/debug.cmake:54 (message):
+dd:
+
+   build_assets = (bool) true
+   assets_dir = (string 31) &quot;/home/code/my-project/resources&quot;
+Call Stack (most recent call first):
+  CMakeLists.txt:132 (dd)
+</code></pre>
+<h2><a id="var-dump" href="#var-dump" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>var_dump()</code></h2>
+<p>Outputs human-readable information about given properties.
+It accepts the following parameters:</p>
+<ul>
+<li><code>PROPERTIES</code>: <em>The variables to be dumped.</em></li>
+<li><code>OUTPUT</code>: (<em>optional</em>), <em>output variable. If specified, message is assigned to variable, instead of being printed to <code>stdout</code> or <code>stderr</code>.</em></li>
+<li><code>WITHOUT_NAMES</code>: (<em>option</em>), <em>Output information without the variable names.</em></li>
+<li><code>IGNORE_LIST</code>: (<em>option</em>), <em>Variables of the type “list” are treated as “string” type instead.</em></li>
+</ul>
+<div class="Admonition Admonition--info"><p class="Admonition__title">Note</p><p>Unless <code>OUTPUT</code> is specified, <code>var_dump()</code> will output using cmake’s <a href="https://cmake.org/cmake/help/latest/command/message.html#general-messages" class="Link--external" rel="noopener noreferrer"><code>NOTICE</code></a>
+message mode.</p></div>
+<pre><code class="hljs cmake"><span class="hljs-keyword">set</span>(my_str <span class="hljs-string">"Hi there"</span>)
+<span class="hljs-keyword">set</span>(my_empty_str <span class="hljs-string">""</span>)
+<span class="hljs-keyword">set</span>(my_num <span class="hljs-number">23</span>)
+<span class="hljs-keyword">set</span>(my_float <span class="hljs-number">1.1234</span>)
+<span class="hljs-keyword">set</span>(my_bool <span class="hljs-keyword">true</span>)
+<span class="hljs-keyword">set</span>(my_const <span class="hljs-keyword">on</span>)
+<span class="hljs-keyword">set</span>(my_list <span class="hljs-string">"foo;bar;42;true"</span>)
+<span class="hljs-keyword">set</span>(my_cached_prop <span class="hljs-string">"My cached var..."</span> CACHE <span class="hljs-keyword">STRING</span> <span class="hljs-string">"Testing"</span>)
+<span class="hljs-keyword">set</span>(ENV{my_env_prop} <span class="hljs-string">"/home/other/place"</span>)
+
+<span class="hljs-keyword">macro</span>(my_macro)
+<span class="hljs-keyword">endmacro</span>()
+
+<span class="hljs-keyword">function</span>(my_function)
+<span class="hljs-keyword">endfunction</span>()
+
+var_dump(PROPERTIES
+    my_str
+    my_empty_str
+    my_num
+    my_float
+    my_const
+    my_undefined_prop
+    my_list
+    my_cached_prop
+    my_env_prop
+    my_macro
+    my_function
+)
+</code></pre>
+<p>The above will output:</p>
+<pre><code class="language-txt">my_str = (string 8) &quot;Hi there&quot;
+my_empty_str = (string 0) &quot;&quot;
+my_num = (int) 23
+my_float = (float) 1.1234
+my_const = (string 2) &quot;on&quot;
+my_undefined_prop = (undefined) 
+my_list = (list 4) [ 
+   0: (string 3) &quot;foo&quot;
+   1: (string 3) &quot;bar&quot;
+   2: (int) 42
+   3: (bool) true
+]
+my_cached_prop = (string 4, cached) &quot;Yolo&quot;
+my_env_prop = (string 17, ENV) &quot;/home/other/place&quot;
+my_macro = (command) my_macro()
+my_function = (command) my_function()
+</code></pre>
+<h3><a id="without-names" href="#without-names" class="Permalink" aria-hidden="true" title="Permalink">#</a>Without Names</h3>
+<p>If the <code>WITHOUT_NAMES</code> option is set, then variable names are not part of the output.</p>
+<pre><code class="hljs cmake">var_dump(
+    WITHOUT_NAMES
+    PROPERTIES
+        my_str
+)
+</code></pre>
+<p>Outputs:</p>
+<pre><code class="language-txt">(string 8) &quot;Hi there&quot;
+</code></pre>
+<h3><a id="ignore-list" href="#ignore-list" class="Permalink" aria-hidden="true" title="Permalink">#</a>Ignore List</h3>
+<p>By default, <code>var_dump()</code> will attempt to parse any list variable and output each item on a new line.
+To disable this behaviour, set the <code>IGNORE_LIST</code> option. When doing so, lists are treated as a regular string.</p>
+<p><strong>Default behaviour</strong></p>
+<pre><code class="hljs cmake">var_dump(
+    PROPERTIES
+        my_list
+)
+</code></pre>
+<p>Outputs:</p>
+<pre><code class="language-txt">my_list = (list 4) [ 
+   0: (string 3) &quot;foo&quot;
+   1: (string 3) &quot;bar&quot;
+   2: (int) 42
+   3: (bool) true
+]
+</code></pre>
+<p><strong>With ignore list option</strong></p>
+<pre><code class="hljs cmake">var_dump(
+    IGNORE_LIST
+    PROPERTIES
+        my_list
+)
+</code></pre>
+<p>Outputs:</p>
+<pre><code class="language-txt">my_list = (string 15) &quot;foo;bar;42;true&quot;
 </code></pre>
     </div>
 
         <nav>
         <ul class="Pager">
-            <li class=Pager--prev><a href="../../../current/modules/git/find_version_tag.html">Previous</a></li>            <li class=Pager--next><a href="../../../current/modules/logging/index.html">Next</a></li>        </ul>
+            <li class=Pager--prev><a href="../../../current/modules/debug/index.html">Previous</a></li>            <li class=Pager--next><a href="../../../current/modules/git/index.html">Next</a></li>        </ul>
     </nav>
     </article>
 
