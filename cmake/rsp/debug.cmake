@@ -57,7 +57,7 @@ endif ()
 
 if (NOT COMMAND "var_dump")
 
-    #! var_dump : Output human readable information about given properties
+    #! var_dump : Outputs human-readable information about given properties
     #
     #
     # @param [OUTPUT <variable>]            Optional - If specified, information is assigned to output variable
