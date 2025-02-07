@@ -7,6 +7,8 @@ include_guard(GLOBAL)
 # Debug
 message(VERBOSE "rsp/helpers module included")
 
+include("rsp/helpers/types")
+
 if (NOT COMMAND "fail_in_source_build")
 
     #! fail_in_source_build : Fails when building project in the source directory

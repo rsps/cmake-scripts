@@ -92,6 +92,38 @@ output("Building package assets" NOTICE LABEL "✓" LABEL_FORMAT "[ %label% ] ")
 
 See [output module](./modules/output/index.md) for additional information.
 
+### Debug
+
+(_available since `v0.1`_)
+
+Debugging utils.
+
+```cmake
+set(resources_list "chart.png;driver.ini;config.json")
+
+dump(
+    resources_list
+)
+```
+
+Outputs:
+
+```txt
+CMake Warning at cmake/rsp/debug.cmake:31 (message):
+dump:
+
+   resources_list = (list 3) [ 
+      0: (string 9) "chart.png"
+      1: (string 10) "driver.ini"
+      2: (string 11) "config.json"
+   ]
+Call Stack (most recent call first):
+  CMakeLists.txt:108 (dump)
+```
+
+See [debug module](./modules/debug/index.md) for additional information.
+
+
 ### Logging
 
 (_available since `v0.1`_)
