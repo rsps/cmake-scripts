@@ -46,10 +46,10 @@ if (NOT COMMAND "var_dump")
     #! var_dump : Output human readable information about given properties
     #
     #
-    # @param [OUTPUT <variable>]           Optional - If specified, information is assigned to output variable
-    #                                      instead of being printed to stderr.
-    # @param [WITHOUT_NAMES]      Option, if given then property names are omitted from the output
-    # @param [PROPERTIES <variable>...]    One or more variables to dump information about.
+    # @param [OUTPUT <variable>]            Optional - If specified, information is assigned to output variable
+    #                                       instead of being printed to stderr.
+    # @param [PROPERTIES <variable>...]     One or more variables to dump information about.
+    # @param [WITHOUT_NAMES]                Option, if given then property names are omitted from the output
     #
     # @return
     #       [OUTPUT]                       The resulting output variable, if OUTPUT was specified.
