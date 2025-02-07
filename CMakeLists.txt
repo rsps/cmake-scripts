@@ -12,8 +12,8 @@ option(RSP_ENABLE_ANSI "Enable ANSI output" false)
 # -------------------------------------------------------------------------------------------------------------- #
 
 # Append this package's cmake scripts in module path
-list(FIND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" hasModulePath)
-if(${hasModulePath} STREQUAL "-1")
+list(FIND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" has_cmake_scripts_module_path)
+if(has_cmake_scripts_module_path EQUAL -1)
     list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 endif()
 
