@@ -50,7 +50,8 @@ project(rsp-cmake-scripts
 )
 
 # Ensure parent project has modules and other properties available.
-if(NOT CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+#if(NOT CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+if(NOT PROJECT_IS_TOP_LEVEL)
     set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" PARENT_SCOPE)
     set("${PROJECT_NAME}_VERSION" "${PROJECT_VERSION}" PARENT_SCOPE)
     set("${PROJECT_NAME}_SEMVER" "${version_SEMVER}" PARENT_SCOPE)
@@ -62,7 +63,7 @@ endif()
 
 include("dependencies.cmake")
 
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+if(PROJECT_IS_TOP_LEVEL)
     include("dev-dependencies.cmake")
 endif()
 
@@ -82,7 +83,7 @@ endif ()
 # Post-dependencies project setup
 # -------------------------------------------------------------------------------------------------------------- #
 
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+if(PROJECT_IS_TOP_LEVEL)
     include("rsp/debug")
     include("rsp/logging")
 endif()
