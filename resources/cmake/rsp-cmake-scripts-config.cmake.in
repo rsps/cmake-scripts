@@ -1,0 +1,6 @@
+@PACKAGE_INIT@
+
+message(NOTICE "RSP CMake Scripts Config file...")
+
+# TODO: Test of variable...
+set(RSP_FOO "bar")
