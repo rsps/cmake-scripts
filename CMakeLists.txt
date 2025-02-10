@@ -46,7 +46,7 @@ project(rsp-cmake-scripts
     VERSION "${version_VERSION}"
     DESCRIPTION "A collection of CMake scripts for C++ projects"
     HOMEPAGE_URL "https://github.com/rsps/cmake-scripts"
-    LANGUAGES "CXX"
+    LANGUAGES NONE
 )
 
 # Ensure parent project has modules and other properties available.
