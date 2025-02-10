@@ -121,20 +121,55 @@ endif ()
 
 include(CMakePackageConfigHelpers)
 
-configure_package_config_file(
-    "resources/cmake/rsp-cmake-scripts-config.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/cmake/rsp/rsp-cmake-scripts-config.cmake"
+# Introduce variables:
+# * CMAKE_INSTALL_LIBDIR
+# * CMAKE_INSTALL_BINDIR
+# * CMAKE_INSTALL_INCLUDEDIR
+include(GNUInstallDirs)
 
-    INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/rsp"
-    #PATH_VARS INCLUDE_INSTALL_DIR SYSCONFIG_INSTALL_DIR
+# Layout. This works for all platforms:
+#   * <prefix>/lib*/cmake/<PROJECT-NAME>
+#   * <prefix>/lib*/
+#   * <prefix>/include/
+set(config_install_dir "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
+
+set(generated_dir "${CMAKE_CURRENT_BINARY_DIR}")
+
+# Configuration
+# set(version_config "${generated_dir}/${PROJECT_NAME}-version.cmake")
+set(project_config "${generated_dir}/${PROJECT_NAME}-config.cmake")
+
+#configure_package_config_file(
+#    "cmake/rsp-cmake-scripts-config.cmake.in"
+#    "${CMAKE_CURRENT_BINARY_DIR}/cmake/rsp/rsp-cmake-scripts-config.cmake"
+#
+#    INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/rsp"
+#    #PATH_VARS INCLUDE_INSTALL_DIR SYSCONFIG_INSTALL_DIR
+#)
+
+configure_package_config_file(
+    "cmake/${PROJECT_NAME}-config.cmake.in"
+    "${project_config}"
+    INSTALL_DESTINATION "${config_install_dir}"
 )
 
 # TODO: CMake Version file
 
+#install(
+#    FILES
+#        "${CMAKE_CURRENT_BINARY_DIR}/cmake/rsp/rsp-cmake-scripts-config.cmake"
+#        # "${CMAKE_CURRENT_BINARY_DIR}/FooConfigVersion.cmake"
+#    DESTINATION
+#        "${CMAKE_INSTALL_LIBDIR}/cmake/rsp"
+#)
+
+# Config
+#   * <prefix>/lib/cmake/Foo/FooConfig.cmake
+#   * <prefix>/lib/cmake/Foo/FooConfigVersion.cmake
 install(
     FILES
-        "${CMAKE_CURRENT_BINARY_DIR}/cmake/rsp/rsp-cmake-scripts-config.cmake"
-        # "${CMAKE_CURRENT_BINARY_DIR}/FooConfigVersion.cmake"
+        "${project_config}"
+        #"${version_config}"
     DESTINATION
-        "${CMAKE_INSTALL_LIBDIR}/cmake/rsp"
+        "${config_install_dir}"
 )
