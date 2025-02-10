@@ -46,26 +46,16 @@ project(rsp-cmake-scripts
     VERSION "${version_VERSION}"
     DESCRIPTION "A collection of CMake scripts for C++ projects"
     HOMEPAGE_URL "https://github.com/rsps/cmake-scripts"
-    LANGUAGES "CXX"
+    LANGUAGES NONE
 )
+set("${PROJECT_NAME}_VERSION" "${PROJECT_VERSION}")
+set("${PROJECT_NAME}_SEMVER" "${version_SEMVER}")
 
 # Ensure parent project has modules and other properties available.
 if(NOT PROJECT_IS_TOP_LEVEL)
-    # TODO: PROBLEM - works only if FetchContent is done from the top-level
-    # TODO: CMakeLists.txt file - or this is pure luck, if it works!!!
-    # When FetchContent_MakeAvailable() is used, in a top-level project,
-    # this will work fine, for adding this project's module path(s).
     set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" PARENT_SCOPE)
-
-    # TODO: But, if CPM is used for obtaining project, then this will sadly
-    # TODO: not work.
-
-    # TODO: Possible Solution: We need to create pacakge config and version files:
-    # TODO: @see https://cmake.org/cmake/help/latest/manual/cmake-packages.7.html#package-configuration-file
-    # TODO: @see https://cmake.org/cmake/help/latest/module/CMakePackageConfigHelpers.html#command:configure_package_config_file
-
-    set("${PROJECT_NAME}_VERSION" "${PROJECT_VERSION}" PARENT_SCOPE)
-    set("${PROJECT_NAME}_SEMVER" "${version_SEMVER}" PARENT_SCOPE)
+    set("${PROJECT_NAME}_VERSION" "${${PROJECT_NAME}_VERSION}" PARENT_SCOPE)
+    set("${PROJECT_NAME}_SEMVER" "${${PROJECT_NAME}_SEMVER}" PARENT_SCOPE)
 endif()
 
 # -------------------------------------------------------------------------------------------------------------- #
@@ -114,57 +104,3 @@ endif ()
 
 # output_ansi_demo()
 # dump(CMAKE_MODULE_PATH FOO BAR PROJECT_NAME)
-
-# -------------------------------------------------------------------------------------------------------------- #
-# TODO: Package Configuration
-# -------------------------------------------------------------------------------------------------------------- #
-
-include(GNUInstallDirs)
-include(CMakePackageConfigHelpers)
-
-#install(
-#    TARGETS "${PROJECT_NAME}"
-#    EXPORT "${PROJECT_NAME}-export"
-##    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
-##    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-##    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-##    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-#)
-#
-## Export cmake targets
-#install(
-#    EXPORT "${PROJECT_NAME}-export"
-#    FILE "${PROJECT_NAME}-targets.cmake"
-#    NAMESPACE "${PROJECT_NAME}::"
-#    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
-#)
-
-# Write config-version
-write_basic_package_version_file(
-    ${PROJECT_NAME}-config-version.cmake
-    VERSION "${PROJECT_VERSION}"
-    COMPATIBILITY SameMinorVersion
-)
-
-# Configure installable cmake config
-configure_package_config_file(
-    "${PROJECT_SOURCE_DIR}/cmake/${PROJECT_NAME}-config.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
-    INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/rsp/${PROJECT_NAME}"
-    NO_SET_AND_CHECK_MACRO
-)
-
-# Install config-version and config
-#install(
-#    FILES
-#        "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
-#        "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
-#    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/rsp/${PROJECT_NAME}"
-#)
-
-install(
-        FILES
-        "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
-        "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
-        DESTINATION "${CMAKE_FIND_PACKAGE_REDIRECTS_DIR}"
-)
