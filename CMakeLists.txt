@@ -114,3 +114,27 @@ endif ()
 
 # output_ansi_demo()
 # dump(CMAKE_MODULE_PATH FOO BAR PROJECT_NAME)
+
+# -------------------------------------------------------------------------------------------------------------- #
+# TODO: Package Configuration
+# -------------------------------------------------------------------------------------------------------------- #
+
+include(CMakePackageConfigHelpers)
+
+configure_package_config_file(
+    "resources/cmake/rsp-cmake-scripts-config.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/rsp-cmake-scripts-config.cmake"
+
+    INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/rsp"
+    #PATH_VARS INCLUDE_INSTALL_DIR SYSCONFIG_INSTALL_DIR
+)
+
+# TODO: CMake Version file
+
+install(
+    FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/rsp-cmake-scripts-config.cmake"
+        # "${CMAKE_CURRENT_BINARY_DIR}/FooConfigVersion.cmake"
+    DESTINATION
+        "${CMAKE_INSTALL_LIBDIR}/cmake/rsp"
+)
