@@ -26,7 +26,7 @@ set(RSP_CMAKE_SCRIPTS_VERSION "0.1.0")
 
 CPMAddPackage(
     NAME "rsp-cmake-scripts"
-    GIT_TAG "${RSP_CMAKE_SCRIPTS_VERSION}"
+    VERSION "${RSP_CMAKE_SCRIPTS_VERSION}"
     GITHUB_REPOSITORY "rsps/cmake-scripts"
 )
 ```
@@ -40,12 +40,11 @@ set(RSP_CMAKE_SCRIPTS_VERSION "0.1.0")
 
 include(FetchContent)
 FetchContent_Declare(
-    rsp-cmake-scripts
-    GIT_REPOSITORY https://github.com/rsps/cmake-scripts
-    GIT_TAG ${RSP_CMAKE_SCRIPTS_VERSION}
-    FIND_PACKAGE_ARGS NAMES rsp-cmake-scripts
+    "rsp-cmake-scripts"
+    GIT_REPOSITORY "https://github.com/rsps/cmake-scripts"
+    GIT_TAG "${RSP_CMAKE_SCRIPTS_VERSION}"
 )
-FetchContent_MakeAvailable(rsp-cmake-scripts)
+FetchContent_MakeAvailable("rsp-cmake-scripts")
 ```
 
 !!! note "Note"
