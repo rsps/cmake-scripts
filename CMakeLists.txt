@@ -46,7 +46,7 @@ project(rsp-cmake-scripts
     VERSION "${version_VERSION}"
     DESCRIPTION "A collection of CMake scripts for C++ projects"
     HOMEPAGE_URL "https://github.com/rsps/cmake-scripts"
-    LANGUAGES NONE
+    LANGUAGES "CXX"
 )
 
 # Ensure parent project has modules and other properties available.
@@ -119,57 +119,45 @@ endif ()
 # TODO: Package Configuration
 # -------------------------------------------------------------------------------------------------------------- #
 
+include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
-# Introduce variables:
-# * CMAKE_INSTALL_LIBDIR
-# * CMAKE_INSTALL_BINDIR
-# * CMAKE_INSTALL_INCLUDEDIR
-include(GNUInstallDirs)
-
-# Layout. This works for all platforms:
-#   * <prefix>/lib*/cmake/<PROJECT-NAME>
-#   * <prefix>/lib*/
-#   * <prefix>/include/
-set(config_install_dir "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
-
-set(generated_dir "${CMAKE_CURRENT_BINARY_DIR}")
-
-# Configuration
-# set(version_config "${generated_dir}/${PROJECT_NAME}-version.cmake")
-set(project_config "${generated_dir}/${PROJECT_NAME}-config.cmake")
-
-#configure_package_config_file(
-#    "cmake/rsp-cmake-scripts-config.cmake.in"
-#    "${CMAKE_CURRENT_BINARY_DIR}/cmake/rsp/rsp-cmake-scripts-config.cmake"
+#install(
+#    TARGETS "${PROJECT_NAME}"
+#    EXPORT "${PROJECT_NAME}-export"
+##    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
+##    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+##    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+##    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#)
 #
-#    INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/rsp"
-#    #PATH_VARS INCLUDE_INSTALL_DIR SYSCONFIG_INSTALL_DIR
+## Export cmake targets
+#install(
+#    EXPORT "${PROJECT_NAME}-export"
+#    FILE "${PROJECT_NAME}-targets.cmake"
+#    NAMESPACE "${PROJECT_NAME}::"
+#    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
 #)
 
-configure_package_config_file(
-    "cmake/${PROJECT_NAME}-config.cmake.in"
-    "${project_config}"
-    INSTALL_DESTINATION "${config_install_dir}"
+# Write config-version
+write_basic_package_version_file(
+    ${PROJECT_NAME}-config-version.cmake
+    VERSION "${PROJECT_VERSION}"
+    COMPATIBILITY SameMinorVersion
 )
 
-# TODO: CMake Version file
+# Configure installable cmake config
+configure_package_config_file(
+    "${PROJECT_SOURCE_DIR}/cmake/${PROJECT_NAME}-config.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
+    INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/rsp/${PROJECT_NAME}"
+    NO_SET_AND_CHECK_MACRO
+)
 
-#install(
-#    FILES
-#        "${CMAKE_CURRENT_BINARY_DIR}/cmake/rsp/rsp-cmake-scripts-config.cmake"
-#        # "${CMAKE_CURRENT_BINARY_DIR}/FooConfigVersion.cmake"
-#    DESTINATION
-#        "${CMAKE_INSTALL_LIBDIR}/cmake/rsp"
-#)
-
-# Config
-#   * <prefix>/lib/cmake/Foo/FooConfig.cmake
-#   * <prefix>/lib/cmake/Foo/FooConfigVersion.cmake
+# Install config-version and config
 install(
     FILES
-        "${project_config}"
-        #"${version_config}"
-    DESTINATION
-        "${config_install_dir}"
+        "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/rsp/${PROJECT_NAME}"
 )
