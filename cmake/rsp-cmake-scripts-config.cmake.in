@@ -3,4 +3,4 @@
 message(NOTICE "RSP CMake Scripts Config file...")
 
 # TODO: Test of variable...
-set(RSP_FOO "bar")
+set(RSP_FOO "bar" PARENT_SCOPE)
