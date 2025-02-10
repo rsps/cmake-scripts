@@ -29,7 +29,15 @@ CPMAddPackage(
     VERSION "${RSP_CMAKE_SCRIPTS_VERSION}"
     GITHUB_REPOSITORY "rsps/cmake-scripts"
 )
+
+# IMPORTANT: Enable "rsp/*" modules in your project,...
+list(APPEND CMAKE_MODULE_PATH "${rsp-cmake-scripts_SOURCE_DIR}/cmake")
 ```
+
+!!! info "`CMAKE_MODULE_PATH`"
+    At the time of this writing, CPM does not automatically support paths appended to `CMAKE_MODULE_PATH`.
+    To make use of this package's cmake modules, via CPM, you **MUST** manually append
+    this package's module path in your top-level `CMakeLists.txt`, as shown in the above install example.
 
 ### Via Fetch Content
 
