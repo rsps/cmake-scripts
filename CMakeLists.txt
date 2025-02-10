@@ -50,9 +50,20 @@ project(rsp-cmake-scripts
 )
 
 # Ensure parent project has modules and other properties available.
-#if(NOT CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 if(NOT PROJECT_IS_TOP_LEVEL)
+    # TODO: PROBLEM - works only if FetchContent is done from the top-level
+    # TODO: CMakeLists.txt file - or this is pure luck, if it works!!!
+    # When FetchContent_MakeAvailable() is used, in a top-level project,
+    # this will work fine, for adding this project's module path(s).
     set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" PARENT_SCOPE)
+
+    # TODO: But, if CPM is used for obtaining project, then this will sadly
+    # TODO: not work.
+
+    # TODO: Possible Solution: We need to create pacakge config and version files:
+    # TODO: @see https://cmake.org/cmake/help/latest/manual/cmake-packages.7.html#package-configuration-file
+    # TODO: @see https://cmake.org/cmake/help/latest/module/CMakePackageConfigHelpers.html#command:configure_package_config_file
+
     set("${PROJECT_NAME}_VERSION" "${PROJECT_VERSION}" PARENT_SCOPE)
     set("${PROJECT_NAME}_SEMVER" "${version_SEMVER}" PARENT_SCOPE)
 endif()
