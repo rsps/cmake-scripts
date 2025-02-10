@@ -155,9 +155,16 @@ configure_package_config_file(
 )
 
 # Install config-version and config
+#install(
+#    FILES
+#        "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
+#        "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
+#    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/rsp/${PROJECT_NAME}"
+#)
+
 install(
-    FILES
+        FILES
         "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
         "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
-    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/rsp/${PROJECT_NAME}"
+        DESTINATION "${CMAKE_FIND_PACKAGE_REDIRECTS_DIR}"
 )
