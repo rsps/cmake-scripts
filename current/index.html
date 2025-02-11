@@ -139,7 +139,7 @@
     <div class="Page__header">
         <h1><a href="../current/index.html">Version 0.x</a></h1>
                 <span class="ModifiedDate">
-            February 7, 2025 at 6:06 AM        </span>
+            February 11, 2025 at 1:54 AM        </span>
                         <span class="EditOn">
             <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/index.md" target="_blank">
                 Edit on GitHub            </a>
@@ -157,13 +157,47 @@ Breaking changes <strong>MUST</strong> be expected for all <code>v0.x</code> rel
         <ul class="TableOfContents">
 <li><a href="#version-0-x">Version 0.x</a>
 <ul>
-<li><a href="#how-to-install">How to install</a></li>
+<li><a href="#how-to-install">How to install</a>
+<ul>
+<li><a href="#via-cpm">Via CPM</a></li>
+<li><a href="#via-fetch-content">Via Fetch Content</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>    </div>
 </div>
 <h2><a id="how-to-install" href="#how-to-install" class="Permalink" aria-hidden="true" title="Permalink">#</a>How to install</h2>
-<p><em>TODO: …incomplete, please review documentation at a later point</em></p>
+<h3><a id="via-cpm" href="#via-cpm" class="Permalink" aria-hidden="true" title="Permalink">#</a>Via CPM</h3>
+<p>If you are using <a href="https://github.com/cpm-cmake/CPM.cmake" class="Link--external" rel="noopener noreferrer">CPM</a>, then you can install “CMake Scripts” using the following:</p>
+<pre><code class="hljs cmake"><span class="hljs-keyword">set</span>(RSP_CMAKE_SCRIPTS_VERSION <span class="hljs-string">"0.1.0"</span>)
+
+CPMAddPackage(
+    NAME <span class="hljs-string">"rsp-cmake-scripts"</span>
+    VERSION <span class="hljs-string">"${RSP_CMAKE_SCRIPTS_VERSION}"</span>
+    GITHUB_REPOSITORY <span class="hljs-string">"rsps/cmake-scripts"</span>
+)
+
+<span class="hljs-comment"># IMPORTANT: Enable "rsp/*" modules in your project,...</span>
+<span class="hljs-keyword">list</span>(APPEND CMAKE_MODULE_PATH <span class="hljs-string">"${rsp-cmake-scripts_SOURCE_DIR}/cmake"</span>)
+</code></pre>
+<div class="Admonition Admonition--info"><p class="Admonition__title"><code>CMAKE_MODULE_PATH</code></p><p>At the time of this writing, CPM does not automatically support paths appended to <code>CMAKE_MODULE_PATH</code>.
+To make use of this package’s cmake modules, via CPM, you <strong>MUST</strong> manually append
+this package’s module path in your top-level <code>CMakeLists.txt</code>, as shown in the above install example.</p></div>
+<h3><a id="via-fetch-content" href="#via-fetch-content" class="Permalink" aria-hidden="true" title="Permalink">#</a>Via Fetch Content</h3>
+<p>Alternatively, you can also use cmake’s <a href="https://cmake.org/cmake/help/latest/module/FetchContent.html" class="Link--external" rel="noopener noreferrer"><code>FetchContent</code></a> module:</p>
+<pre><code class="hljs cmake"><span class="hljs-keyword">set</span>(RSP_CMAKE_SCRIPTS_VERSION <span class="hljs-string">"0.1.0"</span>)
+
+<span class="hljs-keyword">include</span>(FetchContent)
+FetchContent_Declare(
+    <span class="hljs-string">"rsp-cmake-scripts"</span>
+    GIT_REPOSITORY <span class="hljs-string">"https://github.com/rsps/cmake-scripts"</span>
+    GIT_TAG <span class="hljs-string">"${RSP_CMAKE_SCRIPTS_VERSION}"</span>
+)
+FetchContent_MakeAvailable(<span class="hljs-string">"rsp-cmake-scripts"</span>)
+</code></pre>
+<div class="Admonition Admonition--note"><p class="Admonition__title">Note</p><p>“CMake Scripts” depends on <a href="https://github.com/cpm-cmake/CPM.cmake" class="Link--external" rel="noopener noreferrer">CPM</a> for its dependencies. It will
+automatically be included, even when you install this project using cmake’s <code>FetchContent</code> module.</p></div>
     </div>
 
         <nav>
