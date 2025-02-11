@@ -16,6 +16,9 @@ if (NOT COMMAND "dump")
     #
     # Note: function outputs using cmake's WARNING message mode
     #
+    # This function is inspired by Symfony's `dump()`, (copyright Fabien Potencier - MIT License)
+    # @see https://symfony.com/doc/current/components/var_dumper.html
+    #
     # @see https://cmake.org/cmake/help/latest/command/message.html#general-messages
     # @see var_dump()
     #
@@ -39,6 +42,9 @@ if (NOT COMMAND "dd")
     #
     # Note: function outputs using cmake's FATAL_ERROR message mode
     #
+    # This function is inspired by Symfony's `dd()`, (copyright Fabien Potencier - MIT License)
+    # @see https://symfony.com/doc/current/components/var_dumper.html
+    #
     # @see https://cmake.org/cmake/help/latest/command/message.html#general-messages
     # @see var_dump()
     #
@@ -60,6 +66,8 @@ if (NOT COMMAND "var_dump")
 
     #! var_dump : Outputs human-readable information about given properties
     #
+    # This function is inspired by Symfony's var dumper component, (copyright Fabien Potencier - MIT License)
+    # @see https://symfony.com/doc/current/components/var_dumper.html
     #
     # @param [OUTPUT <variable>]            Optional - If specified, information is assigned to output variable
     #                                       instead of being printed to stderr.
