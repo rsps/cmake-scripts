@@ -12,8 +12,8 @@ option(RSP_ENABLE_ANSI "Enable ANSI output" false)
 # -------------------------------------------------------------------------------------------------------------- #
 
 # Append this package's cmake scripts in module path
-list(FIND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" hasModulePath)
-if(${hasModulePath} STREQUAL "-1")
+list(FIND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" has_cmake_scripts_module_path)
+if(has_cmake_scripts_module_path EQUAL -1)
     list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 endif()
 
@@ -48,12 +48,14 @@ project(rsp-cmake-scripts
     HOMEPAGE_URL "https://github.com/rsps/cmake-scripts"
     LANGUAGES NONE
 )
+set("${PROJECT_NAME}_VERSION" "${PROJECT_VERSION}")
+set("${PROJECT_NAME}_SEMVER" "${version_SEMVER}")
 
 # Ensure parent project has modules and other properties available.
-if(NOT CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+if(NOT PROJECT_IS_TOP_LEVEL)
     set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" PARENT_SCOPE)
-    set("${PROJECT_NAME}_VERSION" "${PROJECT_VERSION}" PARENT_SCOPE)
-    set("${PROJECT_NAME}_SEMVER" "${version_SEMVER}" PARENT_SCOPE)
+    set("${PROJECT_NAME}_VERSION" "${${PROJECT_NAME}_VERSION}" PARENT_SCOPE)
+    set("${PROJECT_NAME}_SEMVER" "${${PROJECT_NAME}_SEMVER}" PARENT_SCOPE)
 endif()
 
 # -------------------------------------------------------------------------------------------------------------- #
@@ -62,7 +64,7 @@ endif()
 
 include("dependencies.cmake")
 
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+if(PROJECT_IS_TOP_LEVEL)
     include("dev-dependencies.cmake")
 endif()
 
@@ -82,7 +84,7 @@ endif ()
 # Post-dependencies project setup
 # -------------------------------------------------------------------------------------------------------------- #
 
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+if(PROJECT_IS_TOP_LEVEL)
     include("rsp/debug")
     include("rsp/logging")
 endif()
