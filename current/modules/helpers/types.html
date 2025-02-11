@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <title>Types - CMake Scripts</title>
+    <meta name="description" content="How to use the helpers module.">
+    <meta name="keywords" content="helpers, cmake">
+    <meta name="author" content="RSP Systems A/S">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="icon" href="../../../themes/rsp/favicon/favicon-16x16.png" type="image/x-icon">
+
+    <!-- Mobile -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- JS -->
+    <script>
+        window.base_url = "../../../";
+        document.documentElement.classList.remove('no-js');
+    </script>
+
+    <!-- Font -->
+    
+    <!-- CSS -->
+            <link href='../../../themes/rsp/css/daux-blue.min.css' rel='stylesheet' type='text/css'>
+            <link href='../../../themes/rsp/css/style.css' rel='stylesheet' type='text/css'>
+            <link href='../../../daux_libraries/search.css' rel='stylesheet' type='text/css'>
+    </head>
+<body class="">
+    <div class="Columns content">
+    <aside class="Columns__left Collapsible">
+        <button type="button" class="Button Collapsible__trigger" aria-controls="sidebar_content" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="Collapsible__trigger__bar"></span>
+            <span class="Collapsible__trigger__bar"></span>
+            <span class="Collapsible__trigger__bar"></span>
+        </button>
+
+        <a class="Brand" href="../../../index.html">CMake Scripts</a>
+
+    <form role='search' action="/" method="get" class="Search" id="search_form">
+        <label for="search_input">
+            <span class='u-visuallyHidden'>Search</span>
+        </label>
+        <input
+            type="search"
+            id="search_input"
+            class="Search__field"
+            placeholder="Search..."
+            aria-label="Search..."
+            autocomplete="on"
+            results=25
+            autosave=text_search
+        >
+        <label>
+            <input type="submit" class='u-visuallyHidden' />
+            <span class='u-visuallyHidden'>Search...</span>
+            <svg class="Search__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 451 451">
+                <path d="M447.05 428l-109.6-109.6c29.4-33.8 47.2-77.9 47.2-126.1C384.65 86.2 298.35 0 192.35 0 86.25 0 .05 86.3.05 192.3s86.3 192.3 192.3 192.3c48.2 0 92.3-17.8 126.1-47.2L428.05 447c2.6 2.6 6.1 4 9.5 4s6.9-1.3 9.5-4c5.2-5.2 5.2-13.8 0-19zM26.95 192.3c0-91.2 74.2-165.3 165.3-165.3 91.2 0 165.3 74.2 165.3 165.3s-74.1 165.4-165.3 165.4c-91.1 0-165.3-74.2-165.3-165.4z"/>
+            </svg>
+        </label>
+    </form>
+
+        <div class="Collapsible__content" id="sidebar_content">
+            <!-- Navigation -->
+            <ul class='Nav'>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../current/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version 0.x</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/release_notes.html">Release Notes</a></li>
+<li class='Nav__item '><a href="../../../current/upgrade_guide.html">Upgrade Guide</a></li>
+<li class='Nav__item '><a href="../../../current/contribution_guide.html">Contribution Guide</a></li>
+<li class='Nav__item '><a href="../../../current/security_policy.html">Security Policy</a></li>
+<li class='Nav__item '><a href="../../../current/code_of_conduct.html">Code of Conduct</a></li>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../current/modules/cache/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Cache</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/cache/set.html">Set</a></li>
+<li class='Nav__item '><a href="../../../current/modules/cache/get.html">Get</a></li>
+<li class='Nav__item '><a href="../../../current/modules/cache/has.html">Has</a></li>
+<li class='Nav__item '><a href="../../../current/modules/cache/remember.html">Remember</a></li>
+<li class='Nav__item '><a href="../../../current/modules/cache/forget.html">Forget</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../current/modules/compiler/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Compiler</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/compiler/gcc.html">GCC</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../current/modules/debug/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Debug</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/debug/build_info.html">Build Info</a></li>
+<li class='Nav__item '><a href="../../../current/modules/debug/dump.html">Dump</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../current/modules/git/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Git</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/git/find_version_tag.html">Find Version Tag</a></li></ul></li>
+<li class='Nav__item Nav__item--open has-children'><a href="../../../current/modules/helpers/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Helpers</a><ul class='Nav'>
+<li class='Nav__item Nav__item--active'><a href="../../../current/modules/helpers/types.html">Types</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../current/modules/logging/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Logging</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/logging/levels.html">Log Levels</a></li>
+<li class='Nav__item '><a href="../../../current/modules/logging/functions.html">Log Functions</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../current/modules/output/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Output</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/output/ansi.html">ANSI</a></li>
+<li class='Nav__item '><a href="../../../current/modules/output/helpers.html">Helpers</a></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../current/modules/testing/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Testing</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../current/modules/testing/cmake/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Modules & Scripts</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/test_suite.html">Test Suite</a></li>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/test_case.html">Test Case</a></li>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/test.html">Test</a></li>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/run_tests.html">Run Tests</a></li>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/executor.html">Executor</a></li>
+<li class='Nav__item '><a href="../../../current/modules/testing/cmake/asserts.html">Asserts</a></li></ul></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../current/modules/version/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Version</a><ul class='Nav'>
+<li class='Nav__item  has-children'><a href="../../../current/modules/version/semver/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Semantic Version</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../current/modules/version/semver/parse.html">Parse</a></li></ul></li>
+<li class='Nav__item '><a href="../../../current/modules/version/version_file.html">Version File</a></li></ul></li></ul></li></ul></li>
+<li class='Nav__item  has-children'><a href="../../../archive/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>Archive</a><ul class='Nav'>
+<li class='Nav__item '><a href="../../../archive/v_next/index.html" class="Nav__item__link"><i class="Nav__arrow">&nbsp;</i>next</a><ul class='Nav'></ul></li></ul></li></ul>
+            <div class="Links">
+                                    <hr/>
+                                            <a href="https://github.com/rsps/cmake-scripts/blob/main/CHANGELOG.md" target="_blank"  rel="noopener noreferrer">Changelog</a>
+                        <br />
+                                            <a href="https://github.com/rsps/cmake-scripts" target="_blank"  rel="noopener noreferrer">GitHub</a>
+                        <br />
+                                            <a href="https://github.com/rsps/cmake-scripts/issues" target="_blank"  rel="noopener noreferrer">Issues</a>
+                        <br />
+                                            <a href="https://rspsystems.com/" target="_blank"  rel="noopener noreferrer">RSP Systems</a>
+                        <br />
+                                                </div>
+
+            
+            <div class="DarkModeToggler">
+                <hr/>
+                <label class="Checkbox">Dark Mode                    <input type="checkbox" class="ColorMode__button" />
+                    <div class="Checkbox__indicator"></div>
+                </label>
+            </div>
+
+                
+                                    <div class="PoweredBy">
+                        <hr/>
+                        © RSP Systems A/S                    </div>
+                        </div>
+    </aside>
+    <div class="Columns__right">
+        <div class="Columns__right__content">
+            <div class="doc_content">
+                <article class="Page">
+
+    <div class="Page__header">
+        <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/helpers/index.html">Helpers</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/helpers/types.html">Types</a></h1>
+                <span class="ModifiedDate">
+            February 11, 2025 at 3:43 AM        </span>
+                        <span class="EditOn">
+            <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/helpers/types.md" target="_blank">
+                Edit on GitHub            </a>
+        </span>
+            </div>
+
+    <div class="s-content">
+        <h1><a id="type-utilities" href="#type-utilities" class="Permalink" aria-hidden="true" title="Permalink">#</a>Type Utilities</h1>
+<p>The following helper functions can help you distinguish between the value type¹ of variables.</p>
+<p>¹: <em>In CMake all variable values are strings. See <a href="https://cmake.org/cmake/help/latest/manual/cmake-language.7.html#variables" class="Link--external" rel="noopener noreferrer">official documentation</a> for details.</em></p>
+<div class="TableOfContentsContainer">
+    <h4 class="TableOfContentsContainer__title">Table of Contents</h4>
+    <div class="TableOfContentsContainer__content">
+        <ul class="TableOfContents">
+<li><a href="#type-utilities">Type Utilities</a>
+<ul>
+<li><a href="#is-int">is_int</a></li>
+<li><a href="#is-float">is_float</a></li>
+<li><a href="#is-numeric">is_numeric</a></li>
+<li><a href="#is-bool">is_bool</a></li>
+<li><a href="#is-bool-like">is_bool_like</a></li>
+<li><a href="#is-list">is_list</a></li>
+<li><a href="#is-command">is_command</a></li>
+<li><a href="#is-string">is_string</a></li>
+<li><a href="#get-type">get_type</a></li>
+</ul>
+</li>
+</ul>    </div>
+</div>
+<h2><a id="is-int" href="#is-int" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>is_int</code></h2>
+<p>Determines if value is an integer.</p>
+<pre><code class="hljs cmake">is_int(<span class="hljs-number">22</span> a)
+is_int(<span class="hljs-string">"hi there"</span> b)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${a}"</span>) <span class="hljs-comment"># true</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${b}"</span>) <span class="hljs-comment"># false</span>
+</code></pre>
+<h2><a id="is-float" href="#is-float" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>is_float</code></h2>
+<p>Determines if value is a float point.</p>
+<pre><code class="hljs cmake">is_float(<span class="hljs-number">2.34</span> a)
+is_float(<span class="hljs-number">2</span> b)
+is_int(<span class="hljs-string">"hi there"</span> c)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${a}"</span>) <span class="hljs-comment"># true</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${b}"</span>) <span class="hljs-comment"># false</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${c}"</span>) <span class="hljs-comment"># false</span>
+</code></pre>
+<h2><a id="is-numeric" href="#is-numeric" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>is_numeric</code></h2>
+<p>Determines if value is numeric.</p>
+<pre><code class="hljs cmake">is_numeric(<span class="hljs-number">22</span> a)
+is_numeric(<span class="hljs-number">1.234</span> b)
+is_numeric(<span class="hljs-string">"hi there"</span> c)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${a}"</span>) <span class="hljs-comment"># true</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${b}"</span>) <span class="hljs-comment"># true</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${c}"</span>) <span class="hljs-comment"># false</span>
+</code></pre>
+<h2><a id="is-bool" href="#is-bool" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>is_bool</code></h2>
+<p>Determines if value is a boolean (<em><code>true</code> or <code>false</code></em>).</p>
+<pre><code class="hljs cmake">is_bool(<span class="hljs-keyword">true</span> a)
+is_bool(<span class="hljs-keyword">false</span> b)
+is_bool(<span class="hljs-string">"on"</span> c)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${a}"</span>) <span class="hljs-comment"># true</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${b}"</span>) <span class="hljs-comment"># true</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${c}"</span>) <span class="hljs-comment"># false</span>
+</code></pre>
+<h2><a id="is-bool-like" href="#is-bool-like" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>is_bool_like</code></h2>
+<p>Determine if value is a boolean like.
+See CMake’s official documentation for additional details:</p>
+<ul>
+<li><a href="https://cmake.org/cmake/help/latest/command/if.html#constant" class="Link--external" rel="noopener noreferrer">constant</a></li>
+<li><a href="https://cmake.org/cmake/help/latest/command/if.html#logic-operators" class="Link--external" rel="noopener noreferrer">logic operators</a></li>
+</ul>
+<pre><code class="hljs cmake">is_bool_like(<span class="hljs-keyword">true</span> a)
+is_bool_like(<span class="hljs-string">"yes"</span> b)
+is_bool_like(-<span class="hljs-number">2</span> c)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${a}"</span>) <span class="hljs-comment"># true</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${b}"</span>) <span class="hljs-comment"># true</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${c}"</span>) <span class="hljs-comment"># false</span>
+</code></pre>
+<h2><a id="is-list" href="#is-list" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>is_list</code></h2>
+<p>Determines if value is a list of values.
+See CMake’s official <a href="https://cmake.org/cmake/help/latest/manual/cmake-language.7.html#cmake-language-lists" class="Link--external" rel="noopener noreferrer">documentation</a>
+for additional details.</p>
+<pre><code class="hljs cmake">is_list(<span class="hljs-string">"aa;bbb;ccc"</span> a)
+
+<span class="hljs-keyword">set</span>(my_list <span class="hljs-string">"aa;bbb;ccc"</span>)
+is_list(my_list b)
+
+<span class="hljs-keyword">set</span>(my_other_list aa bbb ccc)
+is_list(my_other_list c)
+
+is_list(<span class="hljs-string">"aa bbb ccc"</span> d)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${a}"</span>) <span class="hljs-comment"># true</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${b}"</span>) <span class="hljs-comment"># true</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${c}"</span>) <span class="hljs-comment"># true</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${d}"</span>) <span class="hljs-comment"># false</span>
+</code></pre>
+<h2><a id="is-command" href="#is-command" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>is_command</code></h2>
+<p>Determines if value is command, <a href="https://cmake.org/cmake/help/latest/command/macro.html#macro" class="Link--external" rel="noopener noreferrer">macro</a> or
+<a href="https://cmake.org/cmake/help/latest/command/function.html#command:function" class="Link--external" rel="noopener noreferrer">function</a>.</p>
+<pre><code class="hljs cmake"><span class="hljs-keyword">macro</span>(my_macro)
+<span class="hljs-keyword">endmacro</span>()
+is_command(my_macro a)
+
+<span class="hljs-keyword">function</span>(my_function)
+<span class="hljs-keyword">endfunction</span>()
+is_command(my_function b)
+
+<span class="hljs-keyword">set</span>(my_var <span class="hljs-string">""</span>)
+is_command(my_var c)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${a}"</span>) <span class="hljs-comment"># true</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${b}"</span>) <span class="hljs-comment"># true</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${c}"</span>) <span class="hljs-comment"># false</span>
+</code></pre>
+<h2><a id="is-string" href="#is-string" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>is_string</code></h2>
+<p>Determines if value is a string.
+In this context, a value is considered to be a string, if it is:</p>
+<ul>
+<li>not <a href="#is_numeric">numeric</a></li>
+<li>not <a href="#is_bool">boolean</a> (<em><code>true</code> or <code>false</code></em>)</li>
+<li>not a <a href="#is_list">list</a> (<em>semicolon separated list</em>)</li>
+<li>not a <a href="#is_command">command</a></li>
+</ul>
+<pre><code class="hljs cmake">is_string(<span class="hljs-string">"abc"</span> a)
+
+<span class="hljs-keyword">set</span>(my_str <span class="hljs-string">"foo"</span>)
+is_string(my_str b)
+
+is_string(<span class="hljs-number">42</span> c)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${a}"</span>) <span class="hljs-comment"># true</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${b}"</span>) <span class="hljs-comment"># true</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${c}"</span>) <span class="hljs-comment"># false</span>
+</code></pre>
+<h2><a id="get-type" href="#get-type" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>get_type</code></h2>
+<p>Determines the type of given value.
+Function assigns a string representation of the value’s type (<em>int, float, bool, list, command, or string</em>), to
+the <code>output</code> argument.</p>
+<ul>
+<li>See <a href="#is_int"><code>is_int()</code></a></li>
+<li>See <a href="#is_float"><code>is_float()</code></a></li>
+<li>See <a href="#is_bool"><code>is_bool()</code></a></li>
+<li>See <a href="#is_list"><code>is_list()</code></a></li>
+<li>See <a href="#is_command"><code>is_command()</code></a></li>
+<li>See <a href="#is_string"><code>is_string()</code></a></li>
+</ul>
+<pre><code class="hljs cmake">get_type(<span class="hljs-string">"abc"</span> a)
+get_type(<span class="hljs-string">"aaa;bbb;ccc"</span> b)
+get_type(<span class="hljs-keyword">true</span> c)
+get_type(<span class="hljs-number">12</span> d)
+
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${a}"</span>) <span class="hljs-comment"># string</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${b}"</span>) <span class="hljs-comment"># list</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${c}"</span>) <span class="hljs-comment"># bool</span>
+<span class="hljs-keyword">message</span>(<span class="hljs-string">"${c}"</span>) <span class="hljs-comment"># int</span>
+</code></pre>
+    </div>
+
+        <nav>
+        <ul class="Pager">
+            <li class=Pager--prev><a href="../../../current/modules/helpers/index.html">Previous</a></li>            <li class=Pager--next><a href="../../../current/modules/logging/index.html">Next</a></li>        </ul>
+    </nav>
+    </article>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    <!-- JS -->
+            <script src="../../../themes/rsp/js/main.mjs"></script>
+    
+        <script>
+        
+        window.searchLanguage = "";
+        window.searchTranslation = {"Search_one_result":"1 result","Search_results":"!count results","Search_no_results":"Nothing found","Search_common_words_ignored":"Common words are largely ignored","Search_too_short":"Search too short","Search_one_character_or_more":"Should be one character or more","Search_should_be_x_or_more":"Should be !min characters or more","Link_previous":"Previous","Link_next":"Next"};
+    </script>
+
+    <!-- Search -->
+    <script type="text/javascript" src="../../../daux_libraries/search.min.js"></script>
+
+    <script>
+        window.search({'base_url': '../../../'})
+    </script>
+</body>
+</html>
