@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2025-02-13
+
 ### Added
 
 * Project's root `CMakeLists.txt`.
@@ -33,4 +35,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Defect and Feature Request issue templates (_for GitHub_).
 * Pull request template (_for GitHub_).
 
-[Unreleased]: https://github.com/rsps/cmake-scripts/compare/develop
+[Unreleased]: https://github.com/rsps/cmake-scripts/compare/0.1.0...HEAD
+[0.1.0]: https://github.com/rsps/cmake-scripts/releases/tag/0.1.0
