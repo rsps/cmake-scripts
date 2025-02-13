@@ -7,11 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* Reformatted release (_version_) headings in `CHANGELOG.md`. 
+
 ### Fixed
 
 * Release (_version_) links in `CHANGELOG.md`.
 
-## [0.1.0] - 2025-02-13
+## [v0.1.0] - 2025-02-13
 
 ### Added
 
@@ -40,4 +44,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Pull request template (_for GitHub_).
 
 [Unreleased]: https://github.com/rsps/cmake-scripts/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/rsps/cmake-scripts/releases/tag/v0.1.0
+[v0.1.0]: https://github.com/rsps/cmake-scripts/releases/tag/v0.1.0
