@@ -13,10 +13,10 @@ author: RSP Systems A/S
 
 The following shows the supported versions of the "CMake Scripts" project.
 
-| Version | CMake       | Release | Security Fixes Until |
-|---------|-------------|---------|----------------------|
-| `1.x`   | `3.30 - ?`  | _TBD_   | _TBD_                |
-| `0.x`*  | `3.30 - ? ` | _TBD_   | _N/A_                |
+| Version | CMake       | Release             | Security Fixes Until |
+|---------|-------------|---------------------|----------------------|
+| `1.x`   | `3.30 - ?`  | _TBD_               | _TBD_                |
+| `0.x`*  | `3.30 - ? ` | February 13th, 2025 | _N/A_                |
 
 _* - current supported version._ \
 _TBD - "To be decided"._ \
