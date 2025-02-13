@@ -19,11 +19,7 @@ if (NOT COMMAND "is_int")
     #
     function(is_int target_value output)
         set("${output}" false)
-
-        # Resolve "value" from variable
-        if (DEFINED "${target_value}")
-            set(target_value "${${target_value}}")
-        endif ()
+        _resolve_target_value()
 
         if (target_value MATCHES "^([\-\+]?)([0-9]+)$")
             set("${output}" true)
@@ -45,11 +41,7 @@ if (NOT COMMAND "is_float")
     #
     function(is_float target_value output)
         set("${output}" false)
-
-        # Resolve "value" from variable
-        if (DEFINED "${target_value}")
-            set(target_value "${${target_value}}")
-        endif ()
+        _resolve_target_value()
 
         if (target_value MATCHES "^([\-\+]?)([0-9]+)\.([0-9]+)$")
             set("${output}" true)
@@ -71,11 +63,7 @@ if (NOT COMMAND "is_numeric")
     #
     function(is_numeric target_value output)
         set("${output}" false)
-
-        # Resolve "value" from variable
-        if (DEFINED "${target_value}")
-            set(target_value "${${target_value}}")
-        endif ()
+        _resolve_target_value()
 
         if (target_value MATCHES "^([\-\+]?)([0-9]+)$" OR target_value MATCHES  "^([\-\+]?)([0-9]+)\.([0-9]+)$")
             set("${output}" true)
@@ -102,11 +90,7 @@ if (NOT COMMAND "is_bool")
     #
     function(is_bool target_value output)
         set("${output}" false)
-
-        # Resolve "value" from variable
-        if (DEFINED "${target_value}")
-            set(target_value "${${target_value}}")
-        endif ()
+        _resolve_target_value()
 
         set(accepted "true;false")
         string(TOLOWER "${target_value}" target_value)
@@ -137,11 +121,7 @@ if (NOT COMMAND "is_bool_like")
     #
     function(is_bool_like target_value output)
         set("${output}" false)
-
-        # Resolve "value" from variable
-        if (DEFINED "${target_value}")
-            set(target_value "${${target_value}}")
-        endif ()
+        _resolve_target_value()
 
         # ...a non-zero number (including floating point numbers) is also considered
         # to be boolean (true).
@@ -179,11 +159,7 @@ if (NOT COMMAND "is_list")
     #
     function(is_list target_value output)
         set("${output}" false)
-
-        # Resolve "value" from variable
-        if (DEFINED "${target_value}")
-            set(target_value "${${target_value}}")
-        endif ()
+        _resolve_target_value()
 
         string(FIND "${target_value}" ";" has_separator)
         list(LENGTH target_value length)
@@ -210,11 +186,7 @@ if (NOT COMMAND "is_command")
     #
     function(is_command target_value output)
         set("${output}" false)
-
-        # Resolve "value" from variable
-        if (DEFINED "${target_value}")
-            set(target_value "${${target_value}}")
-        endif ()
+        _resolve_target_value()
 
         if (COMMAND "${target_value}")
             set("${output}" true)
@@ -249,11 +221,7 @@ if (NOT COMMAND "is_string")
     #
     function(is_string target_value output)
         set("${output}" false)
-
-        # Resolve "value" from variable
-        if (DEFINED "${target_value}")
-            set(target_value "${${target_value}}")
-        endif ()
+        _resolve_target_value()
 
         is_numeric("${target_value}" num)
         is_bool("${target_value}" bool)
@@ -293,11 +261,7 @@ if (NOT COMMAND "get_type")
     #
     function(get_type target_value output)
         set("${output}" "undefined")
-
-        # Resolve "value" from variable
-        if (DEFINED "${target_value}")
-            set(target_value "${${target_value}}")
-        endif ()
+        _resolve_target_value()
 
         # ---------------------------------------------------------------------------------------------- #
 
@@ -352,4 +316,25 @@ if (NOT COMMAND "get_type")
 
         message(FATAL_ERROR "Unable to determine type of target value: ${target_value}")
     endfunction()
+endif ()
+
+# -------------------------------------------------------------------------------------------------------------- #
+# Internals
+# -------------------------------------------------------------------------------------------------------------- #
+
+if (NOT COMMAND "_resolve_target_value")
+
+    #! _resolve_target_value : Resolves target value
+    #
+    # Macro (re)sets the `target_value`, if its value is a defined
+    # variable.
+    #
+    # @internal
+    #
+    macro(_resolve_target_value)
+        # Resolve "value" from variable
+        if (DEFINED "${target_value}")
+            set(target_value "${${target_value}}")
+        endif ()
+    endmacro()
 endif ()
