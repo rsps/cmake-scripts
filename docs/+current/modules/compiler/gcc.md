@@ -37,3 +37,17 @@ set(my_compile_options "${RSP_GCC_STRICT_COMPILE_OPTIONS}")
 # Modify your preset...
 list(REMOVE_ITEM my_compile_options "-Wswitch-default")
 ```
+
+## `gcc_version()`
+
+**Available Since: `v0.2.0`**
+
+Obtains the installed GCC version. The function accepts the following parameters:
+
+* `OUTPUT`: _Output variable to assign the result to._
+
+```cmake
+gcc_version(OUTPUT version)
+
+message("GCC: ${version}") # 14.2.0
+```
