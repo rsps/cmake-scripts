@@ -204,6 +204,24 @@ if (NOT COMMAND "var_dump")
     endfunction()
 endif ()
 
+if (NOT COMMAND "var_dump_all")
+
+    #! var_dump_all : Outputs human-readable information about CMake's current defined variables
+    #
+    # @see https://cmake.org/cmake/help/latest/prop_dir/VARIABLES.html#variables
+    #
+    macro(var_dump_all)
+        # Get the global VARIABLES
+        # @see https://cmake.org/cmake/help/latest/prop_dir/VARIABLES.html#variables
+        get_cmake_property(_global_vars VARIABLES)
+        list (SORT _global_vars)
+
+        foreach (_var "${_global_vars}")
+            var_dump(PROPERTIES ${_var})
+        endforeach()
+    endmacro()
+endif ()
+
 if(NOT COMMAND "build_info")
 
     #! build_info : Output build information to stdout or stderr (Cmake's message type specific)

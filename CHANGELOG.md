@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* `var_dump_all()` macro in `debug.cmake`.
+
 ### Changed
 
 * Reformatted release (_version_) headings in `CHANGELOG.md`. 
