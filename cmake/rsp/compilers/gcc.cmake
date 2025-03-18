@@ -193,6 +193,50 @@ if (NOT DEFINED RSP_GCC_STRICT_COMPILE_OPTIONS)
     )
 endif ()
 
+if (NOT COMMAND "gcc_info")
+
+    #! gcc_version : Assigns path to the available / installed GCC and its version
+    #
+    # @param OUTPUT <variable>            The variable to assign result to.
+    #
+    # @return
+    #       [OUTPUT]                      Path to GCC.
+    #       [OUTPUT]_VERSION              GCC version.
+    #
+    function(gcc_info)
+        set(options "")
+        set(oneValueArgs OUTPUT)
+        set(multiValueArgs "")
+
+        cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+        requires_arguments("OUTPUT" INPUT)
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        find_program(GCC_TOOL NAMES g++-latest g++-HEAD g++-14 g++-13 g++-12 g++-11 NO_CACHE)
+
+        execute_process(
+                COMMAND ${GCC_TOOL} --version
+                OUTPUT_VARIABLE GCC_TOOL_VERSION
+                ERROR_VARIABLE GCC_TOOL_VERSION
+        )
+
+        string(REGEX MATCH "[0-9]+(\\.[0-9]+)+" GCC_TOOL_VERSION "${GCC_TOOL_VERSION}")
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Set the resulting path and version
+        set("${INPUT_OUTPUT}" "${GCC_TOOL}")
+        set("${INPUT_OUTPUT}_VERSION" "${GCC_TOOL_VERSION}")
+
+        return(
+            PROPAGATE
+            "${INPUT_OUTPUT}"
+            "${INPUT_OUTPUT}_VERSION"
+        )
+    endfunction()
+endif ()
+
 if (NOT COMMAND "gcc_version")
 
     #! gcc_version : Returns the GCC tool version
@@ -212,20 +256,12 @@ if (NOT COMMAND "gcc_version")
 
         # ---------------------------------------------------------------------------------------------- #
 
-        find_program(GCC_TOOL NAMES g++-latest g++-HEAD g++-14 g++-13 g++-12 g++-11 NO_CACHE)
-
-        execute_process(
-            COMMAND ${GCC_TOOL} --version
-            OUTPUT_VARIABLE GCC_TOOL_VERSION
-            ERROR_VARIABLE GCC_TOOL_VERSION
-        )
-
-        string(REGEX MATCH "[0-9]+(\\.[0-9]+)+" GCC_TOOL_VERSION "${GCC_TOOL_VERSION}")
+        gcc_info(OUTPUT result)
 
         # ---------------------------------------------------------------------------------------------- #
 
         # Set the resulting version
-        set("${INPUT_OUTPUT}" "${GCC_TOOL_VERSION}")
+        set("${INPUT_OUTPUT}" "${result_VERSION}")
 
         return(
             PROPAGATE
