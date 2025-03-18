@@ -38,6 +38,28 @@ set(my_compile_options "${RSP_GCC_STRICT_COMPILE_OPTIONS}")
 list(REMOVE_ITEM my_compile_options "-Wswitch-default")
 ```
 
+## `gcc_info()`
+
+**Available Since: `v0.3.0`**
+
+Obtains the path and version of the installed GCC version. The function accepts the following parameters:
+
+* `OUTPUT`: _Output variable to assign the result to._
+
+**Output**
+
+* `[OUTPUT]`: _Path to installed GCC tool._
+* `[OUTPUT]_VERSION`: _GCC version._
+
+**Example**
+
+```cmake
+gcc_info(OUTPUT gcc)
+
+message("GCC (path): ${gcc}") # /usr/bin/g++-14
+message("GCC (version): ${gcc_VERSION}") # 14.2.0
+```
+
 ## `gcc_version()`
 
 **Available Since: `v0.2.0`**
