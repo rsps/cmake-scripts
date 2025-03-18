@@ -140,7 +140,7 @@
     <div class="Page__header">
         <h1><a href="../../../current/index.html">Version 0.x</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/index.html">Modules</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/debug/index.html">Debug</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../current/modules/debug/dump.html">Dump</a></h1>
                 <span class="ModifiedDate">
-            March 18, 2025 at 5:20 AM        </span>
+            March 18, 2025 at 5:49 AM        </span>
                         <span class="EditOn">
             <a href="https://github.com/rsps/cmake-scripts/blob/main/docs/+current/modules/debug/dump.md" target="_blank">
                 Edit on GitHub            </a>
@@ -163,6 +163,7 @@
 <li><a href="#ignore-list">Ignore List</a></li>
 </ul>
 </li>
+<li><a href="#var-dump-all">var_dump_all()</a></li>
 </ul>
 </li>
 </ul>    </div>
@@ -312,6 +313,27 @@ To disable this behaviour, set the <code>IGNORE_LIST</code> option. When doing s
 </code></pre>
 <p>Outputs:</p>
 <pre><code class="language-txt">my_list = (string 15) &quot;foo;bar;42;true&quot;
+</code></pre>
+<h2><a id="var-dump-all" href="#var-dump-all" class="Permalink" aria-hidden="true" title="Permalink">#</a><code>var_dump_all()</code></h2>
+<p><strong>Available Since: <code>v0.2.0</code></strong></p>
+<p>Outputs human-readable information about CMake’s current defined variables.</p>
+<p><em>See Cmake’s <a href="https://cmake.org/cmake/help/latest/prop_dir/VARIABLES.html" class="Link--external" rel="noopener noreferrer"><code>VARIABLES</code></a> for additional information.</em></p>
+<pre><code class="hljs cmake">var_dump_all()
+</code></pre>
+<p>Outputs:</p>
+<pre><code class="language-txt">ALERT_LEVEL = (command, cached) ALERT_LEVEL()
+BUILD_TESTING = (string 0) &quot;&quot;
+CMAKE_AUTOGEN_ORIGIN_DEPENDS = (string 2) &quot;ON&quot;
+CMAKE_AUTOMOC_COMPILER_PREDEFINES = (string 2) &quot;ON&quot;
+CMAKE_AUTOMOC_MACRO_NAMES = (list 4) [ 
+   0: (string 8) &quot;Q_OBJECT&quot;
+   1: (string 8) &quot;Q_GADGET&quot;
+   2: (string 11) &quot;Q_NAMESPACE&quot;
+   3: (string 18) &quot;Q_NAMESPACE_EXPORT&quot;
+]
+CMAKE_AUTOMOC_PATH_PREFIX = (string 3) &quot;OFF&quot;
+
+... remaining not shown
 </code></pre>
     </div>
 
