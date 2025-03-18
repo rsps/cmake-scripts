@@ -197,3 +197,33 @@ Outputs:
 ```txt
 my_list = (string 15) "foo;bar;42;true"
 ```
+
+## `var_dump_all()`
+
+**Available Since: `v0.2.0`**
+
+Outputs human-readable information about CMake's current defined variables.
+
+_See Cmake's [`VARIABLES`](https://cmake.org/cmake/help/latest/prop_dir/VARIABLES.html) for additional information._
+
+```cmake
+var_dump_all()
+```
+
+Outputs:
+
+```txt
+ALERT_LEVEL = (command, cached) ALERT_LEVEL()
+BUILD_TESTING = (string 0) ""
+CMAKE_AUTOGEN_ORIGIN_DEPENDS = (string 2) "ON"
+CMAKE_AUTOMOC_COMPILER_PREDEFINES = (string 2) "ON"
+CMAKE_AUTOMOC_MACRO_NAMES = (list 4) [ 
+   0: (string 8) "Q_OBJECT"
+   1: (string 8) "Q_GADGET"
+   2: (string 11) "Q_NAMESPACE"
+   3: (string 18) "Q_NAMESPACE_EXPORT"
+]
+CMAKE_AUTOMOC_PATH_PREFIX = (string 3) "OFF"
+
+... remaining not shown
+```
