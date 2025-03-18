@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added 
+
+* `gcc_info()` function in `compilers/gcc.cmake`.
+
+### Changed
+
+* `gcc_version()` now uses `gcc_info()` to obtain GCC version.
+
+### Fixed
+
+* Internal property bleeds into global scope, when calling `gcc_version()`, due auto caching by `find_program()`. 
+
 ## [v0.2.0] - 2025-03-18
 
 ### Added
