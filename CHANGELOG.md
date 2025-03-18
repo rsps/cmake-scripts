@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.3.0] - 2025-03-18
+
 ### Added 
 
 * `gcc_info()` function in `compilers/gcc.cmake`.
@@ -63,6 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Defect and Feature Request issue templates (_for GitHub_).
 * Pull request template (_for GitHub_).
 
-[Unreleased]: https://github.com/rsps/cmake-scripts/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/rsps/cmake-scripts/compare/v0.3.0...HEAD
+[v0.3.0]: https://github.com/rsps/cmake-scripts/compare/v0.2.0...v0.3.0
 [v0.2.0]: https://github.com/rsps/cmake-scripts/compare/v0.1.0...v0.2.0
 [v0.1.0]: https://github.com/rsps/cmake-scripts/releases/tag/v0.1.0
