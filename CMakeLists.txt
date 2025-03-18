@@ -15,6 +15,9 @@ option(RSP_ENABLE_ANSI "Enable ANSI output" false)
 list(FIND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" has_cmake_scripts_module_path)
 if(has_cmake_scripts_module_path EQUAL -1)
     list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+    set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" CACHE STRING " RSP CMake Scripts CMAKE_MODULE_PATH" FORCE)
+
+    message(WARNING "Caching CMAKE_MODULE_PATH. Please rebuild your project, if a failure occur.")
 endif()
 
 # Abort if building in-source
