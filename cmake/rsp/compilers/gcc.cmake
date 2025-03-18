@@ -212,7 +212,7 @@ if (NOT COMMAND "gcc_version")
 
         # ---------------------------------------------------------------------------------------------- #
 
-        find_program(GCC_TOOL NAMES g++-latest g++-HEAD g++-14 g++-13 g++-12 g++-11)
+        find_program(GCC_TOOL NAMES g++-latest g++-HEAD g++-14 g++-13 g++-12 g++-11 NO_CACHE)
 
         execute_process(
             COMMAND ${GCC_TOOL} --version
