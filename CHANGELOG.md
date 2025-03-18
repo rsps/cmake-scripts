@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+* `CMAKE_MODULE_PATH` changes are not propagated to the top-most project, when "CMake Scripts" is included by other project as a nested dependency. 
 * Release (_version_) links in `CHANGELOG.md`.
 
 ## [v0.1.0] - 2025-02-13
