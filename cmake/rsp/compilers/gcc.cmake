@@ -192,3 +192,44 @@ if (NOT DEFINED RSP_GCC_STRICT_COMPILE_OPTIONS)
         #-dD
     )
 endif ()
+
+if (NOT COMMAND "gcc_version")
+
+    #! gcc_version : Returns the GCC tool version
+    #
+    # @param OUTPUT <variable>            The variable to assign result to.
+    #
+    # @return
+    #       [OUTPUT]                      GCC version.
+    #
+    function(gcc_version)
+        set(options "")
+        set(oneValueArgs OUTPUT)
+        set(multiValueArgs "")
+
+        cmake_parse_arguments(INPUT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+        requires_arguments("OUTPUT" INPUT)
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        find_program(GCC_TOOL NAMES g++-latest g++-HEAD g++-14 g++-13 g++-12 g++-11)
+
+        execute_process(
+            COMMAND ${GCC_TOOL} --version
+            OUTPUT_VARIABLE GCC_TOOL_VERSION
+            ERROR_VARIABLE GCC_TOOL_VERSION
+        )
+
+        string(REGEX MATCH "[0-9]+(\\.[0-9]+)+" GCC_TOOL_VERSION "${GCC_TOOL_VERSION}")
+
+        # ---------------------------------------------------------------------------------------------- #
+
+        # Set the resulting version
+        set("${INPUT_OUTPUT}" "${GCC_TOOL_VERSION}")
+
+        return(
+            PROPAGATE
+            "${INPUT_OUTPUT}"
+        )
+    endfunction()
+endif ()
